@@ -1,26 +1,64 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: only light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+   --breakpoint-xxs: 374px;
+   --breakpoint-xs: 480px;
+  /* Custom Colors :: NGO Website  :: Editable 01 */
+  --color-darkred: darkred;
+  /* rgb(99, 102, 241) :: indigo (Blue) */
+
+
+  --container-8xl: 96rem;
+  /* 96rem :: 1536px */
+
+  /* Custom Transition Properties */
+  --transition-property-height: height;
+  --transition-property-spacing: margin, padding;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme inline {}
+
+
+html,
+body {
+  background-color: #ffffff;
+  color-scheme: only light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  color: #0f172a;
+}
+
+main {
+  /* -------------------------------------- */
+  /* background: #f12711; */
+  /* fallback for old browsers */
+  /* background: -webkit-linear-gradient(to right, #f5af19, #f12711); */
+  /* Chrome 10-25, Safari 5.1-6 */
+  /* background: linear-gradient(to right, #f5af19, #f12711); */
+  /* -------------------------------------- */
+}
+
+
+/* .filter-to-logo-red {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(50%) saturate(4749%) hue-rotate(352deg) brightness(93%) contrast(95%);
+} */
+
+.bg-darkred {
+  background-color: darkred;
+}
+
+.text-orangered {
+  color: orangered;
+}
+
+.text-lightred {
+  color: #ae0000;
 }
