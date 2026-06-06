@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header_of_full_website from "@/components/layout/Header_of_full_website";
+import { Footer } from "@/components/sections/footer";
 // ----------------------------------
 
 
@@ -25,14 +26,15 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col tracking-wide">
+      <body className="flex flex-col tracking-wide items-center">
         <Header_of_full_website></Header_of_full_website>
 
-        <main>
+        <main className="w-full 2xl:container">
           {children}
         </main>
 
-        <footer></footer>
+
+        <Footer></Footer>
 
       </body>
     </html>

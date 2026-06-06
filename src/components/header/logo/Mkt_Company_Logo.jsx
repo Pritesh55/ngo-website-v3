@@ -15,7 +15,7 @@ const Mkt_Company_Logo = () => {
         <>
             <div className="relative py-4 max-xs:pr-4 xl:pr-8 hover:bg-orange-50 rounded-lg">
                 {/* // Logo */}
-                <Link href="#" className="flex items-center gap-x-0 text-ngo-primary" >
+                <Link href="/" className="flex items-center gap-x-0 text-ngo-primary" >
                     {/* <Sun_Icon_SVG></Sun_Icon_SVG> */}
                     <Image src={`/Mkt-logo.svg`} width={144} height={100} alt="logo" className="filter-to-logo-red absolute h-auto max-xxs:w-24 xxs:w-28 md:w-32 md:h-20 xl:w-36 xl:h-24"></Image>
                     <div className="flex flex-col  font-bold max-xxs:ml-24 xxs:ml-28 md:ml-32 xl:ml-36 text-darkred">

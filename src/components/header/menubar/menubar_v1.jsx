@@ -3,15 +3,18 @@ import React, { useState } from 'react'
 import Menu_item_without_dropdown from './Menu_item_without_dropdown';
 import Menu_item_with_dropdown from './Menu_item_with_dropdown';
 import Nav_btn from '../Nav_btn';
+import Link from 'next/link';
 
 const menuItems = [
-    { menuId: 1, label: 'Home', href: '#' },
+    { menuId: 1, label: 'Home', href: '/' },
     {
         menuId: 2, label: 'About', href: '#',
         dropdown: [
             { menuId: 2.1, label: 'About us', href: '#' },
-            { menuId: 2.2, label: 'Our Activities', href: '#' },
-    
+            { menuId: 2.2, label: 'Our Activities', href: 'our-activity' },
+            { menuId: 2.3, label: 'Success Stories', href: 'success-story' },
+            { menuId: 2.4, label: 'Achieved awards', href: 'awards' },
+
         ]
     },
     {
@@ -23,8 +26,8 @@ const menuItems = [
             { menuId: 3.3, label: 'Cource 3', href: '#' },
         ]
     },
-    { menuId: 4, label: 'gallery', href: '#' },
-    { menuId: 5, label: 'Contact', href: '#' },
+    { menuId: 4, label: 'gallery', href: '/gallery' },
+    { menuId: 5, label: 'Contact', href: '/contact' },
 ];
 
 const Menubar_v1 = () => {
@@ -73,25 +76,25 @@ const Menubar_v1 = () => {
                             {menuItems.map((item, index) => (
                                 item.dropdown ? (
                                     <li key={item.menuId}>
-                                        <a href={item.href} id={`${item.label.toLowerCase()}-dropdown-toggle`} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
+                                        <Link href={item.href} id={`${item.label.toLowerCase()}-dropdown-toggle`} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
                                             {item.label}
-                                        </a>
+                                        </Link>
                                         {/* <!-- Mobile Dropdown --> */}
                                         <ul id={`${item.label.toLowerCase()}-dropdown`} className="hidden pl-4">
                                             {item.dropdown.map((subItem, subIndex) => (
                                                 <li key={subItem.menuId}>
-                                                    <a href={subItem.href} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
+                                                    <Link href={subItem.href} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
                                                         {subItem.label}
-                                                    </a>
+                                                    </Link>
                                                 </li>
                                             ))}
                                         </ul>
                                     </li>
                                 ) : (
                                     <li key={item.menuId}>
-                                        <a href={item.href} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
+                                        <Link href={item.href} className="block py-2 text-xl text-darkred hover:text-ngo-primary capitalize">
                                             {item.label}
-                                        </a>
+                                        </Link>
                                     </li>
                                 )
                             ))}

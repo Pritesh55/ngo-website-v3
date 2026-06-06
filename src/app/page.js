@@ -1,13 +1,29 @@
-import Menubar from "@/components/header/menubar/menubar";
-import Menubar_v1 from "@/components/header/menubar/menubar_v1";
+import { AwardsSection } from "@/components/sections/awards";
+
+import { HeroSection } from "@/components/sections/hero";
+
 import Image from "next/image";
+import PartnerSection from "@/components/sections/our-partners";
+import Contact_us_Main_Section from "@/components/sections/contact_us";
+import Our_Leadership_page from "./(about-us)/our-leadership/page";
+import Success_Stories_page from "./(about-us)/success-story/page";
 
 export default function Home() {
   return (
     <>
-      <h1 className="dark:bg-blue text-6xl text-center text-slate-900 py-48">
-        Welcome to NGO website...
-      </h1>
+
+      <HeroSection></HeroSection>
+
+      <Our_Leadership_page></Our_Leadership_page>
+      <Success_Stories_page></Success_Stories_page>
+      <AwardsSection></AwardsSection>
+
+      <PartnerSection></PartnerSection>
+      <div className="2xl:container mx-auto"></div>
+      <Contact_us_Main_Section></Contact_us_Main_Section>
+
+
+
     </>
   );
 }
