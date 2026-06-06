@@ -1,5 +1,3 @@
-'use client';
-
 import { Card } from '@/components/ui/card';
 import { TrendingUp, Users, DollarSign, Star, IndianRupee } from 'lucide-react';
 

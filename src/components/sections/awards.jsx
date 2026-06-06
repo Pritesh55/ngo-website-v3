@@ -1,4 +1,4 @@
-'use client';
+
 
 import { Card } from '@/components/ui/card';
 import { Award, Star } from 'lucide-react';

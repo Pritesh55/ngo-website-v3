@@ -14,15 +14,12 @@ export default function Home() {
 
       <HeroSection></HeroSection>
 
-      <Our_Leadership_page></Our_Leadership_page>
       <Success_Stories_page></Success_Stories_page>
       <AwardsSection></AwardsSection>
 
       <PartnerSection></PartnerSection>
       <div className="2xl:container mx-auto"></div>
       <Contact_us_Main_Section></Contact_us_Main_Section>
-
-
 
     </>
   );

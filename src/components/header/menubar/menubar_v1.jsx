@@ -14,7 +14,7 @@ const menuItems = [
             { menuId: 2.2, label: 'Our Activities', href: 'our-activity' },
             { menuId: 2.3, label: 'Success Stories', href: 'success-story' },
             { menuId: 2.4, label: 'Achieved awards', href: 'awards' },
-
+            { menuId: 2.5, label: 'President Leadership', href: 'our-leadership' },
         ]
     },
     {

@@ -1,9 +1,7 @@
-'use client';
-
 import { Card } from '@/components/ui/card';
 import { Globe, Users, Briefcase, Trophy } from 'lucide-react';
 
-export function ActivitiesSection() {
+export function President_Learship_Section() {
     const activities = [
         {
             title: 'Women Entrepreneurship',
@@ -83,7 +81,7 @@ export function ActivitiesSection() {
             <div className="max-w-7xl mx-auto ">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                        Activities & Leadership
+                        President Leadership
                     </h2>
                     <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
                         Smt. Shree Savitriben Patel, Managing Trustee of Manav Kalyan Trust, has played a transformative role in championing women entrepreneurship and business development across India and internationally.

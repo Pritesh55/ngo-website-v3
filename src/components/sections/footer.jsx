@@ -1,5 +1,3 @@
-'use client';
-
 import { Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 
 export function Footer() {

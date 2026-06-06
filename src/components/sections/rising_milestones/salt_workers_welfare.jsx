@@ -1,5 +1,3 @@
-'use client';
-
 import { Card } from '@/components/ui/card';
 import { Home, Shield, Users } from 'lucide-react';
 

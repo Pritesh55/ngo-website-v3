@@ -12,7 +12,7 @@ const Menu_item_with_dropdown = ({ menuItem: menuItem_Array }) => {
           {menuItem_Array.label}
         </Link>
         {/* <!-- Dropdown Menu --> */}
-        <ul className="absolute z-[99] left-6 mt-1.5 hidden group-hover:block bg-white shadow-md py-2  rounded-md w-48 transition-all duration-300">
+        <ul className="absolute z-[99] left-6 mt-1.5 hidden group-hover:block bg-white shadow-md py-2  rounded-md w-max transition-all duration-300">
           {menuItem_Array.dropdown.map((subItem, subIndex) => (
             <li key={subItem.menuId}>
               <Link href={subItem.href} className="block px-4 py-2 text-lightred hover:bg-orange-50 capitalize">

@@ -8,16 +8,36 @@ import React from 'react'
 const Our_Activity_Page = () => {
     return (
         <>
-            <WomenEmpowermentSection>
-            </WomenEmpowermentSection>
-            <SocioEconomicSection>
-            </SocioEconomicSection>
-            <CommunityHealthSection>
-            </CommunityHealthSection>
-            <ScienceInnovationSection>
-            </ScienceInnovationSection>
-            <SaltWorkersWelfareSection>
-            </SaltWorkersWelfareSection>
+
+            <section className="pt-20 px-4 bg-glow-fresh border-b border-slate-100 relative overflow-hidden">
+                <div className="max-w-7xl mx-auto">
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl md:text-5xl font-bold text-teal-900 mb-4">
+                            Rising Milestones
+                        </h2>
+                        <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                            Transformative programs empowering communities through strategic initiatives
+                        </p>
+                    </div>
+
+
+                    <WomenEmpowermentSection>
+                    </WomenEmpowermentSection>
+
+                    <SocioEconomicSection>
+                    </SocioEconomicSection>
+
+                    <CommunityHealthSection>
+                    </CommunityHealthSection>
+
+                    <ScienceInnovationSection>
+                    </ScienceInnovationSection>
+
+                    <SaltWorkersWelfareSection>
+                    </SaltWorkersWelfareSection>
+                </div>
+            </section>
+
 
         </>
     )

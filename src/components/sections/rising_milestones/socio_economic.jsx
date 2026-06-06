@@ -1,5 +1,3 @@
-'use client';
-
 import { Card } from '@/components/ui/card';
 import { BarChart3 } from 'lucide-react';
 
@@ -17,12 +15,13 @@ export function SocioEconomicSection() {
         '/images/socio-economic-development-activities/02---pdf_20230112_160443_-053.jpg',
         '/images/socio-economic-development-activities/02---pdf_20230112_160443_-054.jpg',
         '/images/socio-economic-development-activities/02---pdf_20230112_160443_-055.jpg',
-        '/images/socio-economic-development-activities/02---pdf_20230112_160443_-056.jpg',
+        // '/images/socio-economic-development-activities/02---pdf_20230112_160443_-056.jpg',
+        'https://web.archive.org/web/20170318005732im_/http://mktngo.org/gallery/gl-6.jpg',
         '/images/socio-economic-development-activities/02---pdf_20230112_160443_-057.jpg',
     ];
 
     return (
-        <section className="py-20 px-4 bg-glow-warm border-b border-slate-100 relative overflow-hidden">
+        <section className="pt-20 px-4 bg-glow-warm border-b border-slate-100 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="bg-linear-to-r from-green-50 to-slate-50 rounded-xl border-2 border-green-200 p-8 mb-12">
                     <div className="flex items-start gap-4 mb-6">
