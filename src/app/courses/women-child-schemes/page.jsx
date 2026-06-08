@@ -245,7 +245,7 @@ const WomenChildSchemesPage = () => {
           {/* Contact and Maps */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              href="https://wa.me/9194260620683?text=Join%20now"
+              href="https://wa.me/919426062083?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer shadow-md"
@@ -349,8 +349,8 @@ const WomenChildSchemesPage = () => {
                         key={scheme.id}
                         onClick={() => setActiveTab(scheme.id)}
                         className={`flex items-center gap-3 w-full text-left px-4 py-3.5 rounded-2xl font-bold text-sm transition-all border whitespace-nowrap md:whitespace-normal cursor-pointer ${isActive
-                            ? 'bg-rose-600 text-white border-rose-600 shadow-md shadow-rose-600/15'
-                            : 'bg-white hover:bg-slate-50 text-slate-650 border-slate-250/70'
+                          ? 'bg-rose-600 text-white border-rose-600 shadow-md shadow-rose-600/15'
+                          : 'bg-white hover:bg-slate-50 text-slate-650 border-slate-250/70'
                           }`}
                       >
                         <SchemeIcon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-white' : 'text-rose-600'}`} />
@@ -401,8 +401,8 @@ const WomenChildSchemesPage = () => {
                               key={idx}
                               onClick={() => toggleDoc(activeScheme.id, idx)}
                               className={`p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer ${isChecked
-                                  ? 'bg-rose-50/40 border-rose-200 text-slate-800 shadow-xs'
-                                  : 'bg-white hover:bg-slate-50 border-slate-200'
+                                ? 'bg-rose-50/40 border-rose-200 text-slate-800 shadow-xs'
+                                : 'bg-white hover:bg-slate-50 border-slate-200'
                                 }`}
                             >
                               <div className={`w-5 h-5 rounded-md flex-shrink-0 mt-0.5 border flex items-center justify-center transition-all ${isChecked ? 'bg-rose-600 border-rose-600 text-white' : 'border-slate-350 bg-white'
@@ -465,7 +465,7 @@ const WomenChildSchemesPage = () => {
             </p>
             <div className="space-y-3">
               <Link
-                href="https://wa.me/9194260620683?text=Scheme%20Assistance"
+                href="https://wa.me/919426062083?text=Scheme%20Assistance"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2.5 py-3.5 bg-white text-rose-900 font-extrabold rounded-2xl text-sm hover:bg-slate-50 transition-colors cursor-pointer w-full text-center shadow-xs"

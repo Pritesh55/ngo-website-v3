@@ -145,7 +145,7 @@ export function CoursesSection() {
                 </Link>
 
                 <a
-                  href={`https://wa.me/9194260620683?text=Join%20now`}
+                  href={`https://wa.me/919426062083?text=Join%20now`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-xs md:text-sm capitalize tracking-wider cursor-pointer w-full sm:w-auto"
