@@ -1,6 +1,8 @@
 import React from 'react'
 import { Eye, Target, Sparkles, Users, Handshake, Shield, GraduationCap, ChevronRight, Heart, UserPlus } from 'lucide-react'
 import Link from 'next/link';
+import Our_team from '@/components/sections/Our_team';
+import CTA_Donate_or_vol from '@/components/sections/CTA_Donate_or_vol';
 
 const About_us_Page = () => {
   return (
@@ -448,174 +450,10 @@ const About_us_Page = () => {
       </section>
 
       {/* <!-- 6 ▸ OUR TEAM ----------------------------------------------- --> */}
-      <section className="bg-glow-warm py-24 border-b border-slate-100 relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
-              <Users className="w-4 h-4 text-orange-700" />
-              <span className="text-xs font-bold text-orange-700 tracking-wider">અમારો સ્ટાફ (OUR TEAM)</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Meet Our Dedicated Team
-            </h2>
-            <p className="text-lg text-slate-650 max-w-2xl mx-auto leading-relaxed font-semibold">
-              અમારા ઉત્સાહી અને સમર્પિત સભ્યો જેઓ સમાજના સકારાત્મક પરિવર્તન માટે અવિરત કાર્યરત છે.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-            {[
-              {
-                name: 'Mrs. Savitriben Patel',
-                role: 'President & Managing Trustee',
-                gujRole: 'પ્રમુખ અને વ્યવસ્થાપક ટ્રસ્ટી',
-                image: '/images/G04-other-activities-of-precident-Mkt/img11.jpg',
-                theme: 'from-orange-50/80 to-red-50/40',
-                border: 'border-orange-200'
-              },
-              {
-                name: 'Dipikaben Patel',
-                role: 'Counselor & Assistant Center Coordinator',
-                gujRole: 'કાઉન્સેલર અને મદદનીશ કેન્દ્ર સંચાલક',
-                image: '/images/G01-Aatmnirbhar/img11.jpg',
-                theme: 'from-blue-50/80 to-indigo-50/40',
-                border: 'border-blue-200'
-              },
-              {
-                name: 'Mahendrasinh Rathod',
-                role: 'Co-ordinator Assistant & Computer Operator',
-                gujRole: 'કો-ઓર્ડિનેટર આસિસ્ટન્ટ અને કમ્પ્યુટર ઓપરેટર',
-                image: '/images/G05-Skill-Traiing-Programs/img14.jpg',
-                theme: 'from-emerald-50/80 to-teal-50/40',
-                border: 'border-emerald-200'
-              },
-              {
-                name: 'Hansaben Prajapati',
-                role: 'Trainer & Teacher',
-                gujRole: 'તાલીમાર્થી શિક્ષક (ટ્રેનર)',
-                image: '/images/G05-Skill-Traiing-Programs/img11.jpg',
-                theme: 'from-pink-50/80 to-rose-50/40',
-                border: 'border-pink-200'
-              },
-              {
-                name: 'Poonamben Solanki',
-                role: 'Sewing Machine Teacher',
-                gujRole: 'સીવણ વર્ગ શિક્ષિકા',
-                image: '/images/courses/img8.jpg',
-                theme: 'from-amber-50/80 to-yellow-50/40',
-                border: 'border-amber-200'
-              }
-            ].map((member, idx) => (
-              <div
-                key={idx}
-                className={`bg-linear-to-br ${member.theme} border ${member.border} rounded-2xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between h-full`}
-              >
-                <div>
-                  {/* Profile Image placeholder */}
-                  <div className="h-56 w-full overflow-hidden bg-slate-100 relative border-b border-slate-150">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-[1.04]"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold text-slate-900 leading-snug mb-1">
-                      {member.name}
-                    </h3>
-                    <p className="text-xs font-bold text-red-700 capitalize tracking-wider mb-3">
-                      {member.role}
-                    </p>
-                    <p className="text-xs md:text-sm text-slate-650 font-bold leading-relaxed border-t border-slate-200/50 pt-3">
-                      {member.gujRole}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Our_team />
 
       {/* <!-- 7 ▸ CLOSING / CTA ------------------------------------------ --> */}
-      <section className="bg-glow-cool py-24 border-t border-slate-100 relative overflow-hidden">
-        <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
-
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
-              <span className="text-xs font-bold text-orange-700 tracking-wider">06 — GET INVOLVED</span>
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Help us place education, dignity &amp; opportunity in more hands
-            </h2>
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Join our mission to empower communities, support rural entrepreneurs, and transform lives across Gujarat.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* Donate Card */}
-            <div className="group hover:shadow-xl transition-all duration-300 bg-linear-to-br from-orange-50/80 to-red-50/40 border border-orange-200/80 rounded-3xl overflow-hidden flex flex-col h-full">
-              <div className="p-8 md:p-10 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="p-3 bg-orange-100 rounded-xl text-orange-700">
-                      <Heart className="w-8 h-8" />
-                    </div>
-                    <span className="text-xs font-bold capitalize tracking-widest text-orange-850 bg-white border border-orange-200 px-3 py-1 rounded-full">
-                      Support the Trust
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 leading-snug mb-3">
-                    Make a Donation
-                  </h3>
-                  <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
-                    Your generous contributions directly fund skill development workshops, educational materials for children, and women's self-sufficiency projects.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Link href="/donate" className="group inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-orange-500 to-darkred text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/30 transition-all cursor-pointer text-sm">
-                    Donate Now
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Volunteer Card */}
-            <div className="group hover:shadow-xl transition-all duration-300 bg-linear-to-br from-blue-50/80 to-indigo-50/40 border border-blue-200/80 rounded-3xl overflow-hidden flex flex-col h-full">
-              <div className="p-8 md:p-10 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-start justify-between mb-6">
-                    <div className="p-3 bg-blue-100 rounded-xl text-blue-700">
-                      <UserPlus className="w-8 h-8" />
-                    </div>
-                    <span className="text-xs font-bold capitalize tracking-widest text-blue-850 bg-white border border-blue-200 px-3 py-1 rounded-full">
-                      Join Our Team
-                    </span>
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 leading-snug mb-3">
-                    Become a Volunteer
-                  </h3>
-                  <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
-                    Share your time, technical skills, or guidance to mentor local communities, support training courses, and expand our rural outreach.
-                  </p>
-                </div>
-                <div className="mt-8">
-                  <Link href="#volunteer" className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-all cursor-pointer text-sm">
-                    Volunteer With Us
-                    <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 text-center text-sm italic text-slate-500 font-semibold">
-            Manav Kalyan Trust · Mehsana, Gujarat · since 1986
-          </div>
-        </div>
-      </section>
+      <CTA_Donate_or_vol />
 
     </>
   )
