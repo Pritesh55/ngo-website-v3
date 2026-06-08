@@ -185,7 +185,7 @@ const MktInstitutePage = () => {
                 <span>સંપર્ક નંબરો :</span>
               </div>
               <div className="flex flex-wrap gap-2 text-white">
-                <a href="tel:9316842712" className="hover:text-orange-400 transition-colors">૯૩૧૬૮૪૨૭૧૨</a> •
+                <a href="tel:9974025126" className="hover:text-orange-400 transition-colors">૯૩૧૬૮૪૨૭૧૨</a> •
                 <a href="tel:6355552491" className="hover:text-orange-400 transition-colors">૬૩૫૫૫૫૨૪૯૧</a> •
                 <a href="tel:9714360243" className="hover:text-orange-400 transition-colors">૯૭૧૪૩૬૦૨૪૩</a> •
                 <a href="tel:9714918134" className="hover:text-orange-400 transition-colors">૯૭૧૪૯૧૮૧૩૪</a>
@@ -196,7 +196,7 @@ const MktInstitutePage = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <Link
-              href="https://wa.me/919316842712?text=Join%20now"
+              href="https://wa.me/919974025126?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
@@ -209,7 +209,7 @@ const MktInstitutePage = () => {
               વોટ્સએપ પૂછપરછ (Join Now)
             </Link>
             <Link
-              href="tel:9316842712"
+              href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
@@ -371,7 +371,7 @@ const MktInstitutePage = () => {
                     {/* WhatsApp CTA */}
                     <div className="mt-6 flex flex-col sm:flex-row gap-3">
                       <a
-                        href={`https://wa.me/919316842712?text=I%20am%20interested%20in%2520${encodeURIComponent(course.name)}`}
+                        href={`https://wa.me/919974025126?text=I%20am%20interested%20in%2520${encodeURIComponent(course.name)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer flex-1 text-center"
@@ -384,7 +384,7 @@ const MktInstitutePage = () => {
                         વોટ્સએપ દ્વારા પ્રવેશ મેળવો (Apply Now)
                       </a>
                       <a
-                        href="tel:9316842712"
+                        href="tel:9974025126"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-slate-350 text-slate-700 font-extrabold rounded-xl hover:bg-slate-100 transition-all text-sm md:text-base cursor-pointer"
                       >
                         કૉલ કરો
@@ -549,7 +549,7 @@ const MktInstitutePage = () => {
               રજીસ્ટ્રેશન પૂછપરછ (WhatsApp)
             </a>
             <a
-              href="tel:9316842712"
+              href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-orange-500 to-darkred text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/35 transition-all text-sm md:text-base cursor-pointer"
             >
               <Phone className="w-5 h-5" />
