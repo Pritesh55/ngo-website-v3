@@ -68,11 +68,11 @@ const courses = [
 
 export function CoursesSection() {
   return (
-    <section className="bg-glow-warm py-12 md:py-20 px-4 border-b border-slate-100 relative overflow-hidden">
+    <section id="our_cources" className="bg-glow-warm py-12 md:py-20 px-4 border-b border-slate-100 relative overflow-hidden">
       <div className="mx-auto">
 
         {/* Section Heading */}
-        <div className="text-center mb-10 md:mb-16">
+        <div className="text-center pb-10 md:pb-16">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
             <GraduationCap className="w-4 h-4 text-orange-700" />
             <span className="text-xs font-bold text-orange-700 tracking-wider">અમારા કોર્સ (OUR COURSES)</span>

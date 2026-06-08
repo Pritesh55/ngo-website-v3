@@ -1,4 +1,5 @@
 
+import Link from 'next/link';
 import Hero_btns from '../btns/hero_btns';
 
 
@@ -49,13 +50,13 @@ export function HeroSection() {
                 </div>
 
                 {/* Scroll Indicator */}
-                <div className="flex justify-center animate-bounce">
+                <Link href="#our_cources" className="flex justify-center animate-bounce">
                     <div className="text-slate-500">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                         </svg>
                     </div>
-                </div>
+                </Link>
             </div>
         </section>
     );
