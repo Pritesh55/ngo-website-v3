@@ -84,7 +84,7 @@ export function AwardsSection() {
                                     <div>
                                         <div className="flex items-start justify-between mb-3">
                                             <div className="flex-1">
-                                                <p className="text-xs font-bold text-amber-600 uppercase tracking-wider mb-1">
+                                                <p className="text-xs font-bold text-amber-600 capitalize tracking-wider mb-1">
                                                     {award.year}
                                                 </p>
                                                 <h3 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">

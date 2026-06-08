@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 export function Footer() {
     return (
@@ -11,7 +12,7 @@ export function Footer() {
                             <h3 className="text-2xl font-bold bg-linear-to-r from-orange-600 to-darkred bg-clip-text text-transparent">
                                 Manav Kalyan Trust
                             </h3>
-                            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mt-1">
+                            <p className="text-xs font-semibold text-slate-500 capitalize tracking-widest mt-1">
                                 Empowering Communities
                             </p>
                         </div>
@@ -33,7 +34,7 @@ export function Footer() {
 
                     {/* Quick Links */}
                     <div className="lg:col-span-4">
-                        <h4 className="text-slate-900 font-bold text-base uppercase tracking-wider mb-4">Programs</h4>
+                        <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Programs</h4>
                         <ul className="space-y-3 text-sm font-medium">
                             {[
                                 'Women Entrepreneurship',
@@ -56,7 +57,7 @@ export function Footer() {
 
                     {/* Resources */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-slate-900 font-bold text-base uppercase tracking-wider mb-4">Resources</h4>
+                        <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Resources</h4>
                         <ul className="space-y-3 text-sm font-medium">
                             {['Success Stories', 'Awards', 'News & Updates', 'Gallery'].map((link) => (
                                 <li key={link}>
@@ -74,7 +75,7 @@ export function Footer() {
 
                     {/* Contact */}
                     <div className="lg:col-span-5">
-                        <h4 className="text-slate-900 font-bold text-base uppercase tracking-wider mb-4">Get In Touch</h4>
+                        <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Get In Touch</h4>
                         <div className="space-y-4 text-sm font-medium text-slate-600">
                             <div className="flex items-start gap-3">
                                 <div className="p-2 bg-orange-100/80 rounded-lg text-orange-600 flex-shrink-0 mt-0.5">
@@ -91,13 +92,30 @@ export function Footer() {
                                 <div className="p-2 bg-red-100/80 rounded-lg text-red-600 flex-shrink-0">
                                     <Phone className="w-4 h-4" />
                                 </div>
-                                <span className="pt-1">(079) 27496640</span>
+                                <span className="pt-1">
+                                    94260 620683
+                                </span>
                             </div>
                             <div className="flex items-start gap-3">
                                 <div className="p-2 bg-amber-100/80 rounded-lg text-amber-600 flex-shrink-0">
                                     <Mail className="w-4 h-4" />
                                 </div>
                                 <span className="pt-1">mktahmedabad1986@gmail.com</span>
+                            </div>
+                            <div className="pt-2">
+                                <a
+                                    href="https://wa.me/919426062068?text=Join%20now"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#25D366] text-white hover:bg-[#20ba59] transition-all font-bold shadow-xs hover:shadow-md text-xs md:text-sm cursor-pointer"
+                                >
+                                    <img
+                                        src="/icons/whatsapp-color-svgrepo-com.svg"
+                                        alt="WhatsApp"
+                                        className="w-4 h-4 object-contain brightness-0 invert"
+                                    />
+                                    Join now on WhatsApp
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -110,16 +128,16 @@ export function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between text-sm font-medium text-slate-500">
                     <p>© 2026 Manav Kalyan Trust. All rights reserved.</p>
                     <div className="flex gap-6 mt-4 md:mt-0">
-                        <a href="#" className="hover:text-red-700 transition-colors">
+                        <Link href="#" className="hover:text-red-700 transition-colors">
                             Privacy Policy
-                        </a>
-                        <a href="#" className="hover:text-red-700 transition-colors">
+                        </Link>
+                        <Link href="#" className="hover:text-red-700 transition-colors">
                             Terms & Conditions
-                        </a>
-                        <a href="#" className="hover:text-red-700 transition-colors flex items-center gap-1 group">
+                        </Link>
+                        <Link href="#" className="hover:text-red-700 transition-colors flex items-center gap-1 group">
                             Sitemap
                             <ExternalLink className="w-3 h-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>
