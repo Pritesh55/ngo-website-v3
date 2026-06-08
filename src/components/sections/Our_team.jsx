@@ -33,7 +33,7 @@ const Our_team = () => {
                                 name: 'Dipikaben Patel',
                                 role: 'Counselor & Assistant Center Coordinator',
                                 gujRole: 'કાઉન્સેલર અને મદદનીશ કેન્દ્ર સંચાલક',
-                                image: '/images/Team/dipikaben-patel.png',
+                                image: '/images/Team/dipikaben-patel.jpeg',
                                 theme: 'from-blue-50/80 to-indigo-50/40',
                                 border: 'border-blue-200'
                             },
