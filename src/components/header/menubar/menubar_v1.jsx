@@ -4,27 +4,27 @@ import Menu_item_without_dropdown from './Menu_item_without_dropdown';
 import Menu_item_with_dropdown from './Menu_item_with_dropdown';
 import Nav_btn from '../Nav_btn';
 import Link from 'next/link';
-import { Home, Info, GraduationCap, Image, Phone } from 'lucide-react';
+import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Trophy, User, Scissors, FileCheck, Laptop } from 'lucide-react';
 
 const menuItems = [
     { menuId: 1, label: 'Home', href: '/', icon: Home },
     {
         menuId: 2, label: 'About', href: '#', icon: Info,
         dropdown: [
-            { menuId: 2.1, label: 'About us', href: '/about-us' },
-            { menuId: 2.2, label: 'Our Activities', href: '/our-activity' },
-            { menuId: 2.6, label: 'Our Partners', href: '/our-partners' },
-            { menuId: 2.3, label: 'Success Stories', href: '/success-story' },
-            { menuId: 2.4, label: 'Achieved awards', href: '/awards' },
-            { menuId: 2.5, label: 'President Leadership', href: '/our-leadership' },
+            { menuId: 2.1, label: 'About us', href: '/about-us', icon: Info },
+            { menuId: 2.2, label: 'Our Activities', href: '/our-activity', icon: Activity },
+            { menuId: 2.6, label: 'Our Partners', href: '/our-partners', icon: Handshake },
+            { menuId: 2.3, label: 'Success Stories', href: '/success-story', icon: Award },
+            { menuId: 2.4, label: 'Achieved awards', href: '/awards', icon: Trophy },
+            { menuId: 2.5, label: 'President Leadership', href: '/our-leadership', icon: User },
         ]
     },
     {
         menuId: 3, label: 'Courses', href: '#', icon: GraduationCap,
         dropdown: [
-            { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine' },
-            { menuId: 3.3, label: 'સરકારી યોજના માર્ગદર્શન (Govt Schemes)', href: '/courses/government-schemes' },
-            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute' },
+            { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine', icon: Scissors },
+            { menuId: 3.3, label: 'સરકારી યોજના માર્ગદર્શન (Govt Schemes)', href: '/courses/government-schemes', icon: FileCheck },
+            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute', icon: Laptop },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },
@@ -112,17 +112,21 @@ const Menubar_v1 = () => {
                                             id={`${item.label.toLowerCase()}-dropdown`} 
                                             className={`${openMobileDropdown === item.menuId ? 'block' : 'hidden'} pl-8 border-l border-orange-200 space-y-1 mt-1 ml-2.5`}
                                         >
-                                            {item.dropdown.map((subItem, subIndex) => (
-                                                <li key={subItem.menuId}>
-                                                    <Link 
-                                                        href={subItem.href} 
-                                                        onClick={() => set_Is_Mobile_Menu_Open(false)}
-                                                        className="block py-2 text-lg text-slate-700 hover:text-ngo-primary capitalize"
-                                                    >
-                                                        {subItem.label}
-                                                    </Link>
-                                                </li>
-                                            ))}
+                                            {item.dropdown.map((subItem, subIndex) => {
+                                                const SubIcon = subItem.icon;
+                                                return (
+                                                    <li key={subItem.menuId}>
+                                                        <Link 
+                                                            href={subItem.href} 
+                                                            onClick={() => set_Is_Mobile_Menu_Open(false)}
+                                                            className="flex items-center gap-2.5 py-2 text-[16px] md:text-[18px] text-emerald-700 font-medium hover:text-emerald-900 capitalize"
+                                                        >
+                                                            {SubIcon && <SubIcon className="w-4.5 h-4.5 text-emerald-600" />}
+                                                            <span>{subItem.label}</span>
+                                                        </Link>
+                                                    </li>
+                                                );
+                                            })}
                                         </ul>
                                     </li>
                                 ) : (

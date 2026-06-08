@@ -1,6 +1,57 @@
 import { Mail, MapPin, Phone, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 
+const socialLinks = [
+    {
+        name: 'Facebook',
+        icon: (
+            <svg className="w-5 h-5 text-blue-600 fill-current" viewBox="0 0 24 24">
+                <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.85z"/>
+            </svg>
+        ),
+        href: 'https://www.facebook.com',
+        hoverClass: 'hover:border-blue-300 hover:bg-blue-50'
+    },
+    {
+        name: 'Instagram',
+        icon: (
+            <svg className="w-5 h-5 text-pink-600 fill-none stroke-current" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+        ),
+        href: 'https://www.instagram.com',
+        hoverClass: 'hover:border-pink-300 hover:bg-pink-50'
+    },
+    {
+        name: 'Twitter',
+        icon: (
+            <svg className="w-5 h-5 text-sky-500 fill-current" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+            </svg>
+        ),
+        href: 'https://twitter.com',
+        hoverClass: 'hover:border-sky-300 hover:bg-sky-50'
+    },
+    {
+        name: 'WhatsApp',
+        icon: (
+            <svg className="w-5 h-5 text-[#25D366] fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.003 5.324 5.328 0 11.859 0c3.166.001 6.141 1.233 8.378 3.472 2.238 2.24 3.466 5.216 3.464 8.385-.004 6.535-5.33 11.859-11.861 11.859-2.002-.001-3.97-.509-5.713-1.479L0 24zm6.59-4.846c1.6.95 3.16 1.455 4.703 1.456 5.405 0 9.803-4.394 9.806-9.799.002-2.618-1.012-5.08-2.859-6.93C16.402 2.03 13.932 1.015 11.86 1.015c-5.409 0-9.809 4.397-9.813 9.803-.001 1.636.433 3.23 1.258 4.643l-.995 3.635 3.737-.98zM17.18 14.8c-.29-.145-1.72-.85-1.985-.946-.266-.097-.46-.144-.654.145-.19.29-.737.946-.906 1.137-.167.19-.335.213-.625.069-1.394-.697-2.3-1.21-3.21-2.78-.24-.415.24-.385.69-.77.12-.1.24-.24.36-.36.12-.12.16-.2.24-.34.08-.14.04-.26-.02-.38-.06-.12-.654-1.577-.897-2.153-.235-.567-.478-.49-.654-.498-.17-.008-.363-.01-.555-.01-.19 0-.5.07-.76.36-.26.29-1 1.02-1 2.49 0 1.47 1.07 2.89 1.21 3.08.14.19 2.1 3.21 5.09 4.51.71.31 1.27.5 1.7.63.72.23 1.37.2 1.88.12.57-.08 1.72-.7 1.96-1.38.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.335z"/>
+            </svg>
+        ),
+        href: 'https://wa.me/919426062068?text=Join%20now',
+        hoverClass: 'hover:border-emerald-300 hover:bg-emerald-50'
+    },
+    {
+        name: 'Google Map',
+        icon: <MapPin className="w-5 h-5 text-red-650" />,
+        href: 'https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D',
+        hoverClass: 'hover:border-red-300 hover:bg-red-50'
+    }
+];
+
 export function Footer() {
     return (
         <footer className="w-full bg-linear-to-br from-orange-50 via-white to-red-50 border-t border-orange-100 pt-8 pb-4 px-6 sm:px-8">
@@ -20,14 +71,17 @@ export function Footer() {
                             Empowering entrepreneurs and transforming lives through sustainable business development and social impact programs.
                         </p>
                         <div className="flex gap-3 mt-2">
-                            {['Facebook', 'Twitter', 'LinkedIn'].map((social) => (
-                                <button
-                                    key={social}
-                                    className="w-10 h-10 rounded-full bg-white border border-orange-100 hover:border-orange-300 hover:bg-orange-50 transition-all flex items-center justify-center shadow-xs cursor-pointer animate-none hover:scale-105"
-                                    aria-label={social}
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`w-10 h-10 rounded-full bg-white border border-slate-200 transition-all flex items-center justify-center shadow-xs cursor-pointer hover:scale-105 ${social.hoverClass}`}
+                                    aria-label={social.name}
                                 >
-                                    <span className="text-sm font-bold text-orange-600">{social[0]}</span>
-                                </button>
+                                    {social.icon}
+                                </a>
                             ))}
                         </div>
                     </div>
