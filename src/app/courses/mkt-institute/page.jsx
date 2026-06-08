@@ -66,8 +66,8 @@ const MktInstitutePage = () => {
         'Basic Computer Operations',
         'Speed Typing & Formatting'
       ],
-      theme: 'from-violet-600 via-purple-600 to-indigo-850',
-      cardBg: 'from-violet-50/70 to-purple-50/30',
+      theme: 'bg-violet-600',
+      cardBg: 'bg-violet-50/60',
       badgeColor: 'bg-violet-100 text-violet-800 border-violet-200',
       borderColor: 'border-violet-250',
       btnColor: 'from-violet-600 to-purple-700 hover:shadow-violet-500/20'
@@ -86,8 +86,8 @@ const MktInstitutePage = () => {
         'jQuery DOM Manipulation',
         'React JS Component-based UI Development'
       ],
-      theme: 'from-sky-600 via-cyan-600 to-blue-850',
-      cardBg: 'from-sky-50/70 to-cyan-50/30',
+      theme: 'bg-sky-600',
+      cardBg: 'bg-sky-50/60',
       badgeColor: 'bg-sky-100 text-sky-850 border-sky-200',
       borderColor: 'border-sky-250',
       btnColor: 'from-sky-600 to-cyan-700 hover:shadow-cyan-500/20'
@@ -107,8 +107,8 @@ const MktInstitutePage = () => {
         'Hand Embroidery & Machine Embroidery',
         'Tie & Dye & Fabric Printing Masterclass'
       ],
-      theme: 'from-pink-600 via-rose-600 to-red-850',
-      cardBg: 'from-pink-50/70 to-rose-50/30',
+      theme: 'bg-pink-600',
+      cardBg: 'bg-pink-50/60',
       badgeColor: 'bg-pink-100 text-pink-850 border-pink-200',
       borderColor: 'border-pink-250',
       btnColor: 'from-pink-600 to-rose-700 hover:shadow-rose-500/20'
@@ -280,7 +280,7 @@ const MktInstitutePage = () => {
                 className="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden scroll-mt-24 transition-all duration-300 hover:shadow-md"
               >
                 {/* Course Header Banner */}
-                <div className={`bg-linear-to-r ${course.theme} p-6 md:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-6`}>
+                <div className={`${course.theme} p-6 md:p-10 text-white flex flex-col md:flex-row md:items-center justify-between gap-6`}>
                   <div className="space-y-2">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold">
                       <Sparkles className="w-3.5 h-3.5" />
@@ -302,7 +302,7 @@ const MktInstitutePage = () => {
 
                   {/* Left Column: Quick Specs */}
                   <div className="lg:col-span-5 space-y-6">
-                    <div className={`bg-linear-to-br ${course.cardBg} border ${course.borderColor} border-2 rounded-3xl p-6 shadow-xs space-y-5`}>
+                    <div className={`${course.cardBg} border ${course.borderColor} border-2 rounded-3xl p-6 shadow-xs space-y-5`}>
 
                       <div className="flex items-start gap-4">
                         <div className="p-3 bg-white rounded-xl text-orange-600 flex-shrink-0 shadow-xs border border-orange-100">
@@ -536,7 +536,7 @@ const MktInstitutePage = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
-              href="https://wa.me/919316842712?text=I%20want%20to%20register%20for%20MKT%20Institute%20courses"
+              href="https://wa.me/c?text=I%20want%20to%20register%20for%20MKT%20Institute%20courses"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-lg hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
