@@ -25,6 +25,7 @@ const menuItems = [
             { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine', icon: Scissors },
             { menuId: 3.3, label: 'સરકારી યોજના માર્ગદર્શન (Govt Schemes)', href: '/courses/government-schemes', icon: FileCheck },
             { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute', icon: Laptop },
+            { menuId: 3.5, label: 'મહિલા બાળ વિકાસ યોજનાઓ (Women & Child)', href: '/courses/women-child-schemes', icon: FileCheck },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },

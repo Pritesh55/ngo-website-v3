@@ -63,6 +63,18 @@ const courses = [
     border: 'border-pink-200 hover:border-pink-300',
     tagClass: 'border-pink-200 bg-pink-100/60 text-pink-750',
     btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
+  },
+  {
+    name: 'મહિલા બાળ વિકાસ માટેની વિવિધ યોજનાઓ (Women & Child Schemes)',
+    duration: 'કાયમી સેવા (Ongoing)',
+    fee: 'વિના મૂલ્યે (Free)',
+    description: 'સંકટ મોચન, વિધવા સહાય, ગંગા સ્વરૂપા પુનઃલગ્ન આર્થિક સહાય જેવી કલ્યાણકારી સરકારી યોજનાઓ માટે રજૂ કરવાના જરૂરી આધાર-પુરાવાઓની યાદી અને માર્ગદર્શન.',
+    image: '/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg',
+    link: '/courses/women-child-schemes',
+    theme: 'from-rose-50/80 to-orange-50/40',
+    border: 'border-rose-200 hover:border-rose-300',
+    tagClass: 'border-rose-200 bg-rose-100/60 text-rose-700',
+    btnClass: 'from-rose-500 to-orange-600 text-white hover:shadow-rose-500/20'
   }
 ];
 
@@ -133,7 +145,7 @@ export function CoursesSection() {
                 </Link>
 
                 <a
-                  href={`https://wa.me/919426062068?text=Join%20now`}
+                  href={`https://wa.me/9194260620683?text=Join%20now`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-xs md:text-sm capitalize tracking-wider cursor-pointer w-full sm:w-auto"

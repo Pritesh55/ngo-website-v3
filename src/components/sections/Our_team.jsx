@@ -41,7 +41,7 @@ const Our_team = () => {
                                 name: 'Mahendrasinh Rathod',
                                 role: 'Co-ordinator Assistant & Computer Operator',
                                 gujRole: 'કો-ઓર્ડિનેટર આસિસ્ટન્ટ અને કમ્પ્યુટર ઓપરેટર',
-                                image: '/images/G05-Skill-Traiing-Programs/img14.jpg',
+                                image: '/images/Team/Mahendrasingh-Rathod.jpeg',
                                 theme: 'from-emerald-50/80 to-teal-50/40',
                                 border: 'border-emerald-200'
                             },
@@ -57,7 +57,7 @@ const Our_team = () => {
                                 name: 'Poonamben Solanki',
                                 role: 'Sewing Machine Teacher',
                                 gujRole: 'સીવણ વર્ગ શિક્ષિકા',
-                                image: '/images/courses/img8.jpg',
+                                image: '/images/Team/poonamben-solanki.jpeg',
                                 theme: 'from-amber-50/80 to-yellow-50/40',
                                 border: 'border-amber-200'
                             }
@@ -72,7 +72,7 @@ const Our_team = () => {
                                         <img
                                             src={member.image}
                                             alt={member.name}
-                                            className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-[1.04]"
+                                            className="w-full h-full object-cover object-center transition-transform duration-500 scale-[1] hover:scale-[1.04]"
                                         />
                                     </div>
                                     <div className="p-5">
