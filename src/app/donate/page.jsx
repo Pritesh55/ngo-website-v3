@@ -50,7 +50,7 @@ const DonatePage = () => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        
+
         {/* Exemption Alert Banner */}
         <div className="mb-12 max-w-4xl mx-auto bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex gap-4 items-center shadow-xs">
           <div className="p-2.5 bg-emerald-100 rounded-xl text-emerald-700 flex-shrink-0">
@@ -65,11 +65,11 @@ const DonatePage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-12">
-          
+
           {/* Column 1: India Donations */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
             <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs flex-1 hover:border-orange-350 hover:shadow-lg transition-all duration-300">
-              
+
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                 <div className="p-3 bg-orange-100 text-orange-700 rounded-2xl">
                   <Landmark className="w-6 h-6" />
@@ -121,7 +121,7 @@ const DonatePage = () => {
                   </p>
                   <div className="space-y-1 pt-2 border-t border-orange-100/50">
                     <p className="flex items-center gap-2">
-                      <Phone className="w-3.5 h-3.5 text-slate-450" /> Telefax: (079) 27496640 | Mo: 09426062083
+                      <Phone className="w-3.5 h-3.5 text-slate-450" /> Telefax: (079) 27496640 | Mo: 09974025126
                     </p>
                     <p className="flex items-center gap-2">
                       <Mail className="w-3.5 h-3.5 text-slate-450" /> mktahmedabad1986@gmail.com / psavitri13@yahoo.com
@@ -136,7 +136,7 @@ const DonatePage = () => {
           {/* Column 2: Overseas Donations */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
             <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs flex-1 hover:border-blue-350 hover:shadow-lg transition-all duration-300">
-              
+
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
                 <div className="p-3 bg-blue-100 text-blue-700 rounded-2xl">
                   <Globe className="w-6 h-6" />

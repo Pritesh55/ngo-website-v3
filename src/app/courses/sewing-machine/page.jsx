@@ -34,7 +34,7 @@ const SewingMachineCoursePage = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8">
             <Link
-              href="https://wa.me/919426062083?text=Join%20now"
+              href="https://wa.me/919974025126?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
@@ -47,7 +47,7 @@ const SewingMachineCoursePage = () => {
               વોટ્સએપ પૂછપરછ (Join Now)
             </Link>
             <Link
-              href="tel:9426062083"
+              href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
@@ -239,7 +239,7 @@ const SewingMachineCoursePage = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center">
             <a
-              href="https://wa.me/919426062083?text=Join%20now"
+              href="https://wa.me/919974025126?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base capitalize tracking-wider cursor-pointer"
@@ -252,7 +252,7 @@ const SewingMachineCoursePage = () => {
               વોટ્સએપ દ્વારા જોડાઓ (Join Now)
             </a>
             <a
-              href="tel:9426062083"
+              href="tel:9974025126"
               className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-linear-to-r from-orange-500 to-darkred text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/35 transition-all text-sm md:text-base capitalize tracking-wider cursor-pointer"
             >
               <Phone className="w-5 h-5" />

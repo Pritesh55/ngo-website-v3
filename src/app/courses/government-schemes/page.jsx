@@ -89,7 +89,7 @@ const GovtSchemesPage = () => {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link
-              href="https://wa.me/919426062083?text=Join%20now"
+              href="https://wa.me/919974025126?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-lg hover:shadow-emerald-500/20 hover:bg-[#20ba59] transition-all text-sm md:text-base tracking-wider cursor-pointer"
@@ -168,7 +168,7 @@ const GovtSchemesPage = () => {
 
           <div className="flex-shrink-0 w-full md:w-auto flex flex-col gap-3 relative z-10">
             <Link
-              href="tel:9426062083"
+              href="tel:9974025126"
               className="flex items-center justify-center gap-3 px-6 py-4 bg-white text-teal-950 hover:bg-slate-55 transition-all font-extrabold rounded-2xl text-base shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             >
               <Phone className="w-4.5 h-4.5 text-emerald-700" />
@@ -844,7 +844,7 @@ const GovtSchemesPage = () => {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 w-full">
             <Link
-              href="https://wa.me/919426062083?text=Join%20now"
+              href="https://wa.me/919974025126?text=Join%20now"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
@@ -857,7 +857,7 @@ const GovtSchemesPage = () => {
               વોટ્સએપ પૂછપરછ (Join Now)
             </Link>
             <Link
-              href="tel:9426062083"
+              href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
