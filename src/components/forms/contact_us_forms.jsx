@@ -14,7 +14,7 @@ const Contact_us_forms = () => {
         <>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Name</label>
+                    <label className="block text-xs font-bold text-slate-700 capitalize tracking-wider mb-1">Name</label>
                     <input
                         type="text"
                         placeholder="Your Name"
@@ -23,7 +23,7 @@ const Contact_us_forms = () => {
                     />
                 </div>
                 <div>
-                    <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Message</label>
+                    <label className="block text-xs font-bold text-slate-700 capitalize tracking-wider mb-1">Message</label>
                     <textarea
                         rows={4}
                         placeholder="How can we help you?"

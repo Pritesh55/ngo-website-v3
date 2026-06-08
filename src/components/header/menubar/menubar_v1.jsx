@@ -10,20 +10,21 @@ const menuItems = [
     {
         menuId: 2, label: 'About', href: '#',
         dropdown: [
-            { menuId: 2.1, label: 'About us', href: '#' },
-            { menuId: 2.2, label: 'Our Activities', href: 'our-activity' },
-            { menuId: 2.3, label: 'Success Stories', href: 'success-story' },
-            { menuId: 2.4, label: 'Achieved awards', href: 'awards' },
-            { menuId: 2.5, label: 'President Leadership', href: 'our-leadership' },
+            { menuId: 2.1, label: 'About us', href: '/about-us' },
+            { menuId: 2.2, label: 'Our Activities', href: '/our-activity' },
+            { menuId: 2.6, label: 'Our Partners', href: '/our-partners' },
+            { menuId: 2.3, label: 'Success Stories', href: '/success-story' },
+            { menuId: 2.4, label: 'Achieved awards', href: '/awards' },
+            { menuId: 2.5, label: 'President Leadership', href: '/our-leadership' },
         ]
     },
     {
-        menuId: 3, label: 'Cources',
+        menuId: 3, label: 'Courses',
         href: '#',
         dropdown: [
-            { menuId: 3.1, label: 'Cource 1', href: '#' },
-            { menuId: 3.2, label: 'Cource 2', href: '#' },
-            { menuId: 3.3, label: 'Cource 3', href: '#' },
+            { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine' },
+            { menuId: 3.3, label: 'સરકારી યોજના માર્ગદર્શન (Govt Schemes)', href: '/courses/government-schemes' },
+            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute' },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery' },

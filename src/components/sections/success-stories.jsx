@@ -72,7 +72,7 @@ export function SuccessStoriesSection() {
                                 <div className="p-8">
                                     {/* Header */}
                                     <div className="mb-6 pb-6 border-b border-slate-200">
-                                        <p className="text-sm font-bold text-slate-500 uppercase tracking-wider mb-2">
+                                        <p className="text-sm font-bold text-slate-500 capitalize tracking-wider mb-2">
                                             Success Story {index + 1} • {story.year}
                                         </p>
                                         <h3 className="text-2xl font-bold text-slate-900 mb-1">
