@@ -87,7 +87,7 @@ const DonatePage = () => {
                 {bankDetailsIndia.map((item, idx) => (
                   <div key={idx} className="flex flex-col sm:flex-row justify-between sm:items-center py-2.5 border-b border-slate-100 gap-1 text-sm">
                     <span className="text-slate-500 font-semibold">{item.label}</span>
-                    <div className="justify-between max-w-1/2 sm:text-rightp-3.5 rounded-xl transition-all duration-150 flex items-start gap-3 cursor-pointer bg-white hover:bg-slate-50">
+                    <div className="justify-between max-w-1/2 sm:text-rightp-3.5 rounded-xl transition-all text-right duration-150 flex items-start gap-3 cursor-pointer bg-white hover:bg-slate-50">
                       <span className="font-bold text-slate-800">{item.value}</span>
                       {item.copyable && (
                         <button
