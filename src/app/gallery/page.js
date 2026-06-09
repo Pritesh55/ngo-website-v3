@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Image as ImageIcon, X, ChevronLeft, ChevronRight, Eye, FolderOpen } from 'lucide-react'
+import Link from 'next/link';
 
 const galleryAlbums = [
   {
@@ -147,8 +148,8 @@ const Gallery_Page = () => {
           <button
             onClick={() => setActiveTab('all')}
             className={`px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm tracking-wide transition-all cursor-pointer ${activeTab === 'all'
-                ? 'bg-linear-to-r from-orange-500 to-darkred text-white shadow-md'
-                : 'bg-white text-slate-650 hover:bg-slate-100 border border-slate-200'
+              ? 'bg-linear-to-r from-orange-500 to-darkred text-white shadow-md'
+              : 'bg-white text-slate-650 hover:bg-slate-100 border border-slate-200'
               }`}
           >
             All Folders (બધા ફોલ્ડર્સ)
@@ -158,8 +159,8 @@ const Gallery_Page = () => {
               key={idx}
               onClick={() => setActiveTab(album.folderName)}
               className={`px-4 py-2.5 rounded-xl font-bold text-xs md:text-sm tracking-wide transition-all cursor-pointer ${activeTab === album.folderName
-                  ? 'bg-linear-to-r from-orange-500 to-darkred text-white shadow-md'
-                  : 'bg-white text-slate-650 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-linear-to-r from-orange-500 to-darkred text-white shadow-md'
+                : 'bg-white text-slate-650 hover:bg-slate-100 border border-slate-200'
                 }`}
             >
               {album.folderName}
@@ -203,12 +204,15 @@ const Gallery_Page = () => {
                       onClick={() => openLightbox(photo.src, photoIdx, albumIdx)}
                     >
                       <div className="aspect-4/3 w-full overflow-hidden bg-slate-100 relative">
-                        <img
-                          src={photo.src}
-                          alt={`${album.heading} - ${photo.desc}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                          loading="lazy"
-                        />
+                        <Link href={photo.src}>
+                          <img
+                            src={photo.src}
+                            alt={`${album.heading} - ${photo.desc}`}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                            loading="lazy"
+                          />
+                        </Link>
+
                         <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                           <div className="p-2 bg-white/90 rounded-full text-slate-900 shadow-md">
                             <Eye className="w-5 h-5" />
@@ -254,11 +258,13 @@ const Gallery_Page = () => {
 
           {/* Active Image */}
           <div className="max-w-4xl max-h-[80vh] flex flex-col items-center">
-            <img
-              src={lightbox.src}
-              alt="Preview"
-              className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
-            />
+            <Link href={lightbox.src}>
+              <img
+                src={lightbox.src}
+                alt="Preview"
+                className="max-w-full max-h-[70vh] object-contain rounded-lg shadow-2xl"
+              />
+            </Link>
             <div className="mt-4 text-center text-white">
               <p className="text-sm font-semibold tracking-wider text-slate-400">
                 FOLDER: {galleryAlbums[lightbox.albumIndex].folderName}

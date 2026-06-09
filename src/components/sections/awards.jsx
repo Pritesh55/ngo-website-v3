@@ -2,6 +2,7 @@
 
 import { Card } from '@/components/ui/card';
 import { Award, Star } from 'lucide-react';
+import Link from 'next/link';
 
 export function AwardsSection() {
     const awards = [
@@ -73,11 +74,14 @@ export function AwardsSection() {
                             >
                                 {award.image && (
                                     <div className="h-48 w-full overflow-hidden border-b border-slate-200 bg-slate-50 flex-shrink-0">
-                                        <img
-                                            src={award.image}
-                                            alt={award.title}
-                                            className="w-full h-full object-fill object-center transition-transform duration-500 group-hover:scale-[1.02]"
-                                        />
+
+                                        <Link href={award.image}>
+                                            <img
+                                                src={award.image}
+                                                alt={award.title}
+                                                className="w-full h-full object-fill object-center transition-transform duration-500 group-hover:scale-[1.02]"
+                                            />
+                                        </Link>
                                     </div>
                                 )}
                                 <div className="flex-1 p-6 flex flex-col justify-between">
@@ -124,11 +128,14 @@ export function AwardsSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16">
                     {extraImages.map((image, idx) => (
                         <div key={idx} className="group relative rounded-lg overflow-hidden border border-slate-200 bg-white shadow-xs hover:shadow-md transition-all duration-300 hover:border-amber-300">
-                            <img
-                                src={image}
-                                alt={`Recognition document ${idx + 1}`}
-                                className="w-full md:h-48 object-fill transition-transform duration-500 group-hover:scale-105"
-                            />
+                            <Link href={image}>
+                                <img
+                                    src={image}
+                                    alt={`Recognition document ${idx + 1}`}
+                                    className="w-full md:h-48 object-fill transition-transform duration-500 group-hover:scale-105"
+                                />
+                            </Link>
+
                         </div>
                     ))}
                 </div>

@@ -1,11 +1,12 @@
 import { Users } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const Our_team = () => {
     return (
         <>
             <section className="bg-glow-warm py-24 border-b border-slate-100 relative overflow-hidden">
-                <div className="mx-auto max-w-7xl px-6 sm:px-10 lg:px-16">
+                <div className="mx-auto">
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
                             <Users className="w-4 h-4 text-orange-700" />
@@ -25,7 +26,7 @@ const Our_team = () => {
                                 name: 'Mrs. Savitriben Patel',
                                 role: 'President & Managing Trustee',
                                 gujRole: 'પ્રમુખ અને વ્યવસ્થાપક ટ્રસ્ટી',
-                                image: '/images/G04-other-activities-of-precident-Mkt/img11.jpg',
+                                image: '/images/G04-other-activities-of-precident-Mkt/img4.jpg',
                                 theme: 'from-orange-50/80 to-red-50/40',
                                 border: 'border-orange-200'
                             },
@@ -49,7 +50,7 @@ const Our_team = () => {
                                 name: 'Hansaben Prajapati',
                                 role: 'Trainer & Teacher',
                                 gujRole: 'તાલીમાર્થી શિક્ષક (ટ્રેનર)',
-                                image: '/images/G05-Skill-Traiing-Programs/img11.jpg',
+                                image: '/images/Team/Hansaben-Prajapati.jpeg',
                                 theme: 'from-pink-50/80 to-rose-50/40',
                                 border: 'border-pink-200'
                             },
@@ -69,11 +70,14 @@ const Our_team = () => {
                                 <div>
                                     {/* Profile Image placeholder */}
                                     <div className="h-56 w-full overflow-hidden bg-slate-100 relative border-b border-slate-150">
-                                        <img
-                                            src={member.image}
-                                            alt={member.name}
-                                            className="w-full h-full object-cover object-center transition-transform duration-500 scale-[1] hover:scale-[1.04]"
-                                        />
+                                        <Link href={`${member.image}`}>
+                                            <img
+                                                src={`${member.image}`}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover object-center transition-transform duration-500 scale-[1] hover:scale-[1.04]"
+                                            />
+                                        </Link>
+
                                     </div>
                                     <div className="p-5">
                                         <h3 className="text-lg font-bold text-slate-900 leading-snug mb-1">

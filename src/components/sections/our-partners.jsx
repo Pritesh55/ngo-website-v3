@@ -1,14 +1,15 @@
+import Link from "next/link";
 import React from "react";
 
 const partners = [
-    { name: "PMKVY", logo: "/images/partners-logo/PMKVY-clean.webp" },
+    // { name: "PMKVY", logo: "/images/partners-logo/PMKVY-clean.webp" },
     { name: "NSDC", logo: "/images/partners-logo/nsdc-logo.webp" },
     { name: "MSDE", logo: "/images/partners-logo/msde-logo.jpg" },
     { name: "gsdc", logo: "/images/partners-logo/gsdc-logo.png" },
     { name: "DST", logo: "/images/partners-logo/dst-logo.jpg" },
     { name: "MWCDI", logo: "/images/partners-logo/MWCDI.png" },
     { name: "EDIA", logo: "/images/partners-logo/EDIA.png" },
-    { name: "MOFPI", logo: "/images/partners-logo/MOFPI.png" },
+    // { name: "MOFPI", logo: "/images/partners-logo/MOFPI.png" },
 ];
 
 export default function PartnerSection() {
@@ -38,12 +39,15 @@ export default function PartnerSection() {
                             key={partner.name}
                             className="flex justify-center items-center p-6 bg-white/75 backdrop-blur-md border border-white/60 rounded-2xl shadow-xs hover:shadow-md hover:scale-[1.03] hover:border-amber-300/80 hover:bg-white transition-all duration-300 h-28 group"
                         >
-                            <img
-                                src={partner.logo}
-                                alt={partner.name}
-                                className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
-                                loading="lazy"
-                            />
+                            <Link href={partner.logo}>
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
+                                    loading="lazy"
+                                />
+                            </Link>
+
                         </div>
                     ))}
                 </div>

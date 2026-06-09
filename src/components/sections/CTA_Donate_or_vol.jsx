@@ -69,7 +69,7 @@ const CTA_Donate_or_vol = () => {
                                     </p>
                                 </div>
                                 <div className="mt-8">
-                                    <Link href="https://wa.me/6361505618?text=Volunteer%20with%20Us" className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-all cursor-pointer text-sm">
+                                    <Link href="https://wa.me/9974025126?text=Volunteer%20with%20Us" className="group inline-flex items-center gap-2 px-6 py-3 border-2 border-slate-300 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-all cursor-pointer text-sm">
                                         Volunteer With Us
                                         <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </Link>

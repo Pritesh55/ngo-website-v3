@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Home, Shield, Users } from 'lucide-react';
+import Link from 'next/link';
 
 export function SaltWorkersWelfareSection() {
     const projects = [
@@ -32,7 +33,7 @@ export function SaltWorkersWelfareSection() {
             <div className="max-w-7xl mx-auto">
                 <div className="bg-linear-to-r from-cyan-50 to-slate-50 rounded-xl border-2 border-cyan-200 p-8 mb-12">
                     <div className="flex items-start gap-4 mb-6">
-                        <div className="p-3 bg-cyan-100 rounded-lg flex-shrink-0 text-cyan-700">
+                        <div className="p-3 bg-cyan-100 rounded-lg shrink-0 text-cyan-700">
                             <Shield className="w-8 h-8" />
                         </div>
                         <div className="flex-1">
@@ -71,11 +72,14 @@ export function SaltWorkersWelfareSection() {
                     <div className="grid grid-cols-2 gap-3 p-4 bg-slate-50 border border-cyan-200/60 rounded-xl">
                         {images.map((src, idx) => (
                             <div key={idx} className=" rounded-lg bg-slate-100 overflow-hidden border border-cyan-100 relative group cursor-pointer hover:shadow-md transition-shadow">
-                                <img
-                                    src={src}
-                                    alt={`Salt Workers Welfare ${idx + 1}`}
-                                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                                />
+                                <Link href={src}>
+                                    <img
+                                        src={src}
+                                        alt={`Salt Workers Welfare ${idx + 1}`}
+                                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                </Link>
+
                             </div>
                         ))}
                     </div>

@@ -26,28 +26,7 @@ import Link from 'next/link'
 
 const WomenChildSchemesPage = () => {
   const [activeTab, setActiveTab] = useState('sankat-mochan')
-  const [checkedDocs, setCheckedDocs] = useState({})
   const [searchQuery, setSearchQuery] = useState('')
-
-  const toggleDoc = (schemeId, docIdx) => {
-    const key = `${schemeId}-${docIdx}`
-    setCheckedDocs(prev => ({
-      ...prev,
-      [key]: !prev[key]
-    }))
-  }
-
-  const resetChecklist = (schemeId) => {
-    setCheckedDocs(prev => {
-      const updated = { ...prev }
-      Object.keys(updated).forEach(key => {
-        if (key.startsWith(`${schemeId}-`)) {
-          delete updated[key]
-        }
-      })
-      return updated
-    })
-  }
 
   const schemes = [
     {
@@ -234,12 +213,12 @@ const WomenChildSchemesPage = () => {
 
           {/* Title */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            મહિલા અને બાળ વિકાસ યોજના માર્ગદર્શન
+            મહિલા અને બાળ વિકાસ યોજના અમલીકરણ
           </h1>
 
           {/* Subheading */}
           <p className="text-base md:text-xl text-rose-150 max-w-5xl mx-auto mb-8 leading-relaxed font-semibold">
-            સરકારી કલ્યાણલક્ષી યોજનાઓ જેવી કે સંકટ મોચન, વિધવા સહાય (ગંગા સ્વરૂપા), EWS પ્રમાણપત્રો અને અન્ય દસ્તાવેજો માટે જરૂરી તમામ આધાર-પુરાવાઓની યાદી ચેકલિસ્ટ સાથે મેળવો.
+            સરકારી કલ્યાણલક્ષી યોજનાઓ જેવી કે સંકટ મોચન, વિધવા સહાય (ગંગા સ્વરૂપા), EWS પ્રમાણપત્રો અને અન્ય દસ્તાવેજો માટે જરૂરી તમામ આધાર-પુરાવાઓની યાદી મેળવો.
           </p>
 
           {/* Contact and Maps */}
@@ -395,21 +374,17 @@ const WomenChildSchemesPage = () => {
                       <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">રજૂ કરવાના થતા દસ્તાવેજો:</p>
                       <div className="space-y-2">
                         {activeScheme.docs.map((doc, idx) => {
-                          const isChecked = !!checkedDocs[`${activeScheme.id}-${idx}`]
+
                           return (
                             <div
                               key={idx}
-                              onClick={() => toggleDoc(activeScheme.id, idx)}
-                              className={`p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer ${isChecked
-                                ? 'bg-rose-50/40 border-rose-200 text-slate-800 shadow-xs'
-                                : 'bg-white hover:bg-slate-50 border-slate-200'
+                              className={`p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer bg-rose-50/40 border-rose-200 text-slate-800 shadow-xs
                                 }`}
                             >
-                              <div className={`w-5 h-5 rounded-md flex-shrink-0 mt-0.5 border flex items-center justify-center transition-all ${isChecked ? 'bg-rose-600 border-rose-600 text-white' : 'border-slate-350 bg-white'
-                                }`}>
-                                {isChecked && <Check className="w-3.5 h-3.5 stroke-[3]" />}
-                              </div>
-                              <span className={`text-sm md:text-base leading-relaxed ${isChecked ? 'line-through text-slate-450' : 'font-semibold'}`}>
+                              <span className="text-sm md:text-base leading-relaxed font-semibold">
+                                {`${idx + 1}.`}
+                              </span>
+                              <span className={`text-sm md:text-base leading-relaxed font-semibold`}>
                                 {doc}
                               </span>
                             </div>
@@ -444,11 +419,14 @@ const WomenChildSchemesPage = () => {
             </h3>
 
             <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 relative group mb-4">
-              <img
-                src="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg"
-                alt="જિલ્લા મહિલા અને બાળ અધિકારીની કચેરી અમદાવાદ બોર્ડ"
-                className="w-full h-auto object-cover object-top max-h-[350px] transition-transform duration-300 group-hover:scale-105"
-              />
+              <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg" target='_blank'>
+                <img
+                  src="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg"
+                  alt="જિલ્લા મહિલા અને બાળ અધિકારીની કચેરી અમદાવાદ બોર્ડ"
+                  className="w-full h-auto object-cover object-top max-h-[350px] transition-transform duration-300 group-hover:scale-105"
+                />
+              </Link>
+
             </div>
 
             <p className="text-xs text-slate-550 leading-relaxed font-semibold">

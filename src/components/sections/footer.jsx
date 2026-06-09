@@ -147,7 +147,7 @@ export function Footer() {
                                 <span className="pt-1">mktahmedabad1986@gmail.com</span>
                             </div>
                             <div className="pt-2">
-                                <a
+                                <Link
                                     href="https://wa.me/919974025126?text=Join%20now"
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -159,7 +159,7 @@ export function Footer() {
                                         className="w-4 h-4 object-contain brightness-0 invert"
                                     />
                                     Join now on WhatsApp
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

@@ -455,10 +455,7 @@ const MktInstitutePage = () => {
                       : 'bg-white hover:bg-slate-50 border-slate-200'
                       }`}
                   >
-                    <div className={`w-6 h-6 rounded-md flex-shrink-0 border flex items-center justify-center transition-colors ${isChecked ? 'bg-orange-600 border-orange-600 text-white' : 'border-slate-350 bg-white'
-                      }`}>
-                      {isChecked && <Check className="w-4 h-4 stroke-[3]" />}
-                    </div>
+
                     <span className={`text-sm md:text-base leading-relaxed ${isChecked ? 'line-through text-slate-400 font-medium' : 'font-extrabold text-slate-750'}`}>
                       ({idx + 1}) {doc}
                     </span>

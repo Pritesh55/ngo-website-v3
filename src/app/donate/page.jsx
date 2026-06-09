@@ -12,19 +12,19 @@ const DonatePage = () => {
   }
 
   const bankDetailsIndia = [
-    { label: "Name of the Account", value: "MANAV KALYAN TRUST" },
-    { label: "Account Number", value: "02130100006447", copyable: true },
+    { label: "Name of the Account", value: "MANAV KALYAN TRUST AHMEDABAD A/C MPWWC SABARMATI CENTRE" },
+    { label: "Account Number", value: "02130110003459", copyable: true },
     { label: "IFSC Code", value: "UCBA0000213", copyable: true },
-    { label: "Name of the Bank", value: "UCO BANK" },
-    { label: "Bank Address", value: "UCO Bank, Navrang pura branch, Ahmedabad-380009." }
+    { label: "Name of the Bank", value: "UCO BANK NAVARANGPURA (0213)" },
+    { label: "Bank Address", value: "GROUND FLR, UCO BHAVAN ASHRAM ROAD,NAVARANGPURA, AHMEDABAD GUJARAT-380009" }
   ]
 
   const bankDetailsOverseas = [
     { label: "Name of the Account", value: "MANAV KALYAN TRUST" },
-    { label: "Account Number", value: "01701010012430", copyable: true },
-    { label: "IFSC Code", value: "ORBC0100170", copyable: true },
-    { label: "Name of the Bank", value: "ORIENTAL BANK OF COMMERCE" },
-    { label: "Bank Address", value: "Nilkamal, Ashram road, Ahmedabad-380009." }
+    { label: "Account Number", value: "40676517726", copyable: true },
+    { label: "IFSC Code", value: "SBIN0000691", copyable: true },
+    { label: "Name of the Bank", value: "STATE BANK OF INDIA NEW DELHI MAIN BRANCH - (00691)" },
+    { label: "Bank Address", value: "N. D. MAIN BRANCH 11, PARLIAMENT STREET NEW DELHI, NCT OF DELHI 110001 Tel: 11 23374140" }
   ]
 
   return (
@@ -87,7 +87,7 @@ const DonatePage = () => {
                 {bankDetailsIndia.map((item, idx) => (
                   <div key={idx} className="flex flex-col sm:flex-row justify-between sm:items-center py-2.5 border-b border-slate-100 gap-1 text-sm">
                     <span className="text-slate-500 font-semibold">{item.label}</span>
-                    <div className="flex items-center gap-2 justify-between">
+                    <div className="justify-between max-w-1/2 sm:text-rightp-3.5 rounded-xl transition-all duration-150 flex items-start gap-3 cursor-pointer bg-white hover:bg-slate-50">
                       <span className="font-bold text-slate-800">{item.value}</span>
                       {item.copyable && (
                         <button
@@ -121,7 +121,8 @@ const DonatePage = () => {
                   </p>
                   <div className="space-y-1 pt-2 border-t border-orange-100/50">
                     <p className="flex items-center gap-2">
-                      <Phone className="w-3.5 h-3.5 text-slate-450" /> Telefax: (079) 27496640 | Mo: 09974025126
+                      <Phone className="w-3.5 h-3.5 text-slate-450" />
+                      Mo: 9974025126
                     </p>
                     <p className="flex items-center gap-2">
                       <Mail className="w-3.5 h-3.5 text-slate-450" /> mktahmedabad1986@gmail.com / psavitri13@yahoo.com
@@ -154,7 +155,7 @@ const DonatePage = () => {
                 {bankDetailsOverseas.map((item, idx) => (
                   <div key={idx} className="flex flex-col sm:flex-row justify-between sm:items-center py-2.5 border-b border-slate-100 gap-1 text-sm">
                     <span className="text-slate-500 font-semibold">{item.label}</span>
-                    <div className="flex items-center gap-2 justify-between">
+                    <div className="flex items-center gap-2 justify-between max-w-1/2 sm:text-right">
                       <span className="font-bold text-slate-800">{item.value}</span>
                       {item.copyable && (
                         <button
@@ -179,19 +180,48 @@ const DonatePage = () => {
                 <p className="text-xs md:text-sm text-slate-700 font-semibold mb-3 leading-relaxed">
                   Registered under Bombay Public trust Act - 1950 (Regd No. E - 2943/Mehsana, Date: 29-11-1986).
                 </p>
-                <div className="space-y-3 pt-3 border-t border-blue-100/50 text-xs md:text-sm font-semibold text-slate-600 leading-relaxed">
-                  <p className="flex items-start gap-2">
+
+                <p className="font-bold text-slate-900 mb-3 flex items-center gap-2 text-sm md:text-base">
+                  Income – Tax exemption
+                </p>
+                <div className="space-y-3 pt-3 border-t border-blue-100/50 text-xs md:text-sm font-semibold ">
+                  <div className="flex items-start gap-2">
                     <span className="text-blue-700 font-bold">•</span>
-                    <span><strong>12AA IT Act Exemption:</strong> CIT/GNR/12AA/MHN.5/2000-2001 (Date: 7-7-2000)</span>
-                  </p>
-                  <p className="flex items-start gap-2">
+                    <div className="flex flex-col gap-y-1">
+                      <strong>U/S 12AA of the I.T. Act , 1961 :</strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981LE20214 (Dated: 28-05-2021)</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
                     <span className="text-blue-700 font-bold">•</span>
-                    <span><strong>80G(5) IT Act Exemption:</strong> DIT (E) 80G (5)/384/2008-09 (Date: 10-07-2008)</span>
-                  </p>
-                  <p className="flex items-start gap-2">
+                    <div className="flex flex-col gap-y-1">
+                      <strong>U/S 80G (5) of the I.T. Act , 1961 :</strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981LF20214 (Date: 01-06-2021)</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
                     <span className="text-blue-700 font-bold">•</span>
-                    <span><strong>FCRA Registered:</strong> FCRA Regd No: 041910337 (Date: 20-07-2006)</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>FCRA Registered :</strong>
+                      <span className="text-base text-green-600 font-semibold">FCRA Regd No: 041910337 (Date: 20-07-2006)</span>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>Registration number (National CSR Portal) :</strong>
+                      <span className="text-base text-green-600 font-semibold">CSR00009140</span>
+                    </div>
+                  </div>
+                  <p className="flex items-start gap-2 mt-12 mb-4">
+                    <span className="text-blue-700 font-normal">•</span>
+                    <span>Work spread over Gujarat as a leading NGO implementing Various project, collaboration with
+                      Various Department, Different Target Group like Women, Children, people living below Poverty
+                      line, Salt Workers, Weaker section, special focus on natural calamities affected population like
+                      Earthquake, Cyclone, Tsunami and riots. </span>
                   </p>
+
+
                 </div>
               </div>
 

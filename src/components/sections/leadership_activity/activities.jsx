@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Globe, Users, Briefcase, Trophy } from 'lucide-react';
+import Link from 'next/link';
 
 export function President_Learship_Section() {
     const activities = [
@@ -111,21 +112,29 @@ export function President_Learship_Section() {
                                         <div className="mb-4">
                                             {activity.images.length === 1 ? (
                                                 <div className="h-48 w-full rounded-lg overflow-hidden border border-slate-200/60 bg-slate-50">
-                                                    <img
-                                                        src={activity.images[0]}
-                                                        alt={activity.title}
-                                                        className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
-                                                    />
+
+                                                    <Link href={activity.images[0]}>
+                                                        <img
+                                                            src={activity.images[0]}
+                                                            alt={activity.title}
+                                                            className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
+                                                        />
+                                                    </Link>
+
                                                 </div>
                                             ) : (
                                                 <div className="grid grid-cols-2 gap-3">
                                                     {activity.images.map((imgSrc, imgIdx) => (
                                                         <div key={imgIdx} className="h-48 rounded-lg overflow-hidden border border-slate-200/60 bg-slate-50">
-                                                            <img
-                                                                src={imgSrc}
-                                                                alt={`${activity.title} ${imgIdx + 1}`}
-                                                                className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
-                                                            />
+
+                                                            <Link href={imgSrc}>
+                                                                <img
+                                                                    src={imgSrc}
+                                                                    alt={`${activity.title} ${imgIdx + 1}`}
+                                                                    className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
+                                                                />
+                                                            </Link>
+
                                                         </div>
                                                     ))}
                                                 </div>

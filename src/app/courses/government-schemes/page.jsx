@@ -335,11 +335,15 @@ const GovtSchemesPage = () => {
             <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
               <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">સંબંધિત લીફલેટ ફોટોગ્રાફ (Scan Leaflet)</p>
               <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
-                <img
-                  src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
-                  alt="મહિલા સ્વાવલંબન યોજના"
-                  className="w-full h-auto object-contain mx-auto max-h-[220px]"
-                />
+
+                <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg">
+                  <img
+                    src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
+                    alt="મહિલા સ્વાવલંબન યોજના"
+                    className="w-full h-auto object-contain mx-auto max-h-[220px]"
+                  />
+                </Link>
+
               </div>
             </div>
 
@@ -463,11 +467,14 @@ const GovtSchemesPage = () => {
             <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
               <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">સંબંધિત લીફલેટ ફોટોગ્રાફ (Scan Leaflet)</p>
               <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
-                <img
-                  src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
-                  alt="વ્હાલી દીકરી યોજના"
-                  className="w-full h-auto object-contain mx-auto max-h-[220px]"
-                />
+
+                <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg">
+                  <img
+                    src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
+                    alt="વ્હાલી દીકરી યોજના"
+                    className="w-full h-auto object-contain mx-auto max-h-[220px]"
+                  />
+                </Link>
               </div>
             </div>
 
@@ -763,56 +770,76 @@ const GovtSchemesPage = () => {
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
                   <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">લિસ્ટ ઓફ ઓલ યોજના વિગત પત્રક - ૧</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
-                    <img
-                      src="/images/courses/Benifite-to-woman-by-gevenments-schemes/List-of-all-yojana-with-detail-01.jpeg"
-                      alt="Government Schemes Flyer 1"
-                      className="w-full h-auto max-h-[160px] object-contain mx-auto"
-                    />
+
+                    <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/List-of-all-yojana-with-detail-01.jpeg">
+                      <img
+                        src="/images/courses/Benifite-to-woman-by-gevenments-schemes/List-of-all-yojana-with-detail-01.jpeg"
+                        alt="Government Schemes Flyer 1"
+                        className="w-full h-auto max-h-[160px] object-contain mx-auto"
+                      />
+                    </Link>
+
                   </div>
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
                   <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">લિસ્ટ ઓફ ઓલ યોજના વિગત પત્રક - ૨</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
-                    <img
-                      src="/images/courses/Benifite-to-woman-by-gevenments-schemes/list-of-all-yojna-with-detail-02.jpeg"
-                      alt="Government Schemes Flyer 2"
-                      className="w-full h-auto max-h-[160px] object-contain mx-auto"
-                    />
+
+                    <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/list-of-all-yojna-with-detail-02.jpeg">
+                      <img
+                        src="/images/courses/Benifite-to-woman-by-gevenments-schemes/list-of-all-yojna-with-detail-02.jpeg"
+                        alt="Government Schemes Flyer 2"
+                        className="w-full h-auto max-h-[160px] object-contain mx-auto"
+                      />
+                    </Link>
+
                   </div>
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
                   <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">મહિલા સ્વાવલંબન યોજના પત્રક</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
-                    <img
-                      src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
-                      alt="Mahila Swavlamban Flyer"
-                      className="w-full h-auto max-h-[160px] object-contain mx-auto"
-                    />
+
+                    <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg">
+                      <img
+                        src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
+                        alt="Mahila Swavlamban Flyer"
+                        className="w-full h-auto max-h-[160px] object-contain mx-auto"
+                      />
+
+                    </Link>
+
                   </div>
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
                   <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">વ્હાલી દીકરી યોજના પત્રક</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
-                    <img
-                      src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
-                      alt="Vhali Dikri Flyer"
-                      className="w-full h-auto max-h-[160px] object-contain mx-auto"
-                    />
+                    <Link
+                      href="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg">
+                      <img
+                        src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
+                        alt="Vhali Dikri Flyer"
+                        className="w-full h-auto max-h-[160px] object-contain mx-auto"
+                      />
+                    </Link>
+
+
+
                   </div>
                 </div>
 
               </div>
             </div>
           </div>
-        )}
+        )
+        }
 
-      </section>
+      </section >
 
       {/* <!-- OFFICIAL COORDINATION PARTNER BANNER --> */}
-      <section className="bg-linear-to-br from-teal-50 to-emerald-50 py-12 px-4 border-y border-teal-100">
+      < section className="bg-linear-to-br from-teal-50 to-emerald-50 py-12 px-4 border-y border-teal-100" >
         <div className="max-w-7xl mx-auto text-center space-y-4">
           <p className="text-teal-800 font-bold uppercase tracking-wider text-sm md:text-base">યોજના સંયોજક અને સંચાલન માહિતી</p>
           <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 leading-normal">
@@ -830,10 +857,10 @@ const GovtSchemesPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* <!-- CALL TO ACTION (CTA) --> */}
-      <section className="py-16 md:py-20 px-4 text-center bg-white">
+      < section className="py-16 md:py-20 px-4 text-center bg-white" >
         <div className="max-w-6xl mx-auto space-y-6">
           <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight">
             શું આપ આમાંથી કોઈ યોજનાના લાભાર્થી છો?
@@ -874,9 +901,9 @@ const GovtSchemesPage = () => {
             </Link>
           </div>
         </div>
-      </section>
+      </section >
 
-    </div>
+    </div >
   )
 }
 

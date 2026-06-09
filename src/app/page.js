@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/sections/hero";
+import ProjectsSection from "@/components/sections/projects";
 import CoursesSection from "@/components/sections/courses";
 import Contact_us_Main_Section from "@/components/sections/contact_us";
 import Our_team from "@/components/sections/Our_team";
@@ -8,6 +9,7 @@ export default function Home() {
   return (
     <>
       <HeroSection></HeroSection>
+      <ProjectsSection></ProjectsSection>
 
       <div className="2xl:container mx-auto">
         <CoursesSection></CoursesSection>

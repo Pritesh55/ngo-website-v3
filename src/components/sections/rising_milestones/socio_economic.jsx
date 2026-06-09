@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { BarChart3 } from 'lucide-react';
+import Link from 'next/link';
 
 export function SocioEconomicSection() {
     const programs = [
@@ -41,11 +42,14 @@ export function SocioEconomicSection() {
                     <div className="grid grid-cols-3 gap-3 p-4 bg-slate-50 border border-green-200/60 rounded-xl">
                         {images.map((src, idx) => (
                             <div key={idx} className=" rounded-lg bg-slate-100 overflow-hidden border border-green-100 relative group cursor-pointer hover:shadow-md transition-shadow">
-                                <img
-                                    src={src}
-                                    alt={`Socio-Economic Development ${idx + 1}`}
-                                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
-                                />
+                                <Link href={src}>
+                                    <img
+                                        src={src}
+                                        alt={`Socio-Economic Development ${idx + 1}`}
+                                        className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                </Link>
+
                             </div>
                         ))}
                     </div>

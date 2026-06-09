@@ -28,9 +28,9 @@ export function HeroSection() {
                 </p>
 
                 {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                     <Hero_btns></Hero_btns>
-                </div>
+                </div> */}
 
                 {/* Stats Banner */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
@@ -50,7 +50,7 @@ export function HeroSection() {
                 </div>
 
                 {/* Scroll Indicator */}
-                <Link href="#our_cources" className="flex justify-center animate-bounce">
+                <Link href="#our-projects" className="flex justify-center animate-bounce">
                     <div className="text-slate-500">
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
