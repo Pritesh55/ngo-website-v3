@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -23,26 +24,28 @@ export default function PartnerSection() {
             <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-teal-400/6 rounded-full blur-3xl pointer-events-none" />
 
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
-                <div className="mx-auto max-w-3xl text-center mb-16">
+                <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
                         Trusted by Our Partners
                     </h2>
-                    <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                    <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
                         We're proud to partner with some of the most innovative companies
                         in India to deliver exceptional results.
                     </p>
                 </div>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {partners.map((partner) => (
                         <div
                             key={partner.name}
-                            className="flex justify-center items-center p-6 bg-white/75 backdrop-blur-md border border-white/60 rounded-2xl shadow-xs hover:shadow-md hover:scale-[1.03] hover:border-amber-300/80 hover:bg-white transition-all duration-300 h-28 group"
+                            className="flex justify-center items-center px-1 sm:px-6 py-6 bg-white/75 backdrop-blur-md border border-white/60 rounded-2xl shadow-xs hover:shadow-md hover:scale-[1.03] hover:border-amber-300/80 hover:bg-white transition-all duration-300 sm:h-40 group"
                         >
                             <Link href={partner.logo}>
-                                <img
+                                <Image
                                     src={partner.logo}
                                     alt={partner.name}
+                                    width={280}
+                                    height={110}
                                     className="object-contain max-w-full max-h-full transition-transform duration-300 group-hover:scale-105"
                                     loading="lazy"
                                 />

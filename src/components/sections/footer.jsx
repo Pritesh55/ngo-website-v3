@@ -103,20 +103,21 @@ export function Footer() {
                     <div className="lg:col-span-3">
                         <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Resources</h4>
                         <ul className="text-sm font-medium flex flex-wrap gap-4">
-                            {['Success Stories',
-                                'Awards',
-                                'Our Team',
-                                'Our Partners',
-                                'Gallery',
-                                'Support Us'
+                            {[
+                                { id: 3.1, label: 'Success Stories', href: '/success-story' },
+                                { id: 3.2, label: 'Awards', href: '/awards' },
+                                { id: 3.3, label: 'Our Team', href: '/our-team' },
+                                { id: 3.4, label: 'Our Partners', href: '/our-partners' },
+                                { id: 3.5, label: 'Gallery', href: '/gallery' },
+                                { id: 3.6, label: 'Support Us', href: '/donate' },
                             ].map((link) => (
-                                <li key={link}>
+                                <li key={link.id}>
                                     <a
-                                        href="#"
+                                        href={link.href}
                                         className="text-slate-600 hover:text-red-700 transition-colors flex items-center gap-2 group"
                                     >
                                         <span className="w-1.5 h-1.5 bg-red-400 rounded-full transition-transform group-hover:scale-125" />
-                                        {link}
+                                        {link.label}
                                     </a>
                                 </li>
                             ))}
@@ -150,7 +151,7 @@ export function Footer() {
                                 <div className="p-2 bg-amber-100/80 rounded-lg text-amber-600 flex-shrink-0">
                                     <Mail className="w-4 h-4" />
                                 </div>
-                                <span className="pt-1">mktahmedabad1986@gmail.com</span>
+                                <span className="pt-1 break-all">mktahmedabad1986@gmail.com</span>
                             </div>
                             <div className="pt-2">
                                 <Link

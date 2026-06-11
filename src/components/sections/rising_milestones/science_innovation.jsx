@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Lightbulb } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function ScienceInnovationSection() {
@@ -43,9 +44,11 @@ export function ScienceInnovationSection() {
                         {images.map((src, idx) => (
                             <div key={idx} className=" rounded-lg bg-slate-100 overflow-hidden border border-purple-100 relative group cursor-pointer hover:shadow-md transition-shadow">
                                 <Link href={src}>
-                                    <img
+                                    <Image
                                         src={src}
                                         alt={`Science and Innovation ${idx + 1}`}
+                                        width={190}
+                                        height={140}
                                         className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
                                     />
                                 </Link>

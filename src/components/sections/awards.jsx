@@ -5,6 +5,7 @@ import { Award, Star } from 'lucide-react';
 import Link from 'next/link';
 import Awards_list from './awards/awards_list';
 import Section_header from './common/section_header';
+import Image from 'next/image';
 
 
 export function AwardsSection() {
@@ -133,9 +134,11 @@ export function AwardsSection() {
                                     <div className="h-48 w-full overflow-hidden border-b border-slate-200 bg-slate-50 flex-shrink-0">
 
                                         <Link href={award.image}>
-                                            <img
+                                            <Image
                                                 src={award.image}
                                                 alt={award.title}
+                                                width={300}
+                                                height={192}
                                                 className="w-full h-full object-fill object-center transition-transform duration-500 group-hover:scale-[1.02]"
                                             />
                                         </Link>

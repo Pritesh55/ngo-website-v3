@@ -1,7 +1,9 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
 const Awards_list = () => {
+
     const award_info_Array = [
         {
             id: 1,
@@ -61,6 +63,7 @@ const Awards_list = () => {
         },
 
     ];
+
     return (
         <>
             {/* Awards List */}
@@ -68,9 +71,11 @@ const Awards_list = () => {
                 {award_info_Array.map((award_info_Array, idx) => (
                     <div key={idx} className="group flex flex-col relative rounded-lg overflow-hidden border border-slate-200 bg-white shadow-xs hover:shadow-md transition-all duration-300 hover:border-amber-300">
                         <Link href={award_info_Array.award_imgURL}>
-                            <img
+                            <Image
                                 src={award_info_Array.award_imgURL}
                                 alt={`Recognition document ${idx + 1}`}
+                                width={420}
+                                height={192}
                                 className="w-full md:h-48 object-fill transition-transform duration-500 group-hover:scale-105"
                             />
                         </Link>

@@ -1,5 +1,6 @@
 import { Card } from '@/components/ui/card';
 import { Globe, Users, Briefcase, Trophy } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function President_Learship_Section() {
@@ -114,9 +115,11 @@ export function President_Learship_Section() {
                                                 <div className="h-48 w-full rounded-lg overflow-hidden border border-slate-200/60 bg-slate-50">
 
                                                     <Link href={activity.images[0]}>
-                                                        <img
+                                                        <Image
                                                             src={activity.images[0]}
                                                             alt={activity.title}
+                                                            width={280}
+                                                            height={192}
                                                             className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
                                                         />
                                                     </Link>
@@ -128,9 +131,11 @@ export function President_Learship_Section() {
                                                         <div key={imgIdx} className="h-48 rounded-lg overflow-hidden border border-slate-200/60 bg-slate-50">
 
                                                             <Link href={imgSrc}>
-                                                                <img
+                                                                <Image
                                                                     src={imgSrc}
                                                                     alt={`${activity.title} ${imgIdx + 1}`}
+                                                                    width={280}
+                                                                    height={192}
                                                                     className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-[1.02]"
                                                                 />
                                                             </Link>

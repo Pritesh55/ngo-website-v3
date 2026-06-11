@@ -2,6 +2,7 @@ import { Users } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import Section_header from './common/section_header'
+import Image from 'next/image'
 
 const Our_team = () => {
 
@@ -71,9 +72,11 @@ const Our_team = () => {
                                     {/* Profile Image placeholder */}
                                     <div className="h-56 w-full overflow-hidden bg-slate-100 relative border-b border-slate-150">
                                         <Link href={`${member.image}`}>
-                                            <img
+                                            <Image
                                                 src={`${member.image}`}
                                                 alt={member.name}
+                                                width={410}
+                                                height={224}
                                                 className="w-full h-full object-cover object-center transition-transform duration-500 scale-[1] hover:scale-[1.04]"
                                             />
                                         </Link>

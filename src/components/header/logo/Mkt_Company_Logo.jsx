@@ -13,7 +13,7 @@ const Mkt_Company_Logo = () => {
 
     return (
         <>
-            <div className="relative py-4 max-xs:pr-4 xl:pr-8 hover:bg-orange-50 rounded-lg">
+            <div className="relative py-4 max-xxs:pr-2 max-xs:pr-4 xl:pr-8 hover:bg-orange-50 rounded-lg">
                 {/* // Logo */}
                 <Link href="/" className="flex items-center gap-x-0 text-ngo-primary" >
                     {/* <Sun_Icon_SVG></Sun_Icon_SVG> */}

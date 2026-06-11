@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { FolderOpen, ArrowRight, Image as ImageIcon } from 'lucide-react'
 import { projects } from '@/data/projects'
 import Section_header from './common/section_header'
+import Image from 'next/image'
 
 export function Our_Projects_Cards_Section() {
 
@@ -35,9 +36,11 @@ export function Our_Projects_Cards_Section() {
                 {/* Project Image Container */}
                 <div className="h-48 md:h-64 w-full overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 mb-5 relative group">
                   <Link href={`/projects/${project.slug}`}>
-                    <img
+                    <Image
                       src={project.images[0]}
                       alt={project.name}
+                      width={574}
+                      height={296}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     {/* Badge for project number */}
