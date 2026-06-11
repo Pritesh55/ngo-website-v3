@@ -25,7 +25,7 @@ import {
 import Link from 'next/link'
 
 const WomenChildSchemesPage = () => {
-  const [activeTab, setActiveTab] = useState('sankat-mochan')
+  const [activeTab2_WCS, setactiveTab2_WCS] = useState('sankat-mochan')
   const [searchQuery, setSearchQuery] = useState('')
 
   const schemes = [
@@ -192,7 +192,7 @@ const WomenChildSchemesPage = () => {
     scheme.info.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
-  const activeScheme = schemes.find(s => s.id === activeTab) || schemes[0]
+  const activeScheme = schemes.find(s => s.id === activeTab2_WCS) || schemes[0]
 
   return (
     <div className="bg-slate-50 min-h-screen text-slate-800 font-sans">
@@ -322,11 +322,11 @@ const WomenChildSchemesPage = () => {
                 <div className="w-full md:w-1/3 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0">
                   {filteredSchemes.map((scheme) => {
                     const SchemeIcon = scheme.icon
-                    const isActive = activeTab === scheme.id
+                    const isActive = activeTab2_WCS === scheme.id
                     return (
                       <button
                         key={scheme.id}
-                        onClick={() => setActiveTab(scheme.id)}
+                        onClick={() => setactiveTab2_WCS(scheme.id)}
                         className={`flex items-center gap-3 w-full text-left px-4 py-3.5 rounded-2xl font-bold text-sm transition-all border whitespace-nowrap md:whitespace-normal cursor-pointer ${isActive
                           ? 'bg-rose-600 text-white border-rose-600 shadow-md shadow-rose-600/15'
                           : 'bg-white hover:bg-slate-50 text-slate-650 border-slate-250/70'

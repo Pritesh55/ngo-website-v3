@@ -18,12 +18,12 @@ const courses = [
     btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
   },
   {
-    name: 'સરકારી યોજના માર્ગદર્શન અને સહાય (Govt Schemes Guidance)',
+    name: 'સરકારી યોજના અમલીકરણ અને સહાય (Govt Schemes Implimantation and Support)',
     category: 'govt-schemes',
     duration: 'કાયમી સેવા (Ongoing)',
     fee: 'વિના મૂલ્યે (Free)',
-    description: 'અમે ગરીબ અને જરૂરિયાતમંદ બહેનોને વિવિધ સરકારી કલ્યાણકારી યોજનાઓનો લાભ અપાવવાનું અને જરૂરી માર્ગદર્શન આપવાનું કામ કરીએ છીએ.',
-    image: '/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg',
+    description: 'અમે ગરીબ અને જરૂરિયાતમંદ લોકોને વિવિધ સરકારી કલ્યાણકારી યોજનાઓનો લાભ અપાવવાનું અને જરૂરી માર્ગદર્શન આપવાનું કામ કરીએ છીએ.',
+    image: '/images/Certified cources/woman-child-development.png',
     link: '/courses/government-schemes',
     theme: 'from-emerald-50/80 to-teal-50/40',
     border: 'border-emerald-250 hover:border-emerald-350',
@@ -68,20 +68,20 @@ const courses = [
     border: 'border-pink-200 hover:border-pink-350',
     tagClass: 'border-pink-200 bg-pink-100/60 text-pink-750',
     btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
-  },
-  {
-    name: 'મહિલા બાળ વિકાસ માટેની વિવિધ યોજનાઓનું અમલીકરણ ',
-    category: 'govt-schemes',
-    duration: 'કાયમી સેવા (Ongoing)',
-    fee: 'વિના મૂલ્યે (Free)',
-    description: 'સંકટ મોચન, વિધવા સહાય, ગંગા સ્વરૂપા પુનઃલગ્ન આર્થિક સહાય જેવી કલ્યાણકારી સરકારી યોજનાઓ માટે રજૂ કરવાના જરૂરી આધાર-પુરાવાઓની યાદી અને માર્ગદર્શન.',
-    image: '/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg',
-    link: '/courses/women-child-schemes',
-    theme: 'from-rose-50/80 to-orange-50/40',
-    border: 'border-rose-200 hover:border-rose-350',
-    tagClass: 'border-rose-200 bg-rose-100/60 text-rose-700',
-    btnClass: 'from-rose-500 to-orange-600 text-white hover:shadow-rose-500/20'
   }
+  // {
+  //   name: 'મહિલા બાળ વિકાસ માટેની વિવિધ યોજનાઓનું અમલીકરણ ',
+  //   category: 'govt-schemes',
+  //   duration: 'કાયમી સેવા (Ongoing)',
+  //   fee: 'વિના મૂલ્યે (Free)',
+  //   description: 'સંકટ મોચન, વિધવા સહાય, ગંગા સ્વરૂપા પુનઃલગ્ન આર્થિક સહાય જેવી કલ્યાણકારી સરકારી યોજનાઓ માટે રજૂ કરવાના જરૂરી આધાર-પુરાવાઓની યાદી અને માર્ગદર્શન.',
+  //   image: '/images/Certified cources/woman-child-development.png',
+  //   link: '/courses/women-child-schemes',
+  //   theme: 'from-rose-50/80 to-orange-50/40',
+  //   border: 'border-rose-200 hover:border-rose-350',
+  //   tagClass: 'border-rose-200 bg-rose-100/60 text-rose-700',
+  //   btnClass: 'from-rose-500 to-orange-600 text-white hover:shadow-rose-500/20'
+  // }
 ];
 
 export function CoursesSection() {

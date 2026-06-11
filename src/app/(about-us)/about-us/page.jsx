@@ -108,7 +108,7 @@ const About_us_Page = () => {
               },
               {
                 dt: '12 AA · I.T. Act, 1961',
-                dd: 'CIT / GNR / 12AA / MHN.5 / 2000‑2001',
+                dd: 'AAATM7981LE20214',
                 sub: 'Income Tax Exemption Approval',
                 theme: 'from-pink-50/80 to-rose-50/40',
                 border: 'border-pink-100',
@@ -116,7 +116,7 @@ const About_us_Page = () => {
               },
               {
                 dt: '80 G (5) · I.T. Act, 1961',
-                dd: 'DIT (E) / 80G (5) / 384 / 2008‑2009',
+                dd: 'AAATM7981LE20214',
                 sub: 'Tax Deduction eligibility for donors',
                 theme: 'from-purple-50/80 to-indigo-50/40',
                 border: 'border-purple-100',

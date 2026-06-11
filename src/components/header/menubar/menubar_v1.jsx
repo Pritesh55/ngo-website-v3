@@ -9,7 +9,7 @@ import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Tr
 const menuItems = [
     { menuId: 1, label: 'Home', href: '/', icon: Home },
     {
-        menuId: 2, label: 'About', href: '#', icon: Info,
+        menuId: 2, label: 'About us', href: '#', icon: Info,
         dropdown: [
             { menuId: 2.1, label: 'About us', href: '/about-us', icon: Info },
             { menuId: 2.2, label: 'Our Activities', href: '/our-activity', icon: Activity },
@@ -23,9 +23,8 @@ const menuItems = [
         menuId: 3, label: 'Courses', href: '#', icon: GraduationCap,
         dropdown: [
             { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine', icon: Scissors },
-            { menuId: 3.3, label: 'સરકારી યોજના માર્ગદર્શન (Govt Schemes)', href: '/courses/government-schemes', icon: FileCheck },
-            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute', icon: Laptop },
-            { menuId: 3.5, label: 'મહિલા બાળ વિકાસ યોજનાઓ (Women & Child)', href: '/courses/women-child-schemes', icon: FileCheck },
+            { menuId: 3.3, label: 'સરકારી યોજના અમલીકરણ (Govt Schemes Implementation)', href: '/courses/government-schemes', icon: FileCheck },
+            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute', icon: Laptop }
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },
@@ -90,35 +89,35 @@ const Menubar_v1 = () => {
                                 const IconComp = item.icon;
                                 return item.dropdown ? (
                                     <li key={item.menuId} className="w-full">
-                                        <button 
+                                        <button
                                             onClick={() => toggleMobileDropdown(item.menuId)}
-                                            id={`${item.label.toLowerCase()}-dropdown-toggle`} 
+                                            id={`${item.label.toLowerCase()}-dropdown-toggle`}
                                             className="w-full flex items-center justify-between py-2 text-xl text-darkred hover:text-ngo-primary capitalize focus:outline-none"
                                         >
                                             <div className="flex items-center gap-3">
                                                 {IconComp && <IconComp className="w-5.5 h-5.5 text-ngo-primary" />}
                                                 <span>{item.label}</span>
                                             </div>
-                                            <svg 
-                                                className={`w-5 h-5 transition-transform duration-200 ${openMobileDropdown === item.menuId ? 'rotate-180' : ''} text-slate-500`} 
-                                                fill="none" 
-                                                viewBox="0 0 24 24" 
+                                            <svg
+                                                className={`w-5 h-5 transition-transform duration-200 ${openMobileDropdown === item.menuId ? 'rotate-180' : ''} text-slate-500`}
+                                                fill="none"
+                                                viewBox="0 0 24 24"
                                                 stroke="currentColor"
                                             >
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                                             </svg>
                                         </button>
                                         {/* <!-- Mobile Dropdown --> */}
-                                        <ul 
-                                            id={`${item.label.toLowerCase()}-dropdown`} 
+                                        <ul
+                                            id={`${item.label.toLowerCase()}-dropdown`}
                                             className={`${openMobileDropdown === item.menuId ? 'block' : 'hidden'} pl-8 border-l border-orange-200 space-y-1 mt-1 ml-2.5`}
                                         >
                                             {item.dropdown.map((subItem, subIndex) => {
                                                 const SubIcon = subItem.icon;
                                                 return (
                                                     <li key={subItem.menuId}>
-                                                        <Link 
-                                                            href={subItem.href} 
+                                                        <Link
+                                                            href={subItem.href}
                                                             onClick={() => set_Is_Mobile_Menu_Open(false)}
                                                             className="flex items-center gap-2.5 py-2 text-[16px] md:text-[18px] text-emerald-700 font-medium hover:text-emerald-900 capitalize"
                                                         >
@@ -132,8 +131,8 @@ const Menubar_v1 = () => {
                                     </li>
                                 ) : (
                                     <li key={item.menuId} className="w-full">
-                                        <Link 
-                                            href={item.href} 
+                                        <Link
+                                            href={item.href}
                                             onClick={() => set_Is_Mobile_Menu_Open(false)}
                                             className="w-full flex items-center gap-3 py-2 text-xl text-darkred hover:text-ngo-primary capitalize"
                                         >

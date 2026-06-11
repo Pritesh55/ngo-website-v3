@@ -53,53 +53,86 @@ export const projects = [
   },
   {
     id: "03",
-    slug: "multi-purpose-women-welfare-center",
-    name: "multi purpose women welfare center",
-    description: "All type of welfare activity for women.",
+    slug: "cedc",
+    name: "Centre for Enterprise Development and Community (CEDC)",
+    description: "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
     images: [
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-01.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-02.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-03.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-04.jpg"
+      "/images/CEDC/03-CEDC-with-MKT.jpeg",
+      "/images/CEDC/02-CEDC.jpeg",
+      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
+      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
+      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
+      "/images/CEDC/01-Photo 48.JPG",
+      "/images/CEDC/Photo 2.jpg",
+      "/images/CEDC/Photo 21.JPG",
+      "/images/CEDC/Photo 22.jpg",
+      "/images/CEDC/Photo 23.jpg",
+      "/images/CEDC/Photo 25.jpg",
+      "/images/CEDC/Photo 27.jpg",
+      "/images/CEDC/Photo 34.jpg",
+      "/images/CEDC/Photo 39.jpg",
+      "/images/CEDC/Photo 41.jpg",
+      "/images/CEDC/Photo 43.jpg",
+      "/images/CEDC/Photo 44.jpg",
+      "/images/CEDC/Photo 46.jpg",
+      "/images/CEDC/Photo 49.JPG",
+      "/images/CEDC/Photo 55.JPG",
+      "/images/CEDC/Photo 6.jpg"
     ],
-    theme: "from-pink-50/80 to-rose-50/40",
-    border: "border-pink-200 hover:border-pink-350",
-    tagClass: "border-pink-200 bg-pink-100/60 text-pink-700",
-    btnClass: "from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20",
+    theme: "from-blue-50/80 to-teal-50/40",
+    border: "border-blue-200 hover:border-blue-350",
+    tagClass: "border-blue-200 bg-blue-100/60 text-blue-700",
+    btnClass: "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
     details: {
-      "Support": "Commissioner for Women & Child Development",
-      "Target Group": "Women from different Category",
-      "Object of the Project": "All type of welfare activity for women.",
-      "Total Budget": "Rs.3,60,000/-",
-      "Expenditure / Grant": "Rs.2,23,046/-"
+      "Goal": "To empower the youth and women of the community by providing them with skill-based training and education, enabling them to become self-reliant and contribute to the development of society.",
+      "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
+      "Target Group": "Unemployed Youth and Women seeking skill development.",
+      "Target Area": "Gandhinagar, Gujarat.",
+      "Duration": "Ongoing",
+      "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
+      "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
+      "Contact": "+91 94280 20080, 079-23242080",
+      "Email": "cedc.gandhinagar@gmail.com, mkt.gnr@gmail.com",
+      "Activities": [
+        "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
+        "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
+        "Certificate Course in Garment Making & Fashion Designing (3 Months, Eligibility: 10th Pass)",
+        "Soft skills and personality development sessions",
+        "Practical training and hands-on experience in sector-specific software and equipment",
+        "100% placement assistance and career guidance",
+        "Fostering entrepreneurship and self-employment initiatives"
+      ],
+      "Outcome": [
+        "Empowerment of youth and women through specialized vocational training.",
+        "Increased employment opportunities in Banking, Retail, and Textile sectors.",
+        "Promotion of entrepreneurship and small enterprise establishment in Gandhinagar and surrounding areas."
+      ]
     }
   },
   {
     id: "04",
-    slug: "marketing-support-for-sustainability",
-    name: "marketing support for sustainability",
-    description: "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
+    slug: "training-under-scheme-6",
+    name: "Training under Scheme - 6",
+    description: "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
     images: [
-      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-02.jpg",
-      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-01.jpg",
-
-      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-03.jpg",
-      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-04.jpg"
+      "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-03.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-04.jpg"
     ],
-    theme: "from-emerald-50/80 to-teal-50/40",
-    border: "border-emerald-200 hover:border-emerald-350",
-    tagClass: "border-emerald-200 bg-emerald-100/60 text-emerald-700",
-    btnClass: "from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    theme: "from-purple-50/80 to-indigo-50/40",
+    border: "border-purple-200 hover:border-purple-350",
+    tagClass: "border-purple-200 bg-purple-100/60 text-purple-700",
+    btnClass: "from-purple-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
     details: {
-      "Support": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
-      "Target Group": "Women artisans",
-      "Target Area": "Rural Area",
-      "Object of the Project": "Marketing for project By women artisans",
-      "Annual Budget": "As per requirement (for two years)",
-      "Expenditure / Grant": "As per requirement",
-      "Process": "As per scheme & need"
+      "Support": "Center for Entrepreneurship Development Gandhinagar",
+      "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
+      "Object of the Project": "Training, Liaison and Placement",
+      "Starting Of The Project": "During the year 23-24",
+      "Expenditure Incurred During The Year": "Rs.25,31,838/-"
     }
   },
+
   {
     id: "05",
     slug: "integrated-skill-development-scheme",
@@ -242,6 +275,117 @@ export const projects = [
       ],
       "Beneficiaries": "Salt workers and Earthquake hit people of Rajkot District in Gujarat",
       "Outcome": "500 families of Salt Workers have got shelters"
+    }
+  }, {
+    id: "10",
+    slug: "multi-purpose-women-welfare-center",
+    name: "multi purpose women welfare center",
+    description: "All type of welfare activity for women.",
+    images: [
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-01.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-02.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-03.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-04.jpg"
+    ],
+    theme: "from-pink-50/80 to-rose-50/40",
+    border: "border-pink-200 hover:border-pink-350",
+    tagClass: "border-pink-200 bg-pink-100/60 text-pink-700",
+    btnClass: "from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20",
+    details: {
+      "Support": "Commissioner for Women & Child Development",
+      "Target Group": "Women from different Category",
+      "Object of the Project": "All type of welfare activity for women.",
+      "Total Budget": "Rs.3,60,000/-",
+      "Expenditure / Grant": "Rs.2,23,046/-"
+    }
+  },
+  {
+    id: "11",
+    slug: "marketing-support-for-sustainability",
+    name: "marketing support for sustainability",
+    description: "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
+    images: [
+      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-02.jpg",
+      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-01.jpg",
+
+      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-03.jpg",
+      "/images/our-projects/04-MARKETING-SUPPORT-FOR-THE-SUSTAINABILITY-THROUGH-EXIHIBITION-ADVERTISE-CATALOGUE-DISTRIBUTION-AND-DIRECT SALES-04.jpg"
+    ],
+    theme: "from-emerald-50/80 to-teal-50/40",
+    border: "border-emerald-200 hover:border-emerald-350",
+    tagClass: "border-emerald-200 bg-emerald-100/60 text-emerald-700",
+    btnClass: "from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    details: {
+      "Support": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
+      "Target Group": "Women artisans",
+      "Target Area": "Rural Area",
+      "Object of the Project": "Marketing for project By women artisans",
+      "Annual Budget": "As per requirement (for two years)",
+      "Expenditure / Grant": "As per requirement",
+      "Process": "As per scheme & need"
+    }
+  },
+  {
+    id: "12",
+    slug: "help-to-khedbrahma-general-hospital",
+    name: "Help to Khedbrahma General Hospital",
+    description: "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
+    images: [
+      "/images/Help_to_khedbrahma_general_hospital/cover-photo-Khedbrahma.jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (1).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (2).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (3).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (4).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (8).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (11).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (13).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (14).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (18).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (26).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (29).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (30).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (31).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (32).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (33).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (36).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (37).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (39).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (41).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (42).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (43).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (44).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (45).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (46).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (47).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (48).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (49).jpeg",
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (50).jpeg"
+    ],
+    theme: "from-amber-50/80 to-orange-50/40",
+    border: "border-amber-200 hover:border-amber-350",
+    tagClass: "border-amber-200 bg-amber-100/60 text-amber-700",
+    btnClass: "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
+    layout: "gratitude",
+    details: {
+      "Support": "Trivedi Family Charitable Trust (USA) & Manav Kalyan Trust (Ahmedabad)",
+      "Target Area": "Khedbrahma, Gujarat",
+      "Date": "09-05-2026",
+      "gratitudeMessage": {
+        "sanskrit": "सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामया। सर्वे भद्राणि પશ્યન્તુ મા કશ્ચિત્ દુઃખભાગ્ ભવેત્।।",
+        "hospital": "જનરલ હોસ્પીટલ – ખેડબ્રહ્મા",
+        "title": "સન્માન પત્ર",
+        "recipient": "માનનીય શ્રી...",
+        "partner": "માનવ કલ્યાણ ટ્રસ્ટ - અમદાવાદ",
+        "body": "આપશ્રી ના તરફથી ત્રિવેદી ફેમિલી ચેરીટેબલ ટ્રસ્ટ – યુ.એસ.એ અને માનવ કલ્યાણ ટ્રસ્ટ – અમદાવાદ ના સહયોગ દ્વારા જનરલ હોસ્પીટલ – ખેડબ્રહ્મા ખાતે જરૂરીયાતમંદ દર્દીના ઉપયોગ હેતુથી મેડીકલ સાધનો અર્પીત કરી સેવા માટેનુ ઉમદા કાર્ય કરવા બદલ જનરલ હોસ્પીટલ – ખેડબ્રહ્મા આપનો ખુબ ખુબ આભાર વ્યકત કરી આ સન્માનપત્ર એનાયત કરવામાં આવે છે.",
+        "location": "ખેડબ્રહ્મા",
+        "date": "તા:- ૦૯-૦૫-૨૦૨૬",
+        "signature": {
+          "text": "(સહી)",
+          "name": "ડો.અશ્વિન ગઢવી",
+          "role": "અધિક્ષક",
+          "facility": "જનરલ હોસ્પીટલ, ખેડબ્રહ્મા."
+        }
+      }
     }
   }
 ];
