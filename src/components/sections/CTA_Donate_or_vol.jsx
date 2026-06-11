@@ -79,7 +79,7 @@ const CTA_Donate_or_vol = () => {
                     </div>
 
                     <div className="mt-16 text-center text-sm italic text-slate-500 font-semibold">
-                        Manav Kalyan Trust · Mehsana, Gujarat · since 1986
+                        Manav Kalyan Trust · Ahmedabad, Gujarat · since 1986
                     </div>
                 </div>
             </section>

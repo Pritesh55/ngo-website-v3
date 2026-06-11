@@ -3,17 +3,13 @@
 import { Card } from '@/components/ui/card';
 import { Award, Star } from 'lucide-react';
 import Link from 'next/link';
+import Awards_list from './awards/awards_list';
+import Section_header from './common/section_header';
+
 
 export function AwardsSection() {
+
     const awards = [
-        {
-            year: '2012',
-            title: 'National Social Development Award',
-            issuer: 'Government Recognition',
-            description: 'Honored as Managing Trustee of Manav Kalyan Trust for outstanding contributions to social development.',
-            category: 'Social Impact',
-            image: 'https://web.archive.org/web/20161025205329im_/http://mktngo.org/sliders/New%20Picture%20(6).png'
-        },
         {
             year: '2009-10',
             title: 'Award of Excellence',
@@ -24,46 +20,107 @@ export function AwardsSection() {
         },
         {
             year: '2012',
-            title: 'International Status Award',
-            issuer: 'International Organization',
-            description: 'Awarded for intellectual activity and contributions to international business development initiatives.',
-            category: 'International',
-            image: 'https://web.archive.org/web/20161026025740im_/http://mktngo.org/sliders/New%20Picture%20(7).png'
+            title: 'National Social Development Award',
+            issuer: 'Government Recognition',
+            description: 'Honored as Managing Trustee of Manav Kalyan Trust for outstanding contributions to social development.',
+            category: 'Social Impact',
+            image: 'https://web.archive.org/web/20161025205329im_/http://mktngo.org/sliders/New%20Picture%20(6).png'
         },
         {
             year: '2012',
-            title: 'Excellence Award for National Social Development',
+            title: 'Chief Minister’s Award for Excellence workin Health & Medicine',
             issuer: 'Ministry Recognition',
-            description: 'Special recognition for sustained excellence in advancing social development programs.',
-            category: 'National',
+            description: 'Awarded for outstanding contributions to the field of health and medicine as an institution.',
+            category: 'Health & Medicine',
             image: 'https://web.archive.org/web/20161025212304im_/http://mktngo.org/sliders/New%20Picture%20(4).png'
         },
+
+        {
+            year: '2012',
+            title: 'International Status Award for Intellectual activity',
+            issuer: 'International Organization',
+            description: 'Awarded for intellectual activity and contributions to international business development initiatives.',
+            category: 'Intellectual activity',
+            image: 'https://web.archive.org/web/20161026025740im_/http://mktngo.org/sliders/New%20Picture%20(7).png'
+        },
+
     ];
 
-    const extraImages = [
-        'https://web.archive.org/web/20161025212030im_/http://mktngo.org/sliders/New%20Picture.png',
-        'https://web.archive.org/web/20161026025749im_/http://mktngo.org/sliders/New%20Picture%20(1).png',
-        'https://web.archive.org/web/20170113210356im_/http://mktngo.org/sliders/award-3.jpg',
-        'https://web.archive.org/web/20170113190254im_/http://mktngo.org/sliders/award-2.jpg',
-        'https://web.archive.org/web/20161026025839im_/http://mktngo.org/sliders/4%20x%206----01-1.jpg',
-        'https://web.archive.org/web/20161025205536im_/http://mktngo.org/sliders/4%20x%206----031.jpg',
+    const award_info_Array = [
+        {
+            id: 1,
+            award_imgURL: 'https://web.archive.org/web/20161025212030im_/http://mktngo.org/sliders/New%20Picture.png',
+            award_Name: 'Awarded by Government of Gujarat for excellent work in Gujarat',
+        },
+        {
+            id: 2,
+            award_imgURL: 'https://web.archive.org/web/20161026025749im_/http://mktngo.org/sliders/New%20Picture%20(1).png',
+            award_Name: 'Awarded by Gujarat Chamber of Commerce & Development Industry for work in Gujarat',
+        },
+        {
+            id: 3,
+            award_imgURL: 'https://web.archive.org/web/20170113210356im_/http://mktngo.org/sliders/award-3.jpg',
+            award_Name: 'Award of Excellence',
+        },
+
+
+        {
+            id: 4,
+            award_imgURL: 'https://web.archive.org/web/20170114010608im_/http://mktngo.org/sliders/award-1.jpg',
+            award_Name: 'Excellence Award for National Social Development',
+        },
+        {
+            id: 5,
+            award_imgURL: 'https://web.archive.org/web/20161025212304im_/http://mktngo.org/sliders/New%20Picture%20(4).png',
+            award_Name: 'Chief Minister’s Award for Excellence workin Health & Medicine',
+        },
+        {
+            id: 6,
+            award_imgURL: 'https://web.archive.org/web/20170113190254im_/http://mktngo.org/sliders/award-2.jpg',
+            award_Name: 'Felicitation by Gujarat Chamber of Commerce for Chief Minister Award for Health & Medicine',
+        },
+
+        {
+            id: 7,
+            award_imgURL: 'https://web.archive.org/web/20161026025740im_/http://mktngo.org/sliders/New%20Picture%20(7).png',
+            award_Name: 'International Status Award for Intellectual activity',
+        },
+
+        {
+            id: 8,
+            award_imgURL: 'https://web.archive.org/web/20161026025839im_/http://mktngo.org/sliders/4%20x%206----01-1.jpg',
+            award_Name: 'Mother Teresa Sadbhavna Award',
+        },
+
+        {
+            id: 9,
+            award_imgURL: 'https://web.archive.org/web/20161025213507im_/http://mktngo.org/sliders/4%20x%206----021.jpg',
+            award_Name: 'Indo Asia Achievers Award',
+        },
+
+        {
+            id: 10,
+            award_imgURL: 'https://web.archive.org/web/20161025205536im_/http://mktngo.org/sliders/4%20x%206----031.jpg',
+            award_Name: 'Asia Pacific International Gold Star Award',
+        },
+
     ];
+
+    const award_section_header_info = {
+        id: 8,
+        icon: <Star className="w-4 h-4 text-amber-600" />,
+        subTitle: 'Awards & Accolades',
+        title: 'Awards & Accolades',
+        description: 'Recognition of distinguished service and transformative impact in social development and business empowerment.',
+    }
+
 
     return (
         <section className="py-20 px-4 bg-glow-warm border-b border-slate-100 relative overflow-hidden">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-amber-200">
-                        <Star className="w-4 h-4 text-amber-600" />
-                        <span className="text-sm font-semibold text-amber-700">RECOGNITION & HONORS</span>
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                        Awards & Accolades
-                    </h2>
-                    <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        Recognition of distinguished service and transformative impact in social development and business empowerment.
-                    </p>
-                </div>
+
+                <Section_header section_header_info={award_section_header_info}></Section_header>
+
 
                 {/* CSS Columns Masonry Layout */}
                 <div className="columns-1 sm:columns-2 lg:columns-4 gap-6 mb-10 [column-fill:_balance]">
@@ -125,20 +182,8 @@ export function AwardsSection() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16">
-                    {extraImages.map((image, idx) => (
-                        <div key={idx} className="group relative rounded-lg overflow-hidden border border-slate-200 bg-white shadow-xs hover:shadow-md transition-all duration-300 hover:border-amber-300">
-                            <Link href={image}>
-                                <img
-                                    src={image}
-                                    alt={`Recognition document ${idx + 1}`}
-                                    className="w-full md:h-48 object-fill transition-transform duration-500 group-hover:scale-105"
-                                />
-                            </Link>
-
-                        </div>
-                    ))}
-                </div>
+                {/* Awards List */}
+                <Awards_list></Awards_list>
 
                 <div className="bg-linear-to-r from-amber-50 via-slate-50 to-amber-50 rounded-xl border border-amber-200 p-8">
                     <div className="flex items-start gap-4">

@@ -268,7 +268,7 @@ const SewingMachineCoursePage = () => {
           </div>
 
           <div className="mt-10 md:mt-12 text-xxs md:text-xs text-slate-500 font-bold tracking-widest capitalize">
-            MANAV KALYAN TRUST • AHMEDABAD / MEHSANA
+            MANAV KALYAN TRUST • AHMEDABAD
           </div>
 
         </div>

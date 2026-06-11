@@ -1,24 +1,24 @@
 import { Users } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import Section_header from './common/section_header'
 
 const Our_team = () => {
+
+    const Our_Team_Section_Header_info = {
+        id: 8,
+        icon: <Users className="w-4 h-4 text-amber-600" />,
+        subTitle: 'અમારો સ્ટાફ (OUR TEAM)',
+        title: 'Meet Our Dedicated Team',
+        description: 'અમારા ઉત્સાહી અને સમર્પિત સભ્યો જેઓ સમાજના સકારાત્મક પરિવર્તન માટે અવિરત કાર્યરત છે.',
+    }
+
+
     return (
         <>
             <section className="bg-glow-warm py-24 border-b border-slate-100 relative overflow-hidden">
                 <div className="mx-auto">
-                    <div className="text-center mb-16">
-                        <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
-                            <Users className="w-4 h-4 text-orange-700" />
-                            <span className="text-xs font-bold text-orange-700 tracking-wider">અમારો સ્ટાફ (OUR TEAM)</span>
-                        </div>
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                            Meet Our Dedicated Team
-                        </h2>
-                        <p className="text-lg text-slate-650 max-w-2xl mx-auto leading-relaxed font-semibold">
-                            અમારા ઉત્સાહી અને સમર્પિત સભ્યો જેઓ સમાજના સકારાત્મક પરિવર્તન માટે અવિરત કાર્યરત છે.
-                        </p>
-                    </div>
+                    <Section_header section_header_info={Our_Team_Section_Header_info}></Section_header>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                         {[

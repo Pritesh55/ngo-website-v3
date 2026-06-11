@@ -84,7 +84,7 @@ const courses = [
   // }
 ];
 
-export function CoursesSection() {
+export function Our_Cource_Cards_Section() {
   const [activeTab, setActiveTab] = useState('fee-based')
 
   const filteredCourses = courses.filter(course => course.category === activeTab)
@@ -201,4 +201,4 @@ export function CoursesSection() {
   )
 }
 
-export default CoursesSection
+export default Our_Cource_Cards_Section

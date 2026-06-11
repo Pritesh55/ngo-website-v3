@@ -78,21 +78,21 @@ export function Footer() {
 
                     {/* Quick Links */}
                     <div className="lg:col-span-4">
-                        <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Programs</h4>
-                        <ul className="space-y-3 text-sm font-medium">
+                        <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Sections</h4>
+                        <ul className="text-sm font-medium flex flex-wrap gap-4">
                             {[
-                                'Women Entrepreneurship',
-                                'Business Training',
-                                'Market Development',
-                                'Community Impact',
+                                { id: 2.1, label: 'About us', href: '/about-us' },
+                                { id: 2.2, label: 'Our Projects', href: '/our-projects' },
+                                { id: 2.3, label: 'Our Courses', href: '/our-courses' },
+                                { id: 2.4, label: 'President Leadership', href: '/our-leadership' },
                             ].map((link) => (
-                                <li key={link}>
+                                <li key={link.id}>
                                     <a
-                                        href="#"
+                                        href={link.href}
                                         className="text-slate-600 hover:text-red-700 transition-colors flex items-center gap-2 group"
                                     >
                                         <span className="w-1.5 h-1.5 bg-orange-400 rounded-full transition-transform group-hover:scale-125" />
-                                        {link}
+                                        {link.label}
                                     </a>
                                 </li>
                             ))}
@@ -102,8 +102,14 @@ export function Footer() {
                     {/* Resources */}
                     <div className="lg:col-span-3">
                         <h4 className="text-slate-900 font-bold text-base capitalize tracking-wider mb-4">Resources</h4>
-                        <ul className="space-y-3 text-sm font-medium">
-                            {['Success Stories', 'Awards', 'News & Updates', 'Gallery'].map((link) => (
+                        <ul className="text-sm font-medium flex flex-wrap gap-4">
+                            {['Success Stories',
+                                'Awards',
+                                'Our Team',
+                                'Our Partners',
+                                'Gallery',
+                                'Support Us'
+                            ].map((link) => (
                                 <li key={link}>
                                     <a
                                         href="#"

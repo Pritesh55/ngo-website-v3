@@ -1,22 +1,22 @@
 import { HeroSection } from "@/components/sections/hero";
-import ProjectsSection from "@/components/sections/projects";
-import CoursesSection from "@/components/sections/courses";
+import CoursesSection, { Our_Cource_Cards_Section } from "@/components/sections/Our_Cource_Cards_Section";
 import Contact_us_Main_Section from "@/components/sections/contact_us";
 import Our_team from "@/components/sections/Our_team";
 import CTA_Donate_or_vol from "@/components/sections/CTA_Donate_or_vol";
+import Our_Projects_Cards_Section from "@/components/sections/our_projects_cards_section";
+import Award_Cards_Section from "@/components/sections/Award_Cards_Section";
+
 
 export default function Home() {
   return (
     <>
       <HeroSection></HeroSection>
-      <ProjectsSection></ProjectsSection>
 
-      <div className="2xl:container mx-auto">
-        <CoursesSection></CoursesSection>
-      </div>
+      <Our_Projects_Cards_Section></Our_Projects_Cards_Section>
 
-      {/* <!-- 6 ▸ OUR TEAM ----------------------------------------------- --> */}
+      <Our_Cource_Cards_Section></Our_Cource_Cards_Section>
       <Our_team />
+      <Award_Cards_Section></Award_Cards_Section>
       <CTA_Donate_or_vol></CTA_Donate_or_vol>
       <Contact_us_Main_Section></Contact_us_Main_Section>
 

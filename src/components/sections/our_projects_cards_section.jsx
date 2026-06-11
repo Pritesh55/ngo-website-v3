@@ -3,28 +3,26 @@ import React from 'react'
 import Link from 'next/link'
 import { FolderOpen, ArrowRight, Image as ImageIcon } from 'lucide-react'
 import { projects } from '@/data/projects'
+import Section_header from './common/section_header'
 
-export function ProjectsSection() {
+export function Our_Projects_Cards_Section() {
+
+  const our_projcts_section_header_info = {
+    id: 2,
+    icon: <FolderOpen className="w-4 h-4 text-blue-700" />,
+    subTitle: 'અમારા પ્રોજેક્ટ્સ (OUR PROJECTS)',
+    title: 'અમારા મુખ્ય સેવા પ્રોજેક્ટ્સ ',
+    description: 'મહિલા સશક્તિકરણ, ગ્રામીણ વિકાસ, કુદરતી આપત્તિ રાહત કાર્ય અને આરોગ્ય ક્ષેત્રે માનવ કલ્યાણ ટ્રસ્ટના અવિરત પ્રયાસો.',
+  }
   return (
-    <section id="our-projects" className="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24 px-6 sm:px-8 border-b border-slate-100 relative overflow-hidden">
+    <section id="our-projects" className="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24 px-4 sm:px-6 border-b border-slate-100 relative overflow-hidden">
       {/* Decorative background gradients */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-100/40 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section Heading */}
-        <div className="text-center pb-12 md:pb-16">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-blue-200 bg-blue-50/50">
-            <FolderOpen className="w-4 h-4 text-blue-700" />
-            <span className="text-xs font-bold text-blue-700 tracking-wider uppercase">અમારા પ્રોજેક્ટ્સ (OUR PROJECTS)</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-            અમારા મુખ્ય સેવા પ્રોજેક્ટ્સ
-          </h2>
-          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-medium">
-            મહિલા સશક્તિકરણ, ગ્રામીણ વિકાસ, કુદરતી આપત્તિ રાહત કાર્ય અને આરોગ્ય ક્ષેત્રે માનવ કલ્યાણ ટ્રસ્ટના અવિરત પ્રયાસો.
-          </p>
-        </div>
+        <Section_header section_header_info={our_projcts_section_header_info}></Section_header>
 
         {/* Projects Grid (2-column layout) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 xl:gap-8 mx-auto">
@@ -108,4 +106,4 @@ export function ProjectsSection() {
   )
 }
 
-export default ProjectsSection
+export default Our_Projects_Cards_Section

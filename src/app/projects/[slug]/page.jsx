@@ -127,8 +127,8 @@ export default function ProjectDetailPage({ params }) {
                         key={idx}
                         onClick={() => setActiveImageIndex(idx)}
                         className={`relative w-20 h-16 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer ${activeImageIndex === idx
-                            ? 'border-blue-600 scale-[1.03] shadow-sm'
-                            : 'border-slate-200 hover:border-slate-350'
+                          ? 'border-blue-600 scale-[1.03] shadow-sm'
+                          : 'border-slate-200 hover:border-slate-350'
                           }`}
                       >
                         <img src={imgUrl} alt="thumbnail" className="w-full h-full object-cover" />
@@ -225,8 +225,8 @@ export default function ProjectDetailPage({ params }) {
                         key={idx}
                         onClick={() => setActiveImageIndex(idx)}
                         className={`relative w-20 h-16 rounded-xl overflow-hidden border-2 transition-all flex-shrink-0 cursor-pointer ${activeImageIndex === idx
-                            ? 'border-blue-600 scale-[1.03] shadow-sm'
-                            : 'border-slate-200 hover:border-slate-350'
+                          ? 'border-blue-600 scale-[1.03] shadow-sm'
+                          : 'border-slate-200 hover:border-slate-350'
                           }`}
                       >
                         <img src={imgUrl} alt="thumbnail" className="w-full h-full object-cover" />
@@ -273,10 +273,10 @@ export default function ProjectDetailPage({ params }) {
                 </h3>
                 <div className="space-y-4">
                   {Object.entries(project.details).map(([key, value]) => {
-                    // Skip listing array fields (render below)
-                    if (key === "Activities" || key === "Outcome" || key === "Goal" || key === "Object of the Project" || key === "Support" || key === "Supporting Agency") return null;
+                    // Skip listing array fields and custom layout payloads
+                    if (key === "Activities" || key === "Outcome" || key === "gratitudeMessage") return null;
                     return (
-                      <div key={key} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-100 gap-1 text-sm md:text-base">
+                      <div key={key} className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 border-b border-slate-100 gap-2 lg:gap-3 xl:gap-4 text-sm md:text-base">
                         <span className="text-slate-500 font-bold capitalize">{key}:</span>
                         <span className="font-extrabold text-slate-800 sm:text-right max-w-sm">{value}</span>
                       </div>

@@ -13,10 +13,11 @@ const menuItems = [
         dropdown: [
             { menuId: 2.1, label: 'About us', href: '/about-us', icon: Info },
             { menuId: 2.2, label: 'Our Activities', href: '/our-activity', icon: Activity },
-            { menuId: 2.6, label: 'Our Partners', href: '/our-partners', icon: Handshake },
-            { menuId: 2.3, label: 'Success Stories', href: '/success-story', icon: Award },
-            { menuId: 2.4, label: 'Achieved awards', href: '/awards', icon: Trophy },
-            { menuId: 2.5, label: 'President Leadership', href: '/our-leadership', icon: User },
+            { menuId: 2.3, label: 'President Leadership', href: '/our-leadership', icon: User },
+            { menuId: 2.4, label: 'Success Stories', href: '/success-story', icon: Award },
+            { menuId: 2.5, label: 'Our Partners', href: '/our-partners', icon: Handshake },
+            { menuId: 2.6, label: 'Achivements (Awards)', href: '/awards', icon: Trophy },
+
         ]
     },
     {
