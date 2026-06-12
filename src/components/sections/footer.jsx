@@ -178,9 +178,8 @@ export function Footer() {
                 {/* Bottom Bar */}
                 <div className="flex flex-col md:flex-row items-center justify-between text-sm font-medium text-slate-500">
                     <p>© 2026 Manav Kalyan Trust. All rights reserved.</p>
+                    <Link href="https://pritesh-shah.vercel.app" title='Website is Made in india.Web Developer : Pritesh Bhupendrabhai Shah' target="_blank" rel="noopener noreferrer" className="text-slate-600"> Made in india </Link>
                     <div className="flex gap-6 mt-4 md:mt-0">
-                        <span className="text-slate-600">Made in india</span>
-                        <span className="text-slate-600">by Pritesh Shah</span>
                         <Link href="#" className="hover:text-red-700 transition-colors">
                             Privacy Policy
                         </Link>
