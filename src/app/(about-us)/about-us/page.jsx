@@ -125,7 +125,7 @@ const About_us_Page = () => {
               },
               {
                 dt: 'FCRA, 1976',
-                dd: '041910237',
+                dd: '041910337',
                 sub: 'Foreign Contribution Regulation Act compliant',
                 theme: 'from-amber-50/80 to-yellow-50/40',
                 border: 'border-amber-100',
