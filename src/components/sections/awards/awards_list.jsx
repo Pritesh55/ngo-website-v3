@@ -88,7 +88,7 @@ const Awards_list = () => {
                                 alt={`Recognition document ${idx + 1}`}
                                 width={420}
                                 height={192}
-                                className="w-full md:h-48 object-fill transition-transform duration-500 group-hover:scale-105"
+                                className="w-full md:h-48 object-contain transition-transform duration-500 group-hover:scale-105"
                             />
                         </Link>
 
