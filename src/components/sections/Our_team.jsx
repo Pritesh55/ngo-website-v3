@@ -41,7 +41,7 @@ const Our_team = () => {
                             },
                             {
                                 name: 'Mahendrasinh Rathod',
-                                role: 'Co-ordinator Assistant & Computer Operator',
+                                role: 'MIS coordinator',
                                 gujRole: 'કો-ઓર્ડિનેટર આસિસ્ટન્ટ અને કમ્પ્યુટર ઓપરેટર',
                                 image: '/images/Team/Mahendrasingh-Rathod.jpeg',
                                 theme: 'from-emerald-50/80 to-teal-50/40',

@@ -17,6 +17,7 @@ const courses = [
     tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
     btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
   },
+
   {
     name: 'Government Schemes Implementation and Support',
     category: 'govt-schemes',
@@ -68,7 +69,20 @@ const courses = [
     border: 'border-pink-200 hover:border-pink-350',
     tagClass: 'border-pink-200 bg-pink-100/60 text-pink-750',
     btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
-  }
+  },
+  {
+    name: 'Sewing Machine Operator',
+    category: 'govt-schemes',
+    duration: '3 Months',
+    fee: 'FREE',
+    description: 'Our intensive training program helps women work proficiently on industrial sewing machines and achieve self-reliance.',
+    image: '/images/courses/img8.jpg',
+    link: '/courses/sewing-machine-free',
+    theme: 'from-orange-50/80 to-red-50/40',
+    border: 'border-orange-200 hover:border-orange-350',
+    tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
+    btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
+  },
 ];
 
 export function Our_Cource_Cards_Section() {
@@ -112,7 +126,7 @@ export function Our_Cource_Cards_Section() {
               : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200'
               }`}
           >
-            02) Government Schemes
+            02) Government Schemes based
           </button>
         </div>
 
