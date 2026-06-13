@@ -131,8 +131,85 @@ const DonatePage = () => {
                 </div>
               </div>
 
+              {/* Compliance & Regulation Details */}
+              <div className="bg-blue-50/50 border border-blue-100 rounded-2xl p-5 md:p-6 mt-8">
+                <h4 className="font-bold text-slate-900 mb-3 flex items-center gap-2 text-sm md:text-base">
+                  <ShieldCheck className="w-4 h-4 text-blue-700" />
+                  Compliance &amp; Legitimacy
+                </h4>
+                <p className="text-xs md:text-sm text-slate-700 font-semibold mb-3 leading-relaxed">
+                  Registered under Bombay Public trust Act - 1950 (Regd No. E - 2943/Mehsana, Date: 29-11-1986).
+                </p>
+
+                <p className="font-bold text-slate-900 mb-3 flex items-center gap-2 text-sm md:text-base">
+                  Income – Tax exemption
+                </p>
+                <div className="space-y-3 pt-3 border-t border-blue-100/50 text-xs md:text-sm font-semibold ">
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>12 AA · I.T. Act, 1961 (Old) :</strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981LE20214</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>12 AB(1)(b) (New) :</strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981L25AD01</span>
+                    </div>
+                  </div>
+
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>80G (5) of the I.T. Act , 1961 (Old) :</strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981LF20214</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>80G (5) : (New) </strong>
+                      <span className="text-base text-green-600 font-semibold">AAATM7981L25AD02</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>Niti aayog number (Darpan registration id) :</strong>
+                      <span className="text-base text-green-600 font-semibold">GJ/2016/0105370</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2">
+                    <span className="text-blue-700 font-bold">•</span>
+                    <div className="flex flex-col gap-y-1">
+                      <strong>Registration number (National CSR Portal) :</strong>
+                      <span className="text-base text-green-600 font-semibold">CSR00009140</span>
+                    </div>
+                  </div>
+
+
+                  <p className="flex items-start gap-2 mt-12 mb-4">
+                    <span className="text-blue-700 font-normal">•</span>
+                    <span>Work spread over Gujarat as a leading NGO implementing Various project, collaboration with
+                      Various Department, Different Target Group like Women, Children, people living below Poverty
+                      line, Salt Workers, Weaker section, special focus on natural calamities affected population like
+                      Earthquake, Cyclone, Tsunami and riots. </span>
+                  </p>
+
+
+                </div>
+              </div>
             </div>
           </div>
+
 
           {/* Column 2: Overseas Donations */}
           <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
@@ -185,20 +262,7 @@ const DonatePage = () => {
                   Income – Tax exemption
                 </p>
                 <div className="space-y-3 pt-3 border-t border-blue-100/50 text-xs md:text-sm font-semibold ">
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-700 font-bold">•</span>
-                    <div className="flex flex-col gap-y-1">
-                      <strong>U/S 12AA of the I.T. Act , 1961 :</strong>
-                      <span className="text-base text-green-600 font-semibold">AAATM7981LE20214 (Dated: 28-05-2021)</span>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-700 font-bold">•</span>
-                    <div className="flex flex-col gap-y-1">
-                      <strong>U/S 80G (5) of the I.T. Act , 1961 :</strong>
-                      <span className="text-base text-green-600 font-semibold">AAATM7981LF20214 (Date: 01-06-2021)</span>
-                    </div>
-                  </div>
+
                   <div className="flex items-start gap-2">
                     <span className="text-blue-700 font-bold">•</span>
                     <div className="flex flex-col gap-y-1">
@@ -206,13 +270,7 @@ const DonatePage = () => {
                       <span className="text-base text-green-600 font-semibold">FCRA Regd No: 041910337 (Date: 20-07-2006)</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-700 font-bold">•</span>
-                    <div className="flex flex-col gap-y-1">
-                      <strong>Registration number (National CSR Portal) :</strong>
-                      <span className="text-base text-green-600 font-semibold">CSR00009140</span>
-                    </div>
-                  </div>
+
                   <p className="flex items-start gap-2 mt-12 mb-4">
                     <span className="text-blue-700 font-normal">•</span>
                     <span>Work spread over Gujarat as a leading NGO implementing Various project, collaboration with

@@ -106,8 +106,9 @@ const About_us_Page = () => {
                 border: 'border-emerald-100',
                 tagClass: 'bg-emerald-100 text-emerald-700 border-emerald-200'
               },
+
               {
-                dt: '12 AA · I.T. Act, 1961',
+                dt: '12 AA · I.T. Act, 1961 (Old)',
                 dd: 'AAATM7981LE20214',
                 sub: 'Income Tax Exemption Approval',
                 theme: 'from-pink-50/80 to-rose-50/40',
@@ -115,12 +116,12 @@ const About_us_Page = () => {
                 tagClass: 'bg-pink-100 text-pink-700 border-pink-200'
               },
               {
-                dt: '80 G (5) · I.T. Act, 1961',
-                dd: 'AAATM7981LE20214',
-                sub: 'Tax Deduction eligibility for donors',
-                theme: 'from-purple-50/80 to-indigo-50/40',
-                border: 'border-purple-100',
-                tagClass: 'bg-purple-100 text-purple-700 border-purple-200'
+                dt: '12 AB (1)(b)  (New)',
+                dd: 'AAATM7981L25AD01',
+                sub: 'Income Tax Exemption Approval',
+                theme: 'from-pink-50/80 to-rose-50/40',
+                border: 'border-pink-100',
+                tagClass: 'bg-pink-100 text-pink-700 border-pink-200'
               },
               {
                 dt: 'FCRA, 1976',
@@ -129,7 +130,32 @@ const About_us_Page = () => {
                 theme: 'from-amber-50/80 to-yellow-50/40',
                 border: 'border-amber-100',
                 tagClass: 'bg-amber-100 text-amber-700 border-amber-200'
+              },
+              {
+                dt: '80 G (5) · I.T. Act, 1961  (Old)',
+                dd: 'AAATM7981LE20214',
+                sub: 'Tax Deduction eligibility for donors',
+                theme: 'from-purple-50/80 to-indigo-50/40',
+                border: 'border-purple-100',
+                tagClass: 'bg-purple-100 text-purple-700 border-purple-200'
+              },
+              {
+                dt: '80 G (5)· (New)',
+                dd: 'AAATM7981L25AD02',
+                sub: 'Tax Deduction eligibility for donors',
+                theme: 'from-purple-50/80 to-indigo-50/40',
+                border: 'border-purple-100',
+                tagClass: 'bg-purple-100 text-purple-700 border-purple-200'
+              },
+              {
+                dt: 'Darpan registration id',
+                dd: 'GJ/2016/0105370',
+                sub: 'Niti aayog number',
+                theme: 'from-purple-50/80 to-indigo-50/40',
+                border: 'border-purple-100',
+                tagClass: 'bg-purple-100 text-purple-700 border-purple-200'
               }
+
             ].map((detail, idx) => (
               <div
                 key={idx}

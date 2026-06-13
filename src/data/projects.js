@@ -215,18 +215,18 @@ export const projects = [
     "btnClass": "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
     "details": {
       "Goal": "To empower the youth and women of the community by providing them with skill-based training and education, enabling them to become self-reliant and contribute to the development of society.",
-      "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
+      "Support": "CED - Centre for Entrepreneurship Development",
       "Target Group": "Unemployed Youth and Women seeking skill development.",
       "Target Area": "Gandhinagar, Gujarat.",
       // "Duration": "Ongoing",
       "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
-      "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
-      "Contact": "+91 94280 20080",
-      "Email": "cedc.gandhinagar@gmail.com, mktahmedabad1986@gmail.com",
+      // "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
+      "Contact": "+91 94260 620683",
+      "Email": "mktahmedabad1986@gmail.com",
       "Activities": [
-        "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
-        "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
-        "Certificate Course in Garment Making & Fashion Designing (3 Months, Eligibility: 10th Pass)",
+        // "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
+        // "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
+        // "Certificate Course in Garment Making & Fashion Designing (3 Months, Eligibility: 10th Pass)",
         "Soft skills and personality development sessions",
         "Practical training and hands-on experience in sector-specific software and equipment",
         "100% placement assistance and career guidance",
@@ -234,7 +234,7 @@ export const projects = [
       ],
       "Outcome": [
         "Empowerment of youth and women through specialized vocational training.",
-        "Increased employment opportunities in Banking, Retail, and Textile sectors.",
+        // "Increased employment opportunities in Banking, Retail, and Textile sectors.",
         "Promotion of entrepreneurship and small enterprise establishment in Gandhinagar and surrounding areas."
       ]
     }
