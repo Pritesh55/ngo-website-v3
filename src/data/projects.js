@@ -65,6 +65,7 @@ export const projects = [
     "description": "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
     "supportType": "FCRA",
     "images": [
+      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (13).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (26).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/cover-photo-Khedbrahma.jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (1).jpeg",
@@ -73,7 +74,7 @@ export const projects = [
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (4).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (8).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (11).jpeg",
-      "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (13).jpeg",
+
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (14).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (18).jpeg",
 
