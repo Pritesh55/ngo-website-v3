@@ -67,7 +67,6 @@ export function Our_Projects_Cards_Section() {
                 {/* Project Description */}
                 <p className="text-slate-600 text-sm leading-relaxed mb-6 font-semibold flex flex-col gap-y-2">
                   <span className=""> {project.description} </span>
-                  <span className=""> {project.description2} </span>
                 </p>
 
                 {/* Quick Info Tags */}
