@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
+import AhvyProjectDetail from '@/components/sections/AhvyProjectDetail'
 import {
   ArrowLeft,
   CheckCircle,
@@ -69,6 +70,10 @@ export default function ProjectDetailPage({ params }) {
     )
   }
 
+  if (project.layout === 'ahvy') {
+    return <AhvyProjectDetail project={project} />
+  }
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
       {/* Dynamic Colored Header Hero */}
@@ -83,7 +88,7 @@ export default function ProjectDetailPage({ params }) {
             className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-slate-700 hover:text-slate-900 bg-white/85 px-4 py-2 rounded-full border border-slate-200/50 mb-6 transition-colors shadow-xs"
           >
             <ArrowLeft className="w-4 h-4" />
-            મુખ્ય પાનું (Home)
+            Home
           </Link>
 
           <div className="flex items-center gap-3 mb-4">
@@ -143,7 +148,7 @@ export default function ProjectDetailPage({ params }) {
                 <div className="bg-emerald-50/50 border border-emerald-100 rounded-3xl p-6 md:p-8">
                   <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
                     <Users className="w-5 h-5 text-emerald-800" />
-                    સહયોગી સંસ્થા (Supporting Agency)
+                    Supporting Agency
                   </h3>
                   <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
                     {project.details["Support"]}
@@ -241,7 +246,7 @@ export default function ProjectDetailPage({ params }) {
                 <div className="bg-blue-50/50 border border-blue-100 rounded-3xl p-6 md:p-8">
                   <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
                     <Target className="w-5 h-5 text-blue-700" />
-                    મુખ્ય ધ્યેય (Project Goal)
+                    Project Goal
                   </h3>
                   <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
                     {project.details["Goal"] || project.details["Object of the Project"]}
@@ -253,7 +258,7 @@ export default function ProjectDetailPage({ params }) {
               <div className="bg-emerald-50/50 border border-emerald-100 rounded-3xl p-6 md:p-8">
                 <h3 className="text-base md:text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
                   <Users className="w-5 h-5 text-emerald-800" />
-                  સહયોગી સંસ્થા (Supporting Agency)
+                  Supporting Agency
                 </h3>
                 <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
                   {project.details["Support"] || project.details["Supporting Agency"]}
@@ -269,7 +274,7 @@ export default function ProjectDetailPage({ params }) {
               <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
                 <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
                   <Activity className="w-5 h-5 text-blue-700" />
-                  પ્રોજેક્ટ વિગત (Specifications)
+                  Project Specifications
                 </h3>
                 <div className="space-y-4">
                   {Object.entries(project.details).map(([key, value]) => {
@@ -290,7 +295,7 @@ export default function ProjectDetailPage({ params }) {
                 <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
                   <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-indigo-700" />
-                    મુખ્ય પ્રવૃત્તિઓ (Activities)
+                    Activities
                   </h3>
                   <ul className="space-y-3.5">
                     {Array.isArray(project.details["Activities"]) ? (
@@ -315,7 +320,7 @@ export default function ProjectDetailPage({ params }) {
                 <div className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
                   <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
                     <CheckCircle className="w-5 h-5 text-emerald-700" />
-                    પ્રોજેક્ટ પરિણામ (Outcome)
+                    Outcome
                   </h3>
                   <ul className="space-y-3.5">
                     {Array.isArray(project.details["Outcome"]) ? (
@@ -345,7 +350,7 @@ export default function ProjectDetailPage({ params }) {
           <section className="mt-12 md:mt-16 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
             <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
               <ImageIcon className="w-6 h-6 text-blue-700" />
-              પ્રોજેક્ટ ગેલેરી (Project Gallery)
+              Project Gallery
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
               {project.images.map((imgUrl, idx) => (

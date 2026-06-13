@@ -105,19 +105,19 @@ export const projects = [
       "Target Area": "Khedbrahma, Gujarat",
       "Date": "09-05-2026",
       "gratitudeMessage": {
-        "sanskrit": "ॐ सर्वे भवन्तु सुखिनः । सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु । मा कश्चिद् दुःखभाग् भवेत् । ॐ शान्तिः शान्तिः शान्तिः॥",
-        "hospital": "જનરલ હોસ્પીટલ – ખેડબ્રહ્મા",
-        "title": "સન્માન પત્ર",
-        "recipient": "માનનીય શ્રી...",
-        "partner": "માનવ કલ્યાણ ટ્રસ્ટ - અમદાવાદ",
-        "body": "આપશ્રી ના તરફથી ત્રિવેદી ફેમિલી ચેરીટેબલ ટ્રસ્ટ – યુ.એસ.એ અને માનવ કલ્યાણ ટ્રસ્ટ – અમદાવાદ ના સહયોગ દ્વારા જનરલ હોસ્પીટલ – ખેડબ્રહ્મા ખાતે જરૂરીયાતમંદ દર્દીના ઉપયોગ હેતુથી મેડીકલ સાધનો અર્પીત કરી સેવા માટેનુ ઉમદા કાર્ય કરવા બદલ જનરલ હોસ્પીટલ – ખેડબ્રહ્મા આપનો ખુબ ખુબ આભાર વ્યકત કરી આ સન્માનપત્ર એનાયત કરવામાં આવે છે.",
-        "location": "ખેડબ્રહ્મા",
-        "date": "તા:- ૦૯-૦૫-૨૦૨૬",
+        "sanskrit": "Om, May All be Happy, May All be Free from Illness, May All See what is Auspicious, May no one Suffer. Om Peace, Peace, Peace.",
+        "hospital": "General Hospital - Khedbrahma",
+        "title": "Certificate of Appreciation",
+        "recipient": "Honorable Shri...",
+        "partner": "Manav Kalyan Trust - Ahmedabad",
+        "body": "General Hospital - Khedbrahma expresses its deep gratitude and presents this honor certificate to you for your noble act of service by donating medical equipment for the use of needy patients, in collaboration with Trivedi Family Charitable Trust - USA and Manav Kalyan Trust - Ahmedabad.",
+        "location": "Khedbrahma",
+        "date": "Date: 09-05-2026",
         "signature": {
-          "text": "(સહી)",
-          "name": "ડો.અશ્વિન ગઢવી",
-          "role": "અધિક્ષક",
-          "facility": "જનરલ હોસ્પીટલ, ખેડબ્રહ્મા."
+          "text": "(Signed)",
+          "name": "Dr. Ashwin Gadhvi",
+          "role": "Superintendent",
+          "facility": "General Hospital, Khedbrahma."
         }
       }
     }
@@ -407,5 +407,37 @@ export const projects = [
       "Process": "As per scheme & need"
     }
   },
-
+  {
+    id: "13",
+    slug: "ahvy",
+    name: "Ambedkar Hastshilp Vikas Yojana (AHVY)",
+    description: "Empowering Artisans: The Ambedkar Hastshilp Vikas Yojana (AHVY) is a pivotal government initiative designed to revitalize and strengthen India's vibrant handicraft sector.",
+    supportType: "Govt. Supported",
+    images: [
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.01 PM.jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.02 PM (1).jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.02 PM.jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.03 PM (1).jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.03 PM (2).jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.03 PM.jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.04 PM (1).jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.04 PM.jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.05 PM (1).jpeg",
+      "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.05 PM.jpeg"
+    ],
+    theme: "from-amber-50/80 to-orange-50/40",
+    border: "border-amber-200 hover:border-amber-350",
+    tagClass: "border-amber-200 bg-amber-100/60 text-amber-700",
+    btnClass: "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
+    layout: "ahvy",
+    details: {
+      "Goal": "To revitalize and strengthen India's vibrant handicraft sector by providing crucial financial, technological, and market support to artisan communities.",
+      "Support": "Development Commissioner (Handicrafts), Ministry of Textiles, Govt. of India.",
+      "Target Group": "Artisans, Self-Help Groups (SHGs), Cooperatives, and handicraft organizations.",
+      "Target Area": "Across India (Cluster-based)",
+      "Duration": "Ongoing",
+      "Process": "Cluster-based interventions, skill upgradation, design development, and marketing link support."
+    }
+  }
 ];
+

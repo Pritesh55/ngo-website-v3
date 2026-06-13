@@ -26,26 +26,26 @@ const GovtSchemesPage = () => {
   const [activeTab, setActiveTab] = useState('swavlamban');
 
   const tabs = [
-    { id: 'swavlamban', name: 'મહિલા સ્વાવલંબન યોજના', icon: Award, color: 'emerald' },
-    { id: 'dikri', name: 'વ્હાલી દીકરી યોજના', icon: Heart, color: 'rose' },
-    { id: 'safety', name: 'સુરક્ષા, સખી OSC અને ૧૮૧', icon: Shield, color: 'teal' },
-    { id: 'pension', name: 'ગંગા સ્વરૂપા અને કલ્યાણ', icon: Users, color: 'indigo' },
-    { id: 'scans', name: 'મૂળ માર્ગદર્શિકા પત્રકો', icon: FileText, color: 'slate' }
+    { id: 'swavlamban', name: 'Mahila Swavlamban Yojana', icon: Award, color: 'emerald' },
+    { id: 'dikri', name: 'Vhali Dikri Yojana', icon: Heart, color: 'rose' },
+    { id: 'safety', name: 'Safety, Sakhi OSC & 181', icon: Shield, color: 'teal' },
+    { id: 'pension', name: 'Ganga Swarupa & Welfare', icon: Users, color: 'indigo' },
+    { id: 'scans', name: 'Guideline Leaflets', icon: FileText, color: 'slate' }
   ]
 
   // Documents list for Mahila Swavlamban
   const swavlambanDocs = [
-    "ઉંમરનો પુરાવો (શાળા છોડ્યાનું પ્રમાણપત્ર / ચૂંટણી કાર્ડ / મેડિકલ સર્ટીફીકેટ પૈકી કોઈપણ એક)",
-    "આધારકાર્ડ રજુ કરવું",
-    "તાલીમનું / અનુભવનું / આવડતનું પ્રમાણપત્ર",
-    "મશીનરી / ફર્નીચર / કાચા માલનું / પાકું ભાવપત્રક (અસલ તથા ઝેરોક્ષ સ્વ પ્રમાણિત કરીને રજુ કરવા)",
-    "રેશનકાર્ડની ઝેરોક્ષ નકલ",
-    "કાયમી રહેઠાણ અંગેનો પુરાવો",
-    "વાર્ષિક આવકનો દાખલો (મામલતદાર / તાલુકા વિકાસ અધિકારી / નાયબ મામલતદાર / નાયબ તાલુકા વિકાસ અધિકારી / વિસ્તરણ અધિકારી (પંચાયત) / તલાટી-કમ-મંત્રી (પંચાયત) નો રજૂ કરવાનો રહેશે. અન્ય પ્રમાણપત્ર માન્ય રાખવામાં આવશે નહિ)",
-    "જાતિ અંગેનો સક્ષમ અધિકારીનો દાખલો (મામલતદાર / તાલુકા વિકાસ અધિકારી / સમાજ કલ્યાણ અધિકારી)",
-    "વિકલાંગ / વિધવા હોય તો તે અંગેનું સિવિલ સર્જનનું પ્રમાણપત્ર અથવા સમાજ સુરક્ષાનું વિકલાંગ ઓળખ કાર્ડ",
-    "તમામ દસ્તાવેજો બે નકલમાં સ્વપ્રમાણિત કરી રજૂ કરવાના રહેશે",
-    "બેંક પાસબુકની નકલ"
+    "Proof of Age (Any one of School Leaving Certificate / Voter ID Card / Medical Certificate)",
+    "Submit Aadhar Card",
+    "Certificate of Training / Experience / Skill",
+    "Quotation for Machinery / Furniture / Raw Material (Submit original and self-attested photocopy)",
+    "Photocopy of Ration Card",
+    "Proof of Permanent Residence",
+    "Annual Income Certificate (Must be issued by Mamlatdar / Taluka Development Officer / Deputy Mamlatdar / Deputy Taluka Development Officer / Extension Officer (Panchayat) / Talati-cum-Mantri (Panchayat). Other certificates will not be accepted)",
+    "Caste Certificate from Competent Officer (Mamlatdar / Taluka Development Officer / Social Welfare Officer)",
+    "Civil Surgeon Certificate for Specially Abled / Widow Certificate or Specially Abled Identity Card from Social Security",
+    "All documents must be submitted self-attested in duplicate",
+    "Copy of Bank Passbook"
   ]
 
   const [activeTab2_WCS, setactiveTab2_WCS] = useState('sankat-mochan')
@@ -54,159 +54,159 @@ const GovtSchemesPage = () => {
   const schemes = [
     {
       id: 'sankat-mochan',
-      name: 'સંકટ મોચન યોજના',
-      category: 'આર્થિક સહાય',
+      name: 'Sankat Mochan Yojana',
+      category: 'Financial Assistance',
       icon: AlertCircle,
       color: 'rose',
       docs: [
-        "નિયત નમૂનાનું અરજી ફોર્મ અને પાસપોર્ટ સાઇઝનો ફોટો",
-        "ચૂંટણીકાર્ડની ઝેરોક્ષ નકલ",
-        "રેશનકાર્ડની ઝેરોક્ષ નકલ",
-        "આધારકાર્ડની ઝેરોક્ષ નકલ",
-        "બેંક પાસબુકના પ્રથમ પાનાની નકલ (અથવા કેન્સલ ચેક)",
-        "અરજદારના રહેઠાણ અંગેનો પુરાવો (લાઇટ બિલ, વેરા બિલ અથવા ભાડા કરાર)",
-        "મૃત્યુ પામનાર મુખ્ય કમાનાર વ્યક્તિનો કુદરતી કે અકસ્માતથી મૃત્યુ થયા અંગેનો મરણનો દાખલો",
-        "કુટુંબની વાર્ષિક આવકનો સક્ષમ અધિકારીનો અસલ દાખલો",
-        "બી.પી.એલ. (BPL) સ્કોર ૦ થી ૨૦ અંગેનો સત્તાવાર દાખલો",
-        "મૃત્યુ પામનાર વ્યક્તિની ઉંમર મરણ વખતે ૧૮ થી ૬૫ વર્ષની હોવા અંગેનો પુરાવો",
-        "અરજદારના તમામ બાળકોની ઉંમરના પ્રમાણપત્રો (LC અથવા જન્મ તારીખનો દાખલો)"
+        "Prescribed application form and passport size photo",
+        "Photocopy of Voter ID Card",
+        "Photocopy of Ration Card",
+        "Photocopy of Aadhar Card",
+        "Copy of the first page of bank passbook (or cancelled check)",
+        "Proof of applicant's residence (Electricity bill, property tax bill, or rent agreement)",
+        "Death certificate of the deceased primary breadwinner (natural or accidental death)",
+        "Original annual family income certificate from a competent authority",
+        "Official certificate of BPL score between 0 and 20",
+        "Proof of age of the deceased person being between 18 and 65 years at the time of death",
+        "Age certificates of all children of the applicant (LC or birth certificate)"
       ],
-      info: "કુટુંબના એકમાત્ર કમાનાર સભ્યનું અકાળે અવસાન થતાં તેના આશ્રિત કુટુંબને તાત્કાલિક રાહત આપવા માટે સહાય યોજના."
+      info: "Assistance scheme to provide immediate relief to the dependent family upon the untimely death of the sole breadwinner of the family."
     },
     {
       id: 'widow-sahay',
-      name: 'વિધવા સહાય (ગંગા સ્વરૂપા સહાય)',
-      category: 'સામાજિક સુરક્ષા',
+      name: 'Widow Sahay (Ganga Swarupa Assistance)',
+      category: 'Social Security',
       icon: Users,
       color: 'emerald',
       docs: [
-        "નિયત નમૂનાનું ફોર્મ અને તાજો પાસપોર્ટ ફોટો",
-        "રેશન કાર્ડની ઝેરોક્ષ નકલ",
-        "ચૂંટણીકાર્ડની ઝેરોક્ષ નકલ",
-        "આધારકાર્ડની ઝેરોક્ષ નકલ",
-        "અરજદારના પતિનું પેઢીનામું (વારસદારોની ચકાસણી માટે)",
-        "રહેઠાણ અંગેનો પુરાવો (બીલ / ચૂંટણી કાર્ડ / આધાર)",
-        "પતિના અવસાનનો સરકારી મરણનો દાખલો",
-        "પતિના અવસાન બાદ પુનઃ લગ્ન કર્યા નથી તે અંગેનું તલાટીનું પ્રમાણપત્ર",
-        "અરજદારના બાળકોના ઉંમરનું પ્રમાણપત્ર (શાળા છોડ્યાનું પ્રમાણપત્ર / જન્મનો દાખલો)",
-        "અરજદારની પોતાની ઉંમરનું પ્રમાણપત્ર / એલ.સી. (૩૦ વર્ષથી વધુ ઉંમરની પાત્રતા)",
-        "કુટુંબની વાર્ષિક આવકનો દાખલો (નિયત આવક મર્યાદા અનુસાર)"
+        "Prescribed form and recent passport size photo",
+        "Photocopy of Ration Card",
+        "Photocopy of Voter ID Card",
+        "Photocopy of Aadhar Card",
+        "Pedhinamu (family tree / list of heirs) of the applicant's husband",
+        "Proof of residence (Bill / Voter ID Card / Aadhar)",
+        "Official death certificate of the husband",
+        "Talati certificate certifying no remarriage after husband's death",
+        "Age certificate of applicant's children (School Leaving Certificate / Birth Certificate)",
+        "Age certificate/LC of the applicant (eligibility above 30 years)",
+        "Annual family income certificate (according to prescribed income limits)"
       ],
-      info: "નિરાધાર વિધવા બહેનોને આત્મનિર્ભરતા અને આર્થિક સલામતી આપવા માટે માસિક નિયમિત નાણાકીય સહાય."
+      info: "Regular monthly financial assistance to destitute widows to provide self-reliance and economic security."
     },
     {
       id: 'remarriage-sahay',
-      name: 'ગંગા સ્વરૂપા પુનઃલગ્ન આર્થિક સહાય',
-      category: 'સામાજિક સુરક્ષા',
+      name: 'Ganga Swarupa Remarriage Financial Assistance',
+      category: 'Social Security',
       icon: Heart,
       color: 'pink',
       docs: [
-        "ગંગા સ્વરૂપા આર્થિક સહાય યોજના (વિધવા સહાય) મેળવતા હોવા અંગેનો મંજુરી હુકમની નકલ",
-        "પુનઃલગ્ન નોંધણી કચેરીનું મેરેજ રજીસ્ટ્રેશન સર્ટિફિકેટ (પ્રમાણપત્ર)",
-        "જે વ્યક્તિ સાથે પુનઃલગ્ન થયેલ છે તે નવા પતિના રહેઠાણ/સરનામા અંગેનો સત્તાવાર પુરાવો",
-        "પુનઃલગ્ન કરનાર દંપતિના સંયુક્ત પાસપોર્ટ સાઇઝના ફોટા"
+        "Copy of approval order for receiving Ganga Swarupa Financial Assistance (Widow Pension)",
+        "Marriage Registration Certificate from the Remarriage Registry Office",
+        "Official proof of residence/address of the new husband with whom remarried",
+        "Joint passport size photos of the remarried couple"
       ],
-      info: "પુનઃલગ્ન કરીને સમાજમાં ફરીથી સન્માનપૂર્વક પુનઃવસન કરવા ઈચ્છતી બહેનો માટે નાણાકીય પ્રોત્સાહન.",
-      note: "પુનઃલગ્ન કર્યાના દિવસથી ૬ (છ) માસની સમય મર્યાદામાં નિયત નમૂનામાં તમામ આધાર પુરાવા સહિત અરજી કરવાની રહેશે."
+      info: "Financial incentive for widows wishing to remarry and rehabilitate respectably in society.",
+      note: "The application must be submitted along with all supporting documents in the prescribed format within a time limit of 6 (six) months from the date of remarriage."
     },
     {
       id: 'destitute-support',
-      name: 'નિરાધાર, વૃદ્ધ તથા અપંગોને સહાય',
-      category: 'સામાજિક સુરક્ષા',
+      name: 'Assistance to Destitute, Elderly and Specially Abled',
+      category: 'Social Security',
       icon: Shield,
       color: 'teal',
       docs: [
         "નિયત નમૂનાનું અરજી પત્રક અને પાસપોર્ટ સાઇઝનો ફોટો",
-        "ચૂંટણીકાર્ડની નકલ",
-        "રેશનકાર્ડની નકલ",
-        "આધારકાર્ડની નકલ",
-        "બેંક પાસબુકના પ્રથમ પાનાની નકલ",
+        "Copy of Voter ID Card",
+        "Copy of Ration Card",
+        "Copy of Aadhar Card",
+        "Copy of the first page of bank passbook",
         "રહેઠાણ અંગેનો પુરાવો (લાઇટ બિલ અથવા વેરા બિલ)",
-        "અરજદારની ઉંમર પુરવાર કરતું પ્રમાણપત્ર (L.C. અથવા ડૉક્ટરનું વય પ્રમાણપત્ર)",
-        "કુટુંબની વાર્ષિક આવકનો સક્ષમ સત્તાધિકારીનો દાખલો"
+        "Age certificate of the applicant (L.C. or doctor's age certificate)",
+        "Annual family income certificate from a competent authority"
       ],
-      info: "સમાજમાં એકલા અટૂલા અને અસહાય રહેતા વૃદ્ધો અને શારીરિક વિકલાંગતા ધરાવતા લોકો માટે માસિક ભથ્થું."
+      info: "Monthly allowance for elderly and physically challenged people living alone and helpless in society."
     },
     {
       id: 'vaya-vandan',
-      name: 'વય વંદન યોજના',
-      category: 'સામાજિક સુરક્ષા',
+      name: 'Vaya Vandan Yojana',
+      category: 'Social Security',
       icon: CheckCircle,
       color: 'amber',
       docs: [
         "નિયત નમૂનાનું ફોર્મ અને પાસપોર્ટ સાઇઝનો ફોટો",
-        "ચૂંટણીકાર્ડની નકલ",
-        "રેશનકાર્ડની નકલ",
-        "આધારકાર્ડની નકલ",
-        "બેંક પાસબુકના પ્રથમ પાનાની નકલ",
-        "અરજદારના રહેઠાણ અંગેનો પુરાવો (સરનામાની સાબિતી)",
-        "અરજદારની સત્તાવાર વય દર્શાવતું પ્રમાણપત્ર",
-        "કુટુંબની આવકનો પ્રમાણિત દાખલો",
-        "બી.પી.એલ. (BPL) યાદીમાં સમાવેશ હોવા અંગેનો સ્કોર ૦ થી ૨૦ નો દાખલો"
+        "Copy of Voter ID Card",
+        "Copy of Ration Card",
+        "Copy of Aadhar Card",
+        "Copy of the first page of bank passbook",
+        "Proof of applicant's residence (address proof)",
+        "Certificate showing the official age of the applicant",
+        "Certified family income certificate",
+        "Certificate of inclusion in BPL list showing score between 0 and 20"
       ],
-      info: "૬૦ વર્ષથી વધુ ઉંમરના ગરીબી રેખા હેઠળના વરિષ્ઠ નાગરિકો માટેની વિશેષ જીવન કલ્યાણ યોજના."
+      info: "Special life welfare scheme for senior citizens below the poverty line aged above 60 years."
     },
     {
       id: 'caste-cert',
-      name: 'જાતિ પ્રમાણપત્ર (Caste Certificate)',
-      category: 'દાખલા / પ્રમાણપત્રો',
+      name: 'Caste Certificate',
+      category: 'Certificates / Attestations',
       icon: FileText,
       color: 'indigo',
       docs: [
-        "અરજદારની શાળાનું અસલ શાળા છોડ્યાનું પ્રમાણપત્ર (L.C.) અથવા જાતિના ઉલ્લેખવાળું બોનાફાઇડ પ્રમાણપત્ર",
-        "અરજદારના પિતા, કાકા, અથવા દાદા પૈકી કોઈ એકનું શાળા છોડ્યાનું પ્રમાણપત્ર અથવા સત્તાવાર જાતિનો દાખલો",
-        "રેશનકાર્ડની ઝેરોક્ષ નકલ (ગીરગઢડા કે સંબંધિત તાલુકાનું)",
-        "આધારકાર્ડની ઝેરોક્ષ નકલ",
-        "અરજદારના તાજા પાસપોર્ટ સાઇઝના ફોટા - ૩"
+        "Original School Leaving Certificate (L.C.) of the applicant or Bonafide Certificate mentioning caste",
+        "School Leaving Certificate or official caste certificate of any one of the applicant's father, uncle, or grandfather",
+        "Photocopy of Ration Card (of Girgadhada or respective taluka)",
+        "Photocopy of Aadhar Card",
+        "3 recent passport size photos of the applicant"
       ],
-      info: "અનુસૂચિત જાતિ / જનજાતિ કે અન્ય પછાત વર્ગની ઓળખ આપતું સત્તાવાર પ્રમાણપત્ર."
+      info: "Official certificate identifying Scheduled Caste / Scheduled Tribe or Other Backward Classes."
     },
     {
       id: 'ews-cert',
-      name: 'આર્થિક રીતે નબળા વર્ગોનું પ્રમાણપત્ર (EWS)',
-      category: 'દાખલા / પ્રમાણપત્રો',
+      name: 'Economically Weaker Sections Certificate (EWS)',
+      category: 'Certificates / Attestations',
       icon: Building,
       color: 'cyan',
       docs: [
-        "અરજદારનું શાળા છોડ્યાનું પ્રમાણપત્ર (L.C.)",
-        "અરજદારના પિતા, કાકા, દાદા, અથવા ફોઈ પૈકી કોઈ એક વ્યક્તિનું શાળા છોડ્યાનું પ્રમાણપત્ર (L.C.)",
-        "રેશનકાર્ડની નકલ (અરજદારના નામ સાથે)",
-        "આધારકાર્ડની નકલ",
-        "નિયત નમૂના મુજબનું સ્ટેમ્પ પેપર પર સોગંદનામું (Affidavit)",
-        "મામલતદાર કે સક્ષમ સ્તરનો વાર્ષિક આવકનો અસલ દાખલો",
-        "જમીનની માલિકી કે સ્થાવર મિલકતના દસ્તાવેજો (લાગુ પડતો મિલકત પુરાવો)"
+        "School Leaving Certificate (L.C.) of the applicant",
+        "School Leaving Certificate (L.C.) of any one of the applicant's father, uncle, grandfather, or aunt",
+        "Copy of Ration Card (with the applicant's name)",
+        "Copy of Aadhar Card",
+        "Affidavit on stamp paper in the prescribed format",
+        "Original annual family income certificate from Mamlatdar or competent authority",
+        "Land ownership or immovable property documents (applicable property proof)"
       ],
-      info: "સામાન્ય (બિન-અનામત) કેટેગરીના પરિવારો જે આર્થિક રીતે નબળા છે તેમને શૈક્ષણિક અને સરકારી રોજગાર માટેનો EWS દાખલો."
+      info: "EWS certificate for general (unreserved) category families who are economically weak, useful for education and government employment."
     },
     {
       id: 'unreserved-cert',
-      name: 'બિન અનામત વર્ગો માટેનું પ્રમાણપત્ર',
-      category: 'દાખલા / પ્રમાણપત્રો',
+      name: 'Certificate for Unreserved Categories',
+      category: 'Certificates / Attestations',
       icon: CheckSquare,
       color: 'purple',
       docs: [
-        "અરજદારનું અસલ શાળા છોડ્યાનું પ્રમાણપત્ર (L.C.) અથવા જાતિ દર્શાવતું બોનાફાઇડ સર્ટિફિકેટ",
-        "અરજદારના પિતા, કાકા, દાદા, અથવા ફોઈ પૈકી કોઈ એકનું શાળા છોડ્યાનું પ્રમાણપત્ર (L.C.)",
-        "રેશનકાર્ડની નકલ (નામના ઉલ્લેખ સાથે)",
-        "આધારકાર્ડની નકલ",
-        "તાજા પાસપોર્ટ સાઇઝના ફોટા - ૨"
+        "Original School Leaving Certificate (L.C.) of the applicant or Bonafide Certificate showing caste",
+        "School Leaving Certificate (L.C.) of any one of the applicant's father, uncle, grandfather, or aunt",
+        "Copy of Ration Card (with name mentioned)",
+        "Copy of Aadhar Card",
+        "2 recent passport size photos"
       ],
-      info: "બિન-અનામત વર્ગોના કલ્યાણ અને યોજનાકીય લોન-સબસિડી મેળવવા માટે ઉપયોગી જ્ઞાતિ અંગેનું પ્રમાણપત્ર."
+      info: "Caste certificate useful for obtaining welfare benefits and scheme loan-subsidies for unreserved categories."
     },
     {
       id: 'income-cert',
-      name: 'આવકનો દાખલો (Income Certificate)',
-      category: 'દાખલા / પ્રમાણપત્રો',
+      name: 'Income Certificate',
+      category: 'Certificates / Attestations',
       icon: FileCheck,
       color: 'violet',
       docs: [
-        "અરજદારના નામનો તલાટી-કમ-મંત્રીનો આવક અંગેનો પંચનામાવાળો અસલ દાખલો",
-        "રેશનકાર્ડની નકલ (જેમાં ફરજિયાત અરજદારના નામનો ઉલ્લેખ થયેલો હોવો જોઈએ)",
-        "આધારકાર્ડ અથવા સચિત્ર ચૂંટણીકાર્ડની ઝેરોક્ષ નકલ",
-        "આવકના દાખલાનું નિયત ફોર્મ સંપૂર્ણ અને સુવાચ્ય અક્ષરે ભરાયેલું (નિયત કોર્ટ ફી સ્ટેમ્પ સાથે)",
-        "સ્વ-ઘોષણાપત્રક (સેલ્ફ ડેકલેરેશન) યોગ્ય સહી સાથે"
+        "Original income certificate with panchnama in the name of the applicant signed by Talati-cum-Mantri",
+        "Copy of Ration Card (in which applicant's name must be mentioned)",
+        "Photocopy of Aadhar Card or Voter ID Card with photo",
+        "Prescribed application form for income certificate filled completely and legibly (with prescribed court fee stamp)",
+        "Self-declaration form with proper signature"
       ],
-      info: "શૈક્ષણિક ફી માફી, શિષ્યવૃત્તિઓ અને અન્ય યોજનાકીય યોગ્યતા પુરવાર કરવા માટે આવશ્યક સત્તાવાર આવક દાખલો."
+      info: "Official income certificate essential for proving eligibility for educational fee waiver, scholarships, and other schemes."
     }
   ]
 
@@ -230,18 +230,18 @@ const GovtSchemesPage = () => {
           <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-teal-500/30 bg-teal-500/10 backdrop-blur-xs">
             <Sparkles className="w-4 h-4 text-teal-400 animate-pulse" />
             <span className="text-sm md:text-base font-bold tracking-wider text-teal-300">
-              મહિલા ઉત્કર્ષ અને સામાજિક આત્મનિર્ભરતા કાર્યક્રમ
+              Women Upliftment and Social Self-Reliance Program
             </span>
           </div>
 
           {/* Title */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            સરકારી યોજનાઓનું અમલીકરણ
+            Implementation of Government Schemes
           </h1>
 
           {/* Subheading */}
           <p className="text-base md:text-xl text-teal-150 max-w-6xl mx-auto mb-8 leading-relaxed font-medium">
-            અમે વિવિધ સરકારી યોજનાઓ નો લાભ ગરીબ જરૂરિયાત મંદ મહિલાઓ ને અપાવીએ છીએ. યોગ્ય લાયકાત ધરાવતી બહેનોને પૂરતી માહિતી અને અરજી પ્રક્રિયામાં ૧૦૦% વિનામૂલ્યે સહાય પૂરી પાડવામાં આવે છે.
+            We assist poor and needy women in benefiting from various government schemes. Proper information and 100% free assistance in the application process are provided to eligible women.
           </p>
 
           {/* CTA Buttons */}
@@ -257,7 +257,7 @@ const GovtSchemesPage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              વોટ્સએપ દ્વારા સંપર્ક કરો
+              Contact via WhatsApp
             </Link>
             <Link
               href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -266,7 +266,7 @@ const GovtSchemesPage = () => {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <MapPin className="w-5 h-5 text-emerald-700" />
-              ઓફિસ મુલાકાત (Google Map)
+              Office Visit (Google Maps)
             </Link>
           </div>
         </div>
@@ -280,8 +280,8 @@ const GovtSchemesPage = () => {
               <Award className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">સેવા ફી</p>
-              <p className="text-base font-bold text-slate-800">૧૦૦% મફત સેવા અને સહાય</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Service Fee</p>
+              <p className="text-base font-bold text-slate-800">100% Free Service and Support</p>
             </div>
           </div>
           <div className="flex items-center gap-4 justify-center md:justify-start border-t md:border-t-0 md:border-x border-slate-100 py-4 md:py-0 md:px-6">
@@ -289,7 +289,7 @@ const GovtSchemesPage = () => {
               <Users className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">લાભાર્થી પાત્રતા</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Beneficiary Eligibility</p>
               <p className="text-base font-bold text-slate-800">જરૂરિયાતમંદ અને નિરાધાર બહેનો</p>
             </div>
           </div>
@@ -298,8 +298,8 @@ const GovtSchemesPage = () => {
               <Clock className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">સેવા સમયગાળો</p>
-              <p className="text-base font-bold text-slate-800">કાયમી માર્ગદર્શન કેન્દ્ર</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Service Duration</p>
+              <p className="text-base font-bold text-slate-800">Permanent Guidance Center</p>
             </div>
           </div>
         </div>
@@ -314,13 +314,13 @@ const GovtSchemesPage = () => {
           <div className="space-y-3 max-w-2xl text-center xl:text-left relative z-10">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
               <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-              <span>વિશેષ હેલ્પડેસ્ક સહાય</span>
+              <span>Special Helpdesk Support</span>
             </div>
             <h2 className="text-2xl md:text-4xl font-black text-white">
-              મદદ અને માર્ગદર્શન જોઈએ છે?
+              Need Help and Guidance?
             </h2>
             <p className="text-base md:text-lg text-emerald-50 leading-relaxed font-semibold">
-              કોઈપણ સરકારી યોજનાની અરજી માટે કયા દસ્તાવેજોની જરૂર પડશે અથવા તમારી પાત્રતા શું છે તેની મફત ચકાસણી અમારા સેવા કેન્દ્ર પરથી મેળવો.
+              Get a free verification of what documents are required for any government scheme application or what your eligibility is from our service center.
             </p>
           </div>
 
@@ -330,7 +330,7 @@ const GovtSchemesPage = () => {
               className="flex items-center justify-center gap-3 px-6 py-4 bg-white text-teal-950 hover:bg-slate-55 transition-all font-extrabold rounded-2xl text-base shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             >
               <Phone className="w-4.5 h-4.5 text-emerald-700" />
-              <span>કૉલ કરો: ૯૪૨૬૦૬૨૦८૩</span>
+              <span>Call: 9426062083</span>
             </Link>
             <Link
               href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -339,7 +339,7 @@ const GovtSchemesPage = () => {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <MapPin className="w-5 h-5 text-emerald-700" />
-              ઓફિસ મુલાકાત (Google Map)
+              Office Visit (Google Maps)
             </Link>
           </div>
         </div>
@@ -381,12 +381,12 @@ const GovtSchemesPage = () => {
               {/* Title & Badge */}
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
                 <div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wide">આત્મનિર્ભરતા યોજના</span>
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">મહિલા સ્વાવલંબન યોજના</h2>
+                  <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wide">Self-Reliance Scheme</span>
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Mahila Swavlamban Yojana</h2>
                 </div>
                 <div className="bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-2xl text-center">
-                  <p className="text-xxs font-bold uppercase text-slate-400">મહત્તમ લોન ભલામણ</p>
-                  <p className="text-xl font-black text-emerald-700">રૂ. ૨,૦૦,૦૦૦/-</p>
+                  <p className="text-xxs font-bold uppercase text-slate-400">Maximum Loan Recommendation</p>
+                  <p className="text-xl font-black text-emerald-700">Rs. 2,00,000/-</p>
                 </div>
               </div>
 
@@ -394,49 +394,49 @@ const GovtSchemesPage = () => {
               <div className="bg-linear-to-r from-emerald-50/50 to-teal-50/20 p-5 rounded-2xl border border-emerald-100/50 mb-6">
                 <h3 className="font-bold text-emerald-900 mb-1 flex items-center gap-2">
                   <Info className="w-4.5 h-4.5" />
-                  યોજનાનો મુખ્ય ઉદ્દેશ્ય
+                  Main Objective of the Scheme
                 </h3>
                 <p className="text-slate-700 text-sm md:text-base leading-relaxed font-medium">
-                  ગરીબી રેખા હેઠળ જીવતા અને જરૂરિયાતમંદ કુટુંબોની મહિલાઓને સ્વરોજગારી મેળવવા માટે બેંક લોનની ભલામણ કરીને અને સબસિડી અપાવીને પોતાના પગભર બનાવવાનો છે.
+                  To make women from needy and below-poverty-line families self-reliant by recommending bank loans and providing subsidies to help them secure self-employment.
                 </p>
               </div>
 
               {/* Eligibility Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="border border-slate-200 rounded-2xl p-4 space-y-1 bg-slate-50/50">
-                  <p className="text-xs font-bold text-slate-400 uppercase">લાભાર્થીની વય મર્યાદા</p>
-                  <p className="text-base font-bold text-slate-800">૧૮ વર્ષ થી ૬૫ વર્ષ</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">Beneficiary Age Limit</p>
+                  <p className="text-base font-bold text-slate-800">18 Years to 65 Years</p>
                 </div>
                 <div className="border border-slate-200 rounded-2xl p-4 space-y-1 bg-slate-50/50">
-                  <p className="text-xs font-bold text-slate-400 uppercase">યોજના વ્યાપ (Trades)</p>
-                  <p className="text-base font-bold text-slate-800">કુલ ૩૦૭ પ્રકારના અલગ-અલગ ધંધા / ઉદ્યોગ</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">Scheme Trades Scope</p>
+                  <p className="text-base font-bold text-slate-800">Total 307 different types of businesses/industries</p>
                 </div>
                 <div className="border border-slate-200 rounded-2xl p-4 space-y-2 md:col-span-2 bg-slate-50/50">
-                  <p className="text-xs font-bold text-slate-400 uppercase">વાર્ષિક આવક મર્યાદા</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">Annual Income Limit</p>
                   <div className="grid grid-cols-2 gap-4 text-sm font-bold text-slate-800 pt-1">
-                    <div>• ગ્રામ્ય વિસ્તાર: રૂ. ૧,૨૦,૦૦૦/-</div>
-                    <div>• શહેરી વિસ્તાર: રૂ. ૧,૫૦,૦૦૦/-</div>
+                    <div>• Rural Area: Rs. 1,20,000/-</div>
+                    <div>• Urban Area: Rs. 1,50,000/-</div>
                   </div>
                 </div>
               </div>
 
               {/* Subsidy Scale */}
-              <h3 className="font-bold text-base text-slate-900 mb-3">મળવા પાત્ર સબસિડીનું ધોરણ (Subsidy)</h3>
+              <h3 className="font-bold text-base text-slate-900 mb-3">Eligible Subsidy Scale (Subsidy)</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
-                  <p className="text-xs font-bold text-slate-500 mb-1">સામાન્ય વર્ગની મહિલા</p>
-                  <p className="text-xl font-bold text-slate-800">૩૦% સબસિડી</p>
-                  <p className="text-xxs text-slate-500 font-semibold mt-1">અથવા મહત્તમ રૂ. ૬૦,૦૦૦/-</p>
+                  <p className="text-xs font-bold text-slate-500 mb-1">General Category Women</p>
+                  <p className="text-xl font-bold text-slate-800">30% Subsidy</p>
+                  <p className="text-xxs text-slate-500 font-semibold mt-1">Or maximum Rs. 60,000/-</p>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
-                  <p className="text-xs font-bold text-slate-500 mb-1">અנוસૂચિત જાતિ / જનજાતિ</p>
-                  <p className="text-xl font-bold text-slate-800">૩૫% સબસિડી</p>
-                  <p className="text-xxs text-slate-500 font-semibold mt-1">લાયકાત ધરાવતી બહેનો માટે</p>
+                  <p className="text-xs font-bold text-slate-500 mb-1">SC / ST</p>
+                  <p className="text-xl font-bold text-slate-800">35% Subsidy</p>
+                  <p className="text-xxs text-slate-500 font-semibold mt-1">For eligible women</p>
                 </div>
                 <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center">
-                  <p className="text-xs font-bold text-slate-500 mb-1">વિધવા અથવા દિવ્યાંગ (&gt;૪૦%)</p>
-                  <p className="text-xl font-bold text-emerald-700 font-extrabold">૪૦% સબસિડી</p>
-                  <p className="text-xxs text-emerald-600 font-semibold mt-1">સરકારના વિશેષ પ્રોત્સાહન હેઠળ</p>
+                  <p className="text-xs font-bold text-slate-500 mb-1">Widow or Specially Abled (&gt;40%)</p>
+                  <p className="text-xl font-bold text-emerald-700 font-extrabold">40% Subsidy</p>
+                  <p className="text-xxs text-emerald-600 font-semibold mt-1">Under special government incentive</p>
                 </div>
               </div>
 
@@ -444,9 +444,9 @@ const GovtSchemesPage = () => {
               <div className="border border-slate-100 rounded-2xl p-4 flex gap-3.5 bg-slate-50 text-sm mb-6">
                 <FileText className="w-5 h-5 text-slate-500 flex-shrink-0" />
                 <div>
-                  <p className="font-bold text-slate-800">અરજી ફોર્મ અને ભલામણ પ્રક્રિયા</p>
+                  <p className="font-bold text-slate-800">Application Form and Recommendation Process</p>
                   <p className="text-slate-650 mt-1 leading-relaxed text-sm md:text-base">
-                    મહિલા સ્વાવલંબન યોજનાનું અરજીપત્રક દરેક જિલ્લાની <strong>મહિલા અને બાળ અધિકારીની કચેરીએથી વિના મૂલ્યે</strong> મળશે. અરજી ફોર્મ ભરીને રજૂ કર્યા બાદ, અધિકારીઓ દ્વારા તેની ચકાસણી કરીને બેંકોને લોન માટે ભલામણ મોકલવામાં આવે છે.
+                    Mahila Swavlamban Yojanaનું અરજીપત્રક દરેક જિલ્લાની <strong>મહિલા અને બાળ અધિકારીની કચેરીએથી વિના મૂલ્યે</strong> મળશે. અરજી ફોર્મ ભરીને રજૂ કર્યા બાદ, અધિકારીઓ દ્વારા તેની ચકાસણી કરીને બેંકોને લોન માટે ભલામણ મોકલવામાં આવે છે.
                   </p>
                 </div>
               </div>
@@ -455,11 +455,11 @@ const GovtSchemesPage = () => {
               <div className="mt-8 border-t border-slate-100 pt-6">
                 <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
                   <FileCheck className="w-5.5 h-5.5 text-emerald-600" />
-                  અરજી માટેના ૧૧ જરૂરી દસ્તાવેજો (બે નકલમાં સ્વપ્રમાણિત)
+                  11 Required Documents for Application (Self-Attested in Duplicate)
                 </h3>
 
                 <p className="text-xs text-slate-500 mb-4 italic">
-                  દસ્તાવેજો એકઠા કરતી વખતે નીચેની યાદીને ચેકલિસ્ટ તરીકે વાપરી શકો છો:
+                  You can use the list below as a checklist when collecting documents:
                 </p>
 
                 <div className="space-y-2">
@@ -483,13 +483,13 @@ const GovtSchemesPage = () => {
 
             {/* Display leaflet */}
             <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
-              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">સંબંધિત લીફલેટ ફોટોગ્રાફ (Scan Leaflet)</p>
+              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">Related Leaflet Image (Scan Leaflet)</p>
               <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
 
                 <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg">
                   <img
                     src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
-                    alt="મહિલા સ્વાવલંબન યોજના"
+                    alt="Mahila Swavlamban Yojana"
                     className="w-full h-auto object-contain mx-auto max-h-[220px]"
                   />
                 </Link>
@@ -508,12 +508,12 @@ const GovtSchemesPage = () => {
               {/* Title & Badge */}
               <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
                 <div>
-                  <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold tracking-wide">દીકરી કલ્યાણ અને શિક્ષણ</span>
-                  <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">વ્હાલી દીકરી યોજના</h2>
+                  <span className="px-3 py-1 rounded-full bg-rose-100 text-rose-800 text-xs font-bold tracking-wide">Daughter's Welfare and Education</span>
+                  <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Vhali Dikri Yojana</h2>
                 </div>
                 <div className="bg-rose-50 border border-rose-100 px-4 py-2 rounded-2xl text-center">
-                  <p className="text-xxs font-bold uppercase text-slate-400">કુલ નાણાકીય સહાય</p>
-                  <p className="text-xl font-black text-rose-700">રૂ. ૧,૦૦,૦૦૦/-</p>
+                  <p className="text-xxs font-bold uppercase text-slate-400">Total Financial Assistance</p>
+                  <p className="text-xl font-black text-rose-700">Rs. 1,00,000/-</p>
                 </div>
               </div>
 
@@ -521,15 +521,15 @@ const GovtSchemesPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                 <div className="bg-rose-50/40 border border-rose-100/50 p-4 rounded-2xl text-center">
                   <div className="text-rose-600 text-xl font-black mb-1">૧</div>
-                  <p className="text-sm md:text-base font-bold text-slate-700">દીકરીઓનો જન્મદર વધારવા અને કન્યા જન્મને પ્રોત્સાહન</p>
+                  <p className="text-sm md:text-base font-bold text-slate-700">To increase the birth rate of daughters and encourage female birth</p>
                 </div>
                 <div className="bg-teal-50/40 border border-teal-100/50 p-4 rounded-2xl text-center">
                   <div className="text-teal-600 text-xl font-black mb-1">૨</div>
-                  <p className="text-sm md:text-base font-bold text-slate-700">શિક્ષણમાં દીકરીઓનો ડ્રોપઆઉટ રેશિયો ઘટાડવો</p>
+                  <p className="text-sm md:text-base font-bold text-slate-700">To reduce the dropout ratio of daughters in education</p>
                 </div>
                 <div className="bg-emerald-50/40 border border-emerald-100/50 p-4 rounded-2xl text-center">
                   <div className="text-emerald-600 text-xl font-black mb-1">૩</div>
-                  <p className="text-sm md:text-base font-bold text-slate-700">બાળલગ્નની હાનિકારક પ્રથા અટકાવવી</p>
+                  <p className="text-sm md:text-base font-bold text-slate-700">To prevent the harmful practice of child marriage</p>
                 </div>
               </div>
 
@@ -537,17 +537,17 @@ const GovtSchemesPage = () => {
               <div className="bg-slate-50 border border-slate-200 rounded-3xl p-5 md:p-6 mb-8 space-y-4">
                 <h3 className="font-bold text-slate-800 flex items-center gap-2">
                   <Info className="w-5 h-5 text-rose-500" />
-                  યોજના અંતર્ગત પાત્રતા અને માપદંડો
+                  Eligibility and Criteria Under the Scheme
                 </h3>
                 <ul className="space-y-3 text-sm md:text-base text-slate-700 font-semibold pl-4 list-disc">
-                  <li>દીકરીના જન્મથી <span className="text-rose-700">એક વર્ષની સમય મર્યાદામાં</span> આ યોજના માટે ફોર્મ ભરવાનું રહેશે.</li>
-                  <li>દંપતીની (પતિ અને પત્નીની સંયુક્ત) વાર્ષિક આવક મર્યાદા <span className="text-emerald-700">રૂ. ૨,૦૦,૦૦૦/- (બે લાખ) કે તેથી ઓછી</span> હોવી જોઈએ.</li>
-                  <li>દંપતીના પ્રથમ ત્રણ સંતાનો પૈકીની તમામ દીકરીઓ આ યોજનાનો લાભ લેવા પાત્ર છે.</li>
+                  <li>The form for this scheme must be filled within <span className="text-rose-700">one year of the birth</span> of the daughter.</li>
+                  <li>દંપતીની (પતિ અને પત્નીની સંયુક્ત) Annual Income Limit <span className="text-emerald-700">Rs. 2,00,000/- (બે લાખ) કે તેથી ઓછી</span> હોવી જોઈએ.</li>
+                  <li>All daughters among the first three children of the couple are eligible to benefit from this scheme.</li>
                 </ul>
               </div>
 
               {/* Installment Steps - Stepper */}
-              <h3 className="font-bold text-lg text-slate-900 mb-6">મળવા પાત્ર સહાયના હપ્તા (Installment Milestones)</h3>
+              <h3 className="font-bold text-lg text-slate-900 mb-6">Eligible Support Installments (Installment Milestones)</h3>
 
               <div className="relative border-l-2 border-rose-150 ml-4 md:ml-6 space-y-8 mb-8">
 
@@ -558,10 +558,10 @@ const GovtSchemesPage = () => {
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-bold text-sm md:text-base text-slate-900">પ્રથમ હપ્તો - પ્રાથમિક પ્રવેશ વખતે</h4>
-                      <span className="px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-100 text-rose-750 font-bold text-sm md:text-base">રૂ. ૪,૦૦૦/- (સહાય)</span>
+                      <h4 className="font-bold text-sm md:text-base text-slate-900">First Installment - At Primary Admission</h4>
+                      <span className="px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-100 text-rose-750 font-bold text-sm md:text-base">Rs. 4,000/- (Assistance)</span>
                     </div>
-                    <p className="text-slate-500 text-sm md:text-base mt-1">જ્યારે દીકરી પ્રથમ ધોરણમાં (1st Standard) પ્રવેશ મેળવે ત્યારે આ આર્થિક સહાય મળવાપાત્ર છે.</p>
+                    <p className="text-slate-500 text-sm md:text-base mt-1">This financial assistance is eligible when the daughter gets admission in the 1st Standard.</p>
                   </div>
                 </div>
 
@@ -572,10 +572,10 @@ const GovtSchemesPage = () => {
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-bold text-sm md:text-base text-slate-900">બીજો હપ્તો - માધ્યમિક પ્રવેશ વખતે</h4>
-                      <span className="px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-100 text-rose-750 font-bold text-sm md:text-base">રૂ. ૬,૦૦૦/- (સહાય)</span>
+                      <h4 className="font-bold text-sm md:text-base text-slate-900">Second Installment - At Secondary Admission</h4>
+                      <span className="px-2.5 py-1 rounded-lg bg-rose-50 border border-rose-100 text-rose-750 font-bold text-sm md:text-base">Rs. 6,000/- (Assistance)</span>
                     </div>
-                    <p className="text-slate-500 text-sm md:text-base mt-1">દીકરી ધોરણ ૯ (9th Standard) માં પ્રવેશે ત્યારે આ હપ્તો મળવાપાત્ર બને છે.</p>
+                    <p className="text-slate-500 text-sm md:text-base mt-1">This installment becomes eligible when the daughter enters 9th Standard.</p>
                   </div>
                 </div>
 
@@ -586,10 +586,10 @@ const GovtSchemesPage = () => {
                   </div>
                   <div>
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h4 className="font-bold text-sm md:text-base text-slate-900">ત્રીજો હપ્તો - ઉચ્ચ શિક્ષણ કે લગ્ન સહાય</h4>
-                      <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-800 font-bold text-sm md:text-base">રૂ. ૧,૦૦,૦૦૦/- (સહાય)</span>
+                      <h4 className="font-bold text-sm md:text-base text-slate-900">Third Installment - Higher Education or Marriage Assistance</h4>
+                      <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-800 font-bold text-sm md:text-base">Rs. 1,00,000/- (સહાય)</span>
                     </div>
-                    <p className="text-slate-500 text-sm md:text-base mt-1">દીકરી ૧૮ વર્ષ પૂર્ણ કરે ત્યારે તે દીકરીને તેના ઉચ્ચ શિક્ષણ માટે અથવા લગ્ન માટે સહાય તરીકે એકસામટી આ રકમ આપવામાં આવે છે.</p>
+                    <p className="text-slate-500 text-sm md:text-base mt-1">When the daughter completes 18 years, this lump sum amount is given as assistance for her higher education or marriage.</p>
                   </div>
                 </div>
 
@@ -599,15 +599,15 @@ const GovtSchemesPage = () => {
               <div className="border border-rose-100 bg-rose-50/30 rounded-2xl p-5 text-sm">
                 <h4 className="font-bold text-rose-900 mb-2 flex items-center gap-1.5">
                   <Building className="w-4.5 h-4.5" />
-                  અરજી ફોર્મ ક્યાં રજુ કરવું?
+                  Where to Submit the Application Form?
                 </h4>
                 <p className="text-slate-650 leading-relaxed text-sm md:text-base">
-                  આ યોજનાનો લાભ લેવા માટે નીચે આપેલા સ્થાનો પર સંપર્ક કરી ફોર્મ જમા કરાવી શકાય છે:
+                  To benefit from this scheme, you can contact and submit the form at the following locations:
                 </p>
                 <ul className="mt-2 space-y-1.5 font-bold text-slate-850 text-sm md:text-base">
-                  <li>• ગ્રામ્ય કક્ષાએ: ગ્રામપંચાયત ખાતે VCE (Village Computer Entrepreneur) મારફતે</li>
-                  <li>• તાલુકા કક્ષાએ: મામલતદાર કચેરી ખાતે</li>
-                  <li>• જિલ્લા કક્ષાએ: જિલ્લા મહિલા અને બાળ અધિકારીશ્રીની કચેરી ખાતે</li>
+                  <li>• Rural Level: At the Gram Panchayat through VCE (Village Computer Entrepreneur)</li>
+                  <li>• Taluka Level: At the Mamlatdar Office</li>
+                  <li>• District Level: At the District Women and Child Officer's Office</li>
                 </ul>
               </div>
 
@@ -615,13 +615,13 @@ const GovtSchemesPage = () => {
 
             {/* Display leaflet */}
             <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
-              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">સંબંધિત લીફલેટ ફોટોગ્રાફ (Scan Leaflet)</p>
+              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">Related Leaflet Image (Scan Leaflet)</p>
               <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
 
                 <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg">
                   <img
                     src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
-                    alt="વ્હાલી દીકરી યોજના"
+                    alt="Vhali Dikri Yojana"
                     className="w-full h-auto object-contain mx-auto max-h-[220px]"
                   />
                 </Link>
@@ -642,32 +642,32 @@ const GovtSchemesPage = () => {
                   <Shield className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="px-2.5 py-0.5 rounded bg-rose-50 text-rose-750 text-xxs font-extrabold uppercase">તાત્કાલિક સેન્ટર</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">સખી - વન સ્ટોપ સેન્ટર (OSC)</h2>
+                  <span className="px-2.5 py-0.5 rounded bg-rose-50 text-rose-750 text-xxs font-extrabold uppercase">Immediate Support Center</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Sakhi - One Stop Centre (OSC)</h2>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                હિંસાથી પીડિત મહિલાઓ/કિશોરીઓને એક જ સ્થળેથી તાત્કાલિક આશ્રય તથા સંકલિત સેવાઓ પૂરી પાડવા માટે વન સ્ટોપ સેન્ટર (OSC) સખી યોજના કાર્યરત છે. ગુજરાતના તમામ ૩૩ જિલ્લાઓમાં આ સેન્ટર કાર્યરત છે.
+                Sakhi One Stop Centre (OSC) scheme is operational to provide immediate shelter and integrated services to women/girls affected by violence from a single location. These centres are operational in all 33 districts of Gujarat.
               </p>
 
-              <h3 className="font-bold text-slate-900 mb-3 text-sm md:text-base">અપાતી મુખ્ય સેવાઓ:</h3>
+              <h3 className="font-bold text-slate-900 mb-3 text-sm md:text-base">Key Services Provided:</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
                 <div className="border border-slate-200 rounded-xl p-3.5 flex items-start gap-2.5 bg-slate-50">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm md:text-base text-slate-700 font-semibold">હિંસાથી પીડિત કિશોરીઓ/મહિલાઓને તાત્કાલિક તબીબી સારવાર.</span>
+                  <span className="text-sm md:text-base text-slate-700 font-semibold">Immediate medical treatment for girls/women affected by violence.</span>
                 </div>
                 <div className="border border-slate-200 rounded-xl p-3.5 flex items-start gap-2.5 bg-slate-50">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm md:text-base text-slate-700 font-semibold">હિંસાથી પીડિત મહિલાઓને ટૂંકાગાળાનો આશ્રય અને સુરક્ષા.</span>
+                  <span className="text-sm md:text-base text-slate-700 font-semibold">Short-term shelter and security for women affected by violence.</span>
                 </div>
                 <div className="border border-slate-200 rounded-xl p-3.5 flex items-start gap-2.5 bg-slate-50">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm md:text-base text-slate-700 font-semibold">હિંસા સામે રક્ષણ મેળવવા માટે કાયદાકીય સલાહ અને પૂરતું માર્ગદર્શન.</span>
+                  <span className="text-sm md:text-base text-slate-700 font-semibold">Legal advice and proper guidance to obtain protection against violence.</span>
                 </div>
                 <div className="border border-slate-200 rounded-xl p-3.5 flex items-start gap-2.5 bg-slate-50">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-sm md:text-base text-slate-700 font-semibold">પોલીસની સહાય તથા યોગ્ય પરામર્શ (Counseling) સેવાઓ.</span>
+                  <span className="text-sm md:text-base text-slate-700 font-semibold">Police assistance and appropriate counseling services.</span>
                 </div>
               </div>
             </div>
@@ -679,33 +679,33 @@ const GovtSchemesPage = () => {
                   <Building className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="px-2.5 py-0.5 rounded bg-teal-50 text-teal-750 text-xxs font-extrabold uppercase">સહાયક સેવા કેન્દ્ર</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">પોલીસ સ્ટેશન બેઇઝ્ડ સપોર્ટ સેન્ટર (PBSC)</h2>
+                  <span className="px-2.5 py-0.5 rounded bg-teal-50 text-teal-750 text-xxs font-extrabold uppercase">Support Service Center</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Police Station Based Support Centre (PBSC)</h2>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                આ સેન્ટરનો મુખ્ય હેતુ ઘરેલુ હિંસા, અત્યાચાર અને સામાજિક અસમાનતા જેવા પ્રશ્નોમાં પીડિત મહિલાને પોતે આત્મવિશ્વાસપૂર્વક નિર્ણય લેવા સક્ષમ બનાવવાનો અને સંસ્થાકીય સહાય પૂરી પાડવાનો છે.
+                The main objective of this center is to enable women victims of domestic violence, harassment, and social inequality to make decisions confidently and provide institutional support.
               </p>
 
-              <h3 className="font-bold text-slate-900 mb-3 text-sm md:text-base">મુખ્ય કાર્યપદ્ધતિ અને કલ્યાણ લક્ષ્યો:</h3>
+              <h3 className="font-bold text-slate-900 mb-3 text-sm md:text-base">Main Procedures and Welfare Goals:</h3>
               <div className="space-y-3.5 text-sm md:text-base text-slate-700 font-semibold">
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <p className="font-bold text-slate-800">૧. કાઉન્સેલીંગ દ્વારા સમસ્યાનો ઉકેલ</p>
+                  <p className="font-bold text-slate-800">1. Problem Solving through Counseling</p>
                   <p className="text-slate-600 mt-1 text-xs leading-relaxed">
-                    જે તે હિંસાગ્રસ્ત મહિલાની ફરિયાદના આધારે બન્ને પક્ષ સાથે પદ્ધતિસર કાઉન્સેલીંગ કરી પરસ્પર સંમતિથી સમસ્યાનો ઉકેલ લાવવા સનિષ્ઠ પ્રયાસો કરવામાં આવે છે.
+                    Based on the complaint of the victim woman, systematic counseling is conducted with both parties to make sincere efforts to resolve the problem by mutual consent.
                   </p>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <p className="font-bold text-slate-800">૨. કાનૂની માર્ગદર્શન અને પોલીસ ફરિયાદ સહાય</p>
+                  <p className="font-bold text-slate-800">2. Legal Guidance and Police Complaint Assistance</p>
                   <p className="text-slate-600 mt-1 text-xs leading-relaxed">
-                    જો કાઉન્સેલિંગ દ્વારા સમસ્યાનો ઉકેલ ન આવે, તો પીડિત મહિલાને કાનૂની અધિકારો અને કાયદાઓની જીણવટભરી માહિતી આપવી, અને જો જરૂર જણાય તો પોલીસ ફરિયાદ નોંધાવવામાં સંપૂર્ણ કાયદાકીય સહાય.
+                    If the problem is not resolved through counseling, providing detailed information about legal rights and laws to the victim, and complete legal assistance in filing a police complaint if necessary.
                   </p>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                  <p className="font-bold text-slate-800">૩. માળખાગત સંકલન</p>
+                  <p className="font-bold text-slate-800">3. Structural Coordination</p>
                   <p className="text-slate-600 mt-1 text-xs leading-relaxed">
-                    મહિલાની ચોક્કસ સમસ્યા અને તેના કાયમી ઉકેલ સંદર્ભે વિવિધ સરકારી અને બિન-સરકારી કલ્યાણકારી માળખાઓ સાથે સુવ્યવસ્થિત સંકલન સાધવું.
+                    Establish systematic coordination with various government and non-governmental welfare structures regarding the specific problem of the woman and its permanent solution.
                   </p>
                 </div>
               </div>
@@ -722,33 +722,33 @@ const GovtSchemesPage = () => {
                   <Phone className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="px-2.5 py-0.5 rounded bg-red-100 text-red-800 text-xxs font-extrabold uppercase">24x7 હેલ્પલાઇન</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">અભયમ્ - ૧૮૧ મહિલા હેલ્પલાઇન</h2>
+                  <span className="px-2.5 py-0.5 rounded bg-red-100 text-red-800 text-xxs font-extrabold uppercase">24x7 Helpline</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Abhayam - 181 Women Helpline</h2>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                વિવિધ પ્રકારની હિંસાથી પીડિત મહિલાઓને તાત્કાલિક આકસ્મિક સંજોગોમાં તમામ માહિતી, રેસ્ક્યુ સહાય અને યોગ્ય ફોલો-અપ મળી રહે તે માટે સરકાર દ્વારા ૧૮૧ નંબરની અભયમ્ મહિલા હેલ્પલાઇન કાર્યરત કરાયેલ છે.
+                The 181 Abhayam Women Helpline has been launched by the government to ensure that women affected by various types of violence receive all information, rescue assistance, and proper follow-up in immediate emergencies.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="border border-slate-200 rounded-2xl p-4">
                   <h4 className="font-bold text-slate-800 text-sm mb-1.5 flex items-center gap-2">
                     <Check className="w-4 h-4 text-emerald-600" />
-                    પોલીસ એક્શન ડેસ્ક
+                    Police Action Desk
                   </h4>
                   <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                    મહિલાઓ, યુવતીઓ અને કિશોરીઓ સાથે થતી ટેલીફોનિક કે ઓનલાઇન સતામણી અટકાવવા માટે સંબંધિત વ્યક્તિને કાયદાકીય સૂચના આપી અટકાવવાના પ્રયાસો કરાય છે.
+                    Efforts are made to prevent telephonic or online harassment of women, youth, and girls by giving legal warnings/notices to the concerned person.
                   </p>
                 </div>
 
                 <div className="border border-slate-200 rounded-2xl p-4">
                   <h4 className="font-bold text-slate-800 text-sm mb-1.5 flex items-center gap-2">
                     <Check className="w-4 h-4 text-emerald-600" />
-                    અભયમ્ મોબાઈલ એપ્લિકેશન
+                    Abhayam Mobile Application
                   </h4>
                   <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                    મહિલા સુરક્ષા માટે ખાસ તૈયાર કરેલ એપ જેમાં જીપીએસ ટ્રેકર છે. આપત્તિના સમયે ફોનને હલાવવાથી (Shake) ફોન આપોઆપ લાગશે અને રેસ્ક્યુ વાન સ્થળ પર દોડી જશે.
+                    A specially designed app for women's safety containing a GPS tracker. In times of emergency, shaking the phone will automatically place a call and the rescue van will rush to the location.
                   </p>
                 </div>
               </div>
@@ -769,37 +769,37 @@ const GovtSchemesPage = () => {
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
-                    <span className="px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xxs font-extrabold uppercase">આજીવન પેન્શન સહાય</span>
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">ગંગા સ્વરૂપા આર્થિક સહાય યોજના</h2>
+                    <span className="px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-xxs font-extrabold uppercase">Lifelong Pension Support</span>
+                    <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Ganga Swarupa Financial Assistance Scheme</h2>
                   </div>
                 </div>
                 <div className="bg-emerald-50 px-4 py-2 rounded-xl text-center">
-                  <p className="text-xxs text-slate-500 font-bold uppercase">માસિક આર્થિક સહાય</p>
-                  <p className="text-base font-black text-emerald-700">રૂ. ૧,૨૫૦/-</p>
+                  <p className="text-xxs text-slate-500 font-bold uppercase">Monthly Financial Assistance</p>
+                  <p className="text-base font-black text-emerald-700">Rs. 1,250/-</p>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                ગંગા સ્વરૂપા (વિધવા) બહેનોને સામાજિક અને આર્થિક સુરક્ષા પૂરી પાડવાના હેતુથી સરકારશ્રી દ્વારા માસિક સહાય સીધી જ તેમના પોસ્ટ અથવા રાષ્ટ્રીયકૃત બેંક ખાતામાં (DBT મારફતે) જમા કરવામાં આવે છે.
+                With the aim of providing social and economic security to Ganga Swarupa (widow) sisters, monthly assistance is deposited directly into their post office or nationalized bank accounts by the government (through DBT).
               </p>
 
-              <h3 className="font-bold text-slate-950 mb-3 text-sm md:text-base">તાજેતરમાં થયેલા મહત્વના સુધારા (૧-૪-૨૦૧૯ થી અમલી):</h3>
+              <h3 className="font-bold text-slate-950 mb-3 text-sm md:text-base">Important Recent Amendments (Effective from 01-04-2019):</h3>
               <div className="space-y-3.5 mb-6">
                 <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex gap-3 text-sm md:text-base">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                  <p className="text-slate-700 font-bold">સહાય આજીવન મળશે: અગાઉ ૨૧ વર્ષનો પુત્ર થતાં આ સહાય બંધ કરવામાં આવતી હતી તે નિયમ હવે નાબૂદ કરવામાં આવેલ છે.</p>
+                  <p className="text-slate-700 font-bold">Assistance will be lifelong: The rule under which this assistance was discontinued upon the son turning 21 years of age has now been abolished.</p>
                 </div>
                 <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 flex gap-3 text-sm md:text-base">
                   <CheckCircle className="w-5 h-5 text-emerald-600 flex-shrink-0" />
-                  <p className="text-slate-700 font-bold">માસિક વધારો: પેન્શનની રકમ વધારીને દર મહિને રૂ. ૧,૨૫૦/- કરવામાં આવેલ છે.</p>
+                  <p className="text-slate-700 font-bold">માસિક વધારો: પેન્શનની રકમ વધારીને દર મહિને Rs. 1,250/- કરવામાં આવેલ છે.</p>
                 </div>
               </div>
 
               <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl">
-                <h4 className="font-bold text-slate-800 text-xs uppercase mb-2">કુટુંબની વાર્ષિક આવક મર્યાદા:</h4>
+                <h4 className="font-bold text-slate-800 text-xs uppercase mb-2">કુટુંબની Annual Income Limit:</h4>
                 <div className="grid grid-cols-2 gap-4 text-sm md:text-base font-extrabold text-slate-700">
-                  <div>• ગ્રામ્ય વિસ્તાર: રૂ. ૧,૨૦,૦૦૦/-</div>
-                  <div>• શહેરી વિસ્તાર: રૂ. ૧,૫૦,૦૦૦/-</div>
+                  <div>• Rural Area: Rs. 1,20,000/-</div>
+                  <div>• Urban Area: Rs. 1,50,000/-</div>
                 </div>
               </div>
             </div>
@@ -812,30 +812,30 @@ const GovtSchemesPage = () => {
                     <Heart className="w-6 h-6" />
                   </div>
                   <div>
-                    <span className="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 text-xxs font-extrabold uppercase">પુનઃલગ્ન આર્થિક પ્રોત્સાહન</span>
-                    <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">ગંગા સ્વરૂપા પુન:લગ્ન આર્થિક સહાય યોજના</h2>
+                    <span className="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 text-xxs font-extrabold uppercase">Remarriage Financial Incentive</span>
+                    <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Ganga Swarupa Remarriage Financial Assistance Scheme</h2>
                   </div>
                 </div>
                 <div className="bg-rose-50 px-4 py-2 rounded-xl text-center">
-                  <p className="text-xxs text-slate-500 font-bold uppercase">કુલ સહાય પ્રોત્સાહન</p>
-                  <p className="text-base font-black text-rose-700">રૂ. ૫૦,૦૦૦/-</p>
+                  <p className="text-xxs text-slate-500 font-bold uppercase">Total Assistance Incentive</p>
+                  <p className="text-base font-black text-rose-700">Rs. 50,000/-</p>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                મહિલા અને બાળ વિકાસ વિભાગની આ યોજનાનો મુખ્ય ઉદ્દેશ્ય ગંગા સ્વરૂપા વિધવા સહાય મેળવતી બહેનોને પુનઃલગ્ન કરી નવું ગૃહસ્થ જીવન શરૂ કરવા માટે આર્થિક સહાય આપવાનો છે.
+                મહિલા અને બાળ વિકાસ વિભાગની આ Main Objective of the Scheme ગંગા સ્વરૂપા વિધવા સહાય મેળવતી બહેનોને પુનઃલગ્ન કરી નવું ગૃહસ્થ જીવન શરૂ કરવા માટે આર્થિક સહાય આપવાનો છે.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase mb-1">લાભાર્થી વય મર્યાદા</h4>
-                  <p className="text-sm md:text-base font-bold text-slate-800">૧૮ વર્ષ થી ૫૦ વર્ષ સુધીની બહેનો</p>
+                  <h4 className="text-xs font-bold text-slate-400 uppercase mb-1">Beneficiary Age Limit</h4>
+                  <p className="text-sm md:text-base font-bold text-slate-800">Women from 18 to 50 years old</p>
                 </div>
                 <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
-                  <h4 className="text-xs font-bold text-slate-400 uppercase mb-1">સહાય ચૂકવવાની પદ્ધતિ</h4>
+                  <h4 className="text-xs font-bold text-slate-400 uppercase mb-1">Payment Method of Assistance</h4>
                   <p className="text-xs leading-relaxed text-slate-700 font-bold">
-                    • DBT થી બચત ખાતામાં: રૂ. ૨૫,૦૦૦/-<br />
-                    • નેશનલ સેવિંગ્સ સર્ટિફિકેટ (NSC): રૂ. ૨૫,૦૦૦/-
+                    • Through DBT to savings account: Rs. 25,000/-<br />
+                    • National Savings Certificate (NSC): Rs. 25,000/-
                   </p>
                 </div>
               </div>
@@ -843,10 +843,10 @@ const GovtSchemesPage = () => {
               <div className="border-l-4 border-amber-500 bg-amber-50 text-amber-900 p-4 rounded-r-xl text-sm md:text-base font-semibold">
                 <p className="font-bold flex items-center gap-1.5 mb-1">
                   <AlertCircle className="w-4.5 h-4.5 text-amber-600" />
-                  અરજી કરવાની પ્રક્રિયા:
+                  Application Process:
                 </p>
                 <p>
-                  અરજી પત્રકો વેબસાઈટ <Link href="http://wcd.gujarat.gov.in" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-800">wcd.gujarat.gov.in</Link> પર ઉપલબ્ધ છે. ફોર્મ ભરીને સંબંધિત મહિલા અને બાળ અધિકારીશ્રીની કચેરી પર પુનઃલગ્ન કર્યાની તારીખથી <strong>૬ માસની અંદર</strong> જમા કરાવવાના રહેશે.
+                  Application forms are available on the website <Link href="http://wcd.gujarat.gov.in" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-800">wcd.gujarat.gov.in</Link>. Forms must be filled and submitted to the concerned Women and Child Officer's office <strong>within 6 months</strong> from the date of remarriage.
                 </p>
               </div>
             </div>
@@ -858,20 +858,20 @@ const GovtSchemesPage = () => {
                   <Building className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="px-2.5 py-0.5 rounded bg-teal-100 text-teal-800 text-xxs font-extrabold uppercase">આશ્રય સેવા</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">આશ્રય ગૃહ / નારી સંરક્ષણ ગૃહ</h2>
+                  <span className="px-2.5 py-0.5 rounded bg-teal-100 text-teal-800 text-xxs font-extrabold uppercase">Shelter Service</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Shelter Home / Nari Sanrakshan Gruh</h2>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                રાજ્યની નિરાશ્રિત અને ઘરેલુ હિંસાનો સામનો કરી રહેલી ૧૮ વર્ષથી મોટી ઉંમરની મહિલાને અને તેના બાળકોને આશ્રય આપવા સમગ્ર ગુજરાતમાં રક્ષણ ગૃહો કાર્યરત છે.
+                Shelter homes are operational across Gujarat to provide shelter to destitute women above 18 years and their children who are facing domestic violence.
               </p>
 
-              <h3 className="font-bold text-slate-900 mb-3 text-sm">મળતી કલ્યાણકારી સેવાઓ:</h3>
+              <h3 className="font-bold text-slate-900 mb-3 text-sm">Welfare Services Offered:</h3>
               <ul className="space-y-2.5 text-sm md:text-base text-slate-700 font-semibold list-disc pl-5">
-                <li>હિંસાથી પીડિત મહિલાઓ અને તેમના બાળકોને સુરક્ષિત આશ્રય અને સુરક્ષા પૂરી પાડવી.</li>
-                <li>આશ્રય લેતી બહેનોની સમયાંતરે નિઃશુલ્ક આરોગ્ય તપાસ અને વ્યવસાયિક તાલીમ/વિકાસ પ્રવૃત્તિઓ સાથે જોડાણ.</li>
-                <li>નિષ્ણાત કાઉન્સેલર દ્વારા સમસ્યામાંથી બહાર લાવવા માટે પરામર્શ (Counseling) સત્રોનું આયોજન.</li>
+                <li>Provide safe shelter and security to women victims of violence and their children.</li>
+                <li>Periodic free health check-ups and linkage with vocational training/development activities for sheltered women.</li>
+                <li>Organization of counseling sessions by expert counselors to help overcome the trauma.</li>
               </ul>
             </div>
 
@@ -882,23 +882,23 @@ const GovtSchemesPage = () => {
                   <Heart className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 text-xxs font-extrabold uppercase">રાષ્ટ્રીય ઝુંબેશ</span>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">બેટી બચાવો - બેટી પઢાવો</h2>
+                  <span className="px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 text-xxs font-extrabold uppercase">National Campaign</span>
+                  <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">Beti Bachao - Beti Padhao</h2>
                 </div>
               </div>
 
               <p className="text-slate-650 text-base md:text-lg leading-relaxed mb-6 font-semibold">
-                માનનીય પ્રધાનમંત્રીશ્રી દ્વારા ૨૦૧૫માં હરિયાણાના પાણીપત ખાતેથી સમાજમાં દીકરીઓ પ્રત્યેના અસંતુલનને રોકવા અને દીકરીઓના વિકાસને વેગ આપવાના ઉદ્દેશ્ય સાથે શરૂ કરાયેલ રાષ્ટ્રીય યોજના.
+                A national scheme launched by the Honorable Prime Minister in 2015 from Panipat, Haryana, with the aim of preventing imbalance against daughters in society and accelerating the development of daughters.
               </p>
 
-              <h3 className="font-bold text-slate-900 mb-3 text-sm">યોજનાના મુખ્ય સૂચકાંકો અને લક્ષ્યો:</h3>
+              <h3 className="font-bold text-slate-900 mb-3 text-sm">Main Indicators and Goals of the Scheme:</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm md:text-base text-slate-700 font-semibold">
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• દીકરી જન્મને દેશવ્યાપી પ્રોત્સાહન આપવું.</div>
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• દીકરીઓમાં એનીમિયા અને ઓછા વજનનું પ્રમાણ અટકાવવું.</div>
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• કન્યા શિક્ષણ અને જન્મદર પ્રત્યે સમુદાયને સક્રિય કરવા.</div>
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• તમામ નવજાત દીકરીઓનું ૧૦૦% રસીકરણ સુનિશ્ચિત કરવું.</div>
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• દીકરીઓની શાળામાં સુરક્ષા અને POCSO એક્ટ-2012 હેઠળ સુરક્ષા.</div>
-                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• શાળાઓમાં દીકરીઓ માટે અલાયદા શૌચાલયો સુનિશ્ચિત કરવા.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Nationwide promotion of female births.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Prevention of anemia and low birth weight among daughters.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Activating the community towards girl child education and birth rate.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Ensuring 100% immunization of all newborn daughters.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Safety of daughters in school and protection under POCSO Act-2012.</div>
+                <div className="p-3 rounded-xl border border-slate-150 bg-slate-50">• Ensuring separate toilets for girls in schools.</div>
               </div>
             </div>
 
@@ -910,15 +910,15 @@ const GovtSchemesPage = () => {
           <div className="space-y-6 animate-fadeIn">
             <div className="bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-sm">
               <div className="mb-6">
-                <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold tracking-wide">અધિકૃત પત્રકો</span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">માર્ગદર્શિકા પત્રકો (Scan Copy)</h2>
-                <p className="text-slate-500 text-sm md:text-base mt-1">જિલ્લા મહિલા બાળ વિકાસ કચેરી દ્વારા પ્રકાશિત અધિકૃત માહિતી પત્રકોના મૂળ સ્કેન અત્રે આપેલા છે.</p>
+                <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-bold tracking-wide">Official Handouts</span>
+                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Guideline Leaflets (Scan Copies)</h2>
+                <p className="text-slate-500 text-sm md:text-base mt-1">Original scans of official information leaflets published by the District Women and Child Development Office are provided here.</p>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
-                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">લિસ્ટ ઓફ ઓલ યોજના વિગત પત્રક - ૧</p>
+                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">List of all schemes details leaflet - 1</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
 
                     <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/List-of-all-yojana-with-detail-01.jpeg">
@@ -933,7 +933,7 @@ const GovtSchemesPage = () => {
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
-                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">લિસ્ટ ઓફ ઓલ યોજના વિગત પત્રક - ૨</p>
+                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">List of all schemes details leaflet - 2</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
 
                     <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/list-of-all-yojna-with-detail-02.jpeg">
@@ -948,7 +948,7 @@ const GovtSchemesPage = () => {
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
-                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">મહિલા સ્વાવલંબન યોજના પત્રક</p>
+                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">Mahila Swavlamban Yojana પત્રક</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
 
                     <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg">
@@ -964,7 +964,7 @@ const GovtSchemesPage = () => {
                 </div>
 
                 <div className="border border-slate-200 p-4 rounded-2xl bg-slate-50">
-                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">વ્હાલી દીકરી યોજના પત્રક</p>
+                  <p className="text-xs font-bold text-slate-500 mb-2.5 text-center">Vhali Dikri Yojana પત્રક</p>
                   <div className="rounded-xl overflow-hidden border border-slate-200 bg-white p-1">
                     <Link
                       href="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg">
@@ -996,9 +996,9 @@ const GovtSchemesPage = () => {
               <MapPin className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">કચેરી સરનામું</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Office Address</p>
               <p className="text-sm font-bold text-slate-800 leading-snug">
-                સરકારી વસાહત, D ટાઈપ ક્વાર્ટર, નં. ૩૦૧ થી ૩૦૪, જિલ્લા સરકારી પુસ્તકાલય સામે, વસ્ત્રાપુર, અમદાવાદ.
+                Government Housing, D-Type Quarters, No. 301 to 304, Opposite District Government Library, Vastrapur, Ahmedabad.
               </p>
             </div>
           </div>
@@ -1007,9 +1007,9 @@ const GovtSchemesPage = () => {
               <Info className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">અરજી પ્રક્રિયા</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Application Procedure</p>
               <p className="text-sm font-bold text-slate-800 leading-snug">
-                નિયત ફોર્મ સાથે આધારો સંલગ્ન કરી એ ટી વી ટી (ATVT) શાખામાં અસલ ફાઈલ રજૂ કરવાની રહેશે.
+                The original file, along with relevant documents attached to the prescribed form, must be submitted to the ATVT branch.
               </p>
             </div>
           </div>
@@ -1018,9 +1018,9 @@ const GovtSchemesPage = () => {
               <CheckSquare className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">માર્ગદર્શન સેવા</p>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Guidance Service</p>
               <p className="text-sm font-bold text-slate-800 leading-snug">
-                માનવ કલ્યાણ ટ્રસ્ટ દ્વારા તમામ જરૂરી દસ્તાવેજો એકઠા કરવામાં અને માર્ગદર્શન મેળવવામાં ૧૦૦% મફત સહાય.
+                100% free assistance by Manav Kalyan Trust in collecting all necessary documents and obtaining guidance.
               </p>
             </div>
           </div>
@@ -1035,13 +1035,13 @@ const GovtSchemesPage = () => {
           <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
               <div>
-                <h2 className="text-2xl font-black text-slate-900">આધાર-પુરાવા નિર્દેશિકા</h2>
-                <p className="text-slate-500 text-sm font-semibold mt-1">વિવિધ યોજનાઓ માટે રજુ કરવાના થતા દસ્તાવેજોની ચેકલિસ્ટ</p>
+                <h2 className="text-2xl font-black text-slate-900">Required Documents Directory</h2>
+                <p className="text-slate-500 text-sm font-semibold mt-1">Checklist of documents to be submitted for various schemes</p>
               </div>
               <div className="relative w-full md:w-72">
                 <input
                   type="text"
-                  placeholder="યોજના શોધો..."
+                  placeholder="Search scheme..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-slate-55 border border-slate-300 rounded-2xl py-3 pl-10 pr-4 text-sm font-semibold focus:outline-none focus:border-rose-500 transition-colors"
@@ -1054,7 +1054,7 @@ const GovtSchemesPage = () => {
             {filteredSchemes.length === 0 ? (
               <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl">
                 <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                <p className="text-slate-500 font-bold">કોઈ મેળ ખાતી યોજનાઓ મળી નથી.</p>
+                <p className="text-slate-500 font-bold">No matching schemes found.</p>
               </div>
             ) : (
               <div className="flex flex-col md:flex-row gap-6">
@@ -1095,7 +1095,7 @@ const GovtSchemesPage = () => {
                         onClick={() => resetChecklist(activeScheme.id)}
                         className="text-xs font-bold text-slate-450 hover:text-rose-600 transition-colors"
                       >
-                        રીસેટ ચેકલિસ્ટ
+                        Reset Checklist
                       </button>
                     </div>
 
@@ -1112,7 +1112,7 @@ const GovtSchemesPage = () => {
 
                     {/* Checkbox Checklist */}
                     <div>
-                      <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">રજૂ કરવાના થતા દસ્તાવેજો:</p>
+                      <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">Documents to be submitted:</p>
                       <div className="space-y-2">
                         {activeScheme.docs.map((doc, idx) => {
 
@@ -1137,7 +1137,7 @@ const GovtSchemesPage = () => {
                     {/* Help Note */}
                     <div className="pt-4 border-t border-slate-100 text-xxs md:text-xs text-slate-500 font-bold flex items-center gap-1.5">
                       <Info className="w-4 h-4 text-slate-400" />
-                      <span>તમામ દસ્તાવેજોની બે નકલો સ્વ-પ્રમાણિત (Self Attested) કરી રજૂ કરવાની રહેશે.</span>
+                      <span>Two copies of all documents must be submitted, self-attested.</span>
                     </div>
 
                   </div>
@@ -1156,14 +1156,14 @@ const GovtSchemesPage = () => {
           <div className="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm text-center">
             <h3 className="text-base font-black text-slate-900 mb-3 flex items-center justify-center gap-2">
               <Eye className="w-5 h-5 text-rose-600" />
-              સત્તાવાર બોર્ડ નોટિસ ફોટો
+              Official Notice Board Photo
             </h3>
 
             <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 relative group mb-4">
               <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg" target='_blank'>
                 <img
                   src="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg"
-                  alt="જિલ્લા મહિલા અને બાળ અધિકારીની કચેરી અમદાવાદ બોર્ડ"
+                  alt="District Women and Child Officer's Office Ahmedabad Board"
                   className="w-full h-auto object-cover object-top max-h-[350px] transition-transform duration-300 group-hover:scale-105"
                 />
               </Link>
@@ -1171,16 +1171,16 @@ const GovtSchemesPage = () => {
             </div>
 
             <p className="text-xs text-slate-550 leading-relaxed font-semibold">
-              આ પાના પર આપેલ માહિતી અમદાવાદ કચેરીના નોટિસ બોર્ડ પર સત્તાવાર મુકવામાં આવેલ બોર્ડ પરથી લેવામાં આવી છે.
+              The information provided on this page is taken from the official board placed on the notice board of the Ahmedabad office.
             </p>
           </div>
 
           {/* Manav Kalyan Trust Helpline */}
           <div className="bg-linear-to-br from-rose-600 to-orange-600 text-white rounded-3xl p-6 shadow-md relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_50%)] pointer-events-none" />
-            <h3 className="text-xl font-black mb-3">મફત હેલ્પલાઇન અને સહાય</h3>
+            <h3 className="text-xl font-black mb-3">Free Helpline and Assistance</h3>
             <p className="text-rose-100 text-sm leading-relaxed mb-6 font-semibold">
-              અરજી ફોર્મ મેળવવા માટે અથવા તેને કેવી રીતે ભરવું, સોગંદનામું કરાવવામાં કઈ બાબતો ધ્યાનમાં રાખવી તેની મફત સહાયતા માટે અમારો સંપર્ક કરો.
+              Contact us for free assistance on how to obtain or fill the application form, and what things to consider when getting an affidavit.
             </p>
             <div className="space-y-3">
               <Link
@@ -1194,13 +1194,13 @@ const GovtSchemesPage = () => {
                   alt="WhatsApp"
                   className="w-5 h-5 object-contain"
                 />
-                વોટ્સએપ હેલ્પડેસ્ક
+                WhatsApp Helpdesk
               </Link>
               <Link
                 href="/contact"
                 className="flex items-center justify-center gap-2 py-3 border border-white/40 text-white font-bold rounded-2xl text-xs hover:bg-white/10 transition-colors w-full text-center"
               >
-                સંપર્ક ફોર્મ ભરો
+                Fill Contact Form
               </Link>
             </div>
           </div>
@@ -1212,19 +1212,19 @@ const GovtSchemesPage = () => {
       {/* <!-- OFFICIAL COORDINATION PARTNER BANNER --> */}
       < section className="bg-linear-to-br from-teal-50 to-emerald-50 py-12 px-4 border-y border-teal-100" >
         <div className="max-w-7xl mx-auto text-center space-y-4">
-          <p className="text-teal-800 font-bold uppercase tracking-wider text-sm md:text-base">યોજના સંયોજક અને સંચાલન માહિતી</p>
+          <p className="text-teal-800 font-bold uppercase tracking-wider text-sm md:text-base">Scheme Coordinator and Management Information</p>
           <h2 className="text-xl md:text-2xl font-extrabold text-slate-900 leading-normal">
-            “કમિશ્નર શ્રી મહિલા બાળ વિકાસ કચેરી” ના સહયોગથી
+            In collaboration with "Commissioner Shri Women and Child Development Office"
           </h2>
           <p className="text-sm font-bold text-slate-700 max-w-xl mx-auto">
-            જિલ્લા વિવિધલક્ષી મહિલા કલ્યાણ કેન્દ્ર, સંચાલિત - <strong>માનવ કલ્યાણ ટ્રસ્ટ</strong>
+            District Multi-purpose Women Welfare Center, Managed by - <strong>Manav Kalyan Trust</strong>
           </p>
           <div className="bg-white border border-teal-100 p-5 rounded-2xl max-w-2xl mx-auto shadow-xs text-sm md:text-base text-slate-650 space-y-1.5 font-bold">
-            <p className="text-slate-800 font-extrabold">ઓફિસ સરનામું:</p>
-            <p> ૪૨૭, કલાસાગર શોપીંગ મોલ, સાંઈબાબા મંદિરની સામે, સત્તાધાર ક્રોસ રોડ, ઘાટલોડિયા, અમદાવાદ - ૩૮૦૦૬૧</p>
+            <p className="text-slate-800 font-extrabold">Office Address:</p>
+            <p> 427, Klasagar Shopping Mall, Opposite Saibaba Temple, Sattadhar Cross Roads, Ghatlodia, Ahmedabad - 380061</p>
             <div className="pt-2 flex flex-wrap justify-center gap-4 text-emerald-800">
-              <span>• મોબા. : ૯૪૨૬૦૬૨૦૮૩</span>
-              <span>• મેનેજીંગ ટ્રસ્ટી : સાવિત્રીબેન પટેલ</span>
+              <span>• Mob. : 9426062083</span>
+              <span>• Managing Trustee : Savitriben Patel</span>
             </div>
           </div>
         </div>
@@ -1234,10 +1234,10 @@ const GovtSchemesPage = () => {
       < section className="py-16 md:py-20 px-4 text-center bg-white" >
         <div className="max-w-6xl mx-auto space-y-6">
           <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 leading-tight">
-            શું આપ આમાંથી કોઈ યોજનાના લાભાર્થી છો?
+            Are you a beneficiary of any of these schemes?
           </h2>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            અમારા કેન્દ્ર પર મહિલાઓ માટેની યોજનાઓની માહિતી પૂરી પાડવામાં આવે છે. યોગ્ય ફોર્મ ભરવા, કાગળો એકત્રિત કરવા અને સરકારી કચેરીમાં યોગ્ય રજૂઆત માટે આજે જ સંપર્ક કરો.
+            Information about schemes for women is provided at our center. Contact us today for filling appropriate forms, collecting documents, and proper representation in government offices.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4 w-full">
@@ -1252,14 +1252,14 @@ const GovtSchemesPage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              વોટ્સએપ પૂછપરછ (Join Now)
+              WhatsApp Inquiry (Join Now)
             </Link>
             <Link
               href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
-              માર્ગદર્શન માટે કૉલ કરો
+              Call for Guidance
             </Link>
             <Link
               href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -1268,7 +1268,7 @@ const GovtSchemesPage = () => {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <MapPin className="w-5 h-5 text-emerald-700" />
-              ઓફિસ મુલાકાત (Google Map)
+              Office Visit (Google Maps)
             </Link>
           </div>
         </div>

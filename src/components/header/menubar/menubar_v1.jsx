@@ -23,9 +23,9 @@ const menuItems = [
     {
         menuId: 3, label: 'Courses', href: '#', icon: GraduationCap,
         dropdown: [
-            { menuId: 3.1, label: 'સીવણ મશીન ઓપરેટર (Sewing)', href: '/courses/sewing-machine', icon: Scissors },
-            { menuId: 3.3, label: 'સરકારી યોજના અમલીકરણ (Govt Schemes Implementation)', href: '/courses/government-schemes', icon: FileCheck },
-            { menuId: 3.4, label: 'MKT આઈટી કોર્ષ (MKT IT Courses)', href: '/courses/mkt-institute', icon: Laptop }
+            { menuId: 3.1, label: 'Sewing Machine Operator', href: '/courses/sewing-machine', icon: Scissors },
+            { menuId: 3.3, label: 'Government Schemes Implementation', href: '/courses/government-schemes', icon: FileCheck },
+            { menuId: 3.4, label: 'MKT IT Courses', href: '/courses/mkt-institute', icon: Laptop }
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },

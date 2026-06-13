@@ -13,22 +13,21 @@ const SewingMachineCoursePage = () => {
           <div className="mb-5 md:mb-6 inline-block">
             <div className="px-4 py-1.5 md:px-5 md:py-2 rounded-full border border-orange-200 bg-orange-100/50 backdrop-blur-xs">
               <p className="text-xs md:text-base font-semibold text-red-700 capitalize tracking-wider">
-                મહિલા સશક્તિકરણ અને કૌશલ્ય વર્ધન કાર્યક્રમ
+                Women Empowerment and Skill Development Program
               </p>
             </div>
           </div>
 
           {/* Main Title */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-4 md:mb-6 leading-tight">
-            સીવણ મશીન ઓપરેટર કોર્સ<br />
             <span className="bg-linear-to-r from-orange-600 via-red-500 to-darkred bg-clip-text text-transparent">
-              Sewing Machine Operator
+              Sewing Machine Operator Course
             </span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-base md:text-xl text-slate-700 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed font-semibold">
-            માત્ર ૩ મહિનામાં તમારા ભવિષ્યને બદલો અને સંપૂર્ણપણે આત્મનિર્ભર બનો!
+            Change your future in just 3 months and become completely self-reliant!
           </p>
 
           {/* CTA Buttons */}
@@ -44,14 +43,14 @@ const SewingMachineCoursePage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              વોટ્સએપ પૂછપરછ (Join Now)
+              WhatsApp Inquiry (Join Now)
             </Link>
             <Link
               href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
-              માર્ગદર્શન માટે કૉલ કરો
+              Call for Guidance
             </Link>
             <Link
               href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -60,7 +59,7 @@ const SewingMachineCoursePage = () => {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <MapPin className="w-5 h-5 text-emerald-700" />
-              ઓફિસ મુલાકાત (Google Map)
+              Office Visit (Google Maps)
             </Link>
 
 
@@ -85,9 +84,9 @@ const SewingMachineCoursePage = () => {
                     <Calendar className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">સમયગાળો (Duration)</h3>
-                    <p className="text-lg md:text-xl font-bold text-slate-900">૩ મહિના (3 Months)</p>
-                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">સંપૂર્ણ પ્રાયોગિક તાલીમ (Hands-on training)</p>
+                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">Duration</h3>
+                    <p className="text-lg md:text-xl font-bold text-slate-900">3 Months</p>
+                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">Complete hands-on training</p>
                   </div>
                 </div>
 
@@ -96,9 +95,9 @@ const SewingMachineCoursePage = () => {
                     <Award className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">કોર્સ ફી (Course Fee)</h3>
-                    <p className="text-lg md:text-xl font-bold text-red-700">₹ 3000 (૩ મહિના)</p>
-                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">મહિલા આત્મનિર્ભરતા પ્રોત્સાહન હેઠળ</p>
+                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">Course Fee</h3>
+                    <p className="text-lg md:text-xl font-bold text-red-700">₹ 3,000 (3 Months)</p>
+                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">Under Women Self-Reliance Initiative</p>
                   </div>
                 </div>
 
@@ -107,9 +106,9 @@ const SewingMachineCoursePage = () => {
                     <CheckCircle className="w-5 h-5 md:w-6 md:h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">સફળતાનો આંકડો (Track Record)</h3>
-                    <p className="text-lg md:text-xl font-bold text-slate-900">૧૨૦+ મહિલાઓ સશક્ત</p>
-                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">આર્થિક રીતે આત્મનિર્ભર અને સ્વતંત્ર</p>
+                    <h3 className="text-xs md:text-sm font-bold capitalize tracking-wider text-slate-500 mb-1">Track Record</h3>
+                    <p className="text-lg md:text-xl font-bold text-slate-900">120+ Empowered Women</p>
+                    <p className="text-xs md:text-sm text-slate-650 font-semibold mt-1">Economically self-reliant and independent</p>
                   </div>
                 </div>
 
@@ -117,9 +116,9 @@ const SewingMachineCoursePage = () => {
 
               {/* Course Objective Card */}
               <div className="bg-white border border-slate-200 p-5 md:p-6 rounded-3xl shadow-xs">
-                <h3 className="text-base md:text-lg font-bold text-slate-900 mb-2 md:mb-3 border-b border-slate-100 pb-2">કોર્સનો મુખ્ય ઉદ્દેશ્ય</h3>
+                <h3 className="text-base md:text-lg font-bold text-slate-900 mb-2 md:mb-3 border-b border-slate-100 pb-2">Main Objective of the Course</h3>
                 <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold">
-                  ઔદ્યોગિક મશીન ઓપરેશન અને ગારમેન્ટ કન્સ્ટ્રક્શનની ટેકનિકલ કુશળતા મેળવીને મહિલાઓને સન્માનજનક નોકરી મેળવવામાં અથવા પોતાનો ઘર-વ્યવસાય શરૂ કરવામાં સક્ષમ બનાવવાનો છે.
+                  To enable women to secure respectable jobs or start their own home-based business by gaining technical skills in industrial machine operation and garment construction.
                 </p>
               </div>
 
@@ -130,7 +129,7 @@ const SewingMachineCoursePage = () => {
 
               <div className="bg-white border border-slate-200 rounded-3xl p-5 md:p-8 shadow-xs flex-1">
                 <h2 className="text-xl md:text-3xl font-bold text-slate-900 mb-5 md:mb-6 border-b border-slate-100 pb-3 md:pb-4">
-                  તમે શું શીખશો? (Course Syllabus)
+                  What you will learn? (Course Syllabus)
                 </h2>
 
                 <div className="space-y-5 md:space-y-6">
@@ -141,9 +140,9 @@ const SewingMachineCoursePage = () => {
                       <Wrench className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">પ્રોફેશનલ સીવણ મશીન પર પકડ</h4>
+                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">Mastery of Professional Sewing Machines</h4>
                       <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold">
-                        ઔદ્યોગિક અને પ્રોફેશનલ સીવણ મશીનોનું સેટઅપ, સુચારું સંચાલન, સેફ્ટી કંટ્રોલ અને પાયાની જાળવણી (Maintenance) ની સંપૂર્ણ વ્યવહારુ માહિતી આપવામાં આવે છે.
+                        Complete practical knowledge of setup, smooth operation, safety control, and basic maintenance of industrial and professional sewing machines is provided.
                       </p>
                     </div>
                   </div>
@@ -154,9 +153,9 @@ const SewingMachineCoursePage = () => {
                       <Scissors className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">સ્ટીચિંગ ટેકનિક અને ડિઝાઇનિંગ</h4>
+                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">Stitching Techniques and Designing</h4>
                       <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold">
-                        વિવિધ પ્રકારના કાપડ પર ગુણવત્તાસભર અને ચોકસાઈપૂર્વક સિલાઈ કરવી, આધુનિક કટિંગ અને સ્ટીચિંગ ટેકનિક સાથે લેટેસ્ટ ફેશન ટ્રેન્ડ મુજબ કપડાંનું ડિઝાઇનિંગ શીખવવામાં આવે છે.
+                        Stitching with quality and precision on various fabrics, garment designing according to the latest fashion trends along with modern cutting and stitching techniques is taught.
                       </p>
                     </div>
                   </div>
@@ -167,9 +166,9 @@ const SewingMachineCoursePage = () => {
                       <Briefcase className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">રોજગારલક્ષી અને સ્વરોજગાર માર્ગદર્શન</h4>
+                      <h4 className="text-base md:text-lg font-bold text-slate-900 mb-1">Employment and Self-Employment Guidance</h4>
                       <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold">
-                        ગારમેન્ટ ફેક્ટરીમાં કામ કરવા માટેની સજ્જતા, ગુણવત્તા નિયંત્રણ (Quality Control) ના ધોરણો, વર્ક સેફ્ટી, and સ્વનિર્ભર વ્યવસાય કે બુટિક સેટઅપ ચલાવવા માટેનું માર્ગદર્શન.
+                        Preparation for working in garment factories, Quality Control standards, work safety, and guidance for running a self-sustaining business or boutique setup.
                       </p>
                     </div>
                   </div>
@@ -203,19 +202,19 @@ const SewingMachineCoursePage = () => {
             {/* Description Text */}
             <div className="lg:col-span-6 space-y-4 md:space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-200 bg-emerald-100/50">
-                <span className="text-xs md:text-sm font-bold text-emerald-800 tracking-wider">તાલીમ કેન્દ્ર (OUR FACILITY)</span>
+                <span className="text-xs md:text-sm font-bold text-emerald-800 tracking-wider">OUR FACILITY</span>
               </div>
 
               <h2 className="text-2xl md:text-4xl font-bold text-slate-900 leading-tight">
-                પ્રાયોગિક શિક્ષણ અને સહાયક વાતાવરણ
+                Practical Education and Supportive Environment
               </h2>
 
               <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
-                અમારા તાલીમ કેન્દ્રમાં, અમે સુનિશ્ચિત કરીએ છીએ કે દરેક વિદ્યાર્થીનીને પોતાનું વ્યક્તિગત સીવણ મશીન અને પૂરતો પ્રાયોગિક સમય મળે. અનુભવી પ્રશિક્ષકો દ્વારા વ્યક્તિગત ધ્યાન આપવામાં આવે છે જેથી દરેક તાલીમાર્થી આત્મવિશ્વાસપૂર્વક શીખી શકે.
+                At our training center, we ensure that every student gets their own sewing machine and ample practical time. Personal attention is provided by experienced instructors so that every trainee can learn with confidence.
               </p>
 
               <blockquote className="border-l-4 border-emerald-500 pl-4 py-1.5 text-slate-600 text-sm md:text-base italic font-semibold">
-                “જેમ તમે ઉપરના ફોટામાં અમારા તાલીમ કેન્દ્રની ઝાંખી જોઈ શકો છો, અમે ઉત્તમ સાધનો સાથે પ્રાયોગિક શિક્ષણ પૂરું પાડીએ છીએ.”
+                “As you can see the glimpse of our training center in the photo above, we provide practical education with excellent equipment.”
               </blockquote>
             </div>
 
@@ -230,11 +229,11 @@ const SewingMachineCoursePage = () => {
         <div className="max-w-4xl mx-auto">
 
           <h2 className="text-2xl md:text-5xl font-bold text-slate-900 mb-4 md:mb-6 leading-tight">
-            આજે જ જોડાઈને સ્વનિર્ભર બનો!
+            Join today and become self-reliant!
           </h2>
 
           <p className="text-base md:text-lg text-slate-700 max-w-2xl mx-auto mb-8 md:mb-10 leading-relaxed font-semibold">
-            નવી બેચ ટૂંક સમયમાં શરૂ થઈ રહી છે. તમારા ભવિષ્યને સિક્યોર કરવા અથવા કૌશલ્ય શીખવા માટે અત્યારે જ સંપર્ક કરો.
+            New batch is starting soon. Contact us now to secure your future or learn skills.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center">
@@ -249,21 +248,21 @@ const SewingMachineCoursePage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              વોટ્સએપ દ્વારા જોડાઓ (Join Now)
+              Join via WhatsApp (Join Now)
             </a>
             <a
               href="tel:9974025126"
               className="group inline-flex items-center justify-center gap-3 w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 bg-linear-to-r from-orange-500 to-darkred text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/35 transition-all text-sm md:text-base capitalize tracking-wider cursor-pointer"
             >
               <Phone className="w-5 h-5" />
-              સંપર્ક કરો (Call to Register)
+              Call to Register
             </a>
             <a
               href="/contact"
               className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 border-2 border-slate-350 text-slate-700 font-bold rounded-xl hover:bg-slate-100 transition-all text-sm md:text-base cursor-pointer"
             >
               <Mail className="w-5 h-5" />
-              ઇમેઇલ દ્વારા પૂછપરછ
+              Inquire via Email
             </a>
           </div>
 

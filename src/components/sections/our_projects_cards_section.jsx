@@ -11,9 +11,9 @@ export function Our_Projects_Cards_Section() {
   const our_projcts_section_header_info = {
     id: 2,
     icon: <FolderOpen className="w-4 h-4 text-blue-700" />,
-    subTitle: 'અમારા પ્રોજેક્ટ્સ (OUR PROJECTS)',
-    title: 'અમારા મુખ્ય સેવા પ્રોજેક્ટ્સ ',
-    description: 'મહિલા સશક્તિકરણ, ગ્રામીણ વિકાસ, કુદરતી આપત્તિ રાહત કાર્ય અને આરોગ્ય ક્ષેત્રે માનવ કલ્યાણ ટ્રસ્ટના અવિરત પ્રયાસો.',
+    subTitle: 'OUR PROJECTS',
+    title: 'Our Key Welfare Projects',
+    description: 'Continuous efforts of Manav Kalyan Trust in women empowerment, rural development, disaster relief, and healthcare.',
   }
   return (
     <section id="our-projects" className="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24 px-4 sm:px-6 border-b border-slate-100 relative overflow-hidden">
@@ -97,7 +97,7 @@ export function Our_Projects_Cards_Section() {
                   href={`/projects/${project.slug}`}
                   className={`inline-flex items-center justify-center gap-1 px-5 py-2.5 rounded-xl text-xs md:text-sm font-extrabold transition-all duration-200 bg-gradient-to-r ${project.btnClass} shadow-xs`}
                 >
-                  વિગત જુઓ (Details)
+                  View Details
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>

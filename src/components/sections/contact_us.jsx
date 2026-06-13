@@ -91,7 +91,7 @@ const Contact_us_Main_Section = () => {
                                         alt="WhatsApp"
                                         className="w-5 h-5 object-contain brightness-0 invert"
                                     />
-                                    વોટ્સએપ પૂછપરછ (Join Now)
+                                    WhatsApp Inquiry (Join Now)
                                 </Link>
 
                                 <Link
@@ -99,16 +99,16 @@ const Contact_us_Main_Section = () => {
                                     className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
                                 >
                                     <Phone className="w-5 h-5" />
-                                    માર્ગદર્શન માટે કૉલ કરો
+                                    Call for Guidance
                                 </Link>
                                 <Link
                                     href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
+                                    className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-350 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
                                 >
                                     <MapPin className="w-5 h-5 text-emerald-700" />
-                                    ઓફિસ મુલાકાત (Google Map)
+                                    Visit Our Office (Google Maps)
                                 </Link>
                             </div>
 

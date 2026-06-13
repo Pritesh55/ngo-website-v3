@@ -55,9 +55,9 @@ const MktInstitutePage = () => {
     {
       id: 'data-entry',
       name: 'Domestic Data Entry Operator',
-      nameGuj: 'ડોમેસ્ટિક ડેટા એન્ટ્રી ઓપરેટર',
-      qualification: '8th Pass (૮ ધોરણ પાસ પછી)',
-      duration: '2 Months (૨ મહિના)',
+      nameGuj: '',
+      qualification: '8th Pass',
+      duration: '2 Months',
       fee: 'Rs. 4000 + GST',
       syllabus: [
         'MS Office (Word, Excel, PowerPoint)',
@@ -75,9 +75,9 @@ const MktInstitutePage = () => {
     {
       id: 'web-developer',
       name: 'Web Developer',
-      nameGuj: 'વેબ ડેવલપર તાલીમ',
-      qualification: '12th Pass (૧૨ ધોરણ પાસ પછી)',
-      duration: '3 Months (૩ મહિના)',
+      nameGuj: '',
+      qualification: '12th Pass',
+      duration: '3 Months',
       fee: 'Rs. 6670 + GST',
       syllabus: [
         'HTML5 & CSS3 Structure & Styling',
@@ -95,9 +95,9 @@ const MktInstitutePage = () => {
     {
       id: 'fashion-designer',
       name: 'Fashion Designer',
-      nameGuj: 'ફેશન ડિઝાઇનર કોર્સ',
-      qualification: '10th Pass (૧૦ ધોરણ પાસ પછી)',
-      duration: '3 Months (૩ મહિના)',
+      nameGuj: '',
+      qualification: '10th Pass',
+      duration: '3 Months',
       fee: 'Rs. 9500 + GST',
       syllabus: [
         'Crocky with Design Garment & Sketching',
@@ -116,24 +116,24 @@ const MktInstitutePage = () => {
   ]
 
   const docs = [
-    'આધારકાર્ડની કોપી (Copy of Aadhar Card)',
-    'પાસપોર્ટ સાઈઝ ફોટો - ૨ (2 Passport Size Photos)',
-    'લેટેસ્ટ માર્કશીટ (Latest Education Marksheet)'
+    'Copy of Aadhar Card',
+    '2 Passport Size Photos',
+    'Latest Education Marksheet'
   ]
 
   const steps = [
-    { name: 'નોંધણી', desc: 'Registration & Verification' },
-    { name: 'તાલીમ', desc: 'Hands-on Classroom Training' },
-    { name: 'મૂલ્યાંકન', desc: 'Assessment & Examination' },
-    { name: 'કૌશલ્ય પ્રમાણપત્ર', desc: 'University Certified Skill Certificate' }
+    { name: 'Registration', desc: 'Registration & Verification' },
+    { name: 'Training', desc: 'Hands-on Classroom Training' },
+    { name: 'Assessment', desc: 'Assessment & Examination' },
+    { name: 'Certification', desc: 'University Certified Skill Certificate' }
   ]
 
   const benefits = [
-    'યુનિવર્સિટીનું સર્ટિફિકેટ મેળવવાની સુવર્ણ તક.',
-    'નોકરી અને પ્લેસમેન્ટ માટેનું ઉજ્જવળ ભવિષ્ય.',
-    'પોતાનો ગૃહ ઉદ્યોગ કે વ્યવસાય સ્થાપવા માટે અમૂલ્ય તકો.',
-    'સરકાર તરફથી મળતી ૫૦ લાખ સુધીની લોન સબસિડી માટે સરકારી અધિકારીઓ સાથે સીધો વાર્તાલાપ.',
-    'સ્ટાર્ટઅપ અને પેટન્ટ રજીસ્ટ્રેશન માટે યુનિવર્સિટી દ્વારા વિશિષ્ટ માર્ગદર્શન.'
+    'Golden opportunity to get university certification.',
+    'Bright future for jobs and placement.',
+    'Invaluable opportunities to start your own home industry or business.',
+    'Direct interaction with government officials for loan subsidies up to 50 Lakhs from the government.',
+    'Special guidance by the university for startup and patent registration.'
   ]
 
   return (
@@ -149,7 +149,7 @@ const MktInstitutePage = () => {
           <div className="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-orange-500/30 bg-orange-500/10 backdrop-blur-xs">
             <GraduationCap className="w-4 h-4 text-orange-400" />
             <span className="text-xs md:text-sm font-bold tracking-wider text-orange-300">
-              યુનિવર્સિટી સર્ટિફાઈડ કોર્ષ (UNIVERSITY CERTIFIED COURSES)
+              UNIVERSITY CERTIFIED COURSES
             </span>
           </div>
 
@@ -162,7 +162,7 @@ const MktInstitutePage = () => {
           </h2>
 
           <p className="text-base md:text-xl text-slate-300 max-w-4xl mx-auto mb-8 leading-relaxed font-semibold">
-            ૮ ધોરણ પાસ પછીના તમામ વર્ગના વિદ્યાર્થીઓ માટે ખાસ વ્યવસાયિક અને સ્વનિર્ભર તાલીમ આપતો આધુનિક શૈક્ષણિક કાર્યક્રમ.
+            A modern educational program offering specialized professional and self-reliant training for all classes of students after passing 8th grade.
           </p>
 
           {/* Address & Contact Card */}
@@ -170,9 +170,9 @@ const MktInstitutePage = () => {
             <div className="flex gap-3.5 mb-4">
               <MapPin className="w-6 h-6 text-red-400 flex-shrink-0 mt-1" />
               <div>
-                <h3 className="font-extrabold text-white text-base md:text-lg mb-1">તાલીમ કેન્દ્રનું સરનામું (Venue Address)</h3>
+                <h3 className="font-extrabold text-white text-base md:text-lg mb-1">Venue Address</h3>
                 <p className="text-sm md:text-base text-slate-200 leading-relaxed font-semibold">
-                  ૪૨૭, ચોથો માળ, કલાસાગર શોપિંગ મોલ, સાંઈબાબા મંદિર સામે, સત્તાધાર ક્રોસ રોડ પાસે, ઘાટલોડિયા, અમદાવાદ - ૩૮૦૦૬૧.
+                  427, 4th Floor, Klasagar Shopping Mall, Opposite Saibaba Temple, Near Sattadhar Cross Roads, Ghatlodia, Ahmedabad - 380061.
                 </p>
               </div>
             </div>
@@ -182,13 +182,13 @@ const MktInstitutePage = () => {
             <div className="flex flex-wrap items-center gap-4 text-sm font-bold">
               <div className="flex items-center gap-2 text-slate-200">
                 <Phone className="w-4.5 h-4.5 text-orange-400" />
-                <span>સંપર્ક નંબરો :</span>
+                <span>Contact Numbers:</span>
               </div>
               <div className="flex flex-wrap gap-2 text-white">
-                <a href="tel:9974025126" className="hover:text-orange-400 transition-colors">૯૩૧૬૮૪૨૭૧૨</a> •
-                <a href="tel:6355552491" className="hover:text-orange-400 transition-colors">૬૩૫૫૫૫૨૪૯૧</a> •
-                <a href="tel:9714360243" className="hover:text-orange-400 transition-colors">૯૭૧૪૩૬૦૨૪૩</a> •
-                <a href="tel:9714918134" className="hover:text-orange-400 transition-colors">૯૭૧૪૯૧૮૧૩૪</a>
+                <a href="tel:9316842712" className="hover:text-orange-400 transition-colors">9316842712</a> •
+                <a href="tel:6355552491" className="hover:text-orange-400 transition-colors">6355552491</a> •
+                <a href="tel:9714360243" className="hover:text-orange-400 transition-colors">9714360243</a> •
+                <a href="tel:9714918134" className="hover:text-orange-400 transition-colors">9714918134</a>
               </div>
             </div>
           </div>
@@ -206,14 +206,14 @@ const MktInstitutePage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              વોટ્સએપ પૂછપરછ (Join Now)
+              WhatsApp Inquiry (Join Now)
             </Link>
             <Link
               href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <Phone className="w-5 h-5" />
-              માર્ગદર્શન માટે કૉલ કરો
+              Call for Guidance
             </Link>
             <Link
               href="https://www.google.com/maps/place/MANAV+KALYAN+TRUST/@23.0720672,72.5124606,13z/data=!4m6!3m5!1s0x395e834433dac7e3:0x6098b80bc73d2bdd!8m2!3d23.0747676!4d72.535598!16s%2Fg%2F11ddwgd7wq?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D"
@@ -222,7 +222,7 @@ const MktInstitutePage = () => {
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold rounded-xl transition-all text-sm md:text-base cursor-pointer shadow-sm"
             >
               <MapPin className="w-5 h-5 text-emerald-700" />
-              ઓફિસ મુલાકાત (Google Map)
+              Office Visit (Google Maps)
             </Link>
 
 
@@ -241,7 +241,7 @@ const MktInstitutePage = () => {
                 : 'bg-slate-50 hover:bg-slate-100 text-slate-650 border border-slate-200'
                 }`}
             >
-              તમામ કોર્સ (All Courses)
+              All Courses
             </button>
             {courses.map(course => (
               <button
@@ -263,7 +263,7 @@ const MktInstitutePage = () => {
 
           <div className="hidden lg:flex items-center gap-1.5 text-xs text-orange-600 font-bold bg-orange-50 px-3 py-1.5 rounded-full border border-orange-100">
             <Percent className="w-4 h-4" />
-            <span>10% Discount on full Payment together</span>
+            <span>10% Discount on full payment together</span>
           </div>
         </div>
       </section>
@@ -284,16 +284,16 @@ const MktInstitutePage = () => {
                   <div className="space-y-2">
                     <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white text-xs font-bold">
                       <Sparkles className="w-3.5 h-3.5" />
-                      <span>યુનિવર્સિટી પ્રમાણિત અભ્યાસક્રમ</span>
+                      <span>University Certified Course</span>
                     </span>
                     <h2 className="text-2xl md:text-4xl font-extrabold">{course.nameGuj}</h2>
                     <h3 className="text-lg md:text-xl text-slate-200 font-medium">{course.name}</h3>
                   </div>
 
                   <div className="bg-white/10 border border-white/25 rounded-2xl p-4 min-w-[200px] text-center backdrop-blur-xs">
-                    <p className="text-xxs uppercase tracking-wider text-slate-200 font-bold">અભ્યાસ ફી (Course Fee)</p>
+                    <p className="text-xxs uppercase tracking-wider text-slate-200 font-bold">Course Fee</p>
                     <p className="text-xl md:text-2xl font-black text-white">{course.fee}</p>
-                    <p className="text-xxs text-orange-200 font-bold mt-1">સમયગાળો: {course.duration}</p>
+                    <p className="text-xxs text-orange-200 font-bold mt-1">Duration: {course.duration}</p>
                   </div>
                 </div>
 
@@ -309,7 +309,7 @@ const MktInstitutePage = () => {
                           <BookOpen className="w-5.5 h-5.5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">પ્રવેશ લાયકાત (Eligibility)</h4>
+                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Eligibility</h4>
                           <p className="text-base font-extrabold text-slate-800 mt-0.5">{course.qualification}</p>
                         </div>
                       </div>
@@ -321,7 +321,7 @@ const MktInstitutePage = () => {
                           <Clock className="w-5.5 h-5.5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">સમયગાળો (Duration)</h4>
+                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Duration</h4>
                           <p className="text-base font-extrabold text-slate-800 mt-0.5">{course.duration}</p>
                         </div>
                       </div>
@@ -333,8 +333,8 @@ const MktInstitutePage = () => {
                           <ShieldCheck className="w-5.5 h-5.5" />
                         </div>
                         <div>
-                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">સર્ટિફિકેશન</h4>
-                          <p className="text-base font-extrabold text-emerald-700 mt-0.5">યુનિવર્સિટી સર્ટિફાઈડ સર્ટિફિકેટ</p>
+                          <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider">Certification</h4>
+                          <p className="text-base font-extrabold text-emerald-700 mt-0.5">University Certified Certificate</p>
                         </div>
                       </div>
 
@@ -344,8 +344,8 @@ const MktInstitutePage = () => {
                     <div className="bg-orange-50/50 border border-orange-200 rounded-2xl p-4 flex gap-3 text-xs md:text-sm font-semibold text-slate-700">
                       <Tag className="w-5 h-5 text-orange-500 flex-shrink-0 mt-0.5" />
                       <div>
-                        <p className="font-bold text-slate-900">વિશેષ ડિસ્કાઉન્ટ ઓફર</p>
-                        <p className="mt-0.5 text-slate-650">તમામ કોર્સની ફી એક સાથે ચૂકવવા પર <strong>૧૦% ડિસ્કાઉન્ટ</strong> મળવાપાત્ર રહેશે.</p>
+                        <p className="font-bold text-slate-900">Special Discount Offer</p>
+                        <p className="mt-0.5 text-slate-650">A <strong>10% discount</strong> is applicable on paying fees for all courses at once.</p>
                       </div>
                     </div>
                   </div>
@@ -355,7 +355,7 @@ const MktInstitutePage = () => {
                     <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 md:p-8 flex-1">
                       <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-5 border-b border-slate-200 pb-3 flex items-center gap-2">
                         <CheckCircle className="w-5 h-5 text-orange-600" />
-                        અભ્યાસક્રમના મુખ્ય મુદ્દાઓ (Syllabus)
+                        Key Topics of the Course (Syllabus)
                       </h3>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -381,13 +381,13 @@ const MktInstitutePage = () => {
                           alt="WhatsApp"
                           className="w-5 h-5 object-contain brightness-0 invert"
                         />
-                        વોટ્સએપ દ્વારા પ્રવેશ મેળવો (Apply Now)
+                        Apply via WhatsApp (Apply Now)
                       </a>
                       <a
                         href="tel:9974025126"
                         className="inline-flex items-center justify-center gap-2 px-6 py-3.5 border-2 border-slate-350 text-slate-700 font-extrabold rounded-xl hover:bg-slate-100 transition-all text-sm md:text-base cursor-pointer"
                       >
-                        કૉલ કરો
+                        Call Now
                       </a>
                     </div>
                   </div>
@@ -403,9 +403,9 @@ const MktInstitutePage = () => {
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
             <Sparkles className="w-4 h-4 text-orange-700" />
-            <span className="text-xs font-bold text-orange-700 tracking-wider">પ્રોસેસ સ્ટેપ્સ (STUDENT JOURNEY)</span>
+            <span className="text-xs font-bold text-orange-700 tracking-wider">STUDENT JOURNEY</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-10 md:mb-14">પ્રવેશ અને સર્ટિફિકેશનના ૪ પગલાં</h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-10 md:mb-14">4 Steps of Admission & Certification</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
             {steps.map((step, idx) => (
@@ -437,10 +437,10 @@ const MktInstitutePage = () => {
           <div className="lg:col-span-6 bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-sm">
             <h3 className="font-extrabold text-xl md:text-2xl text-slate-900 mb-4 flex items-center gap-2.5">
               <FileCheck className="w-6.5 h-6.5 text-orange-600" />
-              એડમિશન માટેના જરૂરી ડોક્યુમેન્ટ્સ
+              Required Documents for Admission
             </h3>
             <p className="text-xs text-slate-400 mb-5 italic font-bold">
-              દસ્તાવેજો એકઠા કરતી વખતે નીચેની યાદીને ચેકલિસ્ટ તરીકે વાપરી શકો છો:
+              You can use the list below as a checklist when collecting documents:
             </p>
 
             <div className="space-y-3">
@@ -467,8 +467,8 @@ const MktInstitutePage = () => {
             <div className="mt-6 p-4 bg-red-50/50 border border-red-200 text-slate-700 rounded-2xl text-xs md:text-sm font-semibold flex items-start gap-2.5">
               <AlertCircle className="w-5 h-5 text-red-650 flex-shrink-0 mt-0.5" />
               <div>
-                <strong className="text-red-700">મહત્વની નોંધ :</strong>
-                <p className="mt-0.5 text-slate-650 font-bold">યુનિવર્સિટી પરીક્ષા ફી (Exam Fee) અલગથી ચૂકવવાની રહેશે.</p>
+                <strong className="text-red-700">Important Note:</strong>
+                <p className="mt-0.5 text-slate-650 font-bold">University Exam Fee is to be paid separately.</p>
               </div>
             </div>
           </div>
@@ -477,7 +477,7 @@ const MktInstitutePage = () => {
           <div className="lg:col-span-6 bg-white rounded-3xl border border-slate-200 p-6 md:p-8 shadow-sm">
             <h3 className="font-extrabold text-xl md:text-2xl text-slate-900 mb-6 flex items-center gap-2.5">
               <Award className="w-6.5 h-6.5 text-orange-600" />
-              કોર્ષનું મુખ્ય આકર્ષણ અને ફાયદાઓ
+              Main Attractions and Benefits of the Course
             </h3>
 
             <div className="space-y-4">
@@ -504,9 +504,9 @@ const MktInstitutePage = () => {
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-slate-300 bg-white/50">
             <BookOpen className="w-4 h-4 text-slate-600" />
-            <span className="text-xs font-bold text-slate-600 tracking-wider">સંબંધિત પત્રક અને બ્રોશર (OFFICIAL BROCHURE)</span>
+            <span className="text-xs font-bold text-slate-600 tracking-wider">OFFICIAL BROCHURE</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-8">અભ્યાસક્રમ વિગત પત્રક (Scan Image)</h2>
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-8">Course Details Brochure (Scan Image)</h2>
 
           <div className="bg-white rounded-3xl p-4 md:p-6 shadow-md border border-slate-200 inline-block max-w-full relative group">
             <div className="absolute top-6 right-6 bg-slate-900/80 text-white p-2.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
@@ -525,10 +525,10 @@ const MktInstitutePage = () => {
       <section className="bg-glow-warm py-16 md:py-24 px-4 text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">
-            આજે જ એડમિશન મેળવીને કારકિર્દી ઘડો!
+            Get admission today and build your career!
           </h2>
           <p className="text-base md:text-lg text-slate-755 max-w-2xl mx-auto mb-10 leading-relaxed font-bold">
-            લિમિટેડ બેઠકો ઉપલબ્ધ છે. નવી બેચ ટૂંક સમયમાં શરૂ થઈ રહી છે. તમારા ભવિષ્યને ઉજ્જવળ બનાવવા માટે આજે જ સંપર્ક કરી નોંધણી કરાવો.
+            Limited seats available. A new batch is starting soon. Contact us today to register and secure your future.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -543,14 +543,14 @@ const MktInstitutePage = () => {
                 alt="WhatsApp"
                 className="w-5 h-5 object-contain brightness-0 invert"
               />
-              રજીસ્ટ્રેશન પૂછપરછ (WhatsApp)
+              Registration Inquiry (WhatsApp)
             </a>
             <a
               href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-orange-500 to-darkred text-white font-bold rounded-xl hover:shadow-lg hover:shadow-red-500/35 transition-all text-sm md:text-base cursor-pointer"
             >
               <Phone className="w-5 h-5" />
-              કોલ કરો : ૯૩૧૬૮૪૨૭૧૨
+              Call Now: 9316842712
             </a>
           </div>
         </div>

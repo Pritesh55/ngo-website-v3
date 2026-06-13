@@ -9,9 +9,9 @@ const Our_team = () => {
     const Our_Team_Section_Header_info = {
         id: 8,
         icon: <Users className="w-4 h-4 text-amber-600" />,
-        subTitle: 'અમારો સ્ટાફ (OUR TEAM)',
+        subTitle: 'OUR TEAM',
         title: 'Meet Our Dedicated Team',
-        description: 'અમારા ઉત્સાહી અને સમર્પિત સભ્યો જેઓ સમાજના સકારાત્મક પરિવર્તન માટે અવિરત કાર્યરત છે.',
+        description: 'Our enthusiastic and dedicated members who work tirelessly for positive social change.',
     }
 
 
@@ -86,11 +86,8 @@ const Our_team = () => {
                                         <h3 className="text-lg font-bold text-slate-900 leading-snug mb-1">
                                             {member.name}
                                         </h3>
-                                        <p className="text-xs font-bold text-red-700 capitalize tracking-wider mb-3">
+                                        <p className="text-xs font-bold text-red-700 capitalize tracking-wider">
                                             {member.role}
-                                        </p>
-                                        <p className="text-xs md:text-sm text-slate-650 font-bold leading-relaxed border-t border-slate-200/50 pt-3">
-                                            {member.gujRole}
                                         </p>
                                     </div>
                                 </div>
