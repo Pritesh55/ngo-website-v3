@@ -1,65 +1,33 @@
 export const projects = [
   {
     "id": "01",
-    "slug": "ISDS",
-    "name": "Integrated Skill Development Scheme (ISDS)",
-    "description": "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
+    "slug": "saksham-kvk-2-0",
+    "name": "saksham kvk 2.0",
+    "description": "Employment Generation Through Placement and Industrial Development.",
     "supportType": "Govt. Supported",
     "images": [
-      "/images/CEDC/Photo 25.jpg",
-      // "/images/CEDC/03-CEDC-with-MKT.jpeg",
-      // "/images/CEDC/02-CEDC.jpeg",
-
-      "/images/CEDC/01-Photo 48.JPG",
-      "/images/CEDC/Photo 2.jpg",
-      "/images/CEDC/Photo 21.JPG",
-      "/images/CEDC/Photo 22.jpg",
-      "/images/CEDC/Photo 23.jpg",
-
-      "/images/CEDC/Photo 27.jpg",
-      "/images/CEDC/Photo 34.jpg",
-      "/images/CEDC/Photo 39.jpg",
-      "/images/CEDC/Photo 41.jpg",
-      "/images/CEDC/Photo 43.jpg",
-      "/images/CEDC/Photo 44.jpg",
-      "/images/CEDC/Photo 46.jpg",
-      "/images/CEDC/Photo 49.JPG",
-      "/images/CEDC/Photo 55.JPG",
-      "/images/CEDC/Photo 6.jpg",
-      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
-      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
-      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
+      "/images/our-projects/01-SAKSHAM-KVK-2-01.jpg",
+      "/images/our-projects/01-SAKSHAM-KVK-2-02.jpg",
+      "/images/our-projects/01-SAKSHAM-KVK-2-03.jpg"
     ],
-    "theme": "from-blue-50/80 to-teal-50/40",
+    "theme": "from-blue-50/80 to-indigo-50/40",
     "border": "border-blue-200 hover:border-blue-350",
     "tagClass": "border-blue-200 bg-blue-100/60 text-blue-700",
-    "btnClass": "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    "btnClass": "from-blue-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
     "details": {
-      "Goal": "To empower the youth and women of the community by providing them with skill-based training and education, enabling them to become self-reliant and contribute to the development of society.",
-      "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
-      "Target Group": "Unemployed Youth and Women seeking skill development.",
-      "Target Area": "Gandhinagar, Gujarat.",
-      "Duration": "Ongoing",
-      "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
-      "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
-      "Contact": "+91 94280 20080, 079-23242080",
-      "Email": "cedc.gandhinagar@gmail.com, mkt.gnr@gmail.com",
-      "Activities": [
-        "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
-        "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
-        "Certificate Course in Garment Making & Fashion Designing (3 Months, Eligibility: 10th Pass)",
-        "Soft skills and personality development sessions",
-        "Practical training and hands-on experience in sector-specific software and equipment",
-        "100% placement assistance and career guidance",
-        "Fostering entrepreneurship and self-employment initiatives"
-      ],
-      "Outcome": [
-        "Empowerment of youth and women through specialized vocational training.",
-        "Increased employment opportunities in Banking, Retail, and Textile sectors.",
-        "Promotion of entrepreneurship and small enterprise establishment in Gandhinagar and surrounding areas."
-      ]
+      "Support": "Gujarat skill development mission Gandhinagar Govt. of Gujarat.",
+      "Target Group": "Unemployed Man and Woman of Gujarat.",
+      "Target Area": "Across Gujarat.",
+      "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
+
+      "Duration": "Three Years",
+
+      "Starting Of The Project": "Feb-2025",
+      "Process": "Training, Liaison, Placement & Follow up."
     }
   },
+
+
   {
     "id": "02",
     "slug": "help-to-khedbrahma-general-hospital",
@@ -126,8 +94,124 @@ export const projects = [
       }
     }
   },
+
   {
     "id": "03",
+    "slug": "pradhan-mantri-kaushal-vikas-yojana",
+    "name": "pradhan mantri kaushal vikas yojana (PMKVY)",
+    "description": "Employment Generation through placement and Industrial Development.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-01.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-02.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-03.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-04.jpg"
+    ],
+    "theme": "from-orange-50/80 to-amber-50/40",
+    "border": "border-orange-200 hover:border-orange-350",
+    "tagClass": "border-orange-200 bg-orange-100/60 text-orange-700",
+    "btnClass": "from-orange-500 to-amber-600 text-white hover:shadow-amber-500/20",
+    "details": {
+      "Support": "Gujarat Skill Development Mission, Gandhinagar Govt. of Gujarat & National Skill Development Corporation, Govt. of India.",
+      "Target Group": "Man and Women who are seeking for Job or desire to setup their own venture.",
+      "Target Area": "Ahmedabad District of Gujarat.",
+      "Object of the Project": "Employment Generation through placement and Industrial Development.",
+
+      "Duration": "Three Years",
+
+      "Process": "Training, Liaison, Placement & Follow up."
+    }
+  },
+
+  {
+    "id": "04",
+    "slug": "training-under-scheme-6",
+    "name": "Training under Scheme - 6",
+    "description": "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-03.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-04.jpg"
+    ],
+    "theme": "from-purple-50/80 to-indigo-50/40",
+    "border": "border-purple-200 hover:border-purple-350",
+    "tagClass": "border-purple-200 bg-purple-100/60 text-purple-700",
+    "btnClass": "from-purple-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
+    "details": {
+      "Support": "Center for Entrepreneurship Development Gandhinagar",
+      "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
+      "Object of the Project": "Training, Liaison and Placement",
+      "Starting Of The Project": "During the year 23-24",
+
+    }
+  },
+
+  {
+
+    "id": "05",
+    "slug": "ISDS",
+    "name": "Integrated Skill Development Scheme (ISDS)",
+    "description": "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/CEDC/Photo 25.jpg",
+      // "/images/CEDC/03-CEDC-with-MKT.jpeg",
+      // "/images/CEDC/02-CEDC.jpeg",
+
+      "/images/CEDC/01-Photo 48.JPG",
+      "/images/CEDC/Photo 2.jpg",
+      "/images/CEDC/Photo 21.JPG",
+      "/images/CEDC/Photo 22.jpg",
+      "/images/CEDC/Photo 23.jpg",
+
+      "/images/CEDC/Photo 27.jpg",
+      "/images/CEDC/Photo 34.jpg",
+      "/images/CEDC/Photo 39.jpg",
+      "/images/CEDC/Photo 41.jpg",
+      "/images/CEDC/Photo 43.jpg",
+      "/images/CEDC/Photo 44.jpg",
+      "/images/CEDC/Photo 46.jpg",
+      "/images/CEDC/Photo 49.JPG",
+      "/images/CEDC/Photo 55.JPG",
+      "/images/CEDC/Photo 6.jpg",
+      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
+      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
+      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
+    ],
+    "theme": "from-blue-50/80 to-teal-50/40",
+    "border": "border-blue-200 hover:border-blue-350",
+    "tagClass": "border-blue-200 bg-blue-100/60 text-blue-700",
+    "btnClass": "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    "details": {
+      "Goal": "To empower the youth and women of the community by providing them with skill-based training and education, enabling them to become self-reliant and contribute to the development of society.",
+      "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
+      "Target Group": "Unemployed Youth and Women seeking skill development.",
+      "Target Area": "Gandhinagar, Gujarat.",
+      "Duration": "Ongoing",
+      "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
+      "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
+      "Contact": "+91 94280 20080, 079-23242080",
+      "Email": "cedc.gandhinagar@gmail.com, mkt.gnr@gmail.com",
+      "Activities": [
+        "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
+        "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
+        "Certificate Course in Garment Making & Fashion Designing (3 Months, Eligibility: 10th Pass)",
+        "Soft skills and personality development sessions",
+        "Practical training and hands-on experience in sector-specific software and equipment",
+        "100% placement assistance and career guidance",
+        "Fostering entrepreneurship and self-employment initiatives"
+      ],
+      "Outcome": [
+        "Empowerment of youth and women through specialized vocational training.",
+        "Increased employment opportunities in Banking, Retail, and Textile sectors.",
+        "Promotion of entrepreneurship and small enterprise establishment in Gandhinagar and surrounding areas."
+      ]
+    }
+  },
+  {
+    "id": "06",
     "slug": "ahvy",
     "name": "Ambedkar Hastshilp Vikas Yojana (AHVY)",
     "description": "Empowering Artisans: The Ambedkar Hastshilp Vikas Yojana (AHVY) is a pivotal government initiative designed to revitalize and strengthen India's vibrant handicraft sector.",
@@ -159,7 +243,7 @@ export const projects = [
     }
   },
   {
-    "id": "04",
+    "id": "07",
     "slug": "pmegp",
     "name": "Entrepreneurship development program under PMEGP scheme",
     "description": "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
@@ -215,7 +299,7 @@ export const projects = [
     }
   },
   {
-    "id": "05",
+    "id": "08",
     "slug": "dch",
     "name": "Development Commissioner (Handicrafts) (DCH)",
     "description": "Supporting and promoting Indian handicrafts through development schemes, artisan cluster support, and national capacity-building initiatives.",
@@ -308,121 +392,43 @@ export const projects = [
       "Process": "Artisan cluster identification, capacity building, tools distribution, and exhibition support."
     }
   },
-  {
-    "id": "06",
-    "slug": "pradhan-mantri-kaushal-vikas-yojana",
-    "name": "pradhan mantri kaushal vikas yojana (PMKVY)",
-    "description": "Employment Generation through placement and Industrial Development.",
-    "supportType": "Govt. Supported",
-    "images": [
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-01.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-02.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-03.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-04.jpg"
-    ],
-    "theme": "from-orange-50/80 to-amber-50/40",
-    "border": "border-orange-200 hover:border-orange-350",
-    "tagClass": "border-orange-200 bg-orange-100/60 text-orange-700",
-    "btnClass": "from-orange-500 to-amber-600 text-white hover:shadow-amber-500/20",
-    "details": {
-      "Support": "Gujarat Skill Development Mission, Gandhinagar Govt. of Gujarat & National Skill Development Corporation, Govt. of India.",
-      "Target Group": "Man and Women who are seeking for Job or desire to setup their own venture.",
-      "Target Area": "Ahmedabad District of Gujarat.",
-      "Object of the Project": "Employment Generation through placement and Industrial Development.",
-
-      "Duration": "Three Years",
-
-      "Process": "Training, Liaison, Placement & Follow up."
-    }
-  },
-  {
-    "id": "07",
-    "slug": "saksham-kvk-2-0",
-    "name": "saksham kvk 2.0",
-    "description": "Employment Generation Through Placement and Industrial Development.",
-    "supportType": "Govt. Supported",
-    "images": [
-      "/images/our-projects/01-SAKSHAM-KVK-2-01.jpg",
-      "/images/our-projects/01-SAKSHAM-KVK-2-02.jpg",
-      "/images/our-projects/01-SAKSHAM-KVK-2-03.jpg"
-    ],
-    "theme": "from-blue-50/80 to-indigo-50/40",
-    "border": "border-blue-200 hover:border-blue-350",
-    "tagClass": "border-blue-200 bg-blue-100/60 text-blue-700",
-    "btnClass": "from-blue-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
-    "details": {
-      "Support": "Gujarat skill development mission Gandhinagar Govt. of Gujarat.",
-      "Target Group": "Unemployed Man and Woman of Gujarat.",
-      "Target Area": "Across Gujarat.",
-      "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
-
-      "Duration": "Three Years",
-
-      "Starting Of The Project": "Feb-2025",
-      "Process": "Training, Liaison, Placement & Follow up."
-    }
-  },
-  {
-    "id": "08",
-    "slug": "training-under-scheme-6",
-    "name": "Training under Scheme - 6",
-    "description": "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
-    "supportType": "Govt. Supported",
-    "images": [
-      "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-03.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-04.jpg"
-    ],
-    "theme": "from-purple-50/80 to-indigo-50/40",
-    "border": "border-purple-200 hover:border-purple-350",
-    "tagClass": "border-purple-200 bg-purple-100/60 text-purple-700",
-    "btnClass": "from-purple-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
-    "details": {
-      "Support": "Center for Entrepreneurship Development Gandhinagar",
-      "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
-      "Object of the Project": "Training, Liaison and Placement",
-      "Starting Of The Project": "During the year 23-24",
-
-    }
-  },
+  // {
+  //   "id": "09",
+  //   "slug": "integrated-skill-development-scheme",
+  //   "name": "Integrated Skill Development Scheme",
+  //   "description": "To make become Men & Women economically sustain",
+  //   "supportType": "Govt. Supported",
+  //   "images": [
+  //     "/images/our-projects/05-Integrated-Skill-Development-Scheme.jpg"
+  //   ],
+  //   "theme": "from-cyan-50/80 to-sky-50/40",
+  //   "border": "border-cyan-200 hover:border-cyan-350",
+  //   "tagClass": "border-cyan-200 bg-cyan-100/60 text-cyan-700",
+  //   "btnClass": "from-cyan-500 to-sky-600 text-white hover:shadow-sky-500/20",
+  //   "details": {
+  //     "Goal": "To make become Men & Women economically sustain",
+  //     "Target Area": "Ahmedabad City, Gujarat State, India",
+  //     "Supporting Agency": "Ministry of Textile Government of India, Centre for Entrepreneurship Development Government of Gujarat",
+  //     "Target Group": "Men & Women from all categories",
+  //     "Activities": [
+  //       "Training in Basic Sewing Operator",
+  //       "Training in Software Application In Textile Design",
+  //       "Third party Assessment for Certification",
+  //       "Placement in Industrial Sector",
+  //       "Escort Service for Self Employment",
+  //       "Marketing support through liasion with small scale industries",
+  //       "Marketing support through participation in exhibition"
+  //     ],
+  //     "Beneficiaries": "Men & Women who want to economically sustain, Men & Women who want to start their own venture",
+  //     "Outcome": [
+  //       "1000 & more Men & Women are trained under this scheme.",
+  //       "750 Men & Women are placed in Industrial sector",
+  //       "100 Men & Women are started their own venture"
+  //     ]
+  //   }
+  // },
   {
     "id": "09",
-    "slug": "integrated-skill-development-scheme",
-    "name": "Integrated Skill Development Scheme",
-    "description": "To make become Men & Women economically sustain",
-    "supportType": "Govt. Supported",
-    "images": [
-      "/images/our-projects/05-Integrated-Skill-Development-Scheme.jpg"
-    ],
-    "theme": "from-cyan-50/80 to-sky-50/40",
-    "border": "border-cyan-200 hover:border-cyan-350",
-    "tagClass": "border-cyan-200 bg-cyan-100/60 text-cyan-700",
-    "btnClass": "from-cyan-500 to-sky-600 text-white hover:shadow-sky-500/20",
-    "details": {
-      "Goal": "To make become Men & Women economically sustain",
-      "Target Area": "Ahmedabad City, Gujarat State, India",
-      "Supporting Agency": "Ministry of Textile Government of India, Centre for Entrepreneurship Development Government of Gujarat",
-      "Target Group": "Men & Women from all categories",
-      "Activities": [
-        "Training in Basic Sewing Operator",
-        "Training in Software Application In Textile Design",
-        "Third party Assessment for Certification",
-        "Placement in Industrial Sector",
-        "Escort Service for Self Employment",
-        "Marketing support through liasion with small scale industries",
-        "Marketing support through participation in exhibition"
-      ],
-      "Beneficiaries": "Men & Women who want to economically sustain, Men & Women who want to start their own venture",
-      "Outcome": [
-        "1000 & more Men & Women are trained under this scheme.",
-        "750 Men & Women are placed in Industrial sector",
-        "100 Men & Women are started their own venture"
-      ]
-    }
-  },
-  {
-    "id": "10",
     "slug": "swajal-dhara",
     "name": "Swajal Dhara",
     "description": "To supply potable water to each and every village of Gujarat State regularly.",
@@ -452,7 +458,7 @@ export const projects = [
     }
   },
   {
-    "id": "11",
+    "id": "10",
     "slug": "woman-empowerment-creation",
     "name": "Woman Empowerment Creation",
     "description": "To Generate income for sustaining their own life and come out from the earthquake affect.",
@@ -479,7 +485,7 @@ export const projects = [
     }
   },
   {
-    "id": "12",
+    "id": "11",
     "slug": "health-care",
     "name": "Health Care",
     "description": "To provide health care to women, children, salt workers and weaker section and people living below poverty line.",
@@ -510,7 +516,7 @@ export const projects = [
     }
   },
   {
-    "id": "13",
+    "id": "12",
     "slug": "namak-mazdoor-awas-yojna",
     "name": "Namak Mazdoor Awas Yojna",
     "description": "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat.",
@@ -536,7 +542,7 @@ export const projects = [
     }
   },
   {
-    "id": "14",
+    "id": "13",
     "slug": "multi-purpose-women-welfare-center",
     "name": "multi purpose women welfare center",
     "description": "All type of welfare activity for women.",
@@ -562,7 +568,7 @@ export const projects = [
     }
   },
   {
-    "id": "15",
+    "id": "14",
     "slug": "marketing-support-for-sustainability",
     "name": "marketing support for sustainability",
     "description": "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
