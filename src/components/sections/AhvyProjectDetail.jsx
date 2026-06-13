@@ -314,6 +314,45 @@ export default function AhvyProjectDetail({ project }) {
 
       {/* Main Container */}
       <main className="max-w-6xl mx-auto px-6 mt-12">
+        {/* Project Gallery Section */}
+        {project.images && project.images.length > 0 && (
+          <section className="mb-12 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-5 mb-6 gap-3">
+              <h3 className="text-lg md:text-2xl font-black text-slate-900 flex items-center gap-2.5">
+                <ImageIcon className="w-6 h-6 text-amber-700" />
+                Project Gallery
+              </h3>
+              <span className="text-xs font-extrabold text-slate-400">
+                Showing {project.images.length} photos of the clusters
+              </span>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {project.images.map((imgUrl, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => {
+                    setActiveImageIndex(idx)
+                    setLightboxIndex(idx)
+                  }}
+                  className="group relative aspect-4/3 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 cursor-pointer shadow-xs hover:shadow-md hover:border-amber-400 transition-all duration-300"
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`${project.name} gallery image ${idx + 1}`}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-white text-xs font-bold bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
+                      View Photo
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
 
         {/* Intro Card & Key Specs Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16">
@@ -649,79 +688,7 @@ export default function AhvyProjectDetail({ project }) {
           </div>
         </section>
 
-        {/* Gallery / Carousel Section */}
-        {project.images && project.images.length > 0 && (
-          <section className="bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-5 mb-6 gap-3">
-              <h3 className="text-lg md:text-2xl font-black text-slate-900 flex items-center gap-2.5">
-                <ImageIcon className="w-6 h-6 text-amber-700" />
-                Project Gallery
-              </h3>
-              <span className="text-xs font-extrabold text-slate-400">
-                Showing {project.images.length} photos of the clusters
-              </span>
-            </div>
 
-            {/* Main Image Display Box */}
-            <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden rounded-2xl border border-slate-150 bg-slate-50 mb-6 group">
-              <img
-                src={project.images[activeImageIndex]}
-                alt="Ambedkar Hastshilp Vikas Yojana cluster overview"
-                className="w-full h-full object-cover object-center transition-transform duration-500"
-              />
-              {/* Overlay controls */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
-                <div className="text-white">
-                  <h4 className="text-sm md:text-base font-black">AHVY Artisan Cluster Photo</h4>
-                  <p className="text-xs text-slate-200/90 font-medium">Image {activeImageIndex + 1} of {project.images.length}</p>
-                </div>
-              </div>
-
-              {/* Prev / Next buttons inside the image display */}
-              <button
-                onClick={() => {
-                  const newIdx = (activeImageIndex - 1 + project.images.length) % project.images.length
-                  setActiveImageIndex(newIdx)
-                }}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center cursor-pointer transition-colors shadow-xs"
-                aria-label="Previous image"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-
-              <button
-                onClick={() => {
-                  const newIdx = (activeImageIndex + 1) % project.images.length
-                  setActiveImageIndex(newIdx)
-                }}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 text-white flex items-center justify-center cursor-pointer transition-colors shadow-xs"
-                aria-label="Next image"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Thumbnail Row */}
-            <div className="flex gap-2.5 overflow-x-auto pb-2 scrollbar-thin">
-              {project.images.map((imgUrl, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setActiveImageIndex(idx)
-                    setLightboxIndex(idx)
-                  }}
-                  className={`relative w-24 h-18 rounded-xl overflow-hidden border-2 flex-shrink-0 cursor-pointer transition-all duration-200 ${activeImageIndex === idx
-                    ? 'border-amber-600 scale-[1.03] shadow-md'
-                    : 'border-slate-200 hover:border-slate-350'
-                    }`}
-                >
-                  <img src={imgUrl} alt={`AHVY thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-black/20 hover:bg-transparent transition-colors" />
-                </button>
-              ))}
-            </div>
-          </section>
-        )}
 
       </main>
 

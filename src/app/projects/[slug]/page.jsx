@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { projects } from '@/data/projects'
 import AhvyProjectDetail from '@/components/sections/AhvyProjectDetail'
 import PmegpProjectDetail from '@/components/sections/PmegpProjectDetail'
+import DchProjectDetail from '@/components/sections/DchProjectDetail'
 import {
   ArrowLeft,
   CheckCircle,
@@ -79,6 +80,10 @@ export default function ProjectDetailPage({ params }) {
     return <PmegpProjectDetail project={project} />
   }
 
+  if (project.layout === 'dch') {
+    return <DchProjectDetail project={project} />
+  }
+
   return (
     <div className="min-h-screen bg-slate-50/50 pb-20">
       {/* Dynamic Colored Header Hero */}
@@ -114,6 +119,39 @@ export default function ProjectDetailPage({ params }) {
 
       {/* Main Details Grid */}
       <main className="max-w-6xl mx-auto px-6 mt-12 md:mt-16">
+        {/* Project Gallery Section */}
+        {project.images && project.images.length > 0 && (
+          <section className="mb-12 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
+            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
+              <ImageIcon className="w-6 h-6 text-blue-700" />
+              Project Gallery
+            </h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+              {project.images.map((imgUrl, idx) => (
+                <div
+                  key={idx}
+                  onClick={() => {
+                    setActiveImageIndex(idx)
+                    setLightboxIndex(idx)
+                  }}
+                  className="group relative aspect-4/3 rounded-2xl overflow-hidden border border-slate-200 bg-slate-55 cursor-pointer shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-300"
+                >
+                  <img
+                    src={imgUrl}
+                    alt={`${project.name} gallery image ${idx + 1}`}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-white text-xs font-bold bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
+                      View Photo
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
         {project.layout === 'gratitude' ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-start">
             {/* Left Column: Image Gallery Card */}
@@ -350,38 +388,7 @@ export default function ProjectDetailPage({ params }) {
           </div>
         )}
 
-        {/* Project Gallery Section */}
-        {project.images && project.images.length > 0 && (
-          <section className="mt-12 md:mt-16 bg-white border border-slate-200 rounded-3xl p-6 md:p-8 shadow-xs">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-100 flex items-center gap-2">
-              <ImageIcon className="w-6 h-6 text-blue-700" />
-              Project Gallery
-            </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-              {project.images.map((imgUrl, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => {
-                    setActiveImageIndex(idx)
-                    setLightboxIndex(idx)
-                  }}
-                  className="group relative aspect-4/3 rounded-2xl overflow-hidden border border-slate-200 bg-slate-55 cursor-pointer shadow-xs hover:shadow-md hover:border-blue-400 transition-all duration-300"
-                >
-                  <img
-                    src={imgUrl}
-                    alt={`${project.name} gallery image ${idx + 1}`}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
-                  />
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold bg-black/60 px-3 py-1.5 rounded-full border border-white/20">
-                      View Photo
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+
       </main>
 
       {/* Lightbox Modal */}
