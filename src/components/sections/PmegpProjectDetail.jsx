@@ -185,7 +185,7 @@ export default function PmegpProjectDetail({ project }) {
                 The Scheme
               </h2>
               <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold mb-4 text-justify">
-                The Government of India approved the introduction of the **Prime Minister’s Employment Generation Programme (PMEGP)** by merging two prominent schemes: the *Prime Minister’s Rojgar Yojana (PMRY)* and the *Rural Employment Generation Programme (REGP)*. 
+                The Government of India approved the introduction of the **Prime Minister’s Employment Generation Programme (PMEGP)** by merging two prominent schemes: the *Prime Minister’s Rojgar Yojana (PMRY)* and the *Rural Employment Generation Programme (REGP)*.
               </p>
               <p className="text-slate-650 text-sm md:text-base leading-relaxed font-semibold text-justify">
                 Administered by the **Ministry of Micro, Small and Medium Enterprises (MoMSME)**, PMEGP functions as a central sector scheme. The Government subsidy is routed by the National Nodal Agency through identified banks for direct credit into the bank accounts of beneficiaries and entrepreneurs.
@@ -274,7 +274,7 @@ export default function PmegpProjectDetail({ project }) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {objectives.map((obj, idx) => (
-              <div 
+              <div
                 key={idx}
                 className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xs hover:shadow-lg hover:border-violet-300 transition-all duration-300 flex items-start gap-4 group"
               >
@@ -355,7 +355,7 @@ export default function PmegpProjectDetail({ project }) {
               <p className="text-xs md:text-sm font-bold text-rose-900/90 leading-relaxed mb-4 text-justify">
                 Specific units and activities are strictly excluded from obtaining credit or subsidies under the PMEGP scheme:
               </p>
-              
+
               <ul className="space-y-3.5">
                 <li className="flex items-start gap-2.5 text-xs md:text-sm font-bold text-rose-950">
                   <span className="w-1.5 h-1.5 rounded-full bg-rose-650 mt-2 flex-shrink-0" />
@@ -393,7 +393,7 @@ export default function PmegpProjectDetail({ project }) {
                 Quantum of funding and beneficiary contribution metrics under the PMEGP framework:
               </p>
             </div>
-            
+
             {/* Quick Limit Badges */}
             <div className="flex flex-wrap gap-2">
               <span className="px-3.5 py-1.5 bg-violet-50 text-violet-850 text-xs font-black rounded-lg border border-violet-100">
@@ -494,9 +494,9 @@ export default function PmegpProjectDetail({ project }) {
                 </p>
               </div>
             </div>
-            
+
             <a
-              href="#our-projects" 
+              href="#our-projects"
               onClick={(e) => {
                 e.preventDefault()
                 window.open("https://msme.gov.in/", "_blank")
