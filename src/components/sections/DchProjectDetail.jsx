@@ -37,36 +37,35 @@ export default function DchProjectDetail({ project }) {
   return (
     <div className="min-h-screen bg-slate-50/70 pb-24 text-slate-800 font-sans">
       {/* Hero Banner Section */}
-      <section className="relative py-16 md:py-24 bg-gradient-to-br from-teal-650 via-cyan-650 to-emerald-700 text-white overflow-hidden shadow-md">
-        {/* Abstract shapes overlay */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-teal-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:20px_20px] opacity-60" />
+      <section className={`relative py-12 md:py-20 bg-gradient-to-br ${project.theme} border-b ${project.border} overflow-hidden`}>
+        {/* Decorative elements */}
+        <div className="absolute top-0 right-0 w-80 h-80 bg-white/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-white/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-6 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-white bg-white/10 hover:bg-white/20 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 mb-8 transition-all duration-200 shadow-sm"
+            className="inline-flex items-center gap-2 text-xs md:text-sm font-bold text-slate-700 hover:text-slate-900 bg-white/85 px-4 py-2 rounded-full border border-slate-200/50 mb-6 transition-colors shadow-xs"
           >
             <ArrowLeft className="w-4 h-4" />
             Home
           </Link>
 
-          <div className="flex items-center gap-2 mb-4">
-            <span className="px-3.5 py-1 bg-teal-500/90 text-white text-xs font-black rounded-full border border-teal-400 uppercase tracking-widest shadow-xs">
+          <div className="flex items-center gap-3 mb-4">
+            <span className={`px-3.5 py-1 rounded-full text-xs font-extrabold border ${project.tagClass}`}>
               Project #{project.id}
             </span>
-            <span className="px-3.5 py-1 bg-white/25 text-white text-xs font-bold rounded-full border border-white/10 backdrop-blur-xs">
+            <span className="px-3.5 py-1 bg-white/60 text-slate-700 text-xs font-bold rounded-full border border-slate-200/50 backdrop-blur-xs">
               {project.supportType}
             </span>
           </div>
 
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6 drop-shadow-sm">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight tracking-tight capitalize mb-4">
             Development Commissioner <br className="hidden md:inline" />
-            <span className="text-teal-200">(Handicrafts) (DCH)</span>
+            <span className="text-slate-850">(Handicrafts) (DCH)</span>
           </h1>
 
-          <p className="text-base md:text-lg lg:text-xl text-teal-50/90 max-w-3xl leading-relaxed font-medium">
+          <p className="text-base md:text-xl text-slate-700 max-w-3xl leading-relaxed font-semibold">
             Supporting and promoting Indian handicrafts through various development schemes, artisan cluster support, and national capacity-building initiatives.
           </p>
         </div>
