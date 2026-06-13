@@ -48,10 +48,10 @@ export const projects = [
       "Target Area": "Across Gujarat.",
       "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
 
-      "Duration": "Three Years",
+      // "Duration": "Three Years",
 
-      "Starting Of The Project": "Feb-2025",
-      "Process": "Training, Liaison, Placement & Follow up."
+      // "Starting Of The Project": "Feb-2025",
+      // "Process": "Training, Liaison, Placement & Follow up."
     }
   },
 
@@ -147,7 +147,7 @@ export const projects = [
       "Target Area": "Ahmedabad District of Gujarat.",
       "Object of the Project": "Employment Generation through placement and Industrial Development.",
 
-      "Duration": "Three Years",
+      // "Duration": "Three Years",
 
       "Process": "Training, Liaison, Placement & Follow up."
     }
@@ -174,7 +174,7 @@ export const projects = [
       "Support": "Center for Entrepreneurship Development Gandhinagar",
       "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
       "Object of the Project": "Training, Liaison and Placement",
-      "Starting Of The Project": "During the year 23-24",
+      // "Starting Of The Project": "During the year 23-24",
 
     }
   },
@@ -207,10 +207,7 @@ export const projects = [
       "/images/CEDC/Photo 46.jpg",
       "/images/CEDC/Photo 49.JPG",
       "/images/CEDC/Photo 55.JPG",
-      "/images/CEDC/Photo 6.jpg",
-      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
-      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
-      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
+      "/images/CEDC/Photo 6.jpg"
     ],
     "theme": "from-blue-50/80 to-teal-50/40",
     "border": "border-blue-200 hover:border-blue-350",
@@ -221,10 +218,10 @@ export const projects = [
       "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
       "Target Group": "Unemployed Youth and Women seeking skill development.",
       "Target Area": "Gandhinagar, Gujarat.",
-      "Duration": "Ongoing",
+      // "Duration": "Ongoing",
       "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
       "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
-      "Contact": "+91 94280 20080, 079-23242080",
+      "Contact": "+91 94280 20080",
       "Email": "cedc.gandhinagar@gmail.com, mkt.gnr@gmail.com",
       "Activities": [
         "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
@@ -271,7 +268,7 @@ export const projects = [
       "Support": "Development Commissioner (Handicrafts), Ministry of Textiles, Govt. of India.",
       "Target Group": "Artisans, Self-Help Groups (SHGs), Cooperatives, and handicraft organizations.",
       "Target Area": "Across India (Cluster-based)",
-      "Duration": "Ongoing",
+      // "Duration": "Ongoing",
       "Process": "Cluster-based interventions, skill upgradation, design development, and marketing link support."
     }
   },
@@ -328,7 +325,7 @@ export const projects = [
       "Support": "Ministry of Micro, Small and Medium Enterprises (MoMSME)",
       "Target Group": "Unemployed Youth, Traditional Artisans, Self Help Groups, and Charitable Trusts.",
       "Target Area": "Across India (Rural & Urban)",
-      "Duration": "Ongoing",
+      // "Duration": "Ongoing",
       "Process": "Credit-linked subsidy routing via identified banks, EDP training, and project identification support."
     }
   },
