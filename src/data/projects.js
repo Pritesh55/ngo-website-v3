@@ -6,6 +6,7 @@ export const projects = [
     "description": "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
     "supportType": "Govt. Supported",
     "images": [
+      "/images/CEDC/Photo 25.jpg",
       "/images/CEDC/03-CEDC-with-MKT.jpeg",
       "/images/CEDC/02-CEDC.jpeg",
       "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
@@ -16,7 +17,7 @@ export const projects = [
       "/images/CEDC/Photo 21.JPG",
       "/images/CEDC/Photo 22.jpg",
       "/images/CEDC/Photo 23.jpg",
-      "/images/CEDC/Photo 25.jpg",
+
       "/images/CEDC/Photo 27.jpg",
       "/images/CEDC/Photo 34.jpg",
       "/images/CEDC/Photo 39.jpg",
