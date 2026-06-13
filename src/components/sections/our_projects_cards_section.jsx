@@ -90,7 +90,7 @@ export function Our_Projects_Cards_Section() {
               {/* Action Buttons */}
               <div className="pt-4 border-t border-slate-200/40 flex items-center justify-between">
                 <span className={`px-3 py-1.5 rounded-full text-xs font-extrabold border ${project.tagClass}`}>
-                  {project.details["Support"] ? "Govt Supported" : "NGO Funds / WASMO"}
+                  {project.supportType}
                 </span>
 
                 <Link

@@ -29,8 +29,12 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${notoSerifGujarati.variable} h-full antialiased`}
-    >
+      className={`${geistSans.variable} ${geistMono.variable} ${notoSerifGujarati.variable} h-full antialiased`}>
+      <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Manav kalyan trust | Ghatlodia, Ahmedabad</title>
+      </head>
       <body className="flex flex-col tracking-wide items-center">
         <Header_of_full_website></Header_of_full_website>
 

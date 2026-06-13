@@ -1,9 +1,10 @@
 export const projects = [
   {
     id: "01",
-    slug: "cedc",
-    name: "Centre for Enterprise Development and Community (CEDC)",
+    slug: "ISDS",
+    name: "Integrated Skill Development Scheme (ISDS)",
     description: "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
+    supportType: "Govt. Supported",
     images: [
       "/images/CEDC/03-CEDC-with-MKT.jpeg",
       "/images/CEDC/02-CEDC.jpeg",
@@ -62,6 +63,7 @@ export const projects = [
     slug: "help-to-khedbrahma-general-hospital",
     name: "Help to Khedbrahma General Hospital",
     description: "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
+    supportType: "FCRA",
     images: [
       "/images/Help_to_khedbrahma_general_hospital/cover-photo-Khedbrahma.jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (1).jpeg",
@@ -125,6 +127,7 @@ export const projects = [
     slug: "pradhan-mantri-kaushal-vikas-yojana",
     name: "pradhan mantri kaushal vikas yojana (PMKVY)",
     description: "Employment Generation through placement and Industrial Development.",
+    supportType: "Govt. Supported",
     images: [
       "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-01.jpg",
       "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-02.jpg",
@@ -151,6 +154,7 @@ export const projects = [
     slug: "saksham-kvk-2-0",
     name: "saksham kvk 2.0",
     description: "Employment Generation Through Placement and Industrial Development.",
+    supportType: "Govt. Supported",
     images: [
       "/images/our-projects/01-SAKSHAM-KVK-2-01.jpg",
       "/images/our-projects/01-SAKSHAM-KVK-2-02.jpg",
@@ -161,7 +165,7 @@ export const projects = [
     tagClass: "border-blue-200 bg-blue-100/60 text-blue-700",
     btnClass: "from-blue-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
     details: {
-      "Support": "Gujarat skill development mission Gandhinagar Govt of Gujarat.",
+      "Support": "Gujarat skill development mission Gandhinagar Govt. of Gujarat.",
       "Target Group": "Unemployed Man and Woman of Gujarat.",
       "Target Area": "Across Gujarat.",
       "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
@@ -178,6 +182,7 @@ export const projects = [
     slug: "training-under-scheme-6",
     name: "Training under Scheme - 6",
     description: "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
+    supportType: "Govt. Supported",
     images: [
       "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
       "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
@@ -202,6 +207,7 @@ export const projects = [
     slug: "integrated-skill-development-scheme",
     name: "Integrated Skill Development Scheme",
     description: "To make become Men & Women economically sustain",
+    supportType: "Govt. Supported",
     images: [
       "/images/our-projects/05-Integrated-Skill-Development-Scheme.jpg"
     ],
@@ -236,6 +242,7 @@ export const projects = [
     slug: "swajal-dhara",
     name: "Swajal Dhara",
     description: "To supply potable water to each and every village of Gujarat State regularly.",
+    supportType: "WASMO",
     images: [
       "/images/our-projects/06-Swajal-Dhara.png"
     ],
@@ -265,6 +272,7 @@ export const projects = [
     slug: "woman-empowerment-creation",
     name: "Woman Empowerment Creation",
     description: "To Generate income for sustaining their own life and come out from the earthquake affect.",
+    supportType: "MKT NGO Funds",
     images: [
       "/images/our-projects/07-Woman-Empowerment-Creation.png"
     ],
@@ -291,6 +299,7 @@ export const projects = [
     slug: "health-care",
     name: "Health Care",
     description: "To provide health care to women, children, salt workers and weaker section and people living below poverty line.",
+    supportType: "MKT NGO Funds",
     images: [
       "/images/our-projects/08-Health-Care.png"
     ],
@@ -321,6 +330,7 @@ export const projects = [
     slug: "namak-mazdoor-awas-yojna",
     name: "Namak Mazdoor Awas Yojna",
     description: "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat.",
+    supportType: "MKT NGO Funds and Govt. Supported",
     images: [
       "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg"
     ],
@@ -345,6 +355,7 @@ export const projects = [
     slug: "multi-purpose-women-welfare-center",
     name: "multi purpose women welfare center",
     description: "All type of welfare activity for women.",
+    supportType: "Govt. Supported",
     images: [
       "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-01.jpg",
       "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-02.jpg",
@@ -371,6 +382,7 @@ export const projects = [
     slug: "marketing-support-for-sustainability",
     name: "marketing support for sustainability",
     description: "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
+    supportType: "Govt. Supported",
     images: [
       "/images/our-projects/04-marketing-support-for-sustainability-01.jpg",
       "/images/our-projects/04-marketing-support-for-sustainability-02.jpg",
