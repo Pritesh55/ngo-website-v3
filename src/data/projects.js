@@ -222,7 +222,7 @@ export const projects = [
       "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
       "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
       "Contact": "+91 94280 20080",
-      "Email": "cedc.gandhinagar@gmail.com, mkt.gnr@gmail.com",
+      "Email": "cedc.gandhinagar@gmail.com, mktahmedabad1986@gmail.com",
       "Activities": [
         "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
         "Certificate Course in Retail Management (3 Months, Eligibility: 12th Pass)",
