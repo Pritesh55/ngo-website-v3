@@ -60,7 +60,7 @@ export const projects = [
     "id": "02",
     "slug": "help-to-khedbrahma-general-hospital",
     "name": "Help to Khedbrahma General Hospital",
-    "description": "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
+    "description": "Supporting Khedbrahma General Hospital with vital medical equipment.",
     "description2": ``,
     "supportType": "FCRA Supported",
     "images": [
