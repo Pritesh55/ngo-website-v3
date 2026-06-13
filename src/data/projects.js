@@ -7,8 +7,8 @@ export const projects = [
     "supportType": "Govt. Supported",
     "images": [
       "/images/CEDC/Photo 25.jpg",
-      "/images/CEDC/03-CEDC-with-MKT.jpeg",
-      "/images/CEDC/02-CEDC.jpeg",
+      // "/images/CEDC/03-CEDC-with-MKT.jpeg",
+      // "/images/CEDC/02-CEDC.jpeg",
       "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
       "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
       "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
