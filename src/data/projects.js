@@ -9,9 +9,7 @@ export const projects = [
       "/images/CEDC/Photo 25.jpg",
       // "/images/CEDC/03-CEDC-with-MKT.jpeg",
       // "/images/CEDC/02-CEDC.jpeg",
-      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
-      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
-      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
+
       "/images/CEDC/01-Photo 48.JPG",
       "/images/CEDC/Photo 2.jpg",
       "/images/CEDC/Photo 21.JPG",
@@ -27,7 +25,10 @@ export const projects = [
       "/images/CEDC/Photo 46.jpg",
       "/images/CEDC/Photo 49.JPG",
       "/images/CEDC/Photo 55.JPG",
-      "/images/CEDC/Photo 6.jpg"
+      "/images/CEDC/Photo 6.jpg",
+      "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
+      "/images/CEDC/05-CESCD-Certificate-cource-in-Retail-sector-.jpeg",
+      "/images/CEDC/06-CESCD-Certificate-cource-in-Textile-sector.jpeg",
     ],
     "theme": "from-blue-50/80 to-teal-50/40",
     "border": "border-blue-200 hover:border-blue-350",
