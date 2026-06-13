@@ -221,6 +221,7 @@ export const projects = [
     "description": "Supporting and promoting Indian handicrafts through development schemes, artisan cluster support, and national capacity-building initiatives.",
     "supportType": "Govt. Supported",
     "images": [
+      "/images/Development-Commissioner-Handicrafts/IMG_0672.JPG",
       "/images/Development-Commissioner-Handicrafts/20180807_163050.jpg",
       "/images/Development-Commissioner-Handicrafts/20180807_163112.jpg",
       "/images/Development-Commissioner-Handicrafts/20180807_163122.jpg",
@@ -286,7 +287,7 @@ export const projects = [
       "/images/Development-Commissioner-Handicrafts/IMG_0664.JPG",
       "/images/Development-Commissioner-Handicrafts/IMG_0665.JPG",
       "/images/Development-Commissioner-Handicrafts/IMG_0671.JPG",
-      "/images/Development-Commissioner-Handicrafts/IMG_0672.JPG",
+
       "/images/Development-Commissioner-Handicrafts/IMG_0673.JPG",
       "/images/Development-Commissioner-Handicrafts/IMG_0675.JPG",
       "/images/Development-Commissioner-Handicrafts/IMG_0677.JPG",
