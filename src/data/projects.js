@@ -1,11 +1,11 @@
 export const projects = [
   {
-    id: "01",
-    slug: "ISDS",
-    name: "Integrated Skill Development Scheme (ISDS)",
-    description: "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
-    supportType: "Govt. Supported",
-    images: [
+    "id": "01",
+    "slug": "ISDS",
+    "name": "Integrated Skill Development Scheme (ISDS)",
+    "description": "Empowering youth and women through skill development, offering job-oriented certificate courses in Banking, Retail Management, and Garment Making & Fashion Designing with 100% placement support.",
+    "supportType": "Govt. Supported",
+    "images": [
       "/images/CEDC/03-CEDC-with-MKT.jpeg",
       "/images/CEDC/02-CEDC.jpeg",
       "/images/CEDC/04-CESCD-Certificate-cource-in-Banking-sector.jpeg",
@@ -28,11 +28,11 @@ export const projects = [
       "/images/CEDC/Photo 55.JPG",
       "/images/CEDC/Photo 6.jpg"
     ],
-    theme: "from-blue-50/80 to-teal-50/40",
-    border: "border-blue-200 hover:border-blue-350",
-    tagClass: "border-blue-200 bg-blue-100/60 text-blue-700",
-    btnClass: "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
-    details: {
+    "theme": "from-blue-50/80 to-teal-50/40",
+    "border": "border-blue-200 hover:border-blue-350",
+    "tagClass": "border-blue-200 bg-blue-100/60 text-blue-700",
+    "btnClass": "from-blue-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    "details": {
       "Goal": "To empower the youth and women of the community by providing them with skill-based training and education, enabling them to become self-reliant and contribute to the development of society.",
       "Support": "Advocate Maheshbhai Kothari Foundation, Gandhinagar.",
       "Target Group": "Unemployed Youth and Women seeking skill development.",
@@ -59,12 +59,12 @@ export const projects = [
     }
   },
   {
-    id: "02",
-    slug: "help-to-khedbrahma-general-hospital",
-    name: "Help to Khedbrahma General Hospital",
-    description: "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
-    supportType: "FCRA",
-    images: [
+    "id": "02",
+    "slug": "help-to-khedbrahma-general-hospital",
+    "name": "Help to Khedbrahma General Hospital",
+    "description": "Supporting Khedbrahma General Hospital with vital medical equipment in collaboration with Trivedi Family Charitable Trust (USA) and Manav Kalyan Trust (Ahmedabad).",
+    "supportType": "FCRA",
+    "images": [
       "/images/Help_to_khedbrahma_general_hospital/cover-photo-Khedbrahma.jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (1).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (2).jpeg",
@@ -95,12 +95,12 @@ export const projects = [
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (49).jpeg",
       "/images/Help_to_khedbrahma_general_hospital/Medical-eqipment-donate-to-Khedbrahma-General-Hospital (50).jpeg"
     ],
-    theme: "from-amber-50/80 to-orange-50/40",
-    border: "border-amber-200 hover:border-amber-350",
-    tagClass: "border-amber-200 bg-amber-100/60 text-amber-700",
-    btnClass: "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
-    layout: "gratitude",
-    details: {
+    "theme": "from-amber-50/80 to-orange-50/40",
+    "border": "border-amber-200 hover:border-amber-350",
+    "tagClass": "border-amber-200 bg-amber-100/60 text-amber-700",
+    "btnClass": "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
+    "layout": "gratitude",
+    "details": {
       "Support": "Trivedi Family Charitable Trust (USA) & Manav Kalyan Trust (Ahmedabad)",
       "Target Area": "Khedbrahma, Gujarat",
       "Date": "09-05-2026",
@@ -123,330 +123,12 @@ export const projects = [
     }
   },
   {
-    id: "03",
-    slug: "pradhan-mantri-kaushal-vikas-yojana",
-    name: "pradhan mantri kaushal vikas yojana (PMKVY)",
-    description: "Employment Generation through placement and Industrial Development.",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-01.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-02.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-03.jpg",
-      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-04.jpg"
-    ],
-    theme: "from-orange-50/80 to-amber-50/40",
-    border: "border-orange-200 hover:border-orange-350",
-    tagClass: "border-orange-200 bg-orange-100/60 text-orange-700",
-    btnClass: "from-orange-500 to-amber-600 text-white hover:shadow-amber-500/20",
-    details: {
-      "Support": "Gujarat Skill Development Mission, Gandhinagar Govt. of Gujarat & National Skill Development Corporation, Govt. of India.",
-      "Target Group": "Man and Women who are seeking for Job or desire to setup their own venture.",
-      "Target Area": "Ahmedabad District of Gujarat.",
-      "Object of the Project": "Employment Generation through placement and Industrial Development.",
-      "Budget": "Rs.1,00,00,000/-",
-      "Duration": "Three Years",
-      "Expenditure / Grant": "Rs.13,78,827/-",
-      "Process": "Training, Liaison, Placement & Follow up."
-    }
-  },
-  {
-    id: "04",
-    slug: "saksham-kvk-2-0",
-    name: "saksham kvk 2.0",
-    description: "Employment Generation Through Placement and Industrial Development.",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/our-projects/01-SAKSHAM-KVK-2-01.jpg",
-      "/images/our-projects/01-SAKSHAM-KVK-2-02.jpg",
-      "/images/our-projects/01-SAKSHAM-KVK-2-03.jpg"
-    ],
-    theme: "from-blue-50/80 to-indigo-50/40",
-    border: "border-blue-200 hover:border-blue-350",
-    tagClass: "border-blue-200 bg-blue-100/60 text-blue-700",
-    btnClass: "from-blue-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
-    details: {
-      "Support": "Gujarat skill development mission Gandhinagar Govt. of Gujarat.",
-      "Target Group": "Unemployed Man and Woman of Gujarat.",
-      "Target Area": "Across Gujarat.",
-      "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
-      "Budget": "Rs.1,03,68,000/-",
-      "Duration": "Three Years",
-      "Expenditure / Grant": "Rs.4,20,000/-",
-      "Starting Of The Project": "Feb-2025",
-      "Process": "Training, Liaison, Placement & Follow up."
-    }
-  },
-
-  {
-    id: "05",
-    slug: "training-under-scheme-6",
-    name: "Training under Scheme - 6",
-    description: "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-03.jpg",
-      "/images/Training-under-scheme-06/Training-under-scheme-06-04.jpg"
-    ],
-    theme: "from-purple-50/80 to-indigo-50/40",
-    border: "border-purple-200 hover:border-purple-350",
-    tagClass: "border-purple-200 bg-purple-100/60 text-purple-700",
-    btnClass: "from-purple-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
-    details: {
-      "Support": "Center for Entrepreneurship Development Gandhinagar",
-      "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
-      "Object of the Project": "Training, Liaison and Placement",
-      "Starting Of The Project": "During the year 23-24",
-      "Expenditure Incurred During The Year": "Rs.25,31,838/-"
-    }
-  },
-
-  {
-    id: "06",
-    slug: "integrated-skill-development-scheme",
-    name: "Integrated Skill Development Scheme",
-    description: "To make become Men & Women economically sustain",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/our-projects/05-Integrated-Skill-Development-Scheme.jpg"
-    ],
-    theme: "from-cyan-50/80 to-sky-50/40",
-    border: "border-cyan-200 hover:border-cyan-350",
-    tagClass: "border-cyan-200 bg-cyan-100/60 text-cyan-700",
-    btnClass: "from-cyan-500 to-sky-600 text-white hover:shadow-sky-500/20",
-    details: {
-      "Goal": "To make become Men & Women economically sustain",
-      "Target Area": "Ahmedabad City, Gujarat State, India",
-      "Supporting Agency": "Ministry of Textile Government of India, Centre for Entrepreneurship Development Government of Gujarat",
-      "Target Group": "Men & Women from all categories",
-      "Activities": [
-        "Training in Basic Sewing Operator",
-        "Training in Software Application In Textile Design",
-        "Third party Assessment for Certification",
-        "Placement in Industrial Sector",
-        "Escort Service for Self Employment",
-        "Marketing support through liasion with small scale industries",
-        "Marketing support through participation in exhibition"
-      ],
-      "Beneficiaries": "Men & Women who want to economically sustain, Men & Women who want to start their own venture",
-      "Outcome": [
-        "1000 & more Men & Women are trained under this scheme.",
-        "750 Men & Women are placed in Industrial sector",
-        "100 Men & Women are started their own venture"
-      ]
-    }
-  },
-  {
-    id: "07",
-    slug: "swajal-dhara",
-    name: "Swajal Dhara",
-    description: "To supply potable water to each and every village of Gujarat State regularly.",
-    supportType: "WASMO",
-    images: [
-      "/images/our-projects/06-Swajal-Dhara.png"
-    ],
-    theme: "from-violet-50/80 to-purple-50/40",
-    border: "border-violet-200 hover:border-violet-350",
-    tagClass: "border-violet-200 bg-violet-100/60 text-violet-700",
-    btnClass: "from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20",
-    details: {
-      "Goal": "To supply potable water to each and every village of Gujarat State regularly.",
-      "Target Area": "UPLETA & DHORAJI Block of Rajkot District in Gujarat State of India.",
-      "Supporting Agency": "WASMO",
-      "Target Group": "Rural people of UPLETA & DHORAJI Group of Rajkot District of Gujarat State.",
-      "Activities": [
-        "Introductory meeting",
-        "Grama sabha",
-        "Formation of Pani Samithi",
-        "Awareness in schools programme",
-        "Sanitation programme.",
-        "Water testing and role of public contribution."
-      ],
-      "Beneficiaries": "Rural people of UPLETA and DHORAJI Block of Rajkot District in Gujarat State.",
-      "Outcome": "Now rural people of UPLETA and Dhoraji block of Rajkot district are in a position to get lots of water regularly."
-    }
-  },
-  {
-    id: "08",
-    slug: "woman-empowerment-creation",
-    name: "Woman Empowerment Creation",
-    description: "To Generate income for sustaining their own life and come out from the earthquake affect.",
-    supportType: "MKT NGO Funds",
-    images: [
-      "/images/our-projects/07-Woman-Empowerment-Creation.png"
-    ],
-    theme: "from-rose-50/80 to-red-50/40",
-    border: "border-rose-200 hover:border-rose-350",
-    tagClass: "border-rose-200 bg-rose-100/60 text-rose-700",
-    btnClass: "from-rose-500 to-red-600 text-white hover:shadow-red-500/20",
-    details: {
-      "Goal": "To Generate income for sustaining their own life and come out from the earthquake affect.",
-      "Target Area": "Maliya-Miyana block in Rajkot district where earthquake had struck in Gujarat State of India.",
-      "Supporting Agency": "Manav Kalyan Trust Funds.",
-      "Target Group": "Earthquake hit rural women of Maliya- Miyana block in Rajkot District of Gujarat State.",
-      "Activities": [
-        "Cluster development",
-        "Marketing development",
-        "Training infrastructure development"
-      ],
-      "Beneficiaries": "Women of Maliya- Miyana block of Rajkot District.",
-      "Outcome": "All the women of Maliya- Miyana block of Rajkot district who have been affected by Earthquake have been rehabilitated with income generating programme and have been benefitted by this project."
-    }
-  },
-  {
-    id: "09",
-    slug: "health-care",
-    name: "Health Care",
-    description: "To provide health care to women, children, salt workers and weaker section and people living below poverty line.",
-    supportType: "MKT NGO Funds",
-    images: [
-      "/images/our-projects/08-Health-Care.png"
-    ],
-    theme: "from-lime-50/80 to-emerald-50/40",
-    border: "border-lime-200 hover:border-lime-350",
-    tagClass: "border-lime-200 bg-lime-100/60 text-lime-800",
-    btnClass: "from-lime-600 to-emerald-600 text-white hover:shadow-emerald-500/20",
-    details: {
-      "Goal": "To provide health care to women, children, salt workers and weaker section and people living poverty line.",
-      "Target Area": "Morbi and Maliya-Miyana Taluka & District of Rajkot in Gujarat State of India; Baroda Taluka & District Baroda in Gujarat State of India; Panchmahal District in Gujarat State of India.",
-      "Supporting Agency": "Manav Kalyan Trust Own Funds, Donations and other funds.",
-      "Target Group": "Women, children, salt workers, weaker sections and people living below poverty line.",
-      "Activities": [
-        "Eye care clinic associated with research and development centre for eye related issues",
-        "Problems Regarding child and mother health care",
-        "Problem of old age people among the target group.",
-        "Permanent clinic with necessary infrastructure.",
-        "Mobile Clinic",
-        "Ambulance for emergency service",
-        "Care and training for child bearing age women."
-      ],
-      "Beneficiaries": "Women, children, salt workers, Weaker sections and people living below povertyline.",
-      "Outcome": "Women, children, salt workers and weaker sections and people living below poverty line have been benefitted under this project."
-    }
-  },
-  {
-    id: "10",
-    slug: "namak-mazdoor-awas-yojna",
-    name: "Namak Mazdoor Awas Yojna",
-    description: "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat.",
-    supportType: "MKT NGO Funds and Govt. Supported",
-    images: [
-      "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg"
-    ],
-    theme: "from-amber-50/80 to-yellow-50/40",
-    border: "border-amber-250 hover:border-amber-350",
-    tagClass: "border-amber-200 bg-amber-100/60 text-amber-800",
-    btnClass: "from-amber-500 to-yellow-600 text-white hover:shadow-yellow-500/20",
-    details: {
-      "Goal": "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat",
-      "Target Area": "Maliya-Miyana Block of Rajkot District of Gujarat State in India",
-      "Supporting Agency": "Manav Kalyan Trust in collaboration with Rural Technology Institute, Commissioner of Industries Government of Gujarat and SALT department of Government of India",
-      "Target Group": "Salt workers living below povertyline and earthquake affected areas of Gujarat",
-      "Activities": [
-        "Distribution of kits to salt workers to provide safety measures while working in the salt industries.",
-        "Construction of houses for the Salt workers and people of Earthquake affected areas."
-      ],
-      "Beneficiaries": "Salt workers and Earthquake hit people of Rajkot District in Gujarat",
-      "Outcome": "500 families of Salt Workers have got shelters"
-    }
-  }, {
-    id: "11",
-    slug: "multi-purpose-women-welfare-center",
-    name: "multi purpose women welfare center",
-    description: "All type of welfare activity for women.",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-01.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-02.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-03.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-04.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-05.jpg",
-      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-06.jpg",
-    ],
-    theme: "from-pink-50/80 to-rose-50/40",
-    border: "border-pink-200 hover:border-pink-350",
-    tagClass: "border-pink-200 bg-pink-100/60 text-pink-700",
-    btnClass: "from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20",
-    details: {
-      "Support": "Commissioner for Women & Child Development",
-      "Extra effort": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
-      "Target Group": "Women from different Category",
-      "Object of the Project": "All type of welfare activity for women.",
-      "Total Budget": "Rs.3,60,000/-",
-      "Expenditure / Grant": "Rs.3,51,518/-"
-    }
-  },
-  {
-    id: "12",
-    slug: "marketing-support-for-sustainability",
-    name: "marketing support for sustainability",
-    description: "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
-    supportType: "Govt. Supported",
-    images: [
-      "/images/our-projects/04-marketing-support-for-sustainability-01.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-02.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-03.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-04.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-05.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-06.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-07.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-08.jpg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (1).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (2).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (3).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (4).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (5).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (6).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (7).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (8).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (9).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (10).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (11).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (12).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (13).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (14).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (15).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (16).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (17).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (18).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (19).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (20).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (21).jpeg",
-      "/images/our-projects/04-marketing-support-for-sustainability-09 (22).jpeg",
-      "/images/our-projects/04-MARK (23).jpeg",
-      "/images/our-projects/04-MARK (24).jpeg",
-      "/images/our-projects/04-MARK (25).jpeg",
-      "/images/our-projects/04-MARK (26).jpeg",
-      "/images/our-projects/04-MARK (27).jpeg",
-      "/images/our-projects/04-MARK (28).jpeg",
-      "/images/our-projects/04-MARK (29).jpeg",
-      "/images/our-projects/04-MARK (30).jpeg",
-      "/images/our-projects/04-MARK (31).jpeg",
-      "/images/our-projects/04-MARK (32).jpeg",
-      "/images/our-projects/04-MARK (33).jpeg"
-    ],
-    theme: "from-emerald-50/80 to-teal-50/40",
-    border: "border-emerald-200 hover:border-emerald-350",
-    tagClass: "border-emerald-200 bg-emerald-100/60 text-emerald-700",
-    btnClass: "from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20",
-    details: {
-      "Support": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
-      "Target Group": "Women artisans",
-      "Target Area": "Rural Area",
-      "Object of the Project": "Marketing for project By women artisans",
-      "Annual Budget": "As per requirement (for two years)",
-      "Expenditure / Grant": "As per requirement",
-      "Process": "As per scheme & need"
-    }
-  },
-  {
-    id: "13",
-    slug: "ahvy",
-    name: "Ambedkar Hastshilp Vikas Yojana (AHVY)",
-    description: "Empowering Artisans: The Ambedkar Hastshilp Vikas Yojana (AHVY) is a pivotal government initiative designed to revitalize and strengthen India's vibrant handicraft sector.",
-    supportType: "Govt. Supported",
-    images: [
+    "id": "03",
+    "slug": "ahvy",
+    "name": "Ambedkar Hastshilp Vikas Yojana (AHVY)",
+    "description": "Empowering Artisans: The Ambedkar Hastshilp Vikas Yojana (AHVY) is a pivotal government initiative designed to revitalize and strengthen India's vibrant handicraft sector.",
+    "supportType": "Govt. Supported",
+    "images": [
       "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.01 PM.jpeg",
       "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.02 PM (1).jpeg",
       "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.02 PM.jpeg",
@@ -458,12 +140,12 @@ export const projects = [
       "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.05 PM (1).jpeg",
       "/images/AHVY/WhatsApp Image 2026-06-12 at 7.37.05 PM.jpeg"
     ],
-    theme: "from-amber-50/80 to-orange-50/40",
-    border: "border-amber-200 hover:border-amber-350",
-    tagClass: "border-amber-200 bg-amber-100/60 text-amber-700",
-    btnClass: "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
-    layout: "ahvy",
-    details: {
+    "theme": "from-amber-50/80 to-orange-50/40",
+    "border": "border-amber-200 hover:border-amber-350",
+    "tagClass": "border-amber-200 bg-amber-100/60 text-amber-700",
+    "btnClass": "from-amber-500 to-orange-600 text-white hover:shadow-orange-500/20",
+    "layout": "ahvy",
+    "details": {
       "Goal": "To revitalize and strengthen India's vibrant handicraft sector by providing crucial financial, technological, and market support to artisan communities.",
       "Support": "Development Commissioner (Handicrafts), Ministry of Textiles, Govt. of India.",
       "Target Group": "Artisans, Self-Help Groups (SHGs), Cooperatives, and handicraft organizations.",
@@ -473,12 +155,12 @@ export const projects = [
     }
   },
   {
-    id: "14",
-    slug: "pmegp",
-    name: "Entrepreneurship development program under PMEGP scheme",
-    description: "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
-    supportType: "Govt. Supported",
-    images: [
+    "id": "04",
+    "slug": "pmegp",
+    "name": "Entrepreneurship development program under PMEGP scheme",
+    "description": "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
+    "supportType": "Govt. Supported",
+    "images": [
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13333.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13338.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13347.JPG",
@@ -513,12 +195,12 @@ export const projects = [
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13864.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13865.JPG"
     ],
-    theme: "from-violet-50/80 to-purple-50/40",
-    border: "border-violet-200 hover:border-violet-350",
-    tagClass: "border-violet-200 bg-violet-100/60 text-violet-750",
-    btnClass: "from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20",
-    layout: "pmegp",
-    details: {
+    "theme": "from-violet-50/80 to-purple-50/40",
+    "border": "border-violet-200 hover:border-violet-350",
+    "tagClass": "border-violet-200 bg-violet-100/60 text-violet-750",
+    "btnClass": "from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20",
+    "layout": "pmegp",
+    "details": {
       "Goal": "To generate employment opportunities through establishment of micro enterprises in rural as well as urban areas.",
       "Support": "Ministry of Micro, Small and Medium Enterprises (MoMSME)",
       "Target Group": "Unemployed Youth, Traditional Artisans, Self Help Groups, and Charitable Trusts.",
@@ -528,12 +210,12 @@ export const projects = [
     }
   },
   {
-    id: "15",
-    slug: "dch",
-    name: "Development Commissioner (Handicrafts) (DCH)",
-    description: "Supporting and promoting Indian handicrafts through development schemes, artisan cluster support, and national capacity-building initiatives.",
-    supportType: "Govt. Supported",
-    images: [
+    "id": "05",
+    "slug": "dch",
+    "name": "Development Commissioner (Handicrafts) (DCH)",
+    "description": "Supporting and promoting Indian handicrafts through development schemes, artisan cluster support, and national capacity-building initiatives.",
+    "supportType": "Govt. Supported",
+    "images": [
       "/images/Development-Commissioner-Handicrafts/20180807_163050.jpg",
       "/images/Development-Commissioner-Handicrafts/20180807_163112.jpg",
       "/images/Development-Commissioner-Handicrafts/20180807_163122.jpg",
@@ -607,20 +289,334 @@ export const projects = [
       "/images/Development-Commissioner-Handicrafts/IMG_0685.JPG",
       "/images/Development-Commissioner-Handicrafts/IMG_0686.JPG"
     ],
-    theme: "from-teal-50/80 to-emerald-50/40",
-    border: "border-teal-200 hover:border-teal-350",
-    tagClass: "border-teal-200 bg-teal-100/60 text-teal-705",
-    btnClass: "from-teal-500 to-emerald-600 text-white hover:shadow-emerald-500/20",
-    layout: "dch",
-    details: {
+    "theme": "from-teal-50/80 to-emerald-50/40",
+    "border": "border-teal-200 hover:border-teal-350",
+    "tagClass": "border-teal-200 bg-teal-100/60 text-teal-705",
+    "btnClass": "from-teal-500 to-emerald-600 text-white hover:shadow-emerald-500/20",
+    "layout": "dch",
+    "details": {
       "Goal": "To support and promote Indian handicrafts through development schemes and artisan cluster support.",
       "Support": "Development Commissioner (Handicrafts), Ministry of Textiles, Govt. of India.",
       "Target Area": "Across India",
       "Duration": "Ongoing",
       "Process": "Artisan cluster identification, capacity building, tools distribution, and exhibition support."
     }
+  },
+  {
+    "id": "06",
+    "slug": "namak-mazdoor-awas-yojna",
+    "name": "Namak Mazdoor Awas Yojna",
+    "description": "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat.",
+    "supportType": "MKT NGO Funds and Govt. Supported",
+    "images": [
+      "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg"
+    ],
+    "theme": "from-amber-50/80 to-yellow-50/40",
+    "border": "border-amber-250 hover:border-amber-350",
+    "tagClass": "border-amber-200 bg-amber-100/60 text-amber-800",
+    "btnClass": "from-amber-500 to-yellow-600 text-white hover:shadow-yellow-500/20",
+    "details": {
+      "Goal": "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat",
+      "Target Area": "Maliya-Miyana Block of Rajkot District of Gujarat State in India",
+      "Supporting Agency": "Manav Kalyan Trust in collaboration with Rural Technology Institute, Commissioner of Industries Government of Gujarat and SALT department of Government of India",
+      "Target Group": "Salt workers living below povertyline and earthquake affected areas of Gujarat",
+      "Activities": [
+        "Distribution of kits to salt workers to provide safety measures while working in the salt industries.",
+        "Construction of houses for the Salt workers and people of Earthquake affected areas."
+      ],
+      "Beneficiaries": "Salt workers and Earthquake hit people of Rajkot District in Gujarat",
+      "Outcome": "500 families of Salt Workers have got shelters"
+    }
+  },
+  {
+    "id": "07",
+    "slug": "multi-purpose-women-welfare-center",
+    "name": "multi purpose women welfare center",
+    "description": "All type of welfare activity for women.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-01.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-02.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-03.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-04.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-05.jpg",
+      "/images/our-projects/03-MULTI-PURPOSE-WOMEN-WELFARE CENTER-06.jpg"
+    ],
+    "theme": "from-pink-50/80 to-rose-50/40",
+    "border": "border-pink-200 hover:border-pink-350",
+    "tagClass": "border-pink-200 bg-pink-100/60 text-pink-700",
+    "btnClass": "from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20",
+    "details": {
+      "Support": "Commissioner for Women & Child Development",
+      "Extra effort": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
+      "Target Group": "Women from different Category",
+      "Object of the Project": "All type of welfare activity for women.",
+      "Total Budget": "Rs.3,60,000/-",
+      "Expenditure / Grant": "Rs.3,51,518/-"
+    }
+  },
+  {
+    "id": "08",
+    "slug": "marketing-support-for-sustainability",
+    "name": "marketing support for sustainability",
+    "description": "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/04-marketing-support-for-sustainability-01.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-02.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-03.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-04.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-05.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-06.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-07.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-08.jpg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (1).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (2).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (3).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (4).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (5).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (6).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (7).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (8).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (9).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (10).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (11).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (12).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (13).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (14).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (15).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (16).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (17).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (18).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (19).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (20).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (21).jpeg",
+      "/images/our-projects/04-marketing-support-for-sustainability-09 (22).jpeg",
+      "/images/our-projects/04-MARK (23).jpeg",
+      "/images/our-projects/04-MARK (24).jpeg",
+      "/images/our-projects/04-MARK (25).jpeg",
+      "/images/our-projects/04-MARK (26).jpeg",
+      "/images/our-projects/04-MARK (27).jpeg",
+      "/images/our-projects/04-MARK (28).jpeg",
+      "/images/our-projects/04-MARK (29).jpeg",
+      "/images/our-projects/04-MARK (30).jpeg",
+      "/images/our-projects/04-MARK (31).jpeg",
+      "/images/our-projects/04-MARK (32).jpeg",
+      "/images/our-projects/04-MARK (33).jpeg"
+    ],
+    "theme": "from-emerald-50/80 to-teal-50/40",
+    "border": "border-emerald-200 hover:border-emerald-350",
+    "tagClass": "border-emerald-200 bg-emerald-100/60 text-emerald-700",
+    "btnClass": "from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20",
+    "details": {
+      "Support": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
+      "Target Group": "Women artisans",
+      "Target Area": "Rural Area",
+      "Object of the Project": "Marketing for project By women artisans",
+      "Annual Budget": "As per requirement (for two years)",
+      "Expenditure / Grant": "As per requirement",
+      "Process": "As per scheme & need"
+    }
+  },
+  {
+    "id": "09",
+    "slug": "pradhan-mantri-kaushal-vikas-yojana",
+    "name": "pradhan mantri kaushal vikas yojana (PMKVY)",
+    "description": "Employment Generation through placement and Industrial Development.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-01.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-02.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-03.jpg",
+      "/images/our-projects/02-PRADHAN-MANTRI-KAUSHAL-VIKAS YOJANA-04.jpg"
+    ],
+    "theme": "from-orange-50/80 to-amber-50/40",
+    "border": "border-orange-200 hover:border-orange-350",
+    "tagClass": "border-orange-200 bg-orange-100/60 text-orange-700",
+    "btnClass": "from-orange-500 to-amber-600 text-white hover:shadow-amber-500/20",
+    "details": {
+      "Support": "Gujarat Skill Development Mission, Gandhinagar Govt. of Gujarat & National Skill Development Corporation, Govt. of India.",
+      "Target Group": "Man and Women who are seeking for Job or desire to setup their own venture.",
+      "Target Area": "Ahmedabad District of Gujarat.",
+      "Object of the Project": "Employment Generation through placement and Industrial Development.",
+      "Budget": "Rs.1,00,00,000/-",
+      "Duration": "Three Years",
+      "Expenditure / Grant": "Rs.13,78,827/-",
+      "Process": "Training, Liaison, Placement & Follow up."
+    }
+  },
+  {
+    "id": "10",
+    "slug": "saksham-kvk-2-0",
+    "name": "saksham kvk 2.0",
+    "description": "Employment Generation Through Placement and Industrial Development.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/01-SAKSHAM-KVK-2-01.jpg",
+      "/images/our-projects/01-SAKSHAM-KVK-2-02.jpg",
+      "/images/our-projects/01-SAKSHAM-KVK-2-03.jpg"
+    ],
+    "theme": "from-blue-50/80 to-indigo-50/40",
+    "border": "border-blue-200 hover:border-blue-350",
+    "tagClass": "border-blue-200 bg-blue-100/60 text-blue-700",
+    "btnClass": "from-blue-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
+    "details": {
+      "Support": "Gujarat skill development mission Gandhinagar Govt. of Gujarat.",
+      "Target Group": "Unemployed Man and Woman of Gujarat.",
+      "Target Area": "Across Gujarat.",
+      "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
+      "Budget": "Rs.1,03,68,000/-",
+      "Duration": "Three Years",
+      "Expenditure / Grant": "Rs.4,20,000/-",
+      "Starting Of The Project": "Feb-2025",
+      "Process": "Training, Liaison, Placement & Follow up."
+    }
+  },
+  {
+    "id": "11",
+    "slug": "training-under-scheme-6",
+    "name": "Training under Scheme - 6",
+    "description": "Empowering individuals through specialized training, liaison, and placement support to facilitate employment and start-up ventures.",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/Training-under-scheme-06/Training-under-scheme-06-01.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-02.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-03.jpg",
+      "/images/Training-under-scheme-06/Training-under-scheme-06-04.jpg"
+    ],
+    "theme": "from-purple-50/80 to-indigo-50/40",
+    "border": "border-purple-200 hover:border-purple-350",
+    "tagClass": "border-purple-200 bg-purple-100/60 text-purple-700",
+    "btnClass": "from-purple-500 to-indigo-600 text-white hover:shadow-indigo-500/20",
+    "details": {
+      "Support": "Center for Entrepreneurship Development Gandhinagar",
+      "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
+      "Object of the Project": "Training, Liaison and Placement",
+      "Starting Of The Project": "During the year 23-24",
+      "Expenditure Incurred During The Year": "Rs.25,31,838/-"
+    }
+  },
+  {
+    "id": "12",
+    "slug": "integrated-skill-development-scheme",
+    "name": "Integrated Skill Development Scheme",
+    "description": "To make become Men & Women economically sustain",
+    "supportType": "Govt. Supported",
+    "images": [
+      "/images/our-projects/05-Integrated-Skill-Development-Scheme.jpg"
+    ],
+    "theme": "from-cyan-50/80 to-sky-50/40",
+    "border": "border-cyan-200 hover:border-cyan-350",
+    "tagClass": "border-cyan-200 bg-cyan-100/60 text-cyan-700",
+    "btnClass": "from-cyan-500 to-sky-600 text-white hover:shadow-sky-500/20",
+    "details": {
+      "Goal": "To make become Men & Women economically sustain",
+      "Target Area": "Ahmedabad City, Gujarat State, India",
+      "Supporting Agency": "Ministry of Textile Government of India, Centre for Entrepreneurship Development Government of Gujarat",
+      "Target Group": "Men & Women from all categories",
+      "Activities": [
+        "Training in Basic Sewing Operator",
+        "Training in Software Application In Textile Design",
+        "Third party Assessment for Certification",
+        "Placement in Industrial Sector",
+        "Escort Service for Self Employment",
+        "Marketing support through liasion with small scale industries",
+        "Marketing support through participation in exhibition"
+      ],
+      "Beneficiaries": "Men & Women who want to economically sustain, Men & Women who want to start their own venture",
+      "Outcome": [
+        "1000 & more Men & Women are trained under this scheme.",
+        "750 Men & Women are placed in Industrial sector",
+        "100 Men & Women are started their own venture"
+      ]
+    }
+  },
+  {
+    "id": "13",
+    "slug": "swajal-dhara",
+    "name": "Swajal Dhara",
+    "description": "To supply potable water to each and every village of Gujarat State regularly.",
+    "supportType": "WASMO",
+    "images": [
+      "/images/our-projects/06-Swajal-Dhara.png"
+    ],
+    "theme": "from-violet-50/80 to-purple-50/40",
+    "border": "border-violet-200 hover:border-violet-350",
+    "tagClass": "border-violet-200 bg-violet-100/60 text-violet-700",
+    "btnClass": "from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20",
+    "details": {
+      "Goal": "To supply potable water to each and every village of Gujarat State regularly.",
+      "Target Area": "UPLETA & DHORAJI Block of Rajkot District in Gujarat State of India.",
+      "Supporting Agency": "WASMO",
+      "Target Group": "Rural people of UPLETA & DHORAJI Group of Rajkot District of Gujarat State.",
+      "Activities": [
+        "Introductory meeting",
+        "Grama sabha",
+        "Formation of Pani Samithi",
+        "Awareness in schools programme",
+        "Sanitation programme.",
+        "Water testing and role of public contribution."
+      ],
+      "Beneficiaries": "Rural people of UPLETA and DHORAJI Block of Rajkot District in Gujarat State.",
+      "Outcome": "Now rural people of UPLETA and Dhoraji block of Rajkot district are in a position to get lots of water regularly."
+    }
+  },
+  {
+    "id": "14",
+    "slug": "woman-empowerment-creation",
+    "name": "Woman Empowerment Creation",
+    "description": "To Generate income for sustaining their own life and come out from the earthquake affect.",
+    "supportType": "MKT NGO Funds",
+    "images": [
+      "/images/our-projects/07-Woman-Empowerment-Creation.png"
+    ],
+    "theme": "from-rose-50/80 to-red-50/40",
+    "border": "border-rose-200 hover:border-rose-350",
+    "tagClass": "border-rose-200 bg-rose-100/60 text-rose-700",
+    "btnClass": "from-rose-500 to-red-600 text-white hover:shadow-red-500/20",
+    "details": {
+      "Goal": "To Generate income for sustaining their own life and come out from the earthquake affect.",
+      "Target Area": "Maliya-Miyana block in Rajkot district where earthquake had struck in Gujarat State of India.",
+      "Supporting Agency": "Manav Kalyan Trust Funds.",
+      "Target Group": "Earthquake hit rural women of Maliya- Miyana block in Rajkot District of Gujarat State.",
+      "Activities": [
+        "Cluster development",
+        "Marketing development",
+        "Training infrastructure development"
+      ],
+      "Beneficiaries": "Women of Maliya- Miyana block of Rajkot District.",
+      "Outcome": "All the women of Maliya- Miyana block of Rajkot district who have been affected by Earthquake have been rehabilitated with income generating programme and have been benefitted by this project."
+    }
+  },
+  {
+    "id": "15",
+    "slug": "health-care",
+    "name": "Health Care",
+    "description": "To provide health care to women, children, salt workers and weaker section and people living below poverty line.",
+    "supportType": "MKT NGO Funds",
+    "images": [
+      "/images/our-projects/08-Health-Care.png"
+    ],
+    "theme": "from-lime-50/80 to-emerald-50/40",
+    "border": "border-lime-200 hover:border-lime-350",
+    "tagClass": "border-lime-200 bg-lime-100/60 text-lime-800",
+    "btnClass": "from-lime-600 to-emerald-600 text-white hover:shadow-emerald-500/20",
+    "details": {
+      "Goal": "To provide health care to women, children, salt workers and weaker section and people living poverty line.",
+      "Target Area": "Morbi and Maliya-Miyana Taluka & District of Rajkot in Gujarat State of India; Baroda Taluka & District Baroda in Gujarat State of India; Panchmahal District in Gujarat State of India.",
+      "Supporting Agency": "Manav Kalyan Trust Own Funds, Donations and other funds.",
+      "Target Group": "Women, children, salt workers, weaker sections and people living below poverty line.",
+      "Activities": [
+        "Eye care clinic associated with research and development centre for eye related issues",
+        "Problems Regarding child and mother health care",
+        "Problem of old age people among the target group.",
+        "Permanent clinic with necessary infrastructure.",
+        "Mobile Clinic",
+        "Ambulance for emergency service",
+        "Care and training for child bearing age women."
+      ],
+      "Beneficiaries": "Women, children, salt workers, Weaker sections and people living below povertyline.",
+      "Outcome": "Women, children, salt workers and weaker sections and people living below poverty line have been benefitted under this project."
+    }
   }
 ];
-
-
-
