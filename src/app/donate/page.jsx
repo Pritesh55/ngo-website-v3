@@ -122,7 +122,7 @@ const DonatePage = () => {
                   <div className="space-y-1 pt-2 border-t border-orange-100/50">
                     <p className="flex items-center gap-2">
                       <Phone className="w-3.5 h-3.5 text-slate-450" />
-                      Mo: 9974025126
+                      Mo: 94260 620683
                     </p>
                     <p className="flex items-center gap-2">
                       <Mail className="w-3.5 h-3.5 text-slate-450" /> mktahmedabad1986@gmail.com / psavitri13@yahoo.com
