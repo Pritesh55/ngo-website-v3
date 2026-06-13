@@ -165,6 +165,7 @@ export const projects = [
     "description": "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
     "supportType": "Govt. Supported",
     "images": [
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13748.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13333.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13338.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13347.JPG",
@@ -189,7 +190,7 @@ export const projects = [
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13686.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13696.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13723.JPG",
-      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13748.JPG",
+
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13765.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13767.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13782.JPG",
