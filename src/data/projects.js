@@ -471,6 +471,62 @@ export const projects = [
       "Duration": "Ongoing",
       "Process": "Cluster-based interventions, skill upgradation, design development, and marketing link support."
     }
+  },
+  {
+    id: "14",
+    slug: "pmegp",
+    name: "Entrepreneurship development program under PMEGP scheme",
+    description: "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
+    supportType: "Govt. Supported",
+    images: [
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13333.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13338.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13347.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13354.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13357.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13367.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13372.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13380.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13397.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13430.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13433.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13447.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13469.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13482.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13504.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13562.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13586.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13633.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13644.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13660.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13665.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13686.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13696.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13723.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13748.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13765.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13767.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13782.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13818.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13828.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13831.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13864.JPG",
+      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13865.JPG"
+    ],
+    theme: "from-violet-50/80 to-purple-50/40",
+    border: "border-violet-200 hover:border-violet-350",
+    tagClass: "border-violet-200 bg-violet-100/60 text-violet-750",
+    btnClass: "from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20",
+    layout: "pmegp",
+    details: {
+      "Goal": "To generate employment opportunities through establishment of micro enterprises in rural as well as urban areas.",
+      "Support": "Ministry of Micro, Small and Medium Enterprises (MoMSME)",
+      "Target Group": "Unemployed Youth, Traditional Artisans, Self Help Groups, and Charitable Trusts.",
+      "Target Area": "Across India (Rural & Urban)",
+      "Duration": "Ongoing",
+      "Process": "Credit-linked subsidy routing via identified banks, EDP training, and project identification support."
+    }
   }
 ];
+
 

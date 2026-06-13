@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 import AhvyProjectDetail from '@/components/sections/AhvyProjectDetail'
+import PmegpProjectDetail from '@/components/sections/PmegpProjectDetail'
 import {
   ArrowLeft,
   CheckCircle,
@@ -72,6 +73,10 @@ export default function ProjectDetailPage({ params }) {
 
   if (project.layout === 'ahvy') {
     return <AhvyProjectDetail project={project} />
+  }
+
+  if (project.layout === 'pmegp') {
+    return <PmegpProjectDetail project={project} />
   }
 
   return (
