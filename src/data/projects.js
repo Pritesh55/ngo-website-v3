@@ -253,7 +253,7 @@ export const projects = [
     "slug": "pmegp",
     "name": "Entrepreneurship development program under PMEGP scheme",
     "description": "The Prime Minister's Employment Generation Programme (PMEGP) is a credit-linked subsidy scheme for setting up micro-enterprises in both rural and urban areas, empowering traditional artisans and unemployed youth.",
-    "description2": "It is supported by Khadi and Village Industries Commission (KVIC)",
+    "description2": "It is supported by Khadi and Village Industries Commission (KVIC).",
     "supportType": "KVIC Supported",
     "images": [
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13748.JPG",
@@ -530,7 +530,7 @@ export const projects = [
     "slug": "namak-mazdoor-awas-yojna",
     "name": "Namak Mazdoor Awas Yojna",
     "description": "To Provide shelter to all the Salt workers who are living below povertyline and the people of Earthquake affected areas of Gujarat.",
-    "description2": "It is supported by Commissioner of Industries Government of Gujarat and SALT department of Government of India",
+    "description2": "It is supported by Commissioner of Industries Government of Gujarat and SALT department of Government of India.",
     "supportType": "SALT department Supported",
     "images": [
       "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg"
@@ -584,7 +584,7 @@ export const projects = [
     "slug": "marketing-support-for-sustainability",
     "name": "marketing support for sustainability",
     "description": "Marketing support for sustainability through exhibitions, advertisements, catalogue distribution, and direct sales.",
-    "description2": "It is supported by DCH,CWCD, MKT own funds",
+    "description2": "It is supported by DCH,CWCD, MKT own funds.",
     "supportType": "DCH,CWCD, MKT own funds",
     "images": [
       "/images/our-projects/04-marketing-support-for-sustainability-01.jpg",
