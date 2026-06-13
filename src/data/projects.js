@@ -329,9 +329,9 @@ export const projects = [
       "Target Group": "Man and Women who are seeking for Job or desire to setup their own venture.",
       "Target Area": "Ahmedabad District of Gujarat.",
       "Object of the Project": "Employment Generation through placement and Industrial Development.",
-      "Budget": "Rs.1,00,00,000/-",
+
       "Duration": "Three Years",
-      "Expenditure / Grant": "Rs.13,78,827/-",
+
       "Process": "Training, Liaison, Placement & Follow up."
     }
   },
@@ -355,9 +355,9 @@ export const projects = [
       "Target Group": "Unemployed Man and Woman of Gujarat.",
       "Target Area": "Across Gujarat.",
       "Object of the Project": "Employment Generation Through Placement and Industrial Development.",
-      "Budget": "Rs.1,03,68,000/-",
+
       "Duration": "Three Years",
-      "Expenditure / Grant": "Rs.4,20,000/-",
+
       "Starting Of The Project": "Feb-2025",
       "Process": "Training, Liaison, Placement & Follow up."
     }
@@ -383,7 +383,7 @@ export const projects = [
       "Target Group": "Man and Woman who are seeking the job or Start-up their own venture.",
       "Object of the Project": "Training, Liaison and Placement",
       "Starting Of The Project": "During the year 23-24",
-      "Expenditure Incurred During The Year": "Rs.25,31,838/-"
+
     }
   },
   {
@@ -558,8 +558,7 @@ export const projects = [
       "Extra effort": "Stall allotment to the women Artisans directly from the connected Govt. Department while exhibition is going on.",
       "Target Group": "Women from different Category",
       "Object of the Project": "All type of welfare activity for women.",
-      "Total Budget": "Rs.3,60,000/-",
-      "Expenditure / Grant": "Rs.3,51,518/-"
+
     }
   },
   {
@@ -620,8 +619,8 @@ export const projects = [
       "Target Group": "Women artisans",
       "Target Area": "Rural Area",
       "Object of the Project": "Marketing for project By women artisans",
-      "Annual Budget": "As per requirement (for two years)",
-      "Expenditure / Grant": "As per requirement",
+
+
       "Process": "As per scheme & need"
     }
   }
