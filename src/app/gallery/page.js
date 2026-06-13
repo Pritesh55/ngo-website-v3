@@ -6,8 +6,8 @@ import Link from 'next/link';
 const galleryAlbums = [
   {
     folderName: "G01-Aatmnirbhar",
-    heading: "Aatmanirbhar Programs (આત્મનિર્ભર તાલીમ કાર્યક્રમો)",
-    description: "સ્વનિર્ભરતા અને રોજગારલક્ષી કૌશલ્ય વર્ધન વર્કશોપ",
+    heading: "Aatmanirbhar Programs (Self-Reliance Training)",
+    description: "Self-reliance and employment-oriented skill enhancement workshops",
     photos: [
       { src: "/images/G01-Aatmnirbhar/img4.jpg", desc: "Photo 1" },
       { src: "/images/G01-Aatmnirbhar/img8.jpg", desc: "Photo 2" },
@@ -18,8 +18,8 @@ const galleryAlbums = [
   },
   {
     folderName: "G05-Skill-Traiing-Programs",
-    heading: "Skill-Training Program (કૌશલ્ય તાલીમ)",
-    description: "વ્યવસાયિક પ્રશિક્ષણ અને રોજગાર સજ્જતા અભિયાન",
+    heading: "Skill-Training Program",
+    description: "Vocational training and employment readiness initiative",
     photos: [
       { src: "/images/G05-Skill-Traiing-Programs/img4.jpg", desc: "Photo 1" },
       { src: "/images/G05-Skill-Traiing-Programs/img8.jpg", desc: "Photo 2" },
@@ -37,8 +37,8 @@ const galleryAlbums = [
   },
   {
     folderName: "G02-General-awewrness",
-    heading: "General Awareness Programs (જનજાગૃતિ કાર્યક્રમો)",
-    description: "સામાજિક અને શૈક્ષણિક લોકજાગૃતિ અભિયાન",
+    heading: "General Awareness Programs",
+    description: "Social and educational public awareness campaigns",
     photos: [
       { src: "/images/G02-General-awewrness/img4.jpg", desc: "Photo 1" },
       { src: "/images/G02-General-awewrness/img8.jpg", desc: "Photo 2" },
@@ -51,8 +51,8 @@ const galleryAlbums = [
   },
   {
     folderName: "G03-relief-work-for-a-flood-affected-people",
-    heading: "Flood Relief Work (પૂર રાહત કામગીરી)",
-    description: "પૂર અસરગ્રસ્ત પરિવારો માટે રાહત અને સહાય સામગ્રી વિતરણ",
+    heading: "Flood Relief Work",
+    description: "Distribution of relief and aid materials for flood-affected families",
     photos: [
       { src: "/images/G03-relief-work-for-a-flood-affected-people/img4.jpg", desc: "Photo 1" },
       { src: "/images/G03-relief-work-for-a-flood-affected-people/img8.jpg", desc: "Photo 2" },
@@ -64,8 +64,8 @@ const galleryAlbums = [
   },
   {
     folderName: "G04-other-activities-of-precident-Mkt",
-    heading: "President Activities (પ્રમુખશ્રીની પ્રવૃત્તિઓ)",
-    description: "માનવ કલ્યાણ ટ્રસ્ટના માધ્યમથી સામાજિક નેતૃત્વ અને પ્રવૃત્તિઓ",
+    heading: "President's Activities",
+    description: "Social leadership and activities through Manav Kalyan Trust",
     photos: [
       { src: "/images/G04-other-activities-of-precident-Mkt/img4.jpg", desc: "Photo 1" },
       { src: "/images/G04-other-activities-of-precident-Mkt/img8.jpg", desc: "Photo 2" },
@@ -128,7 +128,7 @@ const Gallery_Page = () => {
         <div className="relative z-10 max-w-6xl mx-auto text-center">
           <div className="mb-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-orange-200 bg-orange-100/50 backdrop-blur-xs">
             <ImageIcon className="w-4 h-4 text-orange-700" />
-            <span className="text-xs font-bold text-orange-700 tracking-wider">ગેલરી (MKT GALLERY)</span>
+            <span className="text-xs font-bold text-orange-700 tracking-wider">MKT GALLERY</span>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-4 leading-tight">
@@ -137,7 +137,7 @@ const Gallery_Page = () => {
           </h1>
 
           <p className="text-base md:text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed font-semibold">
-            અમારી વિવિધ સામાજિક કલ્યાણ પ્રવૃત્તિઓ, તાલીમ વર્ગો અને પૂર રાહત અભિયાનોની એક ઝાંખી.
+            An overview of our various social welfare activities, training classes, and flood relief campaigns.
           </p>
         </div>
       </section>
@@ -152,7 +152,7 @@ const Gallery_Page = () => {
               : 'bg-white text-slate-650 hover:bg-slate-100 border border-slate-200'
               }`}
           >
-            All Folders (બધા ફોલ્ડર્સ)
+            All Folders
           </button>
           {galleryAlbums.map((album, idx) => (
             <button
