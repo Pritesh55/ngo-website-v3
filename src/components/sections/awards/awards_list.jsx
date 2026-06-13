@@ -62,6 +62,18 @@ const Awards_list = () => {
             award_Name: 'Asia Pacific International Gold Star Award',
         },
 
+        {
+            id: 11,
+            award_imgURL: '/images/awards/Dr-Savitriben-Patel-Honoury-Doctor-in-social-Work-phd-year-2025-America-international-university.jpeg',
+            award_Name: 'Dr. Savitriben Patel - Honoury Doctor in Social Work (phd year 2025) America International University',
+        },
+
+        {
+            id: 12,
+            award_imgURL: '/images/awards/Nari-shakti-vikas-puraskar-Medal-of-Social-hero-at-international-human-right-defender-summit-2025.jpeg',
+            award_Name: 'Nari Shakti Vikas Puraskar - Medal of Social Hero at International Human Right Defender Summit 2025',
+        },
+
     ];
 
     return (
