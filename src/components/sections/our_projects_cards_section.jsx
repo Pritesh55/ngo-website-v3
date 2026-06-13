@@ -43,10 +43,12 @@ export function Our_Projects_Cards_Section() {
                       height={296}
                       className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                     />
+
                     {/* Badge for project number */}
-                    <div className="absolute top-3 left-3 px-3 py-1 bg-white/95 backdrop-blur-xs text-slate-800 text-xs font-extrabold rounded-full border border-slate-200/50 shadow-xs">
+                    {/* <div className="absolute top-3 left-3 px-3 py-1 bg-white/95 backdrop-blur-xs text-slate-800 text-xs font-extrabold rounded-full border border-slate-200/50 shadow-xs">
                       Project {project.id}
-                    </div>
+                    </div> */}
+
                     {/* Badge for multiple photos */}
                     {project.images.length > 1 && (
                       <div className="absolute top-3 right-3 flex items-center gap-1.5 px-3 py-1 bg-black/60 backdrop-blur-xs text-white text-xs font-bold rounded-full border border-white/20">
@@ -63,8 +65,9 @@ export function Our_Projects_Cards_Section() {
                 </h3>
 
                 {/* Project Description */}
-                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-semibold line-clamp-3">
-                  {project.description}
+                <p className="text-slate-600 text-sm leading-relaxed mb-6 font-semibold flex flex-col gap-y-2">
+                  <span className=""> {project.description} </span>
+                  <span className=""> {project.description2} </span>
                 </p>
 
                 {/* Quick Info Tags */}
@@ -74,11 +77,11 @@ export function Our_Projects_Cards_Section() {
                       📍 {project.details["Target Area"]}
                     </span>
                   )}
-                  {project.details["Duration"] && (
+                  {/* {project.details["Duration"] && (
                     <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/80 border border-slate-200 text-slate-700">
                       ⏱️ {project.details["Duration"]}
                     </span>
-                  )}
+                  )} */}
                   {project.details["Budget"] && (
                     <span className="px-3 py-1 rounded-full text-xs font-bold bg-white/80 border border-slate-200 text-slate-700">
                       💰 Budget: {project.details["Budget"]}
