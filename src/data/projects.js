@@ -172,7 +172,7 @@ export const projects = [
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13354.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13357.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13367.JPG",
-      "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13372.JPG",
+      // "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13372.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13380.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13397.JPG",
       "/images/Entrepreneurship-development-program-under-pmegp-scheme-131SSCAM/SDC13430.JPG",
