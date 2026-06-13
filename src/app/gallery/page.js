@@ -4,6 +4,7 @@ import { Image as ImageIcon, X, ChevronLeft, ChevronRight, Eye, FolderOpen } fro
 import Link from 'next/link';
 
 const galleryAlbums = [
+
   {
     folderName: "G01-Aatmnirbhar",
     heading: "Aatmanirbhar Programs (Self-Reliance Training)",
@@ -14,6 +15,19 @@ const galleryAlbums = [
       { src: "/images/G01-Aatmnirbhar/img11.jpg", desc: "Photo 3" },
       { src: "/images/G01-Aatmnirbhar/img14.jpg", desc: "Photo 4" },
       { src: "/images/G01-Aatmnirbhar/img17.jpg", desc: "Photo 5" },
+    ]
+  },
+  {
+    folderName: "G03-relief-work-for-a-flood-affected-people",
+    heading: "Flood Relief Work",
+    description: "Distribution of relief and aid materials for flood-affected families",
+    photos: [
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img4.jpg", desc: "Photo 1" },
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img8.jpg", desc: "Photo 2" },
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img11.jpg", desc: "Photo 3" },
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img14.jpg", desc: "Photo 4" },
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img17.jpg", desc: "Photo 5" },
+      { src: "/images/G03-relief-work-for-a-flood-affected-people/img20.jpg", desc: "Photo 6" },
     ]
   },
   {
@@ -49,19 +63,7 @@ const galleryAlbums = [
       { src: "/images/G02-General-awewrness/img23.jpg", desc: "Photo 7" },
     ]
   },
-  {
-    folderName: "G03-relief-work-for-a-flood-affected-people",
-    heading: "Flood Relief Work",
-    description: "Distribution of relief and aid materials for flood-affected families",
-    photos: [
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img4.jpg", desc: "Photo 1" },
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img8.jpg", desc: "Photo 2" },
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img11.jpg", desc: "Photo 3" },
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img14.jpg", desc: "Photo 4" },
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img17.jpg", desc: "Photo 5" },
-      { src: "/images/G03-relief-work-for-a-flood-affected-people/img20.jpg", desc: "Photo 6" },
-    ]
-  },
+
   {
     folderName: "G04-other-activities-of-precident-Mkt",
     heading: "President's Activities",
