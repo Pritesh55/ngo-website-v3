@@ -60,7 +60,7 @@ export function AwardsSection() {
         },
         {
             id: 3,
-            award_imgURL: 'https://web.archive.org/web/20170113210356im_/http://mktngo.org/sliders/award-3.jpg',
+            award_imgURL: '/images/awards/03-Award-of-Excellence.webp',
             award_Name: 'Award of Excellence',
         },
 

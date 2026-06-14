@@ -451,11 +451,51 @@ const GovtSchemesPage = () => {
                 </div>
               </div>
 
+              {/* 11 Documents Checklist */}
+              <div className="mt-8 border-t border-slate-100 pt-6">
+                <h3 className="font-bold text-lg text-slate-900 mb-4 flex items-center gap-2">
+                  <FileCheck className="w-5.5 h-5.5 text-emerald-600" />
+                  11 Required Documents for Application (Self-Attested in Duplicate)
+                </h3>
 
+                <p className="text-xs text-slate-500 mb-4 italic">
+                  You can use the list below as a checklist when collecting documents:
+                </p>
+
+                <div className="space-y-2">
+                  {swavlambanDocs.map((doc, idx) => {
+                    return (
+                      <div
+                        key={idx}
+                        className={`p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer border-slate-200 text-slate-800`}
+                      >
+
+                        <span className={`text-sm md:text-base leading-relaxed font-medium`}>
+                          ({idx + 1}) {doc}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
 
             </div>
 
+            {/* Display leaflet */}
+            <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
+              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">Related Leaflet Image (Scan Leaflet)</p>
+              <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
 
+                <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg">
+                  <img
+                    src="/images/courses/Benifite-to-woman-by-gevenments-schemes/Mahila-Swavlamban-Yojna.jpeg"
+                    alt="Mahila Swavlamban Yojana"
+                    className="w-full h-auto object-contain mx-auto max-h-[220px]"
+                  />
+                </Link>
+
+              </div>
+            </div>
 
           </div>
         )}
@@ -947,6 +987,227 @@ const GovtSchemesPage = () => {
         }
 
       </section >
+
+      {/* <!-- OFFICE ADDRESS AND INFO BAR --> */}
+      <section className="bg-white border-b border-slate-200 py-6 px-4 shadow-xs">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+          <div className="flex items-center gap-4">
+            <div className="p-3.5 bg-rose-50 text-rose-700 rounded-2xl flex-shrink-0">
+              <MapPin className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Office Address</p>
+              <p className="text-sm font-bold text-slate-800 leading-snug">
+                Government Housing, D-Type Quarters, No. 301 to 304, Opposite District Government Library, Vastrapur, Ahmedabad.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 border-t lg:border-t-0 lg:border-x border-slate-100 py-4 lg:py-0 lg:px-6">
+            <div className="p-3.5 bg-orange-50 text-orange-700 rounded-2xl flex-shrink-0">
+              <Info className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Application Procedure</p>
+              <p className="text-sm font-bold text-slate-800 leading-snug">
+                The original file, along with relevant documents attached to the prescribed form, must be submitted to the ATVT branch.
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="p-3.5 bg-emerald-50 text-emerald-700 rounded-2xl flex-shrink-0">
+              <CheckSquare className="w-6 h-6" />
+            </div>
+            <div>
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Guidance Service</p>
+              <p className="text-sm font-bold text-slate-800 leading-snug">
+                100% free assistance by Manav Kalyan Trust in collecting all necessary documents and obtaining guidance.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <!-- SEARCH AND LEAFLET NOTICE BOARD --> */}
+      <section className="px-4 py-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        {/* Left Part: Interactive Document Directory */}
+        <div className="lg:col-span-8 space-y-6">
+          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+              <div>
+                <h2 className="text-2xl font-black text-slate-900">Required Documents Directory</h2>
+                <p className="text-slate-500 text-sm font-semibold mt-1">Checklist of documents to be submitted for various schemes</p>
+              </div>
+              <div className="relative w-full md:w-72">
+                <input
+                  type="text"
+                  placeholder="Search scheme..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-slate-55 border border-slate-300 rounded-2xl py-3 pl-10 pr-4 text-sm font-semibold focus:outline-none focus:border-rose-500 transition-colors"
+                />
+                <Search className="w-5 h-5 text-slate-400 absolute left-3 top-3.5" />
+              </div>
+            </div>
+
+            {/* List of filtered schemes */}
+            {filteredSchemes.length === 0 ? (
+              <div className="text-center py-12 border-2 border-dashed border-slate-200 rounded-2xl">
+                <AlertCircle className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+                <p className="text-slate-500 font-bold">No matching schemes found.</p>
+              </div>
+            ) : (
+              <div className="flex flex-col md:flex-row gap-6">
+
+                {/* Scheme Navigation Sidebar List */}
+                <div className="w-full md:w-1/3 flex md:flex-col gap-2 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0">
+                  {filteredSchemes.map((scheme) => {
+                    const SchemeIcon = scheme.icon
+                    const isActive = activeTab2_WCS === scheme.id
+                    return (
+                      <button
+                        key={scheme.id}
+                        onClick={() => setactiveTab2_WCS(scheme.id)}
+                        className={`flex items-center gap-3 w-full text-left px-4 py-3.5 rounded-2xl font-bold text-sm transition-all border whitespace-nowrap md:whitespace-normal cursor-pointer ${isActive
+                          ? 'bg-rose-600 text-white border-rose-600 shadow-md shadow-rose-600/15'
+                          : 'bg-white hover:bg-slate-50 text-slate-650 border-slate-250/70'
+                          }`}
+                      >
+                        <SchemeIcon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-white' : 'text-rose-600'}`} />
+                        <span className="truncate md:line-clamp-2 md:whitespace-normal">{scheme.name}</span>
+                      </button>
+                    )
+                  })}
+                </div>
+
+                {/* Checklist Main Content Panel */}
+                <div className="w-full md:w-2/3 border-t md:border-t-0 md:border-l border-slate-100 md:pl-6 pt-6 md:pt-0">
+                  <div className="space-y-4">
+                    {/* Header Info */}
+                    <div className="flex flex-wrap justify-between items-center gap-2 pb-4 border-b border-slate-100">
+                      <div>
+                        <span className="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xxs font-extrabold tracking-wide uppercase">
+                          {activeScheme.category}
+                        </span>
+                        <h3 className="text-xl md:text-2xl font-black text-slate-900 mt-1">{activeScheme.name}</h3>
+                      </div>
+                      <button
+                        onClick={() => resetChecklist(activeScheme.id)}
+                        className="text-xs font-bold text-slate-450 hover:text-rose-600 transition-colors"
+                      >
+                        Reset Checklist
+                      </button>
+                    </div>
+
+                    <p className="text-slate-600 text-sm md:text-base leading-relaxed font-medium">
+                      {activeScheme.info}
+                    </p>
+
+                    {activeScheme.note && (
+                      <div className="bg-orange-50 border border-orange-200 text-orange-850 p-4 rounded-2xl flex gap-3 text-xs md:text-sm font-semibold">
+                        <AlertCircle className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                        <p>{activeScheme.note}</p>
+                      </div>
+                    )}
+
+                    {/* Checkbox Checklist */}
+                    <div>
+                      <p className="text-xs font-black text-slate-400 uppercase tracking-wider mb-3">Documents to be submitted:</p>
+                      <div className="space-y-2">
+                        {activeScheme.docs.map((doc, idx) => {
+
+                          return (
+                            <div
+                              key={idx}
+                              className={`p-3.5 rounded-xl border transition-all duration-150 flex items-start gap-3 cursor-pointer bg-rose-50/40 border-rose-200 text-slate-800 shadow-xs
+                                }`}
+                            >
+                              <span className="text-sm md:text-base leading-relaxed font-semibold">
+                                {`${idx + 1}.`}
+                              </span>
+                              <span className={`text-sm md:text-base leading-relaxed font-semibold`}>
+                                {doc}
+                              </span>
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+
+                    {/* Help Note */}
+                    <div className="pt-4 border-t border-slate-100 text-xxs md:text-xs text-slate-500 font-bold flex items-center gap-1.5">
+                      <Info className="w-4 h-4 text-slate-400" />
+                      <span>Two copies of all documents must be submitted, self-attested.</span>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+          </div>
+        </div>
+
+        {/* Right Part: Image Leaflet View and Contact Helpline */}
+        <div className="lg:col-span-4 space-y-6">
+
+          {/* Visual Notice Board Panel */}
+          <div className="bg-white rounded-3xl border border-slate-200 p-5 shadow-sm text-center">
+            <h3 className="text-base font-black text-slate-900 mb-3 flex items-center justify-center gap-2">
+              <Eye className="w-5 h-5 text-rose-600" />
+              Official Notice Board Photo
+            </h3>
+
+            <div className="rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 relative group mb-4">
+              <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg" target='_blank'>
+                <img
+                  src="/images/courses/Benifite-to-woman-by-gevenments-schemes/district-women-child-officer-schemes.jpg"
+                  alt="District Women and Child Officer's Office Ahmedabad Board"
+                  className="w-full h-auto object-cover object-top max-h-[350px] transition-transform duration-300 group-hover:scale-105"
+                />
+              </Link>
+
+            </div>
+
+            <p className="text-xs text-slate-550 leading-relaxed font-semibold">
+              The information provided on this page is taken from the official board placed on the notice board of the Ahmedabad office.
+            </p>
+          </div>
+
+          {/* Manav Kalyan Trust Helpline */}
+          <div className="bg-linear-to-br from-rose-600 to-orange-600 text-white rounded-3xl p-6 shadow-md relative overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(255,255,255,0.1),transparent_50%)] pointer-events-none" />
+            <h3 className="text-xl font-black mb-3">Free Helpline and Assistance</h3>
+            <p className="text-rose-100 text-sm leading-relaxed mb-6 font-semibold">
+              Contact us for free assistance on how to obtain or fill the application form, and what things to consider when getting an affidavit.
+            </p>
+            <div className="space-y-3">
+              <Link
+                href="https://wa.me/919974025126?text=Scheme%20Assistance"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 py-3.5 bg-white text-rose-900 font-extrabold rounded-2xl text-sm hover:bg-slate-50 transition-colors cursor-pointer w-full text-center shadow-xs"
+              >
+                <img
+                  src="/icons/whatsapp-color-svgrepo-com.svg"
+                  alt="WhatsApp"
+                  className="w-5 h-5 object-contain"
+                />
+                WhatsApp Helpdesk
+              </Link>
+              <Link
+                href="/contact"
+                className="flex items-center justify-center gap-2 py-3 border border-white/40 text-white font-bold rounded-2xl text-xs hover:bg-white/10 transition-colors w-full text-center"
+              >
+                Fill Contact Form
+              </Link>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
 
       {/* <!-- OFFICIAL COORDINATION PARTNER BANNER --> */}
       < section className="bg-linear-to-br from-teal-50 to-emerald-50 py-12 px-4 border-y border-teal-100" >
