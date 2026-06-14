@@ -553,7 +553,11 @@ export const projects = [
     "description2": "It is supported by Commissioner of Industries Government of Gujarat and SALT department of Government of India.",
     "supportType": "SALT department Supported",
     "images": [
-      "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg"
+      "/images/our-projects/09-Namak-Mazdoor-Awas-Yojna.jpg",
+      '/images/salt-workers/02---pdf_20230112_160443_-067.jpg',
+      '/images/salt-workers/02---pdf_20230112_160443_-068.jpg',
+      '/images/salt-workers/02---pdf_20230112_160443_-069.jpg',
+      '/images/salt-workers/02---pdf_20230112_160443_-070.jpg',
     ],
     "theme": "from-amber-50/80 to-yellow-50/40",
     "border": "border-amber-250 hover:border-amber-350",
