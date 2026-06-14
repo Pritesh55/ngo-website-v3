@@ -7,9 +7,6 @@ import CTA_Donate_or_vol from '@/components/sections/CTA_Donate_or_vol';
 const About_us_Page = () => {
   return (
     <>
-
-
-
       {/* <!-- 1 ▸ HERO ---------------------------------------------------- --> */}
       <section className="relative flex items-center justify-center px-4 py-24 bg-linear-to-br from-orange-50 to-red-50 border-b border-orange-100">
         <div className="relative z-10 max-w-6xl mx-auto text-center">
@@ -154,6 +151,14 @@ const About_us_Page = () => {
                 theme: 'from-purple-50/80 to-indigo-50/40',
                 border: 'border-purple-100',
                 tagClass: 'bg-purple-100 text-purple-700 border-purple-200'
+              },
+              {
+                dt: 'Registration number',
+                dd: 'CSR00009140',
+                sub: 'National CSR Portal',
+                theme: 'from-emerald-50/80 to-teal-50/40',
+                border: 'border-emerald-100',
+                tagClass: 'bg-emerald-100 text-emerald-700 border-emerald-200'
               }
 
             ].map((detail, idx) => (

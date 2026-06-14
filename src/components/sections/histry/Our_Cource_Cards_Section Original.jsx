@@ -46,7 +46,7 @@ const courses = [
   {
     name: 'Fashion Designer Course',
     category: 'fee-based',
-    duration: '3 Months : Ongoing',
+    duration: '3 Months',
     fee: 'Rs. 9500 + GST',
     description: 'Career opportunities in garment design, stitching, Photoshop, CorelDRAW, embroidery, and printing. (Admission eligibility: Grade 10 pass)',
     image: '/images/G06-Skill-traiinng-v2/fashion_designer_course.png',
@@ -57,7 +57,7 @@ const courses = [
     btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
   },
   {
-    name: 'Sewing Machine Operator (Under Saksham KVK 2.0)',
+    name: 'Sewing Machine Operator',
     category: 'govt-schemes',
     duration: '3 Months',
     fee: 'FREE',
@@ -86,6 +86,9 @@ const courses = [
 ];
 
 export function Our_Cource_Cards_Section() {
+  const [activeTab, setActiveTab] = useState('fee-based')
+
+  const filteredCourses = courses.filter(course => course.category === activeTab)
 
   return (
     <section id="our_cources" className="bg-glow-warm py-16 md:py-24 px-6 sm:px-8 border-b border-slate-100 relative overflow-hidden from-60% to-100%">
@@ -105,9 +108,31 @@ export function Our_Cource_Cards_Section() {
           </p>
         </div>
 
+        {/* Tab Switcher */}
+        <div className="flex justify-center gap-3 mb-12 border-b border-slate-200 pb-4 max-w-md mx-auto">
+          <button
+            onClick={() => setActiveTab('fee-based')}
+            className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all duration-200 cursor-pointer border ${activeTab === 'fee-based'
+              ? 'bg-linear-to-r from-orange-500 to-darkred text-white border-transparent shadow-md shadow-red-500/10'
+              : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200'
+              }`}
+          >
+            01) Fee based
+          </button>
+          <button
+            onClick={() => setActiveTab('govt-schemes')}
+            className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all duration-200 cursor-pointer border ${activeTab === 'govt-schemes'
+              ? 'bg-linear-to-r from-orange-500 to-darkred text-white border-transparent shadow-md shadow-red-500/10'
+              : 'bg-white text-slate-600 hover:bg-slate-50 border-slate-200'
+              }`}
+          >
+            02) Government Schemes based
+          </button>
+        </div>
+
         {/* Courses Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:gap-16 gap-6 mx-auto">
-          {courses.map((course, idx) => (
+          {filteredCourses.map((course, idx) => (
             <div
               key={idx}
               className={`bg-linear-to-br ${course.theme} border ${course.border} rounded-2xl p-4 md:p-5 shadow-xs flex flex-col justify-between hover:shadow-lg transition-all duration-300 w-full`}

@@ -46,7 +46,7 @@ const courses = [
   {
     name: 'Fashion Designer Course',
     category: 'fee-based',
-    duration: '3 Months : Ongoing',
+    duration: '3 Months',
     fee: 'Rs. 9500 + GST',
     description: 'Career opportunities in garment design, stitching, Photoshop, CorelDRAW, embroidery, and printing. (Admission eligibility: Grade 10 pass)',
     image: '/images/G06-Skill-traiinng-v2/fashion_designer_course.png',
@@ -57,7 +57,7 @@ const courses = [
     btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
   },
   {
-    name: 'Sewing Machine Operator (Under Saksham KVK 2.0)',
+    name: 'Sewing Machine Operator',
     category: 'govt-schemes',
     duration: '3 Months',
     fee: 'FREE',
@@ -103,6 +103,15 @@ export function Our_Cource_Cards_Section() {
           <p className="text-base md:text-lg text-slate-650 max-w-2xl mx-auto leading-relaxed font-semibold">
             Vocational courses and government scheme guidance for women and youth to achieve economic independence and self-reliance.
           </p>
+        </div>
+
+        {/* Tab Switcher */}
+        <div className="flex justify-center gap-3 mb-12 border-b border-slate-200 pb-4 max-w-md mx-auto">
+          <button
+            className={`px-5 py-2.5 rounded-xl text-xs md:text-sm font-bold tracking-wide transition-all duration-200 cursor-pointer border bg-linear-to-r from-orange-500 to-darkred text-white border-transparent shadow-md shadow-red-500/10`}
+          >
+            01) Fee Based
+          </button>
         </div>
 
         {/* Courses Grid */}

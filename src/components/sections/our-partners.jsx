@@ -10,6 +10,9 @@ const partners = [
     { name: "DST", logo: "/images/partners-logo/dst-logo.jpg" },
     { name: "MWCDI", logo: "/images/partners-logo/MWCDI.png" },
     { name: "EDIA", logo: "/images/partners-logo/EDIA.png" },
+    { name: "Apparel Made Ups Home Furnishing Sector Skill Council", logo: "/images/partners-logo/Apparel-Made-Ups-Home-Furnishing-Sector-Skill-Council.png" },
+    { name: "IT-ITeS Sector Skill Council", logo: "/images/partners-logo/IT-ITeS-Sector-Skill-Council.jpg" },
+    { name: "BFSI Sector Skill Council", logo: "/images/partners-logo/BFSI-Sector-Skill-Council.jpg" },
     // { name: "MOFPI", logo: "/images/partners-logo/MOFPI.png" },
 ];
 

@@ -182,14 +182,6 @@ const DonatePage = () => {
                   <div className="flex items-start gap-2">
                     <span className="text-blue-700 font-bold">•</span>
                     <div className="flex flex-col gap-y-1">
-                      <strong>Niti aayog number (Darpan registration id) :</strong>
-                      <span className="text-base text-green-600 font-semibold">GJ/2016/0105370</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-2">
-                    <span className="text-blue-700 font-bold">•</span>
-                    <div className="flex flex-col gap-y-1">
                       <strong>Registration number (National CSR Portal) :</strong>
                       <span className="text-base text-green-600 font-semibold">CSR00009140</span>
                     </div>
