@@ -513,7 +513,7 @@ const MktInstitutePage = () => {
               <ZoomIn className="w-5 h-5" />
             </div>
             <img
-              src="/images/Certified cources/WhatsApp Image 2026-06-08 at 12.21.11 PM.jpeg"
+              src="/images/cources/Certified cources/WhatsApp Image 2026-06-08 at 12.21.11 PM.jpeg"
               alt="MKT Institute of Technology certified courses brochure details"
               className="w-full h-auto rounded-2xl max-h-[700px] object-contain mx-auto shadow-xs border border-slate-100"
             />

@@ -10,8 +10,8 @@ export function President_Learship_Section() {
             description: 'Led the GCCI business women wing, empowering women to launch and grow their own businesses through mentorship and training.',
             icon: Briefcase,
             images: [
-                '/images/activity-section/01-Woman-Entrepreneurship-GCCI-Ahmedabad.jpg',
-                '/images/activity-section/03-Seminar-on-Women-Empowerment.jpg'
+                '/images/G04-other-activities-of-precident-Mkt/img4.jpg',
+                '/images/president-activity-section/03-Seminar-on-Women-Empowerment.jpg'
             ],
             imageExplanations: [
                 'President of MKT and Current PM of India are sharing stage during the Outstanding Business Performance Award Presentation Function in GCCI at Ahmedabad during 2001-02.'
@@ -28,7 +28,7 @@ export function President_Learship_Section() {
             description: 'Extensive travel across multiple nations to establish market ties and develop training programs for entrepreneur development.',
             icon: Globe,
             images: [
-                '/images/activity-section/04-meeting-with-shreelanka-chambers.jpg'
+                '/images/president-activity-section/04-meeting-with-shreelanka-chambers.jpg'
             ],
             imageExplanations: [
                 "Meeting with Sri Lanka Chamber of Commerce during visit to Sri Lanka for Business Development between India & Sri Lanka organized by GCCI, in 2003-2004"
@@ -45,8 +45,8 @@ export function President_Learship_Section() {
             description: 'Served as chairperson of GCCI business women wing and HRD committee, driving strategic initiatives.',
             icon: Users,
             images: [
-                '/images/activity-section/05--Business-woman-wings.jpg',
-                '/images/activity-section/02-President-of-MKT-and-Shri-Sundersinh-Bhandari-Former-Governor-of-Gujarat-discussing-during-the-exhibiton-held-in-GCCI-at-Ahmedabad-during-2001-02.jpg'
+                '/images/president-activity-section/05--Business-woman-wings.jpg',
+                '/images/president-activity-section/02-President-of-MKT-and-Shri-Sundersinh-Bhandari-Former-Governor-of-Gujarat-discussing-during-the-exhibiton-held-in-GCCI-at-Ahmedabad-during-2001-02.jpg'
             ],
             imageExplanations: [
                 'Felicitation of Smt Savitriben Patel by Business women wing GCCI in the presence of Smt Smriti Irani Member of parliament and Present Union Minister.',
@@ -64,7 +64,7 @@ export function President_Learship_Section() {
             description: 'Participated in national and international conferences advancing business development and social initiatives.',
             icon: Trophy,
             images: [
-                '/images/activity-section/06-Meet-and-Greet-with-former-President-of-India.jpg'
+                '/images/president-activity-section/06-Meet-and-Greet-with-former-President-of-India.jpg'
             ],
             imageExplanations: [
                 'A high-level meet and greet session with the former President of India, discussing social and youth innovation projects During Year 2011- 2012.'

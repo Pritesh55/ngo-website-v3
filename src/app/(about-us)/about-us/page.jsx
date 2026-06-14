@@ -124,7 +124,7 @@ const About_us_Page = () => {
                 tagClass: 'bg-pink-100 text-pink-700 border-pink-200'
               },
               {
-                dt: 'FCRA, 1976',
+                dt: 'FCRA',
                 dd: '041910337',
                 sub: 'Foreign Contribution Regulation Act compliant',
                 theme: 'from-amber-50/80 to-yellow-50/40',
