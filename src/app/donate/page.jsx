@@ -267,7 +267,7 @@ const DonatePage = () => {
                     <span className="text-blue-700 font-bold">•</span>
                     <div className="flex flex-col gap-y-1">
                       <strong>FCRA Registered :</strong>
-                      <span className="text-base text-green-600 font-semibold">FCRA Regd No: 041910337 (Date: 20-07-2006)</span>
+                      <span className="text-base text-green-600 font-semibold">FCRA Regd No: 041910337</span>
                     </div>
                   </div>
 
