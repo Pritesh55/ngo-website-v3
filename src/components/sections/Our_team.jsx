@@ -18,7 +18,7 @@ const Our_team = () => {
     return (
         <>
             <section className="bg-glow-warm py-24 border-b border-slate-100 relative overflow-hidden">
-                <div className="mx-auto">
+                <div className="px-4 sm:px-0 mx-auto">
                     <Section_header section_header_info={Our_Team_Section_Header_info}></Section_header>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">

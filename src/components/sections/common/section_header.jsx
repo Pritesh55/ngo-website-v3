@@ -9,10 +9,10 @@ const Section_header = ({ section_header_info }) => {
                     {section_header_info.icon}
                     <span className="text-sm font-semibold text-amber-700">{section_header_info.subTitle}</span>
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
+                <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-4">
                     {section_header_info.title}
                 </h2>
-                <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
+                <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
                     {section_header_info.description}
                 </p>
             </div>
