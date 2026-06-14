@@ -116,7 +116,7 @@ const About_us_Page = () => {
                 tagClass: 'bg-pink-100 text-pink-700 border-pink-200'
               },
               {
-                dt: '12 AB (1)(b)  (New)',
+                dt: '12 AB (1)(b) (New)',
                 dd: 'AAATM7981L25AD01',
                 sub: 'Income Tax Exemption Approval',
                 theme: 'from-pink-50/80 to-rose-50/40',
@@ -476,10 +476,10 @@ const About_us_Page = () => {
       </section>
 
       {/* <!-- 6 ▸ OUR TEAM ----------------------------------------------- --> */}
-      <Our_team />
+      {/* <Our_team /> */}
 
       {/* <!-- 7 ▸ CLOSING / CTA ------------------------------------------ --> */}
-      <CTA_Donate_or_vol />
+      {/* <CTA_Donate_or_vol /> */}
 
     </>
   )
