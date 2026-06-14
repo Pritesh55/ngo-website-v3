@@ -17,20 +17,6 @@ const courses = [
     tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
     btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
   },
-
-  {
-    name: 'Government Schemes Implementation and Support',
-    category: 'govt-schemes',
-    duration: 'Ongoing',
-    fee: 'Free of Cost',
-    description: 'We work to provide benefits from various government welfare schemes to the poor and needy, along with necessary guidance.',
-    image: '/images/courses/Certified cources/woman-child-development.png',
-    link: '/courses/government-schemes',
-    theme: 'from-emerald-50/80 to-teal-50/40',
-    border: 'border-emerald-250 hover:border-emerald-350',
-    tagClass: 'border-emerald-200 bg-emerald-100/60 text-emerald-700',
-    btnClass: 'from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20'
-  },
   {
     name: 'Domestic Data Entry Operator',
     category: 'fee-based',
@@ -82,6 +68,20 @@ const courses = [
     border: 'border-orange-200 hover:border-orange-350',
     tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
     btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
+  },
+
+  {
+    name: 'Government Schemes Implementation and Support',
+    category: 'govt-schemes',
+    duration: 'Ongoing',
+    fee: 'Free of Cost',
+    description: 'We work to provide benefits from various government welfare schemes to the poor and needy, along with necessary guidance.',
+    image: '/images/courses/Certified cources/woman-child-development.png',
+    link: '/courses/government-schemes',
+    theme: 'from-emerald-50/80 to-teal-50/40',
+    border: 'border-emerald-250 hover:border-emerald-350',
+    tagClass: 'border-emerald-200 bg-emerald-100/60 text-emerald-700',
+    btnClass: 'from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20'
   },
 ];
 
