@@ -1,3 +1,4 @@
+import Rising_milestone_heading from '@/components/bmols/Rising_milestone_heading';
 import { Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,26 +32,16 @@ export function WomenEmpowermentSection() {
         '/images/Woman-Empowernment/02---pdf_20230112_160443_-051.jpg',
     ];
 
+
+
     return (
 
 
 
         <div className="mb-16">
-            <div className="bg-linear-to-r from-teal-50 to-slate-50 rounded-xl border-2 border-teal-200 p-8 mb-8">
-                <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 bg-teal-100 rounded-lg flex-shrink-0 text-teal-700">
-                        <Users className="w-8 h-8" />
-                    </div>
-                    <div className="flex-1">
-                        <h3 className="max-xs:text-lg xs:text-xl sm:text-3xl font-bold text-teal-900 mb-3">
-                            Women Empowerment
-                        </h3>
-                        <p className="text-lg text-teal-800 mb-4 leading-relaxed">
-                            The program's main objective is to upskill women in order to support them in becoming financially independent and raising their dignity in the process.
-                        </p>
-                    </div>
-                </div>
-            </div>
+
+
+            <Rising_milestone_heading title_name="Women Empowerment" description="The program's main objective is to upskill women in order to support them in becoming financially independent and raising their dignity in the process." icon={Users} iconBgColor="bg-teal-100" iconTextColor="text-teal-700" />
 
             <div className="grid md:grid-cols-2 gap-8">
                 <div>

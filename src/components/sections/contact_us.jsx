@@ -80,19 +80,34 @@ const Contact_us_Main_Section = () => {
                             <h3 className="text-xl font-bold text-slate-900 mb-4 pb-2 border-b border-slate-100">Send Message</h3>
 
                             <div className="flex flex-col gap-6">
-                                <Link
-                                    href="https://wa.me/919974025126?text=Join%20now"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
-                                >
-                                    <img
-                                        src="/icons/whatsapp-color-svgrepo-com.svg"
-                                        alt="WhatsApp"
-                                        className="w-5 h-5 object-contain brightness-0 invert"
-                                    />
-                                    WhatsApp Inquiry (Join Now)
-                                </Link>
+                                <div className="flex flex-row flex-wrap gap-4">
+                                    <Link
+                                        href="https://wa.me/919974025126?text=Join%20now"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-4 py-2 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
+                                    >
+                                        <img
+                                            src="/icons/whatsapp-color-svgrepo-com.svg"
+                                            alt="WhatsApp"
+                                            className="w-5 h-5 object-contain brightness-0 invert"
+                                        />
+                                        Whatsapp 01                                  </Link>
+                                    <Link
+                                        href="https://wa.me/919974025126?text=Join%20now"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-4 py-2 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
+                                    >
+                                        <img
+                                            src="/icons/whatsapp-color-svgrepo-com.svg"
+                                            alt="WhatsApp"
+                                            className="w-5 h-5 object-contain brightness-0 invert"
+                                        />
+                                        Whatsapp 02
+                                    </Link>
+                                </div>
+
 
                                 <Link
                                     href="tel:9974025126"
