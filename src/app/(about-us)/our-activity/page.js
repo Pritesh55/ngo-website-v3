@@ -3,12 +3,16 @@ import { SaltWorkersWelfareSection } from '@/components/sections/rising_mileston
 import { ScienceInnovationSection } from '@/components/sections/rising_milestones/science_innovation'
 import { SocioEconomicSection } from '@/components/sections/rising_milestones/socio_economic'
 import { WomenEmpowermentSection } from '@/components/sections/rising_milestones/woman_empowernment'
+import { EmploymentGenerationSection } from '@/components/sections/rising_milestones/employment_generation'
+
+import { Employment_generation_activity_data, Women_Empowerment_activity_data, Socio_Economic_activity_data, Community_Health_activity_data, Science_Innovation_activity_data, Salt_Workers_Welfare_activity_data } from '@/data/rising_milestones_data.jsx'
+
 import React from 'react'
 
 const Our_Activity_Page = () => {
+
     return (
         <>
-
             <section className="pt-20 px-4 bg-glow-fresh border-b border-slate-100 relative overflow-hidden">
                 <div className="max-w-7xl mx-auto">
                     <div className="text-center mb-16">
@@ -20,25 +24,19 @@ const Our_Activity_Page = () => {
                         </p>
                     </div>
 
+                    <EmploymentGenerationSection Employment_generation_activity_data={Employment_generation_activity_data} />
 
-                    <WomenEmpowermentSection>
-                    </WomenEmpowermentSection>
+                    <WomenEmpowermentSection Women_Empowerment_activity_data={Women_Empowerment_activity_data} />
 
-                    <SocioEconomicSection>
-                    </SocioEconomicSection>
+                    <SocioEconomicSection Socio_Economic_activity_data={Socio_Economic_activity_data} />
 
-                    <CommunityHealthSection>
-                    </CommunityHealthSection>
+                    <CommunityHealthSection Community_Health_activity_data={Community_Health_activity_data} />
 
-                    <ScienceInnovationSection>
-                    </ScienceInnovationSection>
+                    <ScienceInnovationSection Science_Innovation_activity_data={Science_Innovation_activity_data} />
 
-                    <SaltWorkersWelfareSection>
-                    </SaltWorkersWelfareSection>
+                    <SaltWorkersWelfareSection Salt_Workers_Welfare_activity_data={Salt_Workers_Welfare_activity_data} />
                 </div>
             </section>
-
-
         </>
     )
 }
