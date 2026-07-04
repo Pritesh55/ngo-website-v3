@@ -499,28 +499,6 @@ const MktInstitutePage = () => {
         </div>
       </section>
 
-      {/* <!-- BROCHURE LEAFLET DISPLAY --> */}
-      <section className="bg-slate-100 py-12 md:py-20 px-4 border-t border-slate-200">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-slate-300 bg-white/50">
-            <BookOpen className="w-4 h-4 text-slate-600" />
-            <span className="text-xs font-bold text-slate-600 tracking-wider">OFFICIAL BROCHURE</span>
-          </div>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-8">Course Details Brochure (Scan Image)</h2>
-
-          <div className="bg-white rounded-3xl p-4 md:p-6 shadow-md border border-slate-200 inline-block max-w-full relative group">
-            <div className="absolute top-6 right-6 bg-slate-900/80 text-white p-2.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              <ZoomIn className="w-5 h-5" />
-            </div>
-            <img
-              src="/images/courses/Certified cources/WhatsApp Image 2026-06-08 at 12.21.11 PM.jpeg"
-              alt="MKT Institute of Technology certified courses brochure details"
-              className="w-full h-auto rounded-2xl max-h-[700px] object-contain mx-auto shadow-xs border border-slate-100"
-            />
-          </div>
-        </div>
-      </section>
-
       {/* <!-- FOOTER BANNER CTA --> */}
       <section className="bg-glow-warm py-16 md:py-24 px-4 text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto">
