@@ -572,21 +572,6 @@ const GovtSchemesPage = () => {
 
             </div>
 
-            {/* Display leaflet */}
-            <div className="bg-white rounded-3xl border border-slate-200 p-4 shadow-sm max-w-sm mx-auto w-full">
-              <p className="text-xs font-bold text-slate-400 mb-3 text-center uppercase tracking-wider">Related Leaflet Image (Scan Leaflet)</p>
-              <div className="rounded-2xl overflow-hidden border border-slate-150 bg-slate-50">
-
-                <Link href="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg">
-                  <img
-                    src="/images/courses/Benifite-to-woman-by-gevenments-schemes/vhali-dikri-Yojna.jpeg"
-                    alt="Vhali Dikri Yojana"
-                    className="w-full h-auto object-contain mx-auto max-h-[220px]"
-                  />
-                </Link>
-              </div>
-            </div>
-
           </div>
         )}
 
