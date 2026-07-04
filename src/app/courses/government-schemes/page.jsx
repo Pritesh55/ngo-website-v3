@@ -29,8 +29,7 @@ const GovtSchemesPage = () => {
     { id: 'swavlamban', name: 'Mahila Swavlamban Yojana', icon: Award, color: 'emerald' },
     { id: 'dikri', name: 'Vhali Dikri Yojana', icon: Heart, color: 'rose' },
     { id: 'safety', name: 'Safety, Sakhi OSC & 181', icon: Shield, color: 'teal' },
-    { id: 'pension', name: 'Ganga Swarupa & Welfare', icon: Users, color: 'indigo' },
-    { id: 'scans', name: 'Guideline Leaflets', icon: FileText, color: 'slate' }
+    { id: 'pension', name: 'Ganga Swarupa & Welfare', icon: Users, color: 'indigo' }
   ]
 
   // Documents list for Mahila Swavlamban
