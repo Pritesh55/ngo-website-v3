@@ -144,7 +144,7 @@ export function Footer() {
                                     <Phone className="w-4 h-4" />
                                 </div>
                                 <span className="pt-1">
-                                    94260 620683
+                                    94260 62083
                                 </span>
                             </div>
                             <div className="flex items-start gap-3">

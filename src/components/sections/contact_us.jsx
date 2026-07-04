@@ -1,9 +1,10 @@
 import React from 'react';
+import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { MapPin, Phone, Send } from 'lucide-react';
 import Contact_us_forms from '../forms/contact_us_forms';
 import Image from 'next/image';
-import Link from 'next/link';
+
 
 const Contact_us_Main_Section = () => {
 
@@ -66,7 +67,7 @@ const Contact_us_Main_Section = () => {
                                 <div>
                                     <h3 className="text-lg font-bold text-slate-900 mb-1">Call or Email</h3>
                                     <p className="text-slate-600 text-sm leading-relaxed mb-1">
-                                        <span className="font-semibold text-slate-700">Mobile No:</span> 94260 620683
+                                        <span className="font-semibold text-slate-700">Mobile No:</span> 94260 62083
                                     </p>
                                     <p className="text-slate-600 text-sm leading-relaxed">
                                         <span className="font-semibold text-slate-700">Email:</span> mktahmedabad1986@gmail.com

@@ -217,7 +217,7 @@ export const projects = [
       // "Duration": "Ongoing",
       "Process": "Skill-based training, Soft skills development, 100% placement assistance.",
       // "Address": "Plot No. 415, Sector-28, Gandhinagar - 382028",
-      "Contact": "+91 94260 620683",
+      "Contact": "+91 94260 62083",
       "Email": "mktahmedabad1986@gmail.com",
       "Activities": [
         // "Certificate Course in Banking & Financial Services (3 Months, Eligibility: Graduate)",
