@@ -326,7 +326,7 @@ const GovtSchemesPage = () => {
 
           <div className="flex-shrink-0 w-full md:w-auto flex flex-col gap-3 relative z-10">
             <Link
-              href="tel:9974025126"
+              href="tel:9426062083"
               className="flex items-center justify-center gap-3 px-6 py-4 bg-white text-teal-950 hover:bg-slate-55 transition-all font-extrabold rounded-2xl text-base shadow-lg hover:scale-[1.02] active:scale-[0.98]"
             >
               <Phone className="w-4.5 h-4.5 text-emerald-700" />

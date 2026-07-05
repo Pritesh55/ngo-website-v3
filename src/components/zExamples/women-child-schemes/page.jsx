@@ -237,11 +237,11 @@ const WomenChildSchemesPage = () => {
               વોટ્સએપ દ્વારા સંપર્ક કરો
             </Link>
             <Link
-              href="tel:07926309452"
+              href="tel:9974025126"
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-8 py-4 bg-linear-to-r from-rose-600 to-orange-600 text-white font-bold rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] text-sm md:text-base cursor-pointer shadow-md"
             >
               <Phone className="w-5 h-5" />
-              કચેરી ફોન: ૦૭૯-૨૬૩૦૯૪૫૨
+              કચેરી ફોન: +91 9974025126
             </Link>
           </div>
         </div>

@@ -95,7 +95,7 @@ const Contact_us_Main_Section = () => {
                                         />
                                         Whatsapp 01                                  </Link>
                                     <Link
-                                        href="https://wa.me/919974025126?text=Join%20now"
+                                        href="https://wa.me/9178598 14126?text=Join%20now"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-4 py-2 bg-[#25D366] text-white font-bold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-sm md:text-base cursor-pointer"
