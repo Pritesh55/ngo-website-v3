@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,7 +17,12 @@ const partners = [
     // { name: "MOFPI", logo: "/images/partners-logo/MOFPI.png" },
 ];
 
+import { useCMS } from '@/context/CMSContext';
+
 export default function PartnerSection() {
+    const { t, allContent } = useCMS();
+    const partnersList = allContent?.partners || partners;
+
     return (
         <section
             className="py-20 sm:py-24 border-y border-amber-100/40 relative overflow-hidden bg-pink-green-yellow"
@@ -29,16 +35,15 @@ export default function PartnerSection() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
                 <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 tracking-tight">
-                        Trusted by Our Partners
+                        {t('partnerSection.title') || "Trusted by Our Partners"}
                     </h2>
                     <p className="text-lg sm:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-                        We're proud to partner with some of the most innovative companies
-                        in India to deliver exceptional results.
+                        {t('partnerSection.description') || "We're proud to partner with some of the most innovative companies in India to deliver exceptional results."}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {partners.map((partner) => (
+                    {partnersList.map((partner) => (
                         <div
                             key={partner.name}
                             className="flex justify-center items-center px-1 sm:px-6 py-6 bg-white/75 backdrop-blur-md border border-white/60 rounded-2xl shadow-xs hover:shadow-md hover:scale-[1.03] hover:border-amber-300/80 hover:bg-white transition-all duration-300 sm:h-40 group"

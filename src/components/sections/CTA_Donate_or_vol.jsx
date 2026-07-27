@@ -1,8 +1,12 @@
+'use client'
 import { ChevronRight, Heart, UserPlus } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import { useCMS } from '@/context/CMSContext'
 
 const CTA_Donate_or_vol = () => {
+    const { t } = useCMS()
+
     return (
         <>
             <section className="bg-glow-cool py-24 border-t border-slate-100 relative overflow-hidden">
@@ -10,13 +14,15 @@ const CTA_Donate_or_vol = () => {
 
                     <div className="text-center mb-16">
                         <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
-                            <span className="text-xs font-bold text-orange-700 tracking-wider">06 — GET INVOLVED</span>
+                            <span className="text-xs font-bold text-orange-700 tracking-wider">
+                                {t('ctaSection.tag') || "06 — GET INVOLVED"}
+                            </span>
                         </div>
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                            Help us place education, dignity &amp; opportunity in more hands
+                            {t('ctaSection.title') || "Help us place education, dignity & opportunity in more hands"}
                         </h2>
                         <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-                            Join our mission to empower communities, support rural entrepreneurs, and transform lives across Gujarat.
+                            {t('ctaSection.description') || "Join our mission to empower communities, support rural entrepreneurs, and transform lives across Gujarat."}
                         </p>
                     </div>
 
@@ -30,14 +36,14 @@ const CTA_Donate_or_vol = () => {
                                             <Heart className="w-8 h-8" />
                                         </div>
                                         <span className="text-xs font-bold capitalize tracking-widest text-orange-850 bg-white border border-orange-200 px-3 py-1 rounded-full">
-                                            Support the Trust
+                                            {t('ctaSection.donateTag') || "Support the Trust"}
                                         </span>
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-900 leading-snug mb-3">
-                                        Make a Donation
+                                        {t('ctaSection.donateTitle') || "Make a Donation"}
                                     </h3>
                                     <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
-                                        Your generous contributions directly fund skill development workshops, educational materials for children, and women's self-sufficiency projects.
+                                        {t('ctaSection.donateDesc') || "Your generous contributions directly fund skill development workshops, educational materials for children, and women's self-sufficiency projects."}
                                     </p>
                                 </div>
                                 <div className="mt-8">
@@ -58,14 +64,14 @@ const CTA_Donate_or_vol = () => {
                                             <UserPlus className="w-8 h-8" />
                                         </div>
                                         <span className="text-xs font-bold capitalize tracking-widest text-blue-850 bg-white border border-blue-200 px-3 py-1 rounded-full">
-                                            Join Our Team
+                                            {t('ctaSection.volunteerTag') || "Join Our Team"}
                                         </span>
                                     </div>
                                     <h3 className="text-2xl font-bold text-slate-900 leading-snug mb-3">
-                                        Become a Volunteer
+                                        {t('ctaSection.volunteerTitle') || "Become a Volunteer"}
                                     </h3>
                                     <p className="text-slate-700 text-sm md:text-base leading-relaxed font-semibold">
-                                        Share your time, technical skills, or guidance to mentor local communities, support training courses, and expand our rural outreach.
+                                        {t('ctaSection.volunteerDesc') || "Share your time, technical skills, or guidance to mentor local communities, support training courses, and expand our rural outreach."}
                                     </p>
                                 </div>
                                 <div className="mt-8">

@@ -1,4 +1,4 @@
-
+'use client'
 import React from 'react'
 import { Card } from '@/components/ui/card';
 import { Award, Star } from 'lucide-react';
@@ -6,14 +6,17 @@ import Link from 'next/link';
 import Awards_list from './awards/awards_list';
 import Section_header from './common/section_header';
 
+import { useCMS } from '@/context/CMSContext';
+
 const Award_Cards_Section = () => {
+    const { t } = useCMS();
 
     const award_section_header_info = {
         id: 8,
         icon: <Star className="w-4 h-4 text-amber-600" />,
-        subTitle: 'Awards & Accolades',
-        title: 'Awards & Accolades',
-        description: 'Recognition of distinguished service and transformative impact in social development and business empowerment.',
+        subTitle: t('awardSection.subTitle') || 'Awards & Accolades',
+        title: t('awardSection.title') || 'Awards & Accolades',
+        description: t('awardSection.description') || 'Recognition of distinguished service and transformative impact in social development and business empowerment.',
     }
 
     const award_info_Array = [
@@ -104,21 +107,17 @@ const Award_Cards_Section = () => {
                         <Star className="w-8 h-8 text-amber-600 flex-shrink-0 mt-1" />
                         <div>
                             <h3 className="text-2xl font-bold text-slate-900 mb-2">
-                                A Legacy of Excellence
+                                {t('awardSection.legacyTitle') || "A Legacy of Excellence"}
                             </h3>
 
 
                             <div className="flex flex-col gap-y-4 mx-auto mb-10 w-full max-w-5xl">
                                 <p className="text-lg text-slate-600 leading-relaxed">
-                                    Manav Kalyan Trust's work has received recognition from numerous institutions
-                                    and organisations over the years. We appreciate their trust and confidence in
-                                    our abilities by bestowing such an honour upon us. It motivates us, gives us hope
-                                    that we are on the right track, and makes us aware of the enormous
-                                    responsibility we have to the society.
+                                    {t('awardSection.legacyDesc1') || "Manav Kalyan Trust's work has received recognition from numerous institutions and organisations over the years. We appreciate their trust and confidence in our abilities by bestowing such an honour upon us. It motivates us, gives us hope that we are on the right track, and makes us aware of the enormous responsibility we have to the society."}
                                 </p>
 
                                 <p className="text-lg text-slate-600 leading-relaxed">
-                                    These awards and recognitions reflect decades of dedicated service to women's economic empowerment, social development, and business excellence. Each honor represents the tangible impact of MKT's initiatives and the transformative lives changed through our programs.
+                                    {t('awardSection.legacyDesc2') || "These awards and recognitions reflect decades of dedicated service to women's economic empowerment, social development, and business excellence. Each honor represents the tangible impact of MKT's initiatives and the transformative lives changed through our programs."}
                                 </p>
                             </div>
                         </div>

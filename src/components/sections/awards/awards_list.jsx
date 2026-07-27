@@ -1,8 +1,12 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
+import { useCMS } from '@/context/CMSContext';
+
 const Awards_list = () => {
+    const { allContent } = useCMS();
 
     const award_info_Array = [
         {
@@ -76,15 +80,17 @@ const Awards_list = () => {
 
     ];
 
+    const awardsList = allContent?.awards || award_info_Array;
+
     return (
         <>
             {/* Awards List */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-16">
-                {award_info_Array.map((award_info_Array, idx) => (
+                {awardsList.map((item, idx) => (
                     <div key={idx} className="group flex flex-col relative rounded-lg overflow-hidden border border-slate-200 bg-white shadow-xs hover:shadow-md transition-all duration-300 hover:border-amber-300">
-                        <Link href={award_info_Array.award_imgURL}>
+                        <Link href={item.award_imgURL}>
                             <Image
-                                src={award_info_Array.award_imgURL}
+                                src={item.award_imgURL}
                                 alt={`Recognition document ${idx + 1}`}
                                 width={420}
                                 height={192}
@@ -93,7 +99,7 @@ const Awards_list = () => {
                         </Link>
 
                         <div className="p-4">
-                            <p className="text-base text-slate-700">{`${award_info_Array.id}) ${award_info_Array.award_Name}`}</p>
+                            <p className="text-base text-slate-700">{`${item.id || idx + 1}) ${item.award_Name}`}</p>
                         </div>
 
 

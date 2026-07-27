@@ -6,14 +6,18 @@ import { projects } from '@/data/projects'
 import Section_header from './common/section_header'
 import Image from 'next/image'
 
+import { useCMS } from '@/context/CMSContext'
+
 export function Our_Projects_Cards_Section() {
+  const { t, allContent } = useCMS()
+  const projectsList = allContent?.projects || projects
 
   const our_projcts_section_header_info = {
     id: 2,
     icon: <FolderOpen className="w-4 h-4 text-blue-700" />,
-    subTitle: 'OUR PROJECTS',
-    title: 'Our Key Welfare Projects',
-    description: 'Continuous efforts of Manav Kalyan Trust in women empowerment, rural development, disaster relief, and healthcare.',
+    subTitle: t('projectsSection.subTitle') || 'OUR PROJECTS',
+    title: t('projectsSection.title') || 'Our Key Welfare Projects',
+    description: t('projectsSection.description') || 'Continuous efforts of Manav Kalyan Trust in women empowerment, rural development, disaster relief, and healthcare.',
   }
   return (
     <section id="our-projects" className="bg-gradient-to-b from-slate-50 to-white py-16 md:py-24 px-4 sm:px-6 border-b border-slate-100 relative overflow-hidden">
@@ -27,7 +31,7 @@ export function Our_Projects_Cards_Section() {
 
         {/* Projects Grid (2-column layout) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 xl:gap-8 mx-auto">
-          {projects.map((project) => (
+          {projectsList.map((project) => (
             <div
               key={project.id}
               className={`bg-gradient-to-br ${project.theme} border ${project.border} rounded-3xl p-5 md:p-6 shadow-xs flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 w-full`}

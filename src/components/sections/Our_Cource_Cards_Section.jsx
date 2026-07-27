@@ -85,7 +85,11 @@ const courses = [
   },
 ];
 
+import { useCMS } from '@/context/CMSContext'
+
 export function Our_Cource_Cards_Section() {
+  const { t, allContent } = useCMS()
+  const coursesList = allContent?.courses || courses
 
   return (
     <section id="our_cources" className="bg-glow-warm py-16 md:py-24 px-6 sm:px-8 border-b border-slate-100 relative overflow-hidden from-60% to-100%">
@@ -95,19 +99,21 @@ export function Our_Cource_Cards_Section() {
         <div className="text-center pb-8 md:pb-12">
           <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full border border-orange-200 bg-orange-50/50">
             <GraduationCap className="w-4 h-4 text-orange-700" />
-            <span className="text-xs font-bold text-orange-700 tracking-wider uppercase">OUR COURSES</span>
+            <span className="text-xs font-bold text-orange-700 tracking-wider uppercase">
+              {t('coursesSection.subTitle') || 'OUR COURSES'}
+            </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
-            Skill Development Courses
+            {t('coursesSection.title') || 'Skill Development Courses'}
           </h2>
           <p className="text-base md:text-lg text-slate-650 max-w-2xl mx-auto leading-relaxed font-semibold">
-            Vocational courses and government scheme guidance for women and youth to achieve economic independence and self-reliance.
+            {t('coursesSection.description') || 'Vocational courses and government scheme guidance for women and youth to achieve economic independence and self-reliance.'}
           </p>
         </div>
 
         {/* Courses Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:gap-16 gap-6 mx-auto">
-          {courses.map((course, idx) => (
+          {coursesList.map((course, idx) => (
             <div
               key={idx}
               className={`bg-linear-to-br ${course.theme} border ${course.border} rounded-2xl p-4 md:p-5 shadow-xs flex flex-col justify-between hover:shadow-lg transition-all duration-300 w-full`}

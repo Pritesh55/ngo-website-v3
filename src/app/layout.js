@@ -25,6 +25,8 @@ export const metadata = {
   description: "NGO, Ghatlodia Ahmedabad",
 };
 
+import { CMSProvider } from "@/context/CMSContext";
+
 export default function RootLayout({ children }) {
   return (
     <html
@@ -36,15 +38,15 @@ export default function RootLayout({ children }) {
         <title>Manav kalyan trust | Ghatlodia, Ahmedabad</title>
       </head>
       <body className="flex flex-col tracking-wide items-center">
-        <Header_of_full_website></Header_of_full_website>
+        <CMSProvider>
+          <Header_of_full_website></Header_of_full_website>
 
-        <main className="w-full 2xl:container">
-          {children}
-        </main>
+          <main className="w-full 2xl:container">
+            {children}
+          </main>
 
-
-        <Footer></Footer>
-
+          <Footer></Footer>
+        </CMSProvider>
       </body>
     </html>
   );

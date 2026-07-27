@@ -1,9 +1,19 @@
-
+'use client'
+import React from 'react';
 import Link from 'next/link';
-import Hero_btns from '../btns/hero_btns';
-
+import { Sparkles } from 'lucide-react';
+import { useCMS } from '@/context/CMSContext';
 
 export function HeroSection() {
+    const { t, allContent } = useCMS();
+
+    const stats = allContent?.hero?.stats || [
+        { number: '500+', label: 'Entrepreneurs Supported' },
+        { number: '1000+', label: 'Jobs Created' },
+        { number: '20 Yrs+', label: 'Social Impact' },
+        { number: '5 Continents', label: 'Global Reach' },
+    ];
+
     return (
         <section className="relative flex items-center justify-center px-4 py-20 bg-linear-to-br from-orange-50 to-red-50">
             <div className="relative z-10 max-w-6xl mx-auto text-center">
@@ -11,35 +21,34 @@ export function HeroSection() {
                 <div className="mb-8 inline-block">
                     <div className="px-4 py-2 rounded-full border border-orange-200 bg-orange-100/50 backdrop-blur-sm">
                         <p className="text-sm font-semibold text-red-700">
-                            MANAV KALYAN TRUST • EMPOWERING ENTREPRENEURS
+                            {t('hero.brand') || 'MANAV KALYAN TRUST • EMPOWERING ENTREPRENEURS'}
                         </p>
                     </div>
                 </div>
 
                 {/* Main Headline */}
                 <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight">
-                    Transforming Dreams Into
-                    <span className="bg-linear-to-r from-orange-600 via-red-500 to-darkred bg-clip-text text-transparent"> Thriving Enterprises</span>
+                    {t('hero.title') ? (
+                        <>
+                            {t('hero.title').replace(/Thriving Enterprises/g, '')}
+                            <span className="bg-linear-to-r from-orange-600 via-red-500 to-darkred bg-clip-text text-transparent"> Thriving Enterprises</span>
+                        </>
+                    ) : (
+                        <>
+                            Transforming Dreams Into
+                            <span className="bg-linear-to-r from-orange-600 via-red-500 to-darkred bg-clip-text text-transparent"> Thriving Enterprises</span>
+                        </>
+                    )}
                 </h1>
 
                 {/* Subheadline */}
                 <p className="text-xl md:text-2xl text-slate-700 mb-8 max-w-3xl mx-auto leading-relaxed">
-                    Dedicated to empowering women and minority entrepreneurs across India. We provide mentorship, training, and support to transform visionary ideas into sustainable, profitable businesses that create jobs and change communities.
+                    {t('hero.subtitle') || "Dedicated to empowering women and minority entrepreneurs across India. We provide mentorship, training, and support to transform visionary ideas into sustainable, profitable businesses that create jobs and change communities."}
                 </p>
-
-                {/* CTA Buttons */}
-                {/* <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-                    <Hero_btns></Hero_btns>
-                </div> */}
 
                 {/* Stats Banner */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                    {[
-                        { number: '500+', label: 'Entrepreneurs Supported' },
-                        { number: '1000+', label: 'Jobs Created' },
-                        { number: '20 Yrs+', label: 'Social Impact' },
-                        { number: '5 Continents', label: 'Global Reach' },
-                    ].map((stat, i) => (
+                    {stats.map((stat, i) => (
                         <div key={i} className="p-4 rounded-lg bg-white/70 border border-orange-100 backdrop-blur-sm shadow-xs">
                             <p className="text-2xl md:text-3xl font-bold bg-linear-to-r from-orange-600 to-darkred bg-clip-text text-transparent mb-1">
                                 {stat.number}
