@@ -144,7 +144,7 @@ export function Our_Cource_Cards_Section() {
                     <img
                       src={course.image}
                       alt={course.name}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-[1.03]"
+                      className="w-full h-full object-contain transition-transform duration-500 hover:scale-[1.03]"
                     />
                   </Link>
                 </div>

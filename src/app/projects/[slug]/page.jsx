@@ -139,7 +139,7 @@ export default function ProjectDetailPage({ params }) {
                   <img
                     src={imgUrl}
                     alt={`${project.name} gallery image ${idx + 1}`}
-                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.05]"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.05]"
                   />
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                     <span className="text-white text-xs font-bold bg-black/60 px-3 py-1.5 rounded-full border border-white/20">

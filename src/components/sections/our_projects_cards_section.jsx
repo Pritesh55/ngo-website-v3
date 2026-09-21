@@ -45,7 +45,7 @@ export function Our_Projects_Cards_Section() {
                       alt={project.name}
                       width={574}
                       height={296}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="w-full h-full object-contain object-center transition-transform duration-500 group-hover:scale-[1.04]"
                     />
 
                     {/* Badge for project number */}

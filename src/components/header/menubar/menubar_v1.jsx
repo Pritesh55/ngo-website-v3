@@ -4,7 +4,7 @@ import Menu_item_without_dropdown from './Menu_item_without_dropdown';
 import Menu_item_with_dropdown from './Menu_item_with_dropdown';
 import Nav_btn from '../Nav_btn';
 import Link from 'next/link';
-import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Trophy, User, Scissors, FileCheck, Laptop } from 'lucide-react';
+import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Trophy, User, Scissors, FileCheck, Laptop, Store, Sparkles } from 'lucide-react';
 
 const menuItems = [
     { menuId: 1, label: 'Home', href: '/', icon: Home },
@@ -23,9 +23,9 @@ const menuItems = [
     {
         menuId: 3, label: 'Courses', href: '#', icon: GraduationCap,
         dropdown: [
-            { menuId: 3.1, label: 'Sewing Machine Operator', href: '/courses/sewing-machine', icon: Scissors },
-            { menuId: 3.3, label: 'Government Schemes Implementation', href: '/courses/government-schemes', icon: FileCheck },
-            { menuId: 3.4, label: 'MKT IT Courses', href: '/courses/mkt-institute', icon: Laptop }
+            { menuId: 3.1, label: 'Fashion Designer Course', href: '/courses/fashion-designer-cource', icon: Sparkles },
+            { menuId: 3.2, label: 'Boutique Manager Course', href: '/courses/boutique-manager-cource', icon: Store },
+            { menuId: 3.3, label: 'Purchase Coordinator - Electronics', href: '/courses/purchase-coordinator-electronics-cource', icon: Laptop },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },

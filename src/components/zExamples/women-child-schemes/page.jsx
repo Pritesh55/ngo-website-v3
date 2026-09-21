@@ -333,7 +333,7 @@ const WomenChildSchemesPage = () => {
                           }`}
                       >
                         <SchemeIcon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-white' : 'text-rose-600'}`} />
-                        <span className="truncate md:line-clamp-2 md:whitespace-normal">{scheme.name}</span>
+                        <span className=" md:line-clamp-2 md:whitespace-normal">{scheme.name}</span>
                       </button>
                     )
                   })}
