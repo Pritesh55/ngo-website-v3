@@ -6,11 +6,15 @@ import CTA_Donate_or_vol from "@/components/sections/CTA_Donate_or_vol";
 import Our_Projects_Cards_Section from "@/components/sections/our_projects_cards_section";
 import Award_Cards_Section from "@/components/sections/Award_Cards_Section";
 import PartnerSection from "@/components/sections/our-partners";
+import NewCoursesAnnouncementModal from "@/components/sections/NewCoursesAnnouncementModal";
 
 
 export default function Home() {
   return (
     <>
+      {/* 3 New Free Courses Announcement Modal on Website Open */}
+      <NewCoursesAnnouncementModal />
+
       <HeroSection></HeroSection>
 
       <Our_Projects_Cards_Section></Our_Projects_Cards_Section>

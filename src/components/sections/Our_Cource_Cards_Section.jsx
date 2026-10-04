@@ -5,84 +5,57 @@ import { GraduationCap } from 'lucide-react'
 
 const courses = [
   {
-    name: 'Sewing Machine Operator',
+    name: 'Fashion Designer Course',
     category: 'Free + Stipend',
-    duration: '03 Months',
-    Stipend: '₹500/- per 03 month',
-    description: 'Our intensive training program helps women work proficiently on industrial sewing machines and achieve self-reliance.',
-    image: '/images/courses/img8.jpg',
-    link: '/courses/sewing-machine',
+    duration: '6 Months (570 Hours)',
+    fee: '100% Free (રૂ. 0/-)',
+    description: 'Comprehensive 6-month hands-on fashion designing training with free admission, government stipend after certification, and 100% job placement assistance.',
+    image: '/images/courses/fashion_designer_cources/Fashion_designer_Course.png',
+    link: '/courses/fashion-designer-cource',
     theme: 'from-orange-50/80 to-red-50/40',
     border: 'border-orange-200 hover:border-orange-350',
     tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
     btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
   },
-  // {
-  //   name: 'Sewing Machine Operator',
-  //   category: 'fee-based',
-  //   duration: '3 Months',
-  //   fee: 'Rs. 3000 (For 3 Months)',
-  //   description: 'Our intensive training program helps women work proficiently on industrial sewing machines and achieve self-reliance.',
-  //   image: '/images/courses/img8.jpg',
-  //   link: '/courses/sewing-machine',
-  //   theme: 'from-orange-50/80 to-red-50/40',
-  //   border: 'border-orange-200 hover:border-orange-350',
-  //   tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
-  //   btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
-  // },
-  // {
-  //   name: 'Domestic Data Entry Operator',
-  //   category: 'fee-based',
-  //   duration: '2 Months',
-  //   fee: 'Rs. 4000 + GST',
-  //   description: 'University certified course in MS Office, Tables, Charts, and basic computer training. (Admission eligibility: Grade 8 pass)',
-  //   image: '/images/courses/Certified cources/data_entry_course.png',
-  //   link: '/courses/mkt-institute#data-entry',
-  //   theme: 'from-violet-50/80 to-purple-50/40',
-  //   border: 'border-violet-200 hover:border-violet-350',
-  //   tagClass: 'border-violet-200 bg-violet-100/60 text-violet-750',
-  //   btnClass: 'from-violet-500 to-purple-600 text-white hover:shadow-purple-500/20'
-  // },
-  // {
-  //   name: 'Web Developer Course',
-  //   category: 'fee-based',
-  //   duration: '3 Months',
-  //   fee: 'Rs. 6670 + GST',
-  //   description: 'Complete training in building modern websites by learning HTML, CSS, Bootstrap, JavaScript, jQuery, and React. (Admission eligibility: Grade 12 pass)',
-  //   image: '/images/G06-Skill-traiinng-v2/web_developer_course.png',
-  //   link: '/courses/mkt-institute#web-developer',
-  //   theme: 'from-sky-50/80 to-cyan-50/40',
-  //   border: 'border-sky-200 hover:border-sky-350',
-  //   tagClass: 'border-sky-200 bg-sky-100/60 text-sky-750',
-  //   btnClass: 'from-sky-500 to-cyan-600 text-white hover:shadow-cyan-500/20'
-  // },
-  // {
-  //   name: 'Fashion Designer Course',
-  //   category: 'fee-based',
-  //   duration: '3 Months : Ongoing',
-  //   fee: 'Rs. 9500 + GST',
-  //   description: 'Career opportunities in garment design, stitching, Photoshop, CorelDRAW, embroidery, and printing. (Admission eligibility: Grade 10 pass)',
-  //   image: '/images/G06-Skill-traiinng-v2/fashion_designer_course.png',
-  //   link: '/courses/mkt-institute#fashion-designer',
-  //   theme: 'from-pink-50/80 to-rose-50/40',
-  //   border: 'border-pink-200 hover:border-pink-350',
-  //   tagClass: 'border-pink-200 bg-pink-100/60 text-pink-750',
-  //   btnClass: 'from-pink-500 to-rose-600 text-white hover:shadow-rose-500/20'
-  // },
-  // {
-  //   name: 'Sewing Machine Operator (Under Saksham KVK 2.0)',
-  //   category: 'govt-schemes',
-  //   duration: '3 Months',
-  //   fee: 'FREE',
-  //   description: 'Our intensive training program helps women work proficiently on industrial sewing machines and achieve self-reliance.',
-  //   image: '/images/courses/img8.jpg',
-  //   link: '/courses/sewing-machine-free',
-  //   theme: 'from-orange-50/80 to-red-50/40',
-  //   border: 'border-orange-200 hover:border-orange-350',
-  //   tagClass: 'border-orange-200 bg-orange-100/60 text-orange-700',
-  //   btnClass: 'from-orange-500 to-darkred text-white hover:shadow-red-500/20'
-  // },
-
+  {
+    name: 'Boutique Manager Course',
+    category: 'Free + Stipend',
+    duration: '6 Months (600 Hours)',
+    fee: '100% Free (રૂ. 0/-)',
+    description: 'Professional boutique management and merchandising course for graduates with free admission, government stipend after certification, and 100% placement support.',
+    image: '/images/courses/Boutique_Manager_Course/Boutique_Manager_Course.png',
+    link: '/courses/boutique-manager-cource',
+    theme: 'from-amber-50/80 to-orange-50/40',
+    border: 'border-amber-200 hover:border-amber-350',
+    tagClass: 'border-amber-200 bg-amber-100/60 text-amber-800',
+    btnClass: 'from-amber-600 to-red-600 text-white hover:shadow-red-500/20'
+  },
+  {
+    name: 'Purchase Coordinator - Electronics',
+    category: 'Free + Stipend',
+    duration: '6 Months (510 Hours)',
+    fee: '100% Free (રૂ. 0/-)',
+    description: 'Electronics component procurement and inventory training for 10th pass candidates with free admission, government stipend, and 100% job placement assistance.',
+    image: '/images/courses/Purchase_Coordinator_Electronics/Purchase_Coordinator_Electronics.png',
+    link: '/courses/purchase-coordinator-electronics-cource',
+    theme: 'from-blue-50/80 to-cyan-50/40',
+    border: 'border-blue-200 hover:border-blue-350',
+    tagClass: 'border-blue-200 bg-blue-100/60 text-blue-700',
+    btnClass: 'from-blue-500 to-cyan-600 text-white hover:shadow-cyan-500/20'
+  },
+  {
+    name: 'Sewing Machine Operator',
+    category: 'Free + Stipend',
+    duration: '03 Months',
+    fee: 'Free of Cost',
+    description: 'Our intensive training program helps women work proficiently on industrial sewing machines and achieve self-reliance.',
+    image: '/images/courses/img8.jpg',
+    link: '/courses/sewing-machine',
+    theme: 'from-rose-50/80 to-pink-50/40',
+    border: 'border-rose-200 hover:border-rose-350',
+    tagClass: 'border-rose-200 bg-rose-100/60 text-rose-700',
+    btnClass: 'from-rose-500 to-darkred text-white hover:shadow-red-500/20'
+  },
   {
     name: 'Government Schemes Implementation and Support',
     category: 'govt-schemes',
@@ -96,7 +69,6 @@ const courses = [
     tagClass: 'border-emerald-200 bg-emerald-100/60 text-emerald-700',
     btnClass: 'from-emerald-500 to-teal-600 text-white hover:shadow-teal-500/20'
   },
-
 ];
 
 import { useCMS } from '@/context/CMSContext'
@@ -166,26 +138,33 @@ export function Our_Cource_Cards_Section() {
               </div>
 
               {/* Action Buttons */}
-              <div className="pt-4 border-t border-slate-200/50 flex gap-3 items-center justify-between">
+              <div className="pt-4 border-t border-slate-200/50 flex flex-wrap gap-2 items-center justify-between">
                 <Link
                   href={course.link}
-                  className="inline-flex items-center justify-center px-3 py-2.5 border border-slate-350 text-slate-700 font-extrabold rounded-xl hover:bg-slate-50 transition-all text-xs md:text-sm cursor-pointer flex-1 text-center"
+                  className="inline-flex items-center justify-center px-3 py-2 border border-slate-350 text-slate-700 font-extrabold rounded-xl hover:bg-slate-50 transition-all text-xs md:text-sm cursor-pointer flex-1 text-center"
                 >
                   Details
+                </Link>
+
+                <Link
+                  href="/admission-form"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-extrabold rounded-xl hover:shadow-md transition-all text-xs md:text-sm cursor-pointer flex-1 text-center"
+                >
+                  Apply Online
                 </Link>
 
                 <Link
                   href={`https://wa.me/919974025126?text=Join%20now`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-[#25D366] text-white font-extrabold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-xs md:text-sm capitalize cursor-pointer flex-1"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#25D366] text-white font-extrabold rounded-xl hover:shadow-md hover:bg-[#20ba59] transition-all text-xs md:text-sm capitalize cursor-pointer flex-1"
                 >
                   <img
                     src="/icons/whatsapp-color-svgrepo-com.svg"
                     alt="WhatsApp"
                     className="w-4 h-4 object-contain brightness-0 invert"
                   />
-                  Join Now
+                  WhatsApp
                 </Link>
               </div>
             </div>
