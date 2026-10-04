@@ -44,7 +44,7 @@ const socialLinks = [
 
 export function Footer() {
     return (
-        <footer className="w-full bg-linear-to-br from-orange-50 via-white to-red-50 border-t border-orange-100 pt-8 pb-4 px-6 sm:px-8">
+        <footer className="w-full bg-linear-to-br from-orange-50 via-white to-red-50 border-t border-orange-100 pt-8 pb-4 px-6 sm:px-8 print:hidden">
             <div className="max-w-7xl mx-auto">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-16 gap-12 mb-8">
                     {/* About */}

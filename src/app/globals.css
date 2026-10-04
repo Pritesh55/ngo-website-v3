@@ -95,3 +95,45 @@ main {
 .text-lightred {
   color: #ae0000;
 }
+
+@media print {
+  /* Complete print isolation for official admission form */
+  header,
+  footer,
+  nav,
+  #atom-top-navigation-banner,
+  #atom-submission-success-modal,
+  #atom-submit-button-bar,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Hide interactive upload labels, buttons, and dropzones in print */
+  [data-atom-id^="UPLOAD_"] label,
+  [data-atom-id^="FIELD_"] label.cursor-pointer,
+  input[type="file"],
+  button[title*="Delete"],
+  button[title*="Remove"] {
+    display: none !important;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 8mm 6mm 8mm 6mm;
+  }
+}

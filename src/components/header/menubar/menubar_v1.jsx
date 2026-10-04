@@ -26,6 +26,7 @@ const menuItems = [
             { menuId: 3.1, label: 'Fashion Designer Course', href: '/courses/fashion-designer-cource', icon: Sparkles },
             { menuId: 3.2, label: 'Boutique Manager Course', href: '/courses/boutique-manager-cource', icon: Store },
             { menuId: 3.3, label: 'Purchase Coordinator - Electronics', href: '/courses/purchase-coordinator-electronics-cource', icon: Laptop },
+            { menuId: 3.4, label: 'Admission Form (Apply Online)', href: '/admission-form', icon: FileCheck },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },
@@ -45,7 +46,7 @@ const Menubar_v1 = () => {
         }
     };
 
-    console.log(`is_Mobile_Menu_Open = ${is_Mobile_Menu_Open}`)
+    // console.log(`is_Mobile_Menu_Open = ${is_Mobile_Menu_Open}`)
     return (
         <>
             {/* <!-- Mobile Menu Button (Hidden on larger screens) --> */}
@@ -54,7 +55,7 @@ const Menubar_v1 = () => {
                     onClick={() => {
                         set_Is_Mobile_Menu_Open(!is_Mobile_Menu_Open);
                         setOpenMobileDropdown(null); // Reset dropdown when toggling menu
-                        console.log(`is_Mobile_Menu_Open = ${is_Mobile_Menu_Open}`)
+                        // console.log(`is_Mobile_Menu_Open = ${is_Mobile_Menu_Open}`)
                     }
                     } >
                     <svg className="max-xxs:w-6 w-6 xxs:w-8 xxs:h-8 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">

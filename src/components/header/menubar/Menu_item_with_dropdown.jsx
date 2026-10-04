@@ -3,7 +3,7 @@ import React from 'react'
 
 const Menu_item_with_dropdown = ({ menuItem: menuItem_Array }) => {
 
-  console.log(menuItem_Array);
+  // console.log(menuItem_Array);
 
   return (
     <>
