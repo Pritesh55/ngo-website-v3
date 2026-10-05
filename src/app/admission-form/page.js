@@ -2094,7 +2094,7 @@ export default function AdmissionFormPage() {
           <div
             id="atom-header-live-metadata"
             data-atom-id="HEADER_LIVE_METADATA_DATE_PLACE"
-            className="flex justify-between items-center text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1 print:mb-2"
+            className="flex gap-y-2 justify-between items-center flex-wrap text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1 print:mb-2"
           >
             <div className="flex items-center gap-1.5">
               <Calendar className="w-3.5 h-3.5 text-rose-700" />
@@ -2122,7 +2122,7 @@ export default function AdmissionFormPage() {
           >
             {/* Top row on mobile: Both logos side by side for a neat header */}
             <div className="w-full flex items-center justify-between sm:hidden px-2 pb-1 border-b border-slate-100">
-              <div className="w-14 h-14 relative flex items-center justify-center shrink-0">
+              <div className="w-1/2 relative flex items-center justify-center shrink-0">
                 <Image
                   src="/images/partners-logo/gsdc-logo.png"
                   alt="Gujarat Skill Development Mission Logo"
@@ -2130,19 +2130,19 @@ export default function AdmissionFormPage() {
                   height={56}
                   priority
                   loading="eager"
-                  className="object-contain max-h-full max-w-full"
+                  className="w-full h-full object-contain max-h-full max-w-full"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}
                 />
               </div>
-              <div className="w-12 h-12 relative flex items-center justify-center shrink-0">
+              <div className="w-1/2 relative flex items-center justify-center shrink-0">
                 <Image
                   src="/Mkt-logo.svg"
                   alt="Manav Kalyan Trust Logo"
                   width={48}
                   height={48}
-                  className="object-contain max-h-full max-w-full"
+                  className="w-full h-full object-contain max-h-full max-w-full"
                   priority
                   loading="eager"
                 />
@@ -2153,9 +2153,9 @@ export default function AdmissionFormPage() {
             <div
               id="atom-logo-gsdm-left"
               data-atom-id="LOGO_GSDM_LEFT"
-              className="hidden sm:flex print:flex items-center justify-center shrink-0"
+              className="hidden sm:flex print:flex items-center justify-center shrink-0 sm:w-3/12 max-w-[230px] sm:mr-[-8%]"
             >
-              <div className="w-20 h-20 md:w-24 md:h-24 print:w-18 print:h-18 relative flex items-center justify-center rounded-lg p-1">
+              <div className="w-20 h-20 sm:w-full sm:h-full print:w-18 print:h-18 relative flex items-center justify-center rounded-lg p-1">
                 <Image
                   src="/images/partners-logo/gsdc-logo.png"
                   alt="Gujarat Skill Development Mission Logo"
@@ -2163,7 +2163,7 @@ export default function AdmissionFormPage() {
                   height={96}
                   priority
                   loading="eager"
-                  className="object-contain max-h-full max-w-full"
+                  className="w-full h-full object-contain max-h-full max-w-full"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}
@@ -2175,7 +2175,7 @@ export default function AdmissionFormPage() {
             <div
               id="atom-logo-mkt-center"
               data-atom-id="LOGO_MKT_CENTER_AND_TITLES"
-              className="text-center flex-1 flex flex-col items-center justify-center px-1 sm:px-2"
+              className="text-center flex-1 flex flex-col items-center gap-y-1 justify-center px-1 sm:px-2 sm:w-6/12 "
             >
               {/* Center MKT Logo for Desktop & Print */}
               <div className="hidden sm:flex print:flex w-12 h-12 md:w-14 md:h-14 print:w-12 print:h-12 relative items-center justify-center mb-0.5">
@@ -2193,10 +2193,10 @@ export default function AdmissionFormPage() {
               <h3 className="text-xs sm:text-xs md:text-sm font-extrabold capitalize tracking-wider text-slate-700">
                 NGKRM SCHEME – GSDM
               </h3>
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-rose-800 tracking-tight leading-tight mt-0.5">
+              <h1 className="text-xl lg:text-2xl md:text-3xl font-black text-rose-800 tracking-tight leading-tight mt-0.5">
                 Manav Kalyan Trust
               </h1>
-              <div className="inline-block mt-1 sm:mt-1.5 px-3 py-0.5 sm:px-5 sm:py-0.5 border-2 border-slate-900 rounded bg-slate-50 font-black text-xs sm:text-sm tracking-widest text-slate-900 uppercase">
+              <div className="inline-block mt-1 lg:mt-1.5 px-3 py-0.5 sm:px-5 sm:py-0.5 border-2 border-slate-900 rounded bg-slate-50 font-black text-xs lg:text-sm tracking-widest text-slate-900 uppercase">
                 ADMISSION FORM
               </div>
             </div>
@@ -2282,7 +2282,7 @@ export default function AdmissionFormPage() {
           <div
             id="atom-form-and-reg-numbers-row"
             data-atom-id="FORM_NO_AND_REGISTRATION_NO_ROW"
-            className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 pt-3 border-t border-slate-300 print:mt-2 print:pt-2"
+            className="flex flex-wrap gap-x-4 gap-y-4 sm:gap-x-6 sm:gap-y-2 mt-4 pt-3 border-t border-slate-300 print:mt-2 print:pt-2"
           >
             {/* ATOM: FIELD_FORM_NO */}
             <div id="atom-field-form-no" data-atom-id="FIELD_FORM_NO" className="flex items-center gap-2">
