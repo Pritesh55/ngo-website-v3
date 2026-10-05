@@ -76,14 +76,9 @@ export async function POST(request) {
       coursePrefix = 'FD'
     }
 
-    // 2. Generate Form No and Registration No
-    let { formNo, registrationNo } = getNextCounters(coursePrefix)
-    if (payload.form_no && payload.form_no.startsWith(coursePrefix)) {
-      formNo = payload.form_no
-    }
-    if (payload.registration_no && payload.registration_no.startsWith('MKT_')) {
-      registrationNo = payload.registration_no
-    }
+    // 2. Manual Form No and Registration No (Manual from user input)
+    const formNo = (payload.form_no || '').trim() || `${coursePrefix}_${Date.now().toString().slice(-4)}`
+    const registrationNo = (payload.registration_no || '').trim() || `MKT_${Date.now().toString().slice(-4)}`
 
     const applicationRecord = {
       form_no: formNo,

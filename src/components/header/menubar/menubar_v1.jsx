@@ -4,7 +4,7 @@ import Menu_item_without_dropdown from './Menu_item_without_dropdown';
 import Menu_item_with_dropdown from './Menu_item_with_dropdown';
 import Nav_btn from '../Nav_btn';
 import Link from 'next/link';
-import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Trophy, User, Scissors, FileCheck, Laptop, Store, Sparkles } from 'lucide-react';
+import { Home, Info, GraduationCap, Image, Phone, Activity, Handshake, Award, Trophy, User, Scissors, FileCheck, Laptop, Store, Sparkles, Users } from 'lucide-react';
 
 const menuItems = [
     { menuId: 1, label: 'Home', href: '/', icon: Home },
@@ -27,6 +27,7 @@ const menuItems = [
             { menuId: 3.2, label: 'Boutique Manager Course', href: '/courses/boutique-manager-cource', icon: Store },
             { menuId: 3.3, label: 'Purchase Coordinator - Electronics', href: '/courses/purchase-coordinator-electronics-cource', icon: Laptop },
             { menuId: 3.4, label: 'Admission Form (Apply Online)', href: '/admission-form', icon: FileCheck },
+            { menuId: 3.5, label: 'Enrolled Students (વિદ્યાર્થી યાદી)', href: '/enrolled-students', icon: Users },
         ]
     },
     { menuId: 4, label: 'gallery', href: '/gallery', icon: Image },

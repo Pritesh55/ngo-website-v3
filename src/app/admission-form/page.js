@@ -20,6 +20,7 @@ import {
   ShieldCheck,
   BookOpen,
   User,
+  Users,
   GraduationCap,
   Plus,
   File,
@@ -595,8 +596,8 @@ export default function AdmissionFormPage() {
     course_name: 'fashion designer',
     course_duration: '6 Months (570 Hours)',
     time_slot: '7:30 AM to 11:30 AM',
-    form_no: 'FD_001',
-    registration_no: 'MKT_001',
+    form_no: '',
+    registration_no: '',
 
     // Personal Details (Default Gender: Male)
     full_name: '',
@@ -1141,7 +1142,7 @@ export default function AdmissionFormPage() {
         ...prev,
         course_name: selected.id,
         course_duration: selected.duration,
-        form_no: `${selected.prefix}_001`,
+        form_no: prev.form_no || `${selected.prefix}_001`,
         education_level_id: newEduLevelId,
         education_level: newEduLevel,
         below_10th_standard: newEduLevelId === 0 ? prev.below_10th_standard : '',
@@ -1419,6 +1420,8 @@ export default function AdmissionFormPage() {
     const newErrors = {}
     const activeCourse = COURSES.find((c) => c.id === formData.course_name) || COURSES[0]
 
+    if (!formData.form_no || !formData.form_no.trim()) newErrors.form_no = 'Form No. is required'
+    if (!formData.registration_no || !formData.registration_no.trim()) newErrors.registration_no = 'Registration No. is required'
     if (!formData.full_name.trim()) newErrors.full_name = 'Full name is required (Block Letters)'
     if (!formData.date_of_birth || formData.date_of_birth.length < 10) {
       newErrors.date_of_birth = 'Date of birth is required in DD/MM/YYYY format'
@@ -1620,8 +1623,8 @@ export default function AdmissionFormPage() {
       course_name: selectedCourse.id,
       course_duration: selectedCourse.duration,
       time_slot: randomTimeSlot,
-      form_no: `${selectedCourse.prefix}_001`,
-      registration_no: 'MKT_001',
+      form_no: `${selectedCourse.prefix}_${Math.floor(100 + Math.random() * 900)}`,
+      registration_no: `MKT_${Math.floor(100 + Math.random() * 900)}`,
       full_name: fullName,
       date_of_birth: dobString,
       calculated_age: applicantAge,
@@ -1940,11 +1943,10 @@ export default function AdmissionFormPage() {
                 setIsPassportDragging(false)
               }}
               onDrop={handlePassportPhotoDrop}
-              className={`w-28 h-36 sm:w-32 sm:h-40 print:w-28 print:h-36 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all ${
-                isPassportDragging
-                  ? 'border-rose-600 bg-rose-50 ring-4 ring-rose-200 scale-102'
-                  : 'border-slate-800 bg-slate-50 hover:border-rose-600 print:bg-white'
-              }`}
+              className={`w-28 h-36 sm:w-32 sm:h-40 print:w-28 print:h-36 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all ${isPassportDragging
+                ? 'border-rose-600 bg-rose-50 ring-4 ring-rose-200 scale-102'
+                : 'border-slate-800 bg-slate-50 hover:border-rose-600 print:bg-white'
+                }`}
             >
               {formData.passport_photo_url ? (
                 <div className="w-full h-full relative">
@@ -1969,9 +1971,8 @@ export default function AdmissionFormPage() {
               ) : (
                 <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer p-1">
                   <Camera
-                    className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${
-                      isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
-                    }`}
+                    className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
+                      }`}
                   />
                   <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">
                     {isPassportDragging ? 'Drop Photo!' : 'Affix Passport Photograph'}
@@ -3224,11 +3225,10 @@ export default function AdmissionFormPage() {
                 data-atom-id="BUTTON_SUBMIT"
                 type="submit"
                 disabled={submitting || !formData.declaration_agreed || !!submitSuccess}
-                className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${
-                  submitting || !formData.declaration_agreed || !!submitSuccess
-                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
-                    : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
-                }`}
+                className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${submitting || !formData.declaration_agreed || !!submitSuccess
+                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
+                  : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
+                  }`}
               >
                 {submitting ? (
                   <>
