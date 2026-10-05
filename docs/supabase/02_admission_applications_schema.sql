@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS public.admission_applications (
     
     -- Personal Details
     full_name TEXT NOT NULL,
-    date_of_birth DATE NOT NULL,
+    date_of_birth TEXT NOT NULL,
     calculated_age INTEGER,
     gender TEXT NOT NULL,
     fathers_name TEXT,
@@ -40,6 +40,7 @@ CREATE TABLE IF NOT EXISTS public.admission_applications (
     
     -- Education Details
     education_level TEXT NOT NULL,
+    below_10th_standard TEXT,
     education_history JSONB DEFAULT '[]'::jsonb,
     
     -- Uploaded Document References / URLs & JSONB Arrays

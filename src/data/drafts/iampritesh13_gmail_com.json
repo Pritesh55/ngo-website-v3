@@ -7,53 +7,74 @@
   "form_no": "FD_001",
   "registration_no": "MKT_001",
   "full_name": "PRITESH SHAH",
-  "date_of_birth": "",
-  "calculated_age": "",
+  "date_of_birth": "28/10/1997",
+  "calculated_age": 28,
   "gender": "Male",
-  "fathers_name": "",
-  "mothers_name": "",
-  "fathers_occupation": "",
+  "fathers_name": "Bhupendra shah",
+  "mothers_name": "alka shah",
+  "fathers_occupation": "textile engineer",
   "marital_status": "Unmarried",
   "category": "GEN",
-  "aadhaar_no": "",
+  "aadhaar_no": "438154118293",
   "contact_number": "8320401213",
   "father_number": "9375978809",
   "email": "iampritesh13@gmail.com",
-  "flat_society": "H-6/71 Rameshwar appartment , sola road",
-  "street_road": "Naranpura , Ahmedabad -380063",
+  "flat_society": "C8 Alkapuri Rowhouse, Karmchari Nagar",
+  "street_road": "Ghatlodia",
   "landmark": "",
-  "area_village": "Amroli",
-  "city": "Surat",
+  "area_village": "Chandlodiya",
+  "city": "Ahmedabad",
   "state": "Gujarat",
-  "pincode": "394107",
+  "pincode": "380063",
   "same_as_postal": true,
   "permanent_address": "",
   "permanent_pincode": "",
-  "education_level": "Level 2) 12th pass",
+  "education_level": "12th pass",
   "education_level_id": 2,
-  "year_of_passing": "",
+  "below_10th_standard": "",
+  "year_of_passing": "2013",
   "education_history": [
     {
-      "exam": "10th (SSC)",
+      "exam": "10th pass",
       "board": "GSEB",
-      "year": ""
+      "year": "2013"
     },
     {
-      "exam": "12th (HSC)",
+      "exam": "12th pass",
       "board": "GSHSEB",
-      "year": ""
+      "year": "2015"
     }
   ],
-  "passport_photo_url": "",
-  "aadhaar_photos": [],
+  "passport_photo_url": "[attached]",
+  "aadhaar_photos": [
+    {
+      "name": "01-Pritesh-Aadhar-Card.pdf",
+      "size": 895198
+    }
+  ],
   "marriage_certificates": [],
-  "school_leaving_certificates": [],
-  "marksheets_10th": [],
-  "marksheets_12th": [],
+  "school_leaving_certificates": [
+    {
+      "name": "Pritesh_Shah_Resume_02_FOR_IT.pdf",
+      "size": 95560
+    }
+  ],
+  "marksheets_10th": [
+    {
+      "name": "02-Pritesh_E-Pan-card.pdf",
+      "size": 65773
+    }
+  ],
+  "marksheets_12th": [
+    {
+      "name": "04-EPIC-Pritesh.pdf",
+      "size": 246098
+    }
+  ],
   "diploma_certificates": [],
   "ug_degree_certificates": [],
-  "declaration_agreed": false,
-  "closedAt": "2026-10-04T09:35:32.842Z",
-  "savedAt": "2026-10-04T09:35:33.248Z",
+  "declaration_agreed": true,
+  "closedAt": "2026-10-05T02:29:57.524Z",
+  "savedAt": "2026-10-05T02:29:59.940Z",
   "type": "tab_close_draft"
 }
