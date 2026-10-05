@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import PrintableAdmissionForm from '@/components/forms/PrintableAdmissionForm'
 import {
   Users,
   Search,
@@ -100,6 +101,7 @@ export default function EnrolledStudentsPage() {
 
   // Modals state
   const [selectedStudent, setSelectedStudent] = useState(null)
+  const [studentToPrint, setStudentToPrint] = useState(null)
   const [viewingDoc, setViewingDoc] = useState(null) // { title, url, type, studentName, formNo }
   const [docZoom, setDocZoom] = useState(1)
   const [editingStudent, setEditingStudent] = useState(null)
@@ -496,13 +498,18 @@ export default function EnrolledStudentsPage() {
   }
 
   // Print Student Application
-  const printStudentApplication = () => {
-    window.print()
+  const printStudentApplication = (student = null) => {
+    const targetStudent = student || selectedStudent
+    if (!targetStudent) return
+    setStudentToPrint(targetStudent)
+    setTimeout(() => {
+      window.print()
+    }, 150)
   }
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-3 sm:px-6 lg:px-8 print:bg-white print:p-0 print:m-0">
-      <div className="max-w-7xl mx-auto space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6 print:hidden">
 
         {/* ============================================================ */}
         {/* TOAST / NOTIFICATION */}
@@ -1082,9 +1089,9 @@ export default function EnrolledStudentsPage() {
 
                       {/* Print Form */}
                       <button
-                        onClick={() => setSelectedStudent(student)}
+                        onClick={() => printStudentApplication(student)}
                         className="text-xs font-bold text-rose-700 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-md transition-colors flex items-center gap-1 cursor-pointer ml-1"
-                        title="Print Student Application Form"
+                        title="Print Official Admission Form"
                       >
                         <Printer className="w-3 h-3" />
                         <span>Print</span>
@@ -1234,6 +1241,13 @@ export default function EnrolledStudentsPage() {
                               <Download className="w-4 h-4" />
                             </button>
                             <button
+                              onClick={() => printStudentApplication(s)}
+                              className="p-1.5 rounded-lg text-slate-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer"
+                              title="Print Official Admission Form"
+                            >
+                              <Printer className="w-4 h-4" />
+                            </button>
+                            <button
                               onClick={() => setDeletingStudent(s)}
                               className="p-1.5 rounded-lg text-slate-500 hover:text-red-700 hover:bg-red-50 cursor-pointer"
                               title="Delete Student"
@@ -1255,7 +1269,7 @@ export default function EnrolledStudentsPage() {
         {/* STUDENT FULL DETAILS MODAL */}
         {/* ============================================================ */}
         {selectedStudent && (
-          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto print:hidden">
             <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-300 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
 
               {/* Modal Header */}
@@ -1292,11 +1306,12 @@ export default function EnrolledStudentsPage() {
                     <span className="hidden sm:inline">Download All</span>
                   </button>
                   <button
-                    onClick={printStudentApplication}
+                    onClick={() => printStudentApplication(selectedStudent)}
                     className="bg-white/20 hover:bg-white text-white hover:text-slate-900 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    title="Print Official Admission Form"
                   >
                     <Printer className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Print</span>
+                    <span className="hidden sm:inline">Print Form</span>
                   </button>
                   <button
                     onClick={() => setSelectedStudent(null)}
@@ -1663,8 +1678,9 @@ export default function EnrolledStudentsPage() {
                     <span>Delete Record</span>
                   </button>
                   <button
-                    onClick={printStudentApplication}
+                    onClick={() => printStudentApplication(selectedStudent)}
                     className="px-3.5 py-2 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                    title="Print Official Admission Form"
                   >
                     <Printer className="w-3.5 h-3.5" />
                     <span>Print Form</span>
@@ -1686,7 +1702,7 @@ export default function EnrolledStudentsPage() {
         {/* DOCUMENT VIEWER LIGHTBOX MODAL (SEE & DOWNLOAD DOCUMENT) */}
         {/* ============================================================ */}
         {viewingDoc && (
-          <div className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+          <div className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-hidden print:hidden">
             <div className="bg-slate-900 rounded-2xl max-w-5xl w-full max-h-[94vh] flex flex-col shadow-2xl border border-slate-700 overflow-hidden animate-in fade-in zoom-in-95">
 
               {/* Viewer Header */}
@@ -1795,7 +1811,7 @@ export default function EnrolledStudentsPage() {
         {/* EDIT STUDENT MODAL */}
         {/* ============================================================ */}
         {editingStudent && (
-          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto print:hidden">
             <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-300 overflow-hidden animate-in fade-in zoom-in-95">
 
               {/* Edit Header */}
@@ -2160,7 +2176,7 @@ export default function EnrolledStudentsPage() {
         {/* DELETE CONFIRMATION MODAL */}
         {/* ============================================================ */}
         {deletingStudent && (
-          <div className="fixed inset-0 z-[70] bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[70] bg-black/75 backdrop-blur-xs flex items-center justify-center p-4 print:hidden">
             <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-red-200 space-y-4 animate-in fade-in zoom-in-95">
               <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">
                 <AlertTriangle className="w-6 h-6" />
@@ -2214,6 +2230,15 @@ export default function EnrolledStudentsPage() {
         )}
 
       </div>
+
+      {/* ============================================================ */}
+      {/* OFFICIAL PRINTABLE ADMISSION FORM (VISIBLE ONLY IN PRINT) */}
+      {/* ============================================================ */}
+      {studentToPrint && (
+        <div className="hidden print:block print:w-full print:m-0 print:p-0">
+          <PrintableAdmissionForm student={studentToPrint} />
+        </div>
+      )}
     </div>
   )
 }

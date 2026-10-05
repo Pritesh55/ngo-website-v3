@@ -2094,19 +2094,19 @@ export default function AdmissionFormPage() {
           <div
             id="atom-header-live-metadata"
             data-atom-id="HEADER_LIVE_METADATA_DATE_PLACE"
-            className="flex gap-y-2 justify-between items-center flex-wrap text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1 print:mb-2"
+            className="flex justify-between items-center text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1.5 print:mb-2.5"
           >
             <div className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-rose-700" />
+              <Calendar className="w-3.5 h-3.5 text-rose-700 print:text-black" />
               <span>Date:</span>
-              <span className="bg-slate-100 px-2 py-0.5 rounded border border-slate-300 font-mono text-slate-900">
+              <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
                 {formData.application_date}
               </span>
             </div>
             <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-rose-700" />
+              <MapPin className="w-3.5 h-3.5 text-rose-700 print:text-black" />
               <span>Place:</span>
-              <span className="bg-slate-100 px-2 py-0.5 rounded border border-slate-300 font-mono text-slate-900">
+              <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
                 {formData.application_place}
               </span>
             </div>
@@ -2118,31 +2118,31 @@ export default function AdmissionFormPage() {
           <div
             id="atom-logos-and-passport-row"
             data-atom-id="LOGOS_AND_PASSPORT_ROW"
-            className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-4 print:flex-row print:gap-4"
+            className="flex flex-col sm:flex-row items-center justify-between gap-4 print:flex-row print:gap-3"
           >
             {/* Top row on mobile: Both logos side by side for a neat header */}
-            <div className="w-full flex items-center justify-between sm:hidden px-2 pb-1 border-b border-slate-100">
-              <div className="w-1/2 relative flex items-center justify-center shrink-0">
+            <div className="w-full flex items-center justify-between sm:hidden px-2 pb-2 mb-1 border-b border-slate-200">
+              <div className="w-7/12 relative flex items-center justify-start shrink-0">
                 <Image
-                  src="/images/partners-logo/gsdc-logo.png"
-                  alt="Gujarat Skill Development Mission Logo"
-                  width={56}
-                  height={56}
+                  src="/images/partners-logo/gsdm-official-header.png"
+                  alt="State Emblem of India & Gujarat Skill Development Mission"
+                  width={150}
+                  height={66}
                   priority
                   loading="eager"
-                  className="w-full h-full object-contain max-h-full max-w-full"
+                  className="w-full h-auto object-contain max-h-14"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}
                 />
               </div>
-              <div className="w-1/2 relative flex items-center justify-center shrink-0">
+              <div className="w-4/12 relative flex items-center justify-end shrink-0">
                 <Image
                   src="/Mkt-logo.svg"
                   alt="Manav Kalyan Trust Logo"
-                  width={48}
-                  height={48}
-                  className="w-full h-full object-contain max-h-full max-w-full"
+                  width={64}
+                  height={42}
+                  className="w-auto h-11 object-contain"
                   priority
                   loading="eager"
                 />
@@ -2153,17 +2153,17 @@ export default function AdmissionFormPage() {
             <div
               id="atom-logo-gsdm-left"
               data-atom-id="LOGO_GSDM_LEFT"
-              className="hidden sm:flex print:flex items-center justify-center shrink-0 sm:w-3/12 max-w-[230px] sm:mr-[-8%]"
+              className="hidden sm:flex print:flex items-start justify-start shrink-0 sm:w-[28%] print:w-[28%] pt-1"
             >
-              <div className="w-20 h-20 sm:w-full sm:h-full print:w-18 print:h-18 relative flex items-center justify-center rounded-lg p-1">
+              <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-16 relative flex items-center justify-start rounded-lg p-0.5">
                 <Image
-                  src="/images/partners-logo/gsdc-logo.png"
-                  alt="Gujarat Skill Development Mission Logo"
-                  width={96}
-                  height={96}
+                  src="/images/partners-logo/gsdm-official-header.png"
+                  alt="State Emblem of India & Gujarat Skill Development Mission"
+                  width={200}
+                  height={88}
                   priority
                   loading="eager"
-                  className="w-full h-full object-contain max-h-full max-w-full"
+                  className="w-full h-full object-contain object-left"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
                   }}
@@ -2175,106 +2175,108 @@ export default function AdmissionFormPage() {
             <div
               id="atom-logo-mkt-center"
               data-atom-id="LOGO_MKT_CENTER_AND_TITLES"
-              className="text-center flex-1 flex flex-col items-center gap-y-1 justify-center px-1 sm:px-2 sm:w-6/12 "
+              className="text-center flex-1 flex flex-col items-center justify-start px-1 sm:px-2 pt-0.5"
             >
-              {/* Center MKT Logo for Desktop & Print */}
-              <div className="hidden sm:flex print:flex w-12 h-12 md:w-14 md:h-14 print:w-12 print:h-12 relative items-center justify-center mb-0.5">
+              {/* Center MKT Sunburst Logo for Desktop & Print */}
+              <div className="hidden sm:flex print:flex w-18 h-12 sm:w-22 sm:h-13 print:w-16 print:h-10 relative items-center justify-center mb-1">
                 <Image
                   src="/Mkt-logo.svg"
                   alt="Manav Kalyan Trust Logo"
-                  width={56}
-                  height={56}
-                  className="object-contain max-h-full max-w-full"
+                  width={70}
+                  height={46}
+                  className="w-full h-full object-contain"
                   priority
                   loading="eager"
                 />
               </div>
 
-              <h3 className="text-xs sm:text-xs md:text-sm font-extrabold capitalize tracking-wider text-slate-700">
+              <h3 className="text-[11px] sm:text-xs md:text-sm font-extrabold uppercase tracking-wider text-slate-700 print:text-black leading-tight">
                 NGKRM SCHEME – GSDM
               </h3>
-              <h1 className="text-xl lg:text-2xl md:text-3xl font-black text-rose-800 tracking-tight leading-tight mt-0.5">
+              <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl font-black text-rose-900 print:text-black tracking-tight leading-tight my-0.5 sm:my-1">
                 Manav Kalyan Trust
               </h1>
-              <div className="inline-block mt-1 lg:mt-1.5 px-3 py-0.5 sm:px-5 sm:py-0.5 border-2 border-slate-900 rounded bg-slate-50 font-black text-xs lg:text-sm tracking-widest text-slate-900 uppercase">
+              <div className="inline-block mt-1 px-4 py-0.5 sm:px-6 sm:py-1 border-2 border-slate-900 rounded-md bg-slate-50 font-black text-xs sm:text-sm tracking-widest text-slate-900 uppercase shadow-2xs print:border-black print:bg-white print:shadow-none">
                 ADMISSION FORM
               </div>
             </div>
 
             {/* ATOM: PASSPORT_PHOTO_BOX (Desktop Right, Mobile Center - with Drag & Drop) */}
-            <div
-              id="atom-passport-photo-box"
-              data-atom-id="PASSPORT_PHOTO_BOX"
-              onDragOver={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setIsPassportDragging(true)
-              }}
-              onDragEnter={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                setIsPassportDragging(true)
-              }}
-              onDragLeave={(e) => {
-                e.preventDefault()
-                e.stopPropagation()
-                if (e.currentTarget.contains(e.relatedTarget)) return
-                setIsPassportDragging(false)
-              }}
-              onDrop={handlePassportPhotoDrop}
-              className={`w-28 h-36 sm:w-32 sm:h-40 print:w-28 print:h-36 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all ${isPassportDragging
-                ? 'border-rose-600 bg-rose-50 ring-4 ring-rose-200 scale-102'
-                : 'border-slate-800 bg-slate-50 hover:border-rose-600 print:bg-white'
-                }`}
-            >
-              {formData.passport_photo_url ? (
-                <div className="w-full h-full relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={formData.passport_photo_url}
-                    alt="Passport Preview"
-                    className="w-full h-full object-cover rounded"
-                  />
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setFormData((prev) => ({ ...prev, passport_photo_url: '' }))
-                    }}
-                    className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full text-xs shadow-md print:hidden cursor-pointer"
-                    title="Remove Photo"
-                  >
-                    <Trash2 className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              ) : (
-                <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer p-1">
-                  <Camera
-                    className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
-                      }`}
-                  />
-                  <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">
-                    {isPassportDragging ? 'Drop Photo!' : 'Affix Passport Photograph'}
-                  </span>
-                  <span className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5 print:hidden">
-                    (Click or Drop)
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handlePassportPhotoChange}
-                    className="hidden"
-                  />
-                </label>
+            <div className="w-full sm:w-[24%] print:w-[24%] shrink-0 flex flex-col items-center sm:items-end print:items-end justify-start pt-1">
+              <div
+                id="atom-passport-photo-box"
+                data-atom-id="PASSPORT_PHOTO_BOX"
+                onDragOver={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setIsPassportDragging(true)
+                }}
+                onDragEnter={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  setIsPassportDragging(true)
+                }}
+                onDragLeave={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  if (e.currentTarget.contains(e.relatedTarget)) return
+                  setIsPassportDragging(false)
+                }}
+                onDrop={handlePassportPhotoDrop}
+                className={`w-28 h-36 sm:w-32 sm:h-40 print:w-26 print:h-34 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all shadow-2xs print:shadow-none ${isPassportDragging
+                    ? 'border-rose-600 bg-rose-50 ring-4 ring-rose-200 scale-102'
+                    : 'border-slate-800 bg-slate-50 hover:border-rose-600 print:bg-white'
+                  }`}
+              >
+                {formData.passport_photo_url ? (
+                  <div className="w-full h-full relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={formData.passport_photo_url}
+                      alt="Passport Preview"
+                      className="w-full h-full object-cover rounded"
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        setFormData((prev) => ({ ...prev, passport_photo_url: '' }))
+                      }}
+                      className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full text-xs shadow-md print:hidden cursor-pointer"
+                      title="Remove Photo"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer p-1">
+                    <Camera
+                      className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
+                        }`}
+                    />
+                    <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">
+                      {isPassportDragging ? 'Drop Photo!' : 'Affix Passport Photograph'}
+                    </span>
+                    <span className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5 print:hidden">
+                      (Click or Drop)
+                    </span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handlePassportPhotoChange}
+                      className="hidden"
+                    />
+                  </label>
+                )}
+              </div>
+
+              {errors.passport_photo && (
+                <p className="text-xs text-red-600 text-center sm:text-right mt-1 font-semibold">
+                  {errors.passport_photo}
+                </p>
               )}
             </div>
           </div>
-
-          {errors.passport_photo && (
-            <p className="text-xs text-red-600 text-center sm:text-right mt-1 font-semibold">
-              {errors.passport_photo}
-            </p>
-          )}
 
           {/* ============================================================ */}
           {/* ATOM: FORM_NO_AND_REGISTRATION_NO_ROW */}
