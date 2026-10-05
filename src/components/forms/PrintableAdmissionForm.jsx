@@ -78,11 +78,11 @@ export default function PrintableAdmissionForm({ student }) {
           </div>
         </div>
 
-        {/* Logos & Photo Row (Top Baseline-Aligned 3-Column Layout) */}
-        <div className="flex items-start justify-between gap-3 sm:gap-4 print:gap-3">
+        {/* Logos & Photo Row (Vertically Centered 3-Column Layout) */}
+        <div className="flex items-center justify-between gap-3 sm:gap-4 print:gap-3 print:items-center">
           {/* Left: GSDM Official Header Logo (State Emblem of India + Gujarat Skill Development Mission) */}
-          <div className="w-[30%] sm:w-[28%] print:w-[28%] shrink-0 pt-1 flex items-start justify-start">
-            <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-16 relative flex items-center justify-start">
+          <div className="w-[30%] sm:w-[28%] print:w-[28%] shrink-0 flex items-center justify-start self-center">
+            <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-20 relative flex items-center justify-start">
               <Image
                 src="/images/partners-logo/gsdm-official-header.png"
                 alt="State Emblem of India & Gujarat Skill Development Mission"
@@ -96,7 +96,7 @@ export default function PrintableAdmissionForm({ student }) {
           </div>
 
           {/* Center: MKT Branding & Official Titles */}
-          <div className="text-center flex-1 flex flex-col items-center justify-start px-2 pt-0.5">
+          <div className="text-center flex-1 flex flex-col items-center justify-center px-2 self-center">
             {/* Center MKT Sunburst Logo */}
             <div className="w-18 h-12 sm:w-22 sm:h-13 print:w-16 print:h-10 relative mb-1 flex items-center justify-center">
               <Image
@@ -121,7 +121,7 @@ export default function PrintableAdmissionForm({ student }) {
           </div>
 
           {/* Right: Passport Photo Box (Standard 3.5cm x 4.5cm Indian Photo Aspect) */}
-          <div className="w-[26%] sm:w-[24%] print:w-[24%] shrink-0 flex justify-end pt-1">
+          <div className="w-[26%] sm:w-[24%] print:w-[24%] shrink-0 flex justify-end items-center self-center">
             <div className="w-28 h-36 sm:w-32 sm:h-40 print:w-26 print:h-34 border-2 border-slate-900 rounded-lg flex flex-col items-center justify-center p-1 text-center bg-slate-50 print:bg-white overflow-hidden shadow-2xs print:shadow-none">
               {student.passport_photo_url ? (
                 // eslint-disable-next-line @next/next/no-img-element

@@ -2063,24 +2063,38 @@ export default function AdmissionFormPage() {
 
             {/* Applicant Summary */}
             <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-4 sm:p-5 text-xs sm:text-sm text-slate-700 space-y-2">
-              <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
-                <span className="text-slate-500">Applicant Full Name:</span>
-                <span className="font-bold text-slate-900 uppercase">
-                  {submitSuccess.data?.full_name || formData.full_name || '-'}
-                </span>
-              </div>
-              <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
-                <span className="text-slate-500">Contact Number:</span>
-                <span className="font-semibold text-slate-900">
-                  {submitSuccess.data?.mobile || formData.mobile || '-'}
-                </span>
-              </div>
-              <div className="flex flex-wrap justify-between gap-2">
-                <span className="text-slate-500">Batch / Preferred Slot:</span>
-                <span className="font-semibold text-slate-900">
-                  {submitSuccess.data?.preferred_time_slot || formData.preferred_time_slot || '-'}
-                </span>
-              </div>
+              {(submitSuccess.data?.full_name || formData.full_name) && (
+                <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+                  <span className="text-slate-500 font-medium">Applicant Full Name:</span>
+                  <span className="font-bold text-slate-900 uppercase">
+                    {submitSuccess.data?.full_name || formData.full_name}
+                  </span>
+                </div>
+              )}
+              {(submitSuccess.data?.contact_number || formData.contact_number || submitSuccess.data?.mobile || formData.mobile) && (
+                <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+                  <span className="text-slate-500 font-medium">Contact Number:</span>
+                  <span className="font-bold text-slate-900 font-mono">
+                    {submitSuccess.data?.contact_number || formData.contact_number || submitSuccess.data?.mobile || formData.mobile}
+                  </span>
+                </div>
+              )}
+              {(submitSuccess.data?.time_slot || formData.time_slot || submitSuccess.data?.preferred_time_slot || formData.preferred_time_slot) && (
+                <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+                  <span className="text-slate-500 font-medium">Batch / Preferred Slot:</span>
+                  <span className="font-bold text-slate-900">
+                    {submitSuccess.data?.time_slot || formData.time_slot || submitSuccess.data?.preferred_time_slot || formData.preferred_time_slot}
+                  </span>
+                </div>
+              )}
+              {(submitSuccess.data?.email || formData.email) && (
+                <div className="flex flex-wrap justify-between gap-2">
+                  <span className="text-slate-500 font-medium">Email Address:</span>
+                  <span className="font-semibold text-slate-800">
+                    {submitSuccess.data?.email || formData.email}
+                  </span>
+                </div>
+              )}
             </div>
 
             {/* Action Buttons */}
@@ -2124,13 +2138,14 @@ export default function AdmissionFormPage() {
       {submitSuccess && (
         <div className="hidden print:block print:w-full print:m-0 print:p-0">
           <PrintableAdmissionForm
-            student={
-              submitSuccess.data || {
-                ...formData,
-                form_no: submitSuccess.form_no,
-                registration_no: submitSuccess.registration_no,
-              }
-            }
+            student={{
+              ...formData,
+              ...(submitSuccess.data || {}),
+              form_no: submitSuccess.form_no || formData.form_no,
+              registration_no: submitSuccess.registration_no || formData.registration_no,
+              contact_number: submitSuccess.data?.contact_number || formData.contact_number,
+              time_slot: submitSuccess.data?.time_slot || formData.time_slot,
+            }}
           />
         </div>
       )}
@@ -2183,7 +2198,7 @@ export default function AdmissionFormPage() {
           <div
             id="atom-logos-and-passport-row"
             data-atom-id="LOGOS_AND_PASSPORT_ROW"
-            className="flex flex-col sm:flex-row items-center justify-between gap-4 print:flex-row print:gap-3"
+            className="flex flex-col sm:flex-row items-center justify-between gap-4 print:flex-row print:items-center print:gap-3"
           >
             {/* Top row on mobile: Both logos side by side for a neat header */}
             <div className="w-full flex items-center justify-between sm:hidden px-2 pb-2 mb-1 border-b border-slate-200">
@@ -2214,13 +2229,13 @@ export default function AdmissionFormPage() {
               </div>
             </div>
 
-            {/* ATOM: LOGO_GSDM_LEFT (Desktop & Print) */}
+            {/* ATOM: LOGO_GSDM_LEFT (Desktop & Print - Vertically Centered) */}
             <div
               id="atom-logo-gsdm-left"
               data-atom-id="LOGO_GSDM_LEFT"
-              className="hidden sm:flex print:flex items-start justify-start shrink-0 sm:w-[28%] print:w-[28%] pt-1"
+              className="hidden sm:flex print:flex items-center justify-start shrink-0 sm:w-[28%] print:w-[28%] self-center"
             >
-              <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-16 relative flex items-center justify-start rounded-lg p-0.5">
+              <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-20 relative flex items-center justify-start rounded-lg p-0.5">
                 <Image
                   src="/images/partners-logo/gsdm-official-header.png"
                   alt="State Emblem of India & Gujarat Skill Development Mission"
@@ -2240,7 +2255,7 @@ export default function AdmissionFormPage() {
             <div
               id="atom-logo-mkt-center"
               data-atom-id="LOGO_MKT_CENTER_AND_TITLES"
-              className="text-center flex-1 flex flex-col items-center justify-start px-1 sm:px-2 pt-0.5"
+              className="text-center flex-1 flex flex-col items-center justify-center px-1 sm:px-2 self-center"
             >
               {/* Center MKT Sunburst Logo for Desktop & Print */}
               <div className="hidden sm:flex print:flex w-18 h-12 sm:w-22 sm:h-13 print:w-16 print:h-10 relative items-center justify-center mb-1">
@@ -2266,8 +2281,8 @@ export default function AdmissionFormPage() {
               </div>
             </div>
 
-            {/* ATOM: PASSPORT_PHOTO_BOX (Desktop Right, Mobile Center - with Drag & Drop) */}
-            <div className="w-full sm:w-[24%] print:w-[24%] shrink-0 flex flex-col items-center sm:items-end print:items-end justify-start pt-1">
+            {/* ATOM: PASSPORT_PHOTO_BOX (Desktop Right, Mobile Center - Vertically Centered) */}
+            <div className="w-full sm:w-[24%] print:w-[24%] shrink-0 flex flex-col items-center sm:items-end print:items-end justify-center self-center">
               <div
                 id="atom-passport-photo-box"
                 data-atom-id="PASSPORT_PHOTO_BOX"

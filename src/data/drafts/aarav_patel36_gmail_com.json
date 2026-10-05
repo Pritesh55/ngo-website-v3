@@ -1,4 +1,6 @@
 {
+  "application_date": "05/10/2026",
+  "application_place": "Ahmedabad",
   "course_name": "purchase coordinator electronics",
   "course_duration": "6 Months (510 Hours)",
   "time_slot": "7:30 AM to 11:30 AM",
@@ -62,9 +64,7 @@
   "diploma_certificates": [],
   "ug_degree_certificates": [],
   "declaration_agreed": true,
-  "application_date": "05/10/2026",
-  "application_place": "Ahmedabad",
-  "closedAt": "2026-10-05T11:53:18.128Z",
-  "savedAt": "2026-10-05T11:53:22.278Z",
+  "closedAt": "2026-10-05T11:59:00.100Z",
+  "savedAt": "2026-10-05T11:59:01.084Z",
   "type": "tab_close_draft"
 }
