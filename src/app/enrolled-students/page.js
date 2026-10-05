@@ -29,7 +29,16 @@ import {
   Layers,
   Sparkles,
   LayoutGrid,
-  List
+  List,
+  Edit,
+  Trash2,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  AlertTriangle,
+  Save,
+  Check,
+  FileDown
 } from 'lucide-react'
 
 // Course definitions with visual styles
@@ -45,6 +54,7 @@ const COURSES = [
     shortName: 'Fashion Designer',
     name: 'Fashion Designer (ફેશન ડિઝાઇનર)',
     prefix: 'FD',
+    duration: '6 Months (570 Hours)',
     badgeColor: 'bg-rose-100 text-rose-800 border-rose-300',
     headerGradient: 'from-rose-600 via-rose-700 to-orange-600',
     tagColor: 'from-rose-500 to-orange-500',
@@ -54,6 +64,7 @@ const COURSES = [
     shortName: 'Boutique Manager',
     name: 'Boutique Manager (બુટિક મેનેજર)',
     prefix: 'BM',
+    duration: '6 Months (600 Hours)',
     badgeColor: 'bg-amber-100 text-amber-800 border-amber-300',
     headerGradient: 'from-amber-600 via-amber-700 to-orange-600',
     tagColor: 'from-amber-500 to-orange-600',
@@ -63,10 +74,17 @@ const COURSES = [
     shortName: 'Purchase Coordinator',
     name: 'Purchase Coordinator - Electronics (પરચેઝ કો-ઓર્ડિનેટર)',
     prefix: 'EPC',
+    duration: '6 Months (510 Hours)',
     badgeColor: 'bg-blue-100 text-blue-800 border-blue-300',
     headerGradient: 'from-blue-600 via-indigo-700 to-cyan-700',
     tagColor: 'from-blue-600 to-cyan-600',
   },
+]
+
+const TIME_SLOTS = [
+  '7:30 AM to 11:30 AM',
+  '11:30 AM to 3:30 PM',
+  '3:30 PM to 7:30 PM',
 ]
 
 export default function EnrolledStudentsPage() {
@@ -79,7 +97,140 @@ export default function EnrolledStudentsPage() {
   const [genderFilter, setGenderFilter] = useState('all')
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [viewMode, setViewMode] = useState('grid') // 'grid' | 'table'
+
+  // Modals state
   const [selectedStudent, setSelectedStudent] = useState(null)
+  const [viewingDoc, setViewingDoc] = useState(null) // { title, url, type, studentName, formNo }
+  const [docZoom, setDocZoom] = useState(1)
+  const [editingStudent, setEditingStudent] = useState(null)
+  const [editFormData, setEditFormData] = useState({})
+  const [isSavingEdit, setIsSavingEdit] = useState(false)
+  const [deletingStudent, setDeletingStudent] = useState(null)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [statusNotification, setStatusNotification] = useState(null) // { type: 'success'|'error', text: '' }
+
+  // Auto-dismiss notification after 4 seconds
+  useEffect(() => {
+    if (statusNotification) {
+      const timer = setTimeout(() => setStatusNotification(null), 4000)
+      return () => clearTimeout(timer)
+    }
+  }, [statusNotification])
+
+  // Download Single File Helper (supports data URL and external URL)
+  const downloadFile = (url, filename) => {
+    if (!url) {
+      alert('File content is not available for download')
+      return
+    }
+
+    try {
+      if (url.startsWith('data:')) {
+        const a = document.createElement('a')
+        a.href = url
+        a.download = filename || 'document'
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+      } else {
+        fetch(url)
+          .then((res) => res.blob())
+          .then((blob) => {
+            const blobUrl = window.URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = blobUrl
+            a.download = filename || 'document'
+            document.body.appendChild(a)
+            a.click()
+            window.URL.revokeObjectURL(blobUrl)
+            document.body.removeChild(a)
+          })
+          .catch(() => {
+            const a = document.createElement('a')
+            a.href = url
+            a.target = '_blank'
+            a.download = filename || 'document'
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+          })
+      }
+    } catch (err) {
+      window.open(url, '_blank')
+    }
+  }
+
+  // Download All Student Documents Helper (Passport photo + all attached certificates)
+  const downloadAllStudentFiles = (student) => {
+    if (!student) return
+    const safeName = (student.full_name || 'Student').replace(/[^a-zA-Z0-9_-]/g, '_')
+    const formNo = (student.form_no || 'Form').replace(/[^a-zA-Z0-9_-]/g, '_')
+
+    const filesToDownload = []
+
+    // 1. Passport Photo
+    if (student.passport_photo_url) {
+      const ext = student.passport_photo_url.includes('svg') ? 'svg' : 'png'
+      filesToDownload.push({
+        url: student.passport_photo_url,
+        filename: `${formNo}_${safeName}_Passport_Photo.${ext}`,
+      })
+    }
+
+    // 2. Helper to collect documents
+    const addDocList = (docs, defaultTitle) => {
+      if (Array.isArray(docs)) {
+        docs.forEach((d, i) => {
+          if (d && d.url) {
+            const rawName = d.name || `${defaultTitle}_${i + 1}`
+            const ext = rawName.includes('.') ? '' : (d.url.includes('svg') ? '.svg' : '.png')
+            filesToDownload.push({
+              url: d.url,
+              filename: `${formNo}_${safeName}_${rawName}${ext}`,
+            })
+          }
+        })
+      }
+    }
+
+    addDocList(student.aadhaar_photos, 'Aadhaar_Card')
+    addDocList(student.school_leaving_certificates, 'School_Leaving_Certificate')
+    addDocList(student.marksheets_10th, '10th_Marksheet')
+    addDocList(student.marksheets_12th, '12th_Marksheet')
+    addDocList(student.diploma_certificates, 'Diploma_Certificate')
+    addDocList(student.ug_degree_certificates, 'UG_Degree_Certificate')
+    addDocList(student.marriage_certificates, 'Marriage_Certificate')
+
+    if (filesToDownload.length === 0) {
+      alert('No downloadable documents or photos found for this student.')
+      return
+    }
+
+    // Sequentially trigger downloads
+    filesToDownload.forEach((item, index) => {
+      setTimeout(() => {
+        downloadFile(item.url, item.filename)
+      }, index * 300)
+    })
+
+    setStatusNotification({
+      type: 'success',
+      text: `Downloading ${filesToDownload.length} file(s) for ${student.full_name}...`,
+    })
+  }
+
+  // Count total documents attached to student
+  const getStudentDocsCount = (student) => {
+    let count = 0
+    if (Array.isArray(student.aadhaar_photos)) count += student.aadhaar_photos.length
+    if (Array.isArray(student.school_leaving_certificates)) count += student.school_leaving_certificates.length
+    if (Array.isArray(student.marksheets_10th)) count += student.marksheets_10th.length
+    if (Array.isArray(student.marksheets_12th)) count += student.marksheets_12th.length
+    if (Array.isArray(student.diploma_certificates)) count += student.diploma_certificates.length
+    if (Array.isArray(student.ug_degree_certificates)) count += student.ug_degree_certificates.length
+    if (Array.isArray(student.marriage_certificates)) count += student.marriage_certificates.length
+    return count
+  }
 
   // Fetch students from API
   const fetchStudents = async () => {
@@ -153,182 +304,240 @@ export default function EnrolledStudentsPage() {
       }
 
       // 3. Time Slot Filter
-      if (timeSlotFilter !== 'all' && s.time_slot !== timeSlotFilter) {
-        return false
+      if (timeSlotFilter !== 'all') {
+        if (s.time_slot !== timeSlotFilter) return false
       }
 
       // 4. Gender Filter
-      if (genderFilter !== 'all' && (s.gender || '').toLowerCase() !== genderFilter.toLowerCase()) {
-        return false
+      if (genderFilter !== 'all') {
+        if (s.gender !== genderFilter) return false
       }
 
       // 5. Category Filter
-      if (categoryFilter !== 'all' && s.category !== categoryFilter) {
-        return false
+      if (categoryFilter !== 'all') {
+        if (s.category !== categoryFilter) return false
       }
 
       return true
     })
   }, [students, selectedCourseTab, searchTerm, timeSlotFilter, genderFilter, categoryFilter])
 
-  // Helper for Exporting to CSV
-  const exportToCSV = () => {
-    if (!filteredStudents.length) return alert('No students to export!')
-
-    const headers = [
-      'Form No',
-      'Registration No',
-      'Course Name',
-      'Full Name',
-      'Gender',
-      'Age',
-      'DOB',
-      'Category',
-      'Contact Phone',
-      'Father Phone',
-      'Email',
-      'Time Slot',
-      'Education Level',
-      'Passing Year',
-      'Aadhaar No',
-      'Address',
-      'City',
-      'State',
-      'Pincode',
-      'Application Date',
-    ]
-
-    const rows = filteredStudents.map((s) => [
-      `"${s.form_no || ''}"`,
-      `"${s.registration_no || ''}"`,
-      `"${s.course_name || ''}"`,
-      `"${s.full_name || ''}"`,
-      `"${s.gender || ''}"`,
-      `"${s.calculated_age || ''}"`,
-      `"${s.date_of_birth || ''}"`,
-      `"${s.category || ''}"`,
-      `"${s.contact_number || ''}"`,
-      `"${s.father_number || ''}"`,
-      `"${s.email || ''}"`,
-      `"${s.time_slot || ''}"`,
-      `"${s.education_level || ''}"`,
-      `"${s.year_of_passing || ''}"`,
-      `"${s.aadhaar_no || ''}"`,
-      `"${(s.flat_society || '')} ${(s.street_road || '')} ${(s.area_village || '')}"`.trim(),
-      `"${s.city || ''}"`,
-      `"${s.state || ''}"`,
-      `"${s.pincode || ''}"`,
-      `"${s.application_date || ''}"`,
-    ])
-
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map((r) => r.join(','))].join('\n')
-    const encodedUri = encodeURI(csvContent)
-    const link = document.createElement('a')
-    link.setAttribute('href', encodedUri)
-    link.setAttribute('download', `enrolled_students_${selectedCourseTab}_${new Date().toISOString().slice(0, 10)}.csv`)
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+  // Open Edit Modal
+  const handleOpenEdit = (student) => {
+    setEditingStudent(student)
+    setEditFormData({
+      ...student,
+      full_name: student.full_name || '',
+      form_no: student.form_no || '',
+      registration_no: student.registration_no || '',
+      course_name: student.course_name || 'fashion designer',
+      time_slot: student.time_slot || '7:30 AM to 11:30 AM',
+      date_of_birth: student.date_of_birth || '',
+      calculated_age: student.calculated_age || '',
+      gender: student.gender || 'Male',
+      fathers_name: student.fathers_name || '',
+      mothers_name: student.mothers_name || '',
+      fathers_occupation: student.fathers_occupation || '',
+      marital_status: student.marital_status || 'Unmarried',
+      category: student.category || 'GEN',
+      aadhaar_no: student.aadhaar_no || '',
+      contact_number: student.contact_number || '',
+      father_number: student.father_number || '',
+      email: student.email || '',
+      flat_society: student.flat_society || '',
+      street_road: student.street_road || '',
+      landmark: student.landmark || '',
+      area_village: student.area_village || '',
+      city: student.city || 'Ahmedabad',
+      state: student.state || 'Gujarat',
+      pincode: student.pincode || '',
+      education_level: student.education_level || '12th pass',
+      year_of_passing: student.year_of_passing || '',
+    })
   }
 
-  // Print Student Form
+  // Save Edit Student
+  const handleSaveEdit = async (e) => {
+    e.preventDefault()
+    setIsSavingEdit(true)
+    try {
+      const res = await fetch('/api/admission/students', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editFormData),
+      })
+      const data = await res.json()
+      if (data.success && data.student) {
+        // Update local list
+        setStudents((prev) =>
+          prev.map((s) => (s.form_no === editFormData.form_no || s.id === editFormData.id ? data.student : s))
+        )
+        // If modal was open, update selected student
+        if (selectedStudent && (selectedStudent.form_no === editFormData.form_no || selectedStudent.id === editFormData.id)) {
+          setSelectedStudent(data.student)
+        }
+        setEditingStudent(null)
+        setStatusNotification({ type: 'success', text: `✓ Student profile for ${editFormData.full_name} updated successfully!` })
+      } else {
+        alert(data.error || 'Failed to update student profile')
+      }
+    } catch (err) {
+      alert(`Error updating student: ${err.message}`)
+    } finally {
+      setIsSavingEdit(false)
+    }
+  }
+
+  // Handle Delete Confirmation
+  const handleConfirmDelete = async () => {
+    if (!deletingStudent) return
+    setIsDeleting(true)
+    try {
+      const res = await fetch('/api/admission/students', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: deletingStudent.id,
+          form_no: deletingStudent.form_no,
+        }),
+      })
+      const data = await res.json()
+      if (data.success) {
+        // Remove from local list
+        setStudents((prev) => prev.filter((s) => s.form_no !== deletingStudent.form_no && s.id !== deletingStudent.id))
+        // If selected student is deleted, close profile modal
+        if (selectedStudent && (selectedStudent.form_no === deletingStudent.form_no || selectedStudent.id === deletingStudent.id)) {
+          setSelectedStudent(null)
+        }
+        const name = deletingStudent.full_name
+        setDeletingStudent(null)
+        setStatusNotification({ type: 'success', text: `✓ Student record for ${name} deleted successfully.` })
+      } else {
+        alert(data.error || 'Failed to delete student')
+      }
+    } catch (err) {
+      alert(`Error deleting student: ${err.message}`)
+    } finally {
+      setIsDeleting(false)
+    }
+  }
+
+  // Print Student Application
   const printStudentApplication = () => {
     window.print()
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 py-6 sm:py-8 px-3 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-slate-50 py-8 px-3 sm:px-6 lg:px-8 print:bg-white print:p-0 print:m-0">
       <div className="max-w-7xl mx-auto space-y-6">
 
         {/* ============================================================ */}
-        {/* TOP BAR / NAVIGATION */}
+        {/* TOAST / NOTIFICATION */}
         {/* ============================================================ */}
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl border border-slate-200 shadow-xs print:hidden">
+        {statusNotification && (
+          <div className="fixed top-5 right-5 z-[9999] bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-semibold border border-slate-700 animate-in fade-in slide-in-from-top-3">
+            <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span>{statusNotification.text}</span>
+            <button
+              onClick={() => setStatusNotification(null)}
+              className="ml-2 text-slate-400 hover:text-white"
+            >
+              <X className="w-3.5 h-3.5" />
+            </button>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* TOP BAR & NAVIGATION */}
+        {/* ============================================================ */}
+        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-2xs border border-slate-200 print:hidden">
           <div className="flex items-center gap-3">
             <Link
               href="/"
-              className="text-xs sm:text-sm font-semibold text-rose-700 hover:text-rose-900 flex items-center gap-1"
+              className="text-xs font-semibold text-rose-700 hover:text-rose-900 flex items-center gap-1"
             >
               ← Home
             </Link>
             <span className="text-slate-300">|</span>
             <Link
               href="/admission-form"
-              className="text-xs sm:text-sm font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
+              className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 flex items-center gap-1"
             >
-              Admission Form
+              <PlusCircle className="w-3.5 h-3.5" /> New Admission Form
             </Link>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-2">
             <button
               onClick={fetchStudents}
               disabled={loading}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 hover:border-slate-400 bg-white text-slate-700 font-bold text-xs shadow-2xs cursor-pointer active:scale-95 transition-all"
-              title="Refresh student list"
+              className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+              title="Refresh enrolled students list"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-rose-600' : 'text-slate-500'}`} />
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-rose-600' : ''}`} />
               <span>Refresh</span>
             </button>
 
             <button
-              onClick={exportToCSV}
-              disabled={!filteredStudents.length}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs shadow-2xs cursor-pointer transition-all"
-              title="Export filtered students as CSV spreadsheet"
+              onClick={() => window.print()}
+              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
             >
-              <Download className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Export CSV</span>
+              <Printer className="w-3.5 h-3.5" />
+              <span>Print Directory</span>
             </button>
-
-            <Link
-              href="/admission-form"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs shadow-xs hover:shadow transition-all"
-            >
-              <PlusCircle className="w-3.5 h-3.5" />
-              <span>+ New Admission</span>
-            </Link>
           </div>
         </div>
 
         {/* ============================================================ */}
         {/* PAGE HEADER */}
         {/* ============================================================ */}
-        <div className="bg-gradient-to-r from-darkred via-rose-700 to-orange-600 text-white p-5 sm:p-7 rounded-xl shadow-md relative overflow-hidden print:hidden">
-          <div className="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 rounded-full bg-white/10 blur-2xl pointer-events-none" />
-          <div className="relative z-10 space-y-2">
-            <div className="inline-flex items-center gap-1.5 bg-yellow-400 text-slate-950 px-3 py-0.5 rounded-sm text-xs font-black uppercase tracking-wider shadow-xs">
-              <Users className="w-3.5 h-3.5 fill-current" />
-              <span>Enrolled Students Directory • વિદ્યાર્થીઓની યાદી</span>
+        <div className="bg-gradient-to-r from-darkred via-rose-700 to-orange-600 rounded-2xl p-6 sm:p-8 text-white shadow-lg print:bg-white print:text-black print:p-2 print:border-b-2 print:border-black">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="space-y-2">
+              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                <ShieldCheck className="w-3.5 h-3.5 text-rose-200" />
+                <span>GSDM • 100% Free Government Approved Scheme</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight">
+                Enrolled Students Directory (વિદ્યાર્થીઓની યાદી)
+              </h1>
+              <p className="text-xs sm:text-sm text-rose-100 max-w-2xl leading-relaxed">
+                Manav Kalyan Trust - Course-wise Visual Directory of all registered candidates with document verification, download, edit &amp; record management.
+              </p>
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white">
-              Course-wise Enrolled Students Records
-            </h1>
-            <p className="text-rose-100 text-xs sm:text-sm font-medium max-w-3xl">
-              માનવ કલ્યાણ ટ્રસ્ટ દ્વારા સંચાલિત સરકારી માન્ય વ્યાવસાયિક કોર્સમાં ઓનલાઇન પ્રવેશ મેળવેલ તમામ વિદ્યાર્થીઓની વિગતવાર યાદી.
-            </p>
+
+            {/* Total count badge */}
+            <div className="bg-white/15 backdrop-blur-md rounded-2xl p-4 sm:p-5 border border-white/20 text-center shrink-0 self-start md:self-auto">
+              <span className="text-xs uppercase tracking-wider text-rose-100 font-bold block">
+                Total Enrolled
+              </span>
+              <span className="text-3xl sm:text-4xl font-black block">
+                {loading ? '...' : students.length}
+              </span>
+              <span className="text-[11px] text-rose-200 block">Registered Applicants</span>
+            </div>
           </div>
         </div>
 
         {/* ============================================================ */}
-        {/* KPI STATS CARDS */}
+        {/* COURSE SUMMARY STATS CARDS */}
         {/* ============================================================ */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 print:hidden">
-          {/* Card 1: All Students */}
+          {/* Card 1: All Courses */}
           <div
             onClick={() => setSelectedCourseTab('all')}
             className={`p-4 rounded-xl border bg-white shadow-2xs hover:shadow-sm cursor-pointer transition-all ${
-              selectedCourseTab === 'all' ? 'border-slate-800 ring-2 ring-slate-800/20' : 'border-slate-200'
+              selectedCourseTab === 'all' ? 'border-slate-900 ring-2 ring-slate-900/20' : 'border-slate-200'
             }`}
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-500 uppercase">Total Enrolled</span>
+              <span className="text-xs font-bold text-slate-500 uppercase">All Courses</span>
               <span className="p-2 rounded-lg bg-slate-100 text-slate-700">
                 <Users className="w-4 h-4" />
               </span>
             </div>
             <p className="text-2xl sm:text-3xl font-black text-slate-900 mt-2">{courseCounts.all}</p>
-            <span className="text-[11px] text-slate-500 font-medium">Across all courses</span>
+            <span className="text-[11px] text-slate-400 font-medium">All Candidates</span>
           </div>
 
           {/* Card 2: Fashion Designer */}
@@ -458,9 +667,9 @@ export default function EnrolledStudentsPage() {
                 onChange={(e) => setGenderFilter(e.target.value)}
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs font-medium text-slate-700 cursor-pointer"
               >
-                <option value="all">All Genders</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+                <option value="all">All Genders (જાતિ)</option>
+                <option value="Male">Male (પુરુષ)</option>
+                <option value="Female">Female (સ્ત્રી)</option>
               </select>
 
               {/* Category Filter */}
@@ -469,105 +678,142 @@ export default function EnrolledStudentsPage() {
                 onChange={(e) => setCategoryFilter(e.target.value)}
                 className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 text-xs font-medium text-slate-700 cursor-pointer"
               >
-                <option value="all">All Categories</option>
-                <option value="GEN">General (GEN)</option>
+                <option value="all">All Categories (કેટેગરી)</option>
+                <option value="GEN">GEN</option>
                 <option value="OBC">OBC</option>
                 <option value="SC">SC</option>
                 <option value="ST">ST</option>
               </select>
 
-              {/* View Switcher: Grid vs Table */}
-              <div className="flex items-center border border-slate-200 rounded-lg p-0.5 bg-slate-50">
+              {/* View Mode Toggle */}
+              <div className="flex items-center border border-slate-200 rounded-lg overflow-hidden bg-slate-50 p-0.5">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-1.5 rounded-md text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors ${
-                    viewMode === 'grid' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-800'
+                  className={`p-1.5 rounded-md cursor-pointer ${
+                    viewMode === 'grid' ? 'bg-white shadow-2xs text-rose-700 font-bold' : 'text-slate-500 hover:text-slate-800'
                   }`}
-                  title="Grid / Card View"
+                  title="Card Grid View"
                 >
-                  <LayoutGrid className="w-3.5 h-3.5" />
+                  <LayoutGrid className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setViewMode('table')}
-                  className={`p-1.5 rounded-md text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors ${
-                    viewMode === 'table' ? 'bg-white text-slate-900 shadow-2xs' : 'text-slate-500 hover:text-slate-800'
+                  className={`p-1.5 rounded-md cursor-pointer ${
+                    viewMode === 'table' ? 'bg-white shadow-2xs text-rose-700 font-bold' : 'text-slate-500 hover:text-slate-800'
                   }`}
                   title="Table List View"
                 >
-                  <List className="w-3.5 h-3.5" />
+                  <List className="w-4 h-4" />
                 </button>
               </div>
             </div>
           </div>
 
-          {/* Active Filter Info Strip */}
-          <div className="flex items-center justify-between text-xs text-slate-500 pt-1">
-            <span>
-              Showing <strong className="text-slate-900 font-bold">{filteredStudents.length}</strong> of{' '}
-              <strong className="text-slate-900 font-bold">{students.length}</strong> enrolled students
-            </span>
-            {(searchTerm || timeSlotFilter !== 'all' || genderFilter !== 'all' || categoryFilter !== 'all' || selectedCourseTab !== 'all') && (
+          {/* Active Filter Indicators */}
+          {(searchTerm || timeSlotFilter !== 'all' || genderFilter !== 'all' || categoryFilter !== 'all' || selectedCourseTab !== 'all') && (
+            <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-slate-100 text-xs">
+              <span className="text-slate-400 font-medium">Active filters:</span>
+              {selectedCourseTab !== 'all' && (
+                <span className="bg-rose-50 text-rose-800 border border-rose-200 px-2 py-0.5 rounded-md font-medium flex items-center gap-1">
+                  Course: {selectedCourseTab}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setSelectedCourseTab('all')} />
+                </span>
+              )}
+              {searchTerm && (
+                <span className="bg-slate-100 text-slate-800 border border-slate-200 px-2 py-0.5 rounded-md font-medium flex items-center gap-1">
+                  &ldquo;{searchTerm}&rdquo;
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setSearchTerm('')} />
+                </span>
+              )}
+              {timeSlotFilter !== 'all' && (
+                <span className="bg-amber-50 text-amber-800 border border-amber-200 px-2 py-0.5 rounded-md font-medium flex items-center gap-1">
+                  {timeSlotFilter}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setTimeSlotFilter('all')} />
+                </span>
+              )}
+              {genderFilter !== 'all' && (
+                <span className="bg-blue-50 text-blue-800 border border-blue-200 px-2 py-0.5 rounded-md font-medium flex items-center gap-1">
+                  {genderFilter}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setGenderFilter('all')} />
+                </span>
+              )}
+              {categoryFilter !== 'all' && (
+                <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded-md font-medium flex items-center gap-1">
+                  Cat: {categoryFilter}
+                  <X className="w-3 h-3 cursor-pointer" onClick={() => setCategoryFilter('all')} />
+                </span>
+              )}
               <button
                 onClick={() => {
+                  setSelectedCourseTab('all')
                   setSearchTerm('')
                   setTimeSlotFilter('all')
                   setGenderFilter('all')
                   setCategoryFilter('all')
-                  setSelectedCourseTab('all')
                 }}
-                className="text-xs text-rose-600 hover:text-rose-800 font-semibold cursor-pointer underline"
+                className="text-rose-600 hover:text-rose-800 font-bold ml-1 cursor-pointer"
               >
-                Clear all filters
+                Clear all
               </button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* ============================================================ */}
         {/* LOADING & ERROR STATES */}
         {/* ============================================================ */}
         {loading && (
-          <div className="bg-white rounded-xl border border-slate-200 p-12 text-center space-y-3">
-            <RefreshCw className="w-8 h-8 text-rose-600 animate-spin mx-auto" />
-            <p className="text-sm font-bold text-slate-700">Loading enrolled students records...</p>
+          <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-2xs space-y-4">
+            <RefreshCw className="w-10 h-10 text-rose-600 animate-spin mx-auto" />
+            <p className="text-base font-bold text-slate-800">Loading Enrolled Students...</p>
+            <p className="text-xs text-slate-400">Fetching records from Supabase database &amp; local storage...</p>
           </div>
         )}
 
         {error && !loading && (
-          <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center space-y-2">
-            <p className="text-sm font-bold text-red-800">Error loading data: {error}</p>
+          <div className="bg-red-50 rounded-2xl p-6 border-2 border-red-200 text-center space-y-3">
+            <AlertTriangle className="w-10 h-10 text-red-600 mx-auto" />
+            <h3 className="text-base font-bold text-red-900">Failed to load students</h3>
+            <p className="text-xs text-red-700">{error}</p>
             <button
               onClick={fetchStudents}
-              className="px-4 py-1.5 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold"
+              className="px-4 py-2 bg-red-700 hover:bg-red-800 text-white rounded-lg text-xs font-bold cursor-pointer"
             >
-              Retry
+              Try Again
             </button>
           </div>
         )}
 
-        {/* ============================================================ */}
-        {/* EMPTY STATE */}
-        {/* ============================================================ */}
+        {/* Empty state */}
         {!loading && !error && filteredStudents.length === 0 && (
-          <div className="bg-white rounded-xl border border-slate-200 p-12 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center mx-auto text-slate-400">
+          <div className="bg-white rounded-2xl p-12 text-center border border-slate-200 shadow-2xs space-y-4">
+            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto text-slate-400">
               <Users className="w-8 h-8" />
             </div>
-            <div>
-              <h3 className="text-base font-bold text-slate-800">No Enrolled Students Found</h3>
-              <p className="text-xs text-slate-500 max-w-md mx-auto mt-1">
-                {searchTerm || selectedCourseTab !== 'all'
-                  ? 'No students match your active filters or search terms. Try clearing filters.'
-                  : 'No student admissions have been registered yet. Fill out the admission form to register.'}
-              </p>
+            <h3 className="text-lg font-bold text-slate-800">No Enrolled Students Found</h3>
+            <p className="text-xs text-slate-500 max-w-md mx-auto">
+              No applications match your selected filters. Try clearing your search term or register a new student using the admission form.
+            </p>
+            <div className="flex items-center justify-center gap-3 pt-2">
+              <button
+                onClick={() => {
+                  setSelectedCourseTab('all')
+                  setSearchTerm('')
+                  setTimeSlotFilter('all')
+                  setGenderFilter('all')
+                  setCategoryFilter('all')
+                }}
+                className="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold cursor-pointer"
+              >
+                Clear Filters
+              </button>
+              <Link
+                href="/admission-form"
+                className="px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-lg text-xs font-bold flex items-center gap-1.5"
+              >
+                <PlusCircle className="w-4 h-4" /> Fill New Form
+              </Link>
             </div>
-            <Link
-              href="/admission-form"
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-rose-700 hover:bg-rose-800 text-white rounded-lg text-xs font-bold shadow-xs"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Fill New Admission Form</span>
-            </Link>
           </div>
         )}
 
@@ -575,28 +821,19 @@ export default function EnrolledStudentsPage() {
         {/* GRID VIEW (CARDS) */}
         {/* ============================================================ */}
         {!loading && !error && viewMode === 'grid' && filteredStudents.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {filteredStudents.map((student, idx) => {
-              const isFashion = (student.course_name || '').toLowerCase().includes('fashion')
-              const isBoutique = (student.course_name || '').toLowerCase().includes('boutique')
-              const isElectronics = !isFashion && !isBoutique
-
-              const cardBorder = isFashion
-                ? 'border-rose-200 hover:border-rose-400 hover:ring-2 hover:ring-rose-200/50'
-                : isBoutique
-                ? 'border-amber-200 hover:border-amber-400 hover:ring-2 hover:ring-amber-200/50'
-                : 'border-blue-200 hover:border-blue-400 hover:ring-2 hover:ring-blue-200/50'
-
-              const tagBadge = isFashion
-                ? 'bg-rose-50 text-rose-700 border-rose-200'
-                : isBoutique
-                ? 'bg-amber-50 text-amber-700 border-amber-200'
-                : 'bg-blue-50 text-blue-700 border-blue-200'
+              const cName = (student.course_name || '').toLowerCase()
+              const isFashion = cName.includes('fashion')
+              const isBoutique = cName.includes('boutique')
+              const borderColor = isFashion ? 'hover:border-rose-400' : isBoutique ? 'hover:border-amber-400' : 'hover:border-blue-400'
+              const tagBadge = isFashion ? 'bg-rose-50 text-rose-700 border-rose-200' : isBoutique ? 'bg-amber-50 text-amber-700 border-amber-200' : 'bg-blue-50 text-blue-700 border-blue-200'
+              const docsCount = getStudentDocsCount(student)
 
               return (
                 <div
                   key={student.id || student.form_no || idx}
-                  className={`bg-white rounded-xl border ${cardBorder} p-4 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group`}
+                  className={`bg-white rounded-2xl border border-slate-200 p-4 sm:p-5 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between ${borderColor} group relative`}
                 >
                   <div className="space-y-3">
                     {/* Card Top: Numbers & Course Tag */}
@@ -622,14 +859,47 @@ export default function EnrolledStudentsPage() {
 
                     {/* Student Photo & Name Row */}
                     <div className="flex items-center gap-3">
-                      {/* Photo slot */}
-                      <div className="w-16 h-20 rounded-md overflow-hidden bg-slate-100 border border-slate-200 shrink-0 relative flex items-center justify-center">
+                      {/* Photo slot with hover preview & download actions */}
+                      <div className="w-16 h-20 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 shrink-0 relative flex items-center justify-center group/photo">
                         {student.passport_photo_url ? (
-                          <img
-                            src={student.passport_photo_url}
-                            alt={student.full_name}
-                            className="w-full h-full object-cover"
-                          />
+                          <>
+                            <img
+                              src={student.passport_photo_url}
+                              alt={student.full_name}
+                              className="w-full h-full object-cover"
+                            />
+                            {/* Hover overlay with See & Download */}
+                            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/photo:opacity-100 transition-opacity flex flex-col items-center justify-center gap-1 p-1">
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  setViewingDoc({
+                                    title: 'Passport Photo',
+                                    url: student.passport_photo_url,
+                                    type: 'image',
+                                    studentName: student.full_name,
+                                    formNo: student.form_no,
+                                  })
+                                }}
+                                className="w-6 h-6 rounded bg-white text-slate-900 flex items-center justify-center text-[10px] hover:bg-rose-50"
+                                title="See Photo Full View"
+                              >
+                                <Eye className="w-3.5 h-3.5" />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  downloadFile(student.passport_photo_url, `${student.form_no}_${student.full_name}_Photo.svg`)
+                                }}
+                                className="w-6 h-6 rounded bg-emerald-600 text-white flex items-center justify-center text-[10px] hover:bg-emerald-700"
+                                title="Download Photo"
+                              >
+                                <Download className="w-3 h-3" />
+                              </button>
+                            </div>
+                          </>
                         ) : (
                           <User className="w-8 h-8 text-slate-300" />
                         )}
@@ -682,32 +952,70 @@ export default function EnrolledStudentsPage() {
                       </div>
                     </div>
 
-                    {/* Education level tag */}
+                    {/* Education level & Documents badge */}
                     <div className="flex items-center justify-between text-[11px] text-slate-500 pt-0.5">
                       <span className="truncate">Edu: <strong className="text-slate-700">{student.education_level || '10th/12th'}</strong></span>
-                      <span className="shrink-0 bg-emerald-100/80 text-emerald-800 font-bold px-2 py-0.5 rounded-sm text-[10px]">
-                        ✓ Submitted
-                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedStudent(student)}
+                        className="shrink-0 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded border border-emerald-200 text-[10px] flex items-center gap-1 cursor-pointer transition-colors"
+                        title="Click to view all uploaded documents"
+                      >
+                        <FileCheck className="w-3 h-3 text-emerald-600" />
+                        <span>{docsCount} Doc(s)</span>
+                      </button>
                     </div>
                   </div>
 
-                  {/* Card Action Buttons */}
-                  <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                  {/* Card Action Buttons (View, Edit, Delete, Print, Download) */}
+                  <div className="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between gap-1.5 flex-wrap">
                     <button
                       onClick={() => setSelectedStudent(student)}
                       className="text-xs font-bold text-slate-700 hover:text-rose-700 flex items-center gap-1 transition-colors cursor-pointer"
+                      title="View Student Profile & Documents"
                     >
                       <Eye className="w-3.5 h-3.5" />
-                      <span>View Details</span>
+                      <span>Details</span>
                     </button>
 
-                    <button
-                      onClick={() => setSelectedStudent(student)}
-                      className="text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md transition-colors flex items-center gap-1 cursor-pointer"
-                    >
-                      <Printer className="w-3 h-3" />
-                      <span>Print Form</span>
-                    </button>
+                    <div className="flex items-center gap-1">
+                      {/* Direct Edit Button */}
+                      <button
+                        onClick={() => handleOpenEdit(student)}
+                        className="p-1.5 rounded-lg text-slate-600 hover:text-indigo-700 hover:bg-indigo-50 transition-colors cursor-pointer"
+                        title="Edit Student Application"
+                      >
+                        <Edit className="w-3.5 h-3.5" />
+                      </button>
+
+                      {/* Download All Student Files Button */}
+                      <button
+                        onClick={() => downloadAllStudentFiles(student)}
+                        className="p-1.5 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
+                        title="Download All Student Documents & Photo"
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                      </button>
+
+                      {/* Delete Button */}
+                      <button
+                        onClick={() => setDeletingStudent(student)}
+                        className="p-1.5 rounded-lg text-slate-500 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
+                        title="Delete Student Record"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+
+                      {/* Print Form */}
+                      <button
+                        onClick={() => setSelectedStudent(student)}
+                        className="text-xs font-bold text-rose-700 hover:text-rose-800 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-md transition-colors flex items-center gap-1 cursor-pointer ml-1"
+                        title="Print Student Application Form"
+                      >
+                        <Printer className="w-3 h-3" />
+                        <span>Print</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               )
@@ -731,76 +1039,137 @@ export default function EnrolledStudentsPage() {
                     <th className="p-3">Batch Time</th>
                     <th className="p-3">Contact</th>
                     <th className="p-3">City / Area</th>
-                    <th className="p-3">Education</th>
+                    <th className="p-3">Documents</th>
                     <th className="p-3 text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
-                  {filteredStudents.map((s, idx) => (
-                    <tr key={s.id || s.form_no || idx} className="hover:bg-slate-50 transition-colors">
-                      {/* Photo */}
-                      <td className="p-3">
-                        <div className="w-10 h-12 rounded-md bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center">
-                          {s.passport_photo_url ? (
-                            <img src={s.passport_photo_url} alt="" className="w-full h-full object-cover" />
-                          ) : (
-                            <User className="w-5 h-5 text-slate-400" />
-                          )}
-                        </div>
-                      </td>
+                  {filteredStudents.map((s, idx) => {
+                    const docsCount = getStudentDocsCount(s)
+                    return (
+                      <tr key={s.id || s.form_no || idx} className="hover:bg-slate-50 transition-colors">
+                        {/* Photo */}
+                        <td className="p-3">
+                          <div className="w-10 h-12 rounded-md bg-slate-100 overflow-hidden border border-slate-200 flex items-center justify-center relative group/tblphoto">
+                            {s.passport_photo_url ? (
+                              <>
+                                <img src={s.passport_photo_url} alt="" className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/tblphoto:opacity-100 transition-opacity flex items-center justify-center gap-1">
+                                  <button
+                                    onClick={() => setViewingDoc({
+                                      title: 'Passport Photo',
+                                      url: s.passport_photo_url,
+                                      type: 'image',
+                                      studentName: s.full_name,
+                                      formNo: s.form_no,
+                                    })}
+                                    className="p-1 rounded bg-white text-slate-900"
+                                    title="See Photo"
+                                  >
+                                    <Eye className="w-3 h-3" />
+                                  </button>
+                                  <button
+                                    onClick={() => downloadFile(s.passport_photo_url, `${s.form_no}_${s.full_name}_Photo.svg`)}
+                                    className="p-1 rounded bg-emerald-600 text-white"
+                                    title="Download Photo"
+                                  >
+                                    <Download className="w-3 h-3" />
+                                  </button>
+                                </div>
+                              </>
+                            ) : (
+                              <User className="w-5 h-5 text-slate-400" />
+                            )}
+                          </div>
+                        </td>
 
-                      {/* Form & Reg */}
-                      <td className="p-3 font-mono">
-                        <span className="font-bold text-rose-700 block">{s.form_no}</span>
-                        <span className="text-[11px] text-slate-500">{s.registration_no}</span>
-                      </td>
+                        {/* Form No & Reg */}
+                        <td className="p-3 font-mono">
+                          <span className="font-bold text-slate-900 block">{s.form_no}</span>
+                          <span className="text-[11px] text-slate-500">{s.registration_no}</span>
+                        </td>
 
-                      {/* Student Name */}
-                      <td className="p-3">
-                        <strong className="text-slate-900 block font-bold">{s.full_name}</strong>
-                        <span className="text-[11px] text-slate-500">{s.gender}, Age: {s.calculated_age}</span>
-                      </td>
+                        {/* Name & Gender */}
+                        <td className="p-3">
+                          <span className="font-bold text-slate-900 block">{s.full_name}</span>
+                          <span className="text-[11px] text-slate-500">
+                            {s.gender} • Age: {s.calculated_age || '-'}
+                          </span>
+                        </td>
 
-                      {/* Course */}
-                      <td className="p-3">
-                        <span className="font-bold text-slate-800 capitalize block">{s.course_name}</span>
-                        <span className="text-[10px] text-slate-500">{s.course_duration}</span>
-                      </td>
+                        {/* Course */}
+                        <td className="p-3">
+                          <span className="capitalize font-semibold text-slate-800 block">{s.course_name}</span>
+                          <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">
+                            Free Training
+                          </span>
+                        </td>
 
-                      {/* Time */}
-                      <td className="p-3 text-slate-600 font-medium">
-                        {s.time_slot}
-                      </td>
+                        {/* Batch Time */}
+                        <td className="p-3 text-slate-600 font-medium">
+                          {s.time_slot}
+                        </td>
 
-                      {/* Contact */}
-                      <td className="p-3">
-                        <span className="font-mono font-bold text-slate-800 block">{s.contact_number}</span>
-                        <span className="text-[11px] text-slate-500 block truncate max-w-[140px]">{s.email}</span>
-                      </td>
+                        {/* Contact */}
+                        <td className="p-3 font-mono">
+                          <span className="text-emerald-700 font-bold block">{s.contact_number}</span>
+                          <span className="text-[11px] text-slate-500 truncate max-w-[120px] block">{s.email}</span>
+                        </td>
 
-                      {/* City */}
-                      <td className="p-3 text-slate-600">
-                        <span className="block font-medium">{s.city}</span>
-                        <span className="text-[10px] text-slate-400">{s.area_village} ({s.pincode})</span>
-                      </td>
+                        {/* City / Area */}
+                        <td className="p-3 text-slate-600">
+                          <span className="font-medium block">{s.city}</span>
+                          <span className="text-[11px] text-slate-400">{s.area_village}</span>
+                        </td>
 
-                      {/* Education */}
-                      <td className="p-3 text-slate-600">
-                        <span className="block font-medium">{s.education_level}</span>
-                        <span className="text-[10px] text-slate-400">Pass: {s.year_of_passing}</span>
-                      </td>
+                        {/* Documents count */}
+                        <td className="p-3">
+                          <button
+                            type="button"
+                            onClick={() => setSelectedStudent(s)}
+                            className="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold px-2 py-1 rounded text-xs border border-emerald-200 flex items-center gap-1 cursor-pointer"
+                          >
+                            <FileCheck className="w-3.5 h-3.5 text-emerald-600" />
+                            <span>{docsCount} Docs</span>
+                          </button>
+                        </td>
 
-                      {/* Actions */}
-                      <td className="p-3 text-right">
-                        <button
-                          onClick={() => setSelectedStudent(s)}
-                          className="bg-slate-100 hover:bg-rose-50 text-slate-700 hover:text-rose-700 px-3 py-1.5 rounded-lg font-bold text-xs cursor-pointer transition-colors"
-                        >
-                          View Details
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                        {/* Actions */}
+                        <td className="p-3 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              onClick={() => setSelectedStudent(s)}
+                              className="p-1.5 rounded-lg text-slate-600 hover:text-rose-700 hover:bg-rose-50 cursor-pointer"
+                              title="View Details"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => handleOpenEdit(s)}
+                              className="p-1.5 rounded-lg text-slate-600 hover:text-indigo-700 hover:bg-indigo-50 cursor-pointer"
+                              title="Edit Student"
+                            >
+                              <Edit className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => downloadAllStudentFiles(s)}
+                              className="p-1.5 rounded-lg text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 cursor-pointer"
+                              title="Download All Documents & Photo"
+                            >
+                              <Download className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={() => setDeletingStudent(s)}
+                              className="p-1.5 rounded-lg text-slate-500 hover:text-red-700 hover:bg-red-50 cursor-pointer"
+                              title="Delete Student"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    )
+                  })}
                 </tbody>
               </table>
             </div>
@@ -832,11 +1201,27 @@ export default function EnrolledStudentsPage() {
 
                 <div className="flex items-center gap-2">
                   <button
+                    onClick={() => handleOpenEdit(selectedStudent)}
+                    className="bg-white/20 hover:bg-white text-white hover:text-slate-900 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    title="Edit Student Details"
+                  >
+                    <Edit className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Edit</span>
+                  </button>
+                  <button
+                    onClick={() => downloadAllStudentFiles(selectedStudent)}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
+                    title="Download All Documents & Photo"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span className="hidden sm:inline">Download All</span>
+                  </button>
+                  <button
                     onClick={printStudentApplication}
                     className="bg-white/20 hover:bg-white text-white hover:text-slate-900 px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer"
                   >
                     <Printer className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Print Form</span>
+                    <span className="hidden sm:inline">Print</span>
                   </button>
                   <button
                     onClick={() => setSelectedStudent(null)}
@@ -850,17 +1235,73 @@ export default function EnrolledStudentsPage() {
               {/* Modal Body */}
               <div className="p-4 sm:p-6 overflow-y-auto space-y-6 text-xs text-slate-700">
 
-                {/* Top Profile Summary Card */}
+                {/* Top Profile Summary Card with Photo actions */}
                 <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200">
-                  <div className="w-24 h-32 rounded-lg bg-white overflow-hidden border-2 border-slate-300 shadow-sm shrink-0 flex items-center justify-center">
-                    {selectedStudent.passport_photo_url ? (
-                      <img
-                        src={selectedStudent.passport_photo_url}
-                        alt={selectedStudent.full_name}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <User className="w-10 h-10 text-slate-300" />
+                  <div className="space-y-2 shrink-0 flex flex-col items-center">
+                    <div className="w-28 h-36 rounded-lg bg-white overflow-hidden border-2 border-slate-300 shadow-sm flex items-center justify-center relative group/modalphoto">
+                      {selectedStudent.passport_photo_url ? (
+                        <>
+                          <img
+                            src={selectedStudent.passport_photo_url}
+                            alt={selectedStudent.full_name}
+                            className="w-full h-full object-cover"
+                          />
+                          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/modalphoto:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setViewingDoc({
+                                title: 'Passport Photo',
+                                url: selectedStudent.passport_photo_url,
+                                type: 'image',
+                                studentName: selectedStudent.full_name,
+                                formNo: selectedStudent.form_no,
+                              })}
+                              className="p-1.5 rounded bg-white text-slate-900 hover:bg-rose-50 shadow-sm"
+                              title="See Photo"
+                            >
+                              <Eye className="w-4 h-4" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => downloadFile(selectedStudent.passport_photo_url, `${selectedStudent.form_no}_${selectedStudent.full_name}_Photo.svg`)}
+                              className="p-1.5 rounded bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+                              title="Download Photo"
+                            >
+                              <Download className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <User className="w-12 h-12 text-slate-300" />
+                      )}
+                    </div>
+
+                    {/* Direct Photo Action Buttons */}
+                    {selectedStudent.passport_photo_url && (
+                      <div className="flex items-center gap-1 w-full justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setViewingDoc({
+                            title: 'Passport Photo',
+                            url: selectedStudent.passport_photo_url,
+                            type: 'image',
+                            studentName: selectedStudent.full_name,
+                            formNo: selectedStudent.form_no,
+                          })}
+                          className="px-2 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-200 rounded text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                        >
+                          <Eye className="w-3 h-3 text-rose-600" />
+                          <span>See Photo</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => downloadFile(selectedStudent.passport_photo_url, `${selectedStudent.form_no}_${selectedStudent.full_name}_Photo.svg`)}
+                          className="px-2 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded text-[11px] font-semibold flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                        >
+                          <Download className="w-3 h-3 text-emerald-600" />
+                          <span>Download</span>
+                        </button>
+                      </div>
                     )}
                   </div>
 
@@ -1012,70 +1453,684 @@ export default function EnrolledStudentsPage() {
                   )}
                 </div>
 
-                {/* Uploaded Documents */}
-                <div className="border border-slate-200 rounded-xl p-4 space-y-3">
-                  <h4 className="font-bold text-xs uppercase text-slate-800 tracking-wider flex items-center gap-1.5 border-b border-slate-100 pb-2">
-                    <FileText className="w-3.5 h-3.5 text-rose-600" /> 4. Uploaded Documents
-                  </h4>
-                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-                    {/* Aadhaar */}
-                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block">Aadhaar Card</span>
-                      <span className="font-bold text-emerald-700 text-xs">
-                        {Array.isArray(selectedStudent.aadhaar_photos) && selectedStudent.aadhaar_photos.length > 0
-                          ? `✓ ${selectedStudent.aadhaar_photos.length} File(s) Attached`
-                          : 'Pending'}
-                      </span>
-                    </div>
+                {/* ============================================================ */}
+                {/* 4. UPLOADED DOCUMENTS WITH DIRECT "SEE" AND "DOWNLOAD" */}
+                {/* ============================================================ */}
+                <div className="border border-slate-200 rounded-xl p-4 space-y-4">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-2 flex-wrap gap-2">
+                    <h4 className="font-bold text-xs uppercase text-slate-800 tracking-wider flex items-center gap-1.5">
+                      <FileText className="w-3.5 h-3.5 text-rose-600" /> 4. Uploaded Student Documents &amp; Certificates
+                    </h4>
+                    <button
+                      type="button"
+                      onClick={() => downloadAllStudentFiles(selectedStudent)}
+                      className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center gap-1.5 cursor-pointer shadow-2xs transition-colors"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                      <span>Download All Documents</span>
+                    </button>
+                  </div>
 
-                    {/* School Leaving */}
-                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block">School LC</span>
-                      <span className="font-bold text-emerald-700 text-xs">
-                        {Array.isArray(selectedStudent.school_leaving_certificates) && selectedStudent.school_leaving_certificates.length > 0
-                          ? `✓ ${selectedStudent.school_leaving_certificates.length} File(s) Attached`
-                          : 'Pending'}
-                      </span>
-                    </div>
+                  {/* Render Document Groups */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {/* Helper to render document cards */}
+                    {[
+                      { title: 'Aadhaar Card (આધાર કાર્ડ)', docs: selectedStudent.aadhaar_photos, icon: ShieldCheck, badgeColor: 'bg-orange-50 text-orange-800' },
+                      { title: 'School Leaving Certificate (LC)', docs: selectedStudent.school_leaving_certificates, icon: GraduationCap, badgeColor: 'bg-blue-50 text-blue-800' },
+                      { title: '10th SSC Marksheet (૧૦મું ધોરણ)', docs: selectedStudent.marksheets_10th, icon: FileText, badgeColor: 'bg-emerald-50 text-emerald-800' },
+                      { title: '12th HSC Marksheet (૧૨મું ધોરણ)', docs: selectedStudent.marksheets_12th, icon: FileText, badgeColor: 'bg-purple-50 text-purple-800' },
+                      { title: 'Diploma Certificate', docs: selectedStudent.diploma_certificates, icon: FileText, badgeColor: 'bg-indigo-50 text-indigo-800' },
+                      { title: 'UG Degree Certificate', docs: selectedStudent.ug_degree_certificates, icon: GraduationCap, badgeColor: 'bg-teal-50 text-teal-800' },
+                      { title: 'Marriage Certificate', docs: selectedStudent.marriage_certificates, icon: FileText, badgeColor: 'bg-rose-50 text-rose-800' },
+                    ].map((group, gIdx) => {
+                      const hasFiles = Array.isArray(group.docs) && group.docs.length > 0
+                      const IconComp = group.icon
 
-                    {/* 10th/12th Marksheet */}
-                    <div className="p-2 rounded-lg bg-slate-50 border border-slate-200">
-                      <span className="text-[10px] text-slate-400 block">Marksheets</span>
-                      <span className="font-bold text-emerald-700 text-xs">
-                        {Array.isArray(selectedStudent.marksheets_10th) && selectedStudent.marksheets_10th.length > 0
-                          ? `✓ 10th Attached`
-                          : Array.isArray(selectedStudent.marksheets_12th) && selectedStudent.marksheets_12th.length > 0
-                          ? `✓ 12th Attached`
-                          : 'Pending'}
-                      </span>
-                    </div>
+                      return (
+                        <div
+                          key={gIdx}
+                          className={`p-3 rounded-xl border ${hasFiles ? 'border-slate-300 bg-white' : 'border-slate-200 bg-slate-50/70'} space-y-2`}
+                        >
+                          <div className="flex items-center justify-between">
+                            <span className="font-bold text-xs text-slate-800 flex items-center gap-1.5">
+                              <IconComp className="w-3.5 h-3.5 text-rose-600" />
+                              {group.title}
+                            </span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${hasFiles ? group.badgeColor : 'bg-slate-200 text-slate-500'}`}>
+                              {hasFiles ? `${group.docs.length} Attached` : 'Not Attached'}
+                            </span>
+                          </div>
+
+                          {/* List of files in this group */}
+                          {hasFiles ? (
+                            <div className="space-y-1.5 pt-1">
+                              {group.docs.map((doc, dIdx) => (
+                                <div
+                                  key={dIdx}
+                                  className="flex items-center justify-between gap-2 p-2 bg-slate-50 hover:bg-slate-100 rounded-lg border border-slate-200 transition-colors"
+                                >
+                                  <div className="min-w-0 flex-1 flex items-center gap-2">
+                                    <FileCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                                    <div className="min-w-0">
+                                      <p className="text-xs font-semibold text-slate-900 truncate">
+                                        {doc.name || `${group.title} #${dIdx + 1}`}
+                                      </p>
+                                      <p className="text-[10px] text-slate-400">
+                                        {doc.size ? `${(doc.size / 1024).toFixed(1)} KB` : 'Verified Document'}
+                                      </p>
+                                    </div>
+                                  </div>
+
+                                  <div className="flex items-center gap-1.5 shrink-0">
+                                    {/* SEE DOCUMENT BUTTON */}
+                                    <button
+                                      type="button"
+                                      onClick={() => setViewingDoc({
+                                        title: doc.name || group.title,
+                                        url: doc.url,
+                                        type: doc.type || 'document',
+                                        studentName: selectedStudent.full_name,
+                                        formNo: selectedStudent.form_no,
+                                      })}
+                                      className="px-2.5 py-1 bg-white hover:bg-rose-50 text-rose-700 hover:text-rose-800 border border-slate-200 hover:border-rose-200 rounded-md font-bold text-[11px] flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                                      title="See Document in Full Resolution"
+                                    >
+                                      <Eye className="w-3 h-3 text-rose-600" />
+                                      <span>See</span>
+                                    </button>
+
+                                    {/* DOWNLOAD DOCUMENT BUTTON */}
+                                    <button
+                                      type="button"
+                                      onClick={() => downloadFile(doc.url, `${selectedStudent.form_no}_${doc.name || group.title}`)}
+                                      className="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-md font-bold text-[11px] flex items-center gap-1 cursor-pointer transition-colors shadow-2xs"
+                                      title="Download Document"
+                                    >
+                                      <Download className="w-3 h-3" />
+                                      <span>Download</span>
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          ) : (
+                            <p className="text-[11px] text-slate-400 italic">No document file submitted.</p>
+                          )}
+                        </div>
+                      )
+                    })}
                   </div>
                 </div>
 
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 bg-slate-100 border-t border-slate-200 flex items-center justify-between gap-3 shrink-0">
+              <div className="p-4 bg-slate-100 border-t border-slate-200 flex items-center justify-between gap-3 shrink-0 flex-wrap">
                 <span className="text-xs text-slate-500">
                   Data source: <strong className="uppercase">{selectedStudent.source || 'Database'}</strong>
                 </span>
                 <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleOpenEdit(selectedStudent)}
+                    className="px-3.5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <Edit className="w-3.5 h-3.5" />
+                    <span>Edit Profile</span>
+                  </button>
+                  <button
+                    onClick={() => setDeletingStudent(selectedStudent)}
+                    className="px-3.5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Record</span>
+                  </button>
+                  <button
+                    onClick={printStudentApplication}
+                    className="px-3.5 py-2 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  >
+                    <Printer className="w-3.5 h-3.5" />
+                    <span>Print Form</span>
+                  </button>
                   <button
                     onClick={() => setSelectedStudent(null)}
                     className="px-4 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-bold text-xs cursor-pointer"
                   >
                     Close
                   </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* DOCUMENT VIEWER LIGHTBOX MODAL (SEE & DOWNLOAD DOCUMENT) */}
+        {/* ============================================================ */}
+        {viewingDoc && (
+          <div className="fixed inset-0 z-[60] bg-black/85 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-hidden">
+            <div className="bg-slate-900 rounded-2xl max-w-5xl w-full max-h-[94vh] flex flex-col shadow-2xl border border-slate-700 overflow-hidden animate-in fade-in zoom-in-95">
+
+              {/* Viewer Header */}
+              <div className="bg-slate-950 px-5 py-3.5 text-white flex items-center justify-between border-b border-slate-800 shrink-0 gap-3">
+                <div className="min-w-0">
+                  <h3 className="text-sm sm:text-base font-bold text-white truncate flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-rose-500 shrink-0" />
+                    <span>{viewingDoc.title}</span>
+                  </h3>
+                  <p className="text-xs text-slate-400 font-mono">
+                    Candidate: {viewingDoc.studentName} ({viewingDoc.formNo})
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {/* Zoom controls */}
                   <button
-                    onClick={printStudentApplication}
-                    className="px-4 py-2 rounded-lg bg-rose-700 hover:bg-rose-800 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-xs"
+                    type="button"
+                    onClick={() => setDocZoom((prev) => Math.max(0.5, prev - 0.25))}
+                    className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                    title="Zoom Out"
                   >
-                    <Printer className="w-3.5 h-3.5" />
-                    <span>Print Student Form</span>
+                    <ZoomOut className="w-4 h-4" />
+                  </button>
+                  <span className="text-xs font-mono text-slate-400 w-12 text-center">
+                    {Math.round(docZoom * 100)}%
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setDocZoom((prev) => Math.min(2.5, prev + 0.25))}
+                    className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg cursor-pointer"
+                    title="Zoom In"
+                  >
+                    <ZoomIn className="w-4 h-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDocZoom(1)}
+                    className="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs font-semibold cursor-pointer"
+                  >
+                    Reset
+                  </button>
+
+                  {/* Direct Download Button */}
+                  <button
+                    type="button"
+                    onClick={() => downloadFile(viewingDoc.url, `${viewingDoc.formNo}_${viewingDoc.title}`)}
+                    className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-colors shadow-sm ml-2"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download</span>
+                  </button>
+
+                  {/* Close Viewer */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setViewingDoc(null)
+                      setDocZoom(1)
+                    }}
+                    className="w-8 h-8 rounded-full bg-slate-800 hover:bg-rose-600 text-slate-300 hover:text-white flex items-center justify-center cursor-pointer ml-1 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
                   </button>
                 </div>
               </div>
 
+              {/* Viewer Content Area */}
+              <div className="flex-1 overflow-auto p-4 sm:p-6 flex items-center justify-center bg-slate-950/70 min-h-[350px]">
+                {viewingDoc.url ? (
+                  <div
+                    style={{ transform: `scale(${docZoom})`, transformOrigin: 'center center' }}
+                    className="transition-transform duration-150 max-w-full flex items-center justify-center"
+                  >
+                    <img
+                      src={viewingDoc.url}
+                      alt={viewingDoc.title}
+                      className="max-h-[75vh] max-w-full object-contain rounded-lg shadow-2xl border border-slate-700 bg-white"
+                    />
+                  </div>
+                ) : (
+                  <p className="text-slate-400 text-sm">No preview available for this document.</p>
+                )}
+              </div>
+
+              {/* Viewer Footer */}
+              <div className="bg-slate-950 px-5 py-3 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                <span>Click &ldquo;Download&rdquo; to save an original high-resolution copy to your computer.</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setViewingDoc(null)
+                    setDocZoom(1)
+                  }}
+                  className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold cursor-pointer"
+                >
+                  Close Viewer
+                </button>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* EDIT STUDENT MODAL */}
+        {/* ============================================================ */}
+        {editingStudent && (
+          <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+            <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[92vh] flex flex-col shadow-2xl border border-slate-300 overflow-hidden animate-in fade-in zoom-in-95">
+
+              {/* Edit Header */}
+              <div className="bg-slate-900 text-white px-5 py-4 flex items-center justify-between border-b border-slate-800 shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <Edit className="w-5 h-5 text-indigo-400" />
+                  <div>
+                    <h3 className="text-base font-bold">Edit Student Application</h3>
+                    <p className="text-xs text-slate-400 font-mono">
+                      Form No: {editFormData.form_no} | ID: {editFormData.id}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setEditingStudent(null)}
+                  className="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Edit Form Body */}
+              <form onSubmit={handleSaveEdit} className="p-5 sm:p-6 overflow-y-auto space-y-5 text-xs text-slate-700">
+
+                {/* Course & Timing */}
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                  <h4 className="font-bold text-slate-900 uppercase text-[11px] tracking-wider">
+                    Course &amp; Batch Assignment
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Course Name *</label>
+                      <select
+                        value={editFormData.course_name}
+                        onChange={(e) => {
+                          const val = e.target.value
+                          const matched = COURSES.find((c) => c.id === val)
+                          setEditFormData((prev) => ({
+                            ...prev,
+                            course_name: val,
+                            course_duration: matched?.duration || prev.course_duration,
+                          }))
+                        }}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium text-slate-900"
+                        required
+                      >
+                        <option value="fashion designer">Fashion Designer (FD)</option>
+                        <option value="boutique manager">Boutique Manager (BM)</option>
+                        <option value="purchase coordinator electronics">Purchase Coordinator - Electronics (EPC)</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Batch Time Slot *</label>
+                      <select
+                        value={editFormData.time_slot}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, time_slot: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium text-slate-900"
+                        required
+                      >
+                        {TIME_SLOTS.map((slot) => (
+                          <option key={slot} value={slot}>{slot}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Form No (Manual) *</label>
+                      <input
+                        type="text"
+                        value={editFormData.form_no}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, form_no: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono font-bold text-rose-700"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Registration No (Manual) *</label>
+                      <input
+                        type="text"
+                        value={editFormData.registration_no}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, registration_no: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono font-bold text-indigo-700"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Personal Details */}
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                  <h4 className="font-bold text-slate-900 uppercase text-[11px] tracking-wider">
+                    Personal Details
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="sm:col-span-2">
+                      <label className="block font-bold text-slate-700 mb-1">Full Name *</label>
+                      <input
+                        type="text"
+                        value={editFormData.full_name}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, full_name: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-bold text-slate-900 uppercase"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Gender *</label>
+                      <select
+                        value={editFormData.gender}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, gender: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium"
+                      >
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Date of Birth (DD/MM/YYYY) *</label>
+                      <input
+                        type="text"
+                        value={editFormData.date_of_birth}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, date_of_birth: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                        placeholder="DD/MM/YYYY"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Calculated Age (Years)</label>
+                      <input
+                        type="number"
+                        value={editFormData.calculated_age}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, calculated_age: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Category *</label>
+                      <select
+                        value={editFormData.category}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, category: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium"
+                      >
+                        <option value="GEN">GEN</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Father&#39;s Name</label>
+                      <input
+                        type="text"
+                        value={editFormData.fathers_name}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, fathers_name: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Mother&#39;s Name</label>
+                      <input
+                        type="text"
+                        value={editFormData.mothers_name}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, mothers_name: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Father&#39;s Occupation</label>
+                      <input
+                        type="text"
+                        value={editFormData.fathers_occupation}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, fathers_occupation: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact & Residential Address */}
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                  <h4 className="font-bold text-slate-900 uppercase text-[11px] tracking-wider">
+                    Contact &amp; Address
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Mobile Number *</label>
+                      <input
+                        type="tel"
+                        maxLength={10}
+                        value={editFormData.contact_number}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, contact_number: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono font-bold text-emerald-700"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Father&#39;s Phone</label>
+                      <input
+                        type="tel"
+                        maxLength={10}
+                        value={editFormData.father_number}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, father_number: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Email ID *</label>
+                      <input
+                        type="email"
+                        value={editFormData.email}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, email: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Aadhaar Number *</label>
+                      <input
+                        type="text"
+                        maxLength={12}
+                        value={editFormData.aadhaar_no}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, aadhaar_no: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Area / Village *</label>
+                      <input
+                        type="text"
+                        value={editFormData.area_village}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, area_village: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">City / District *</label>
+                      <input
+                        type="text"
+                        value={editFormData.city}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, city: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">State *</label>
+                      <input
+                        type="text"
+                        value={editFormData.state}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, state: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Pincode *</label>
+                      <input
+                        type="text"
+                        maxLength={6}
+                        value={editFormData.pincode}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, pincode: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Flat / Society</label>
+                      <input
+                        type="text"
+                        value={editFormData.flat_society}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, flat_society: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Education */}
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
+                  <h4 className="font-bold text-slate-900 uppercase text-[11px] tracking-wider">
+                    Education
+                  </h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Education Level *</label>
+                      <input
+                        type="text"
+                        value={editFormData.education_level}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, education_level: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-bold text-slate-700 mb-1">Passing Year</label>
+                      <input
+                        type="text"
+                        value={editFormData.year_of_passing}
+                        onChange={(e) => setEditFormData((prev) => ({ ...prev, year_of_passing: e.target.value }))}
+                        className="w-full bg-white border border-slate-300 rounded-lg p-2 font-mono"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Modal Footer Actions */}
+                <div className="pt-4 border-t border-slate-200 flex items-center justify-end gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => setEditingStudent(null)}
+                    className="px-4 py-2 rounded-lg border border-slate-300 hover:bg-slate-100 font-bold text-xs cursor-pointer text-slate-700"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSavingEdit}
+                    className="px-5 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-sm disabled:opacity-60"
+                  >
+                    {isSavingEdit ? (
+                      <>
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                        <span>Saving Changes...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Save className="w-3.5 h-3.5" />
+                        <span>Save &amp; Update Record</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+              </form>
+
+            </div>
+          </div>
+        )}
+
+        {/* ============================================================ */}
+        {/* DELETE CONFIRMATION MODAL */}
+        {/* ============================================================ */}
+        {deletingStudent && (
+          <div className="fixed inset-0 z-[70] bg-black/75 backdrop-blur-xs flex items-center justify-center p-4">
+            <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-red-200 space-y-4 animate-in fade-in zoom-in-95">
+              <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center mx-auto">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+
+              <div className="text-center space-y-2">
+                <h3 className="text-lg font-bold text-slate-900">Confirm Deletion</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Are you sure you want to permanently delete the admission record for:
+                </p>
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl font-medium text-xs text-red-900 space-y-1">
+                  <p className="font-bold text-sm">{deletingStudent.full_name}</p>
+                  <p className="font-mono">Form No: {deletingStudent.form_no} | Reg: {deletingStudent.registration_no}</p>
+                  <p className="capitalize">Course: {deletingStudent.course_name}</p>
+                </div>
+                <p className="text-[11px] text-red-700 font-semibold">
+                  ⚠️ This action will remove the record from both the Supabase database and local storage.
+                </p>
+              </div>
+
+              <div className="flex items-center justify-center gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setDeletingStudent(null)}
+                  disabled={isDeleting}
+                  className="px-4 py-2 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-xs cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  onClick={handleConfirmDelete}
+                  disabled={isDeleting}
+                  className="px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white font-bold text-xs flex items-center gap-1.5 cursor-pointer shadow-sm disabled:opacity-60"
+                >
+                  {isDeleting ? (
+                    <>
+                      <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                      <span>Deleting...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Yes, Permanently Delete</span>
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         )}

@@ -1531,6 +1531,237 @@ export default function AdmissionFormPage() {
     }
   }
 
+  // Dynamic Realistic Passport Photo Generator (Unique for every student)
+  const generateRealisticStudentPhoto = (fullName, isMale) => {
+    const skinTones = [
+      { face: '#F3C5A5', shadow: '#E4A882', lips: '#C86D56' },
+      { face: '#E6B088', shadow: '#D29165', lips: '#B85843' },
+      { face: '#D9986D', shadow: '#C27C50', lips: '#A54938' },
+      { face: '#C78358', shadow: '#AF6940', lips: '#8F3E30' },
+      { face: '#F0BA97', shadow: '#DE9E78', lips: '#BD6450' },
+      { face: '#DF9D74', shadow: '#C88258', lips: '#A24A3B' },
+    ]
+    const skin = skinTones[Math.floor(Math.random() * skinTones.length)]
+
+    const backgrounds = [
+      ['#CFFAFE', '#BAE6FD'], // Studio Sky
+      ['#E2E8F0', '#CBD5E1'], // Classic Slate
+      ['#FEF3C7', '#FDE68A'], // Warm Ivory
+      ['#E0E7FF', '#C7D2FE'], // Studio Lavender
+      ['#DCFCE7', '#BBF7D0'], // Studio Mint
+      ['#FCE7F3', '#FBCFE8'], // Soft Rose
+      ['#F8FAFC', '#E2E8F0'], // Studio Off-White
+      ['#1E3A8A', '#3B82F6'], // Deep Royal Studio
+    ]
+    const [bgTop, bgBot] = backgrounds[Math.floor(Math.random() * backgrounds.length)]
+
+    const hairColors = ['#0F0F12', '#1C1917', '#27272A', '#18181B']
+    const hairColor = hairColors[Math.floor(Math.random() * hairColors.length)]
+
+    const maleClothes = [
+      { color: '#1E3A8A', collar: '#FFFFFF' },
+      { color: '#831843', collar: '#FDF2F8' },
+      { color: '#14532D', collar: '#F0FDF4' },
+      { color: '#334155', collar: '#F8FAFC' },
+      { color: '#0F766E', collar: '#CCFBF1' },
+      { color: '#4338CA', collar: '#EEF2FF' },
+    ]
+    const femaleClothes = [
+      { color: '#BE123C', secondary: '#FDE047' },
+      { color: '#1D4ED8', secondary: '#93C5FD' },
+      { color: '#047857', secondary: '#FBBF24' },
+      { color: '#7C3AED', secondary: '#DDD6FE' },
+      { color: '#C2410C', secondary: '#FED7AA' },
+      { color: '#DB2777', secondary: '#FCE7F3' },
+    ]
+
+    const hasGlasses = Math.random() < 0.32
+    const glassColor = Math.random() > 0.5 ? '#1E293B' : '#78350F'
+    const hairStyle = Math.floor(Math.random() * 3)
+
+    const studentFirstName = fullName.split(' ')[1] || fullName.split(' ')[0] || 'STUDENT'
+
+    let bodySvg = ''
+    let hairSvg = ''
+
+    if (isMale) {
+      const cloth = maleClothes[Math.floor(Math.random() * maleClothes.length)]
+      bodySvg = `
+        <path d="M50,360 C50,225 250,225 250,360 Z" fill="${cloth.color}" />
+        <polygon points="120,225 150,255 135,275 110,235" fill="${cloth.collar}" />
+        <polygon points="180,225 150,255 165,275 190,235" fill="${cloth.collar}" />
+        <line x1="150" y1="255" x2="150" y2="340" stroke="rgba(255,255,255,0.4)" stroke-width="2" />
+        <circle cx="150" cy="280" r="3" fill="${cloth.collar}" />
+        <circle cx="150" cy="310" r="3" fill="${cloth.collar}" />
+      `
+      if (hairStyle === 0) {
+        hairSvg = `
+          <path d="M104,130 C104,80 196,80 196,130 Q190,105 150,100 Q110,105 104,130 Z" fill="${hairColor}" />
+          <path d="M102,120 Q150,75 198,115 Q150,92 102,120 Z" fill="${hairColor}" />
+        `
+      } else if (hairStyle === 1) {
+        hairSvg = `
+          <path d="M104,135 C104,75 196,75 196,135 Q150,95 104,135 Z" fill="${hairColor}" />
+        `
+      } else {
+        hairSvg = `
+          <path d="M105,130 C100,75 200,75 195,130 Q150,90 105,130 Z" fill="${hairColor}" />
+          <path d="M110,100 Q150,65 190,100 Z" fill="${hairColor}" />
+        `
+      }
+    } else {
+      const cloth = femaleClothes[Math.floor(Math.random() * femaleClothes.length)]
+      bodySvg = `
+        <path d="M60,360 C60,235 240,235 240,360 Z" fill="${cloth.color}" />
+        <path d="M75,250 Q150,305 225,250 L240,360 L60,360 Z" fill="${cloth.secondary}" opacity="0.88" />
+        <circle cx="106" cy="162" r="3.5" fill="#EAB308" />
+        <circle cx="194" cy="162" r="3.5" fill="#EAB308" />
+      `
+      if (hairStyle === 0) {
+        hairSvg = `
+          <path d="M100,130 C100,75 200,75 200,130 C205,175 210,250 198,285 C185,260 188,180 185,150 C180,102 120,102 115,150 C112,180 115,260 102,285 C90,250 95,175 100,130 Z" fill="${hairColor}" />
+          <path d="M106,125 Q150,85 194,125 Q150,102 106,125 Z" fill="${hairColor}" />
+        `
+      } else if (hairStyle === 1) {
+        hairSvg = `
+          <circle cx="150" cy="76" r="32" fill="${hairColor}" />
+          <circle cx="150" cy="76" r="34" fill="none" stroke="#F59E0B" stroke-width="2" stroke-dasharray="4,4" />
+          <path d="M104,130 C104,80 196,80 196,130 Q150,100 104,130 Z" fill="${hairColor}" />
+        `
+      } else {
+        hairSvg = `
+          <path d="M98,135 C98,75 202,75 202,135 C206,180 200,230 188,255 C182,210 182,150 178,130 C170,95 130,95 122,130 C118,150 118,210 112,255 C100,230 94,180 98,135 Z" fill="${hairColor}" />
+          <path d="M104,120 Q150,85 196,120 Q150,98 104,120 Z" fill="${hairColor}" />
+        `
+      }
+    }
+
+    const glassesSvg = hasGlasses
+      ? `
+      <rect x="121" y="136" width="23" height="16" rx="3.5" fill="rgba(255,255,255,0.2)" stroke="${glassColor}" stroke-width="2.2" />
+      <rect x="156" y="136" width="23" height="16" rx="3.5" fill="rgba(255,255,255,0.2)" stroke="${glassColor}" stroke-width="2.2" />
+      <line x1="144" y1="143" x2="156" y2="143" stroke="${glassColor}" stroke-width="2" />
+      <line x1="108" y1="141" x2="121" y2="141" stroke="${glassColor}" stroke-width="1.8" />
+      <line x1="179" y1="141" x2="192" y2="141" stroke="${glassColor}" stroke-width="1.8" />
+    `
+      : ''
+
+    const bindiSvg = !isMale ? `<circle cx="150" cy="128" r="3.2" fill="#BE123C" />` : ''
+
+    const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="380" viewBox="0 0 300 380">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="${bgTop}" />
+          <stop offset="100%" stop-color="${bgBot}" />
+        </linearGradient>
+      </defs>
+      <rect width="300" height="380" fill="url(#bgGrad)" />
+      ${bodySvg}
+      <rect x="135" y="185" width="30" height="42" fill="${skin.shadow}" rx="4" />
+      <ellipse cx="106" cy="148" rx="6.5" ry="12" fill="${skin.shadow}" />
+      <ellipse cx="194" cy="148" rx="6.5" ry="12" fill="${skin.shadow}" />
+      <ellipse cx="150" cy="145" rx="43" ry="53" fill="${skin.face}" />
+      <ellipse cx="126" cy="155" rx="7" ry="4" fill="#F43F5E" opacity="0.16" />
+      <ellipse cx="174" cy="155" rx="7" ry="4" fill="#F43F5E" opacity="0.16" />
+      <path d="M124,133 Q134,129 144,133" stroke="${hairColor}" stroke-width="2.6" stroke-linecap="round" fill="none" />
+      <path d="M156,133 Q166,129 176,133" stroke="${hairColor}" stroke-width="2.6" stroke-linecap="round" fill="none" />
+      <ellipse cx="134" cy="142" rx="7.5" ry="4.5" fill="#FFFFFF" />
+      <circle cx="134" cy="142" r="3.5" fill="#2E180E" />
+      <circle cx="135.5" cy="140.5" r="1.3" fill="#FFFFFF" />
+      <ellipse cx="166" cy="142" rx="7.5" ry="4.5" fill="#FFFFFF" />
+      <circle cx="166" cy="142" r="3.5" fill="#2E180E" />
+      <circle cx="167.5" cy="140.5" r="1.3" fill="#FFFFFF" />
+      ${bindiSvg}
+      ${glassesSvg}
+      <path d="M150,140 L150,155 Q146,158 150,159 Q154,158 150,155" fill="none" stroke="${skin.shadow}" stroke-width="2" stroke-linecap="round" />
+      <path d="M141,168 Q150,175 159,168" stroke="${skin.lips}" stroke-width="2.8" stroke-linecap="round" fill="none" />
+      ${hairSvg}
+      <rect x="0" y="342" width="300" height="38" fill="rgba(15,23,42,0.92)" />
+      <text x="150" y="366" font-family="Arial, sans-serif" font-size="11.5" font-weight="900" fill="#F8FAFC" text-anchor="middle" letter-spacing="1.5">PHOTO • ${studentFirstName}</text>
+    </svg>`
+
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgContent)}`
+  }
+
+  // Realistic Aadhaar Card Document Generator
+  const generateRealisticAadhaarDoc = (fullName, aadhaarNo, dobString, isMale) => {
+    const formattedAadhaar = aadhaarNo.replace(/(\d{4})(\d{4})(\d{4})/, '$1 $2 $3')
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
+      <rect width="600" height="380" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" rx="12" />
+      <rect x="0" y="0" width="600" height="12" fill="#FF9933" />
+      <rect x="0" y="12" width="600" height="12" fill="#FFFFFF" />
+      <rect x="0" y="24" width="600" height="12" fill="#138808" />
+      <text x="300" y="62" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#B91C1C" text-anchor="middle">ભારત સરકાર / GOVERNMENT OF INDIA</text>
+      <text x="300" y="82" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1E293B" text-anchor="middle">વિશિષ્ટ ઓળખ સત્તામંડળ / Unique Identification Authority of India</text>
+      <line x1="20" y1="95" x2="580" y2="95" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="40" y="115" width="110" height="140" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5" rx="6" />
+      <circle cx="95" cy="165" r="30" fill="#94A3B8" />
+      <path d="M55,245 C55,205 135,205 135,245 Z" fill="#64748B" />
+      <text x="95" y="270" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#64748B" text-anchor="middle">PHOTO</text>
+      <text x="175" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0F172A">${fullName}</text>
+      <text x="175" y="170" font-family="Arial, sans-serif" font-size="13" fill="#334155">જન્મ તારીખ / DOB: <tspan font-weight="bold" fill="#0F172A">${dobString}</tspan></text>
+      <text x="175" y="198" font-family="Arial, sans-serif" font-size="13" fill="#334155">જાતિ / Gender: <tspan font-weight="bold" fill="#0F172A">${isMale ? 'પુરુષ / Male' : 'સ્ત્રી / Female'}</tspan></text>
+      <rect x="40" y="295" width="520" height="55" fill="#FEF2F2" stroke="#FCA5A5" stroke-width="1.5" rx="8" />
+      <text x="300" y="332" font-family="Courier New, monospace" font-size="26" font-weight="bold" fill="#991B1B" text-anchor="middle" letter-spacing="4">${formattedAadhaar}</text>
+      <text x="300" y="370" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803D" text-anchor="middle">મારું આધાર, મારી ઓળખ (Mera Aadhaar, Meri Pehchan)</text>
+    </svg>`
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+  }
+
+  // Realistic Marksheet Document Generator
+  const generateRealisticMarksheetDoc = (fullName, passingYear, levelLabel) => {
+    const rollNo = `G-${Math.floor(100000 + Math.random() * 900000)}`
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="420" viewBox="0 0 600 420">
+      <rect width="600" height="420" fill="#FFFBEB" stroke="#D97706" stroke-width="2" rx="10" />
+      <rect x="12" y="12" width="576" height="396" fill="none" stroke="#F59E0B" stroke-width="1" stroke-dasharray="6,3" />
+      <text x="300" y="45" font-family="Arial, sans-serif" font-size="15" font-weight="bold" fill="#78350F" text-anchor="middle">GUJARAT SECONDARY &amp; HIGHER SECONDARY EDUCATION BOARD</text>
+      <text x="300" y="66" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#B45309" text-anchor="middle">STATEMENT OF MARKS - ${levelLabel.toUpperCase()}</text>
+      <text x="300" y="85" font-family="Arial, sans-serif" font-size="11" fill="#92400E" text-anchor="middle">EXAMINATION YEAR: MARCH ${passingYear}</text>
+      <line x1="30" y1="95" x2="570" y2="95" stroke="#FDE68A" stroke-width="1.5" />
+      <text x="40" y="120" font-family="Arial, sans-serif" font-size="12" fill="#78350F">CANDIDATE NAME: <tspan font-weight="bold" fill="#000000">${fullName}</tspan></text>
+      <text x="40" y="142" font-family="Arial, sans-serif" font-size="12" fill="#78350F">SEAT NO: <tspan font-weight="bold" font-family="Courier New">${rollNo}</tspan> | CENTER: AHMEDABAD (01)</text>
+      <rect x="40" y="160" width="520" height="150" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1" />
+      <rect x="40" y="160" width="520" height="30" fill="#FEF3C7" />
+      <text x="60" y="180" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#78350F">SUBJECT</text>
+      <text x="300" y="180" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#78350F">MAX MARKS</text>
+      <text x="460" y="180" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#78350F">MARKS OBTAINED</text>
+      <text x="60" y="210" font-family="Arial, sans-serif" font-size="11" fill="#334155">1. GUJARATI (FIRST LANG)</text><text x="320" y="210" font-family="Arial, sans-serif" font-size="11" fill="#334155">100</text><text x="490" y="210" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803D">078</text>
+      <text x="60" y="235" font-family="Arial, sans-serif" font-size="11" fill="#334155">2. ENGLISH (SECOND LANG)</text><text x="320" y="235" font-family="Arial, sans-serif" font-size="11" fill="#334155">100</text><text x="490" y="235" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803D">082</text>
+      <text x="60" y="260" font-family="Arial, sans-serif" font-size="11" fill="#334155">3. MATHEMATICS / COMMERCE</text><text x="320" y="260" font-family="Arial, sans-serif" font-size="11" fill="#334155">100</text><text x="490" y="260" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803D">085</text>
+      <text x="60" y="285" font-family="Arial, sans-serif" font-size="11" fill="#334155">4. SCIENCE / ACCOUNTS</text><text x="320" y="285" font-family="Arial, sans-serif" font-size="11" fill="#334155">100</text><text x="490" y="285" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#15803D">076</text>
+      <rect x="40" y="325" width="520" height="40" fill="#ECFDF5" stroke="#A7F3D0" stroke-width="1" rx="4" />
+      <text x="60" y="350" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#065F46">TOTAL: 405 / 500 (81.00%) | RESULT: PASS IN FIRST CLASS WITH DISTINCTION</text>
+      <circle cx="510" cy="385" r="24" fill="none" stroke="#DC2626" stroke-width="2" />
+      <text x="510" y="388" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#DC2626" text-anchor="middle">OFFICIAL SEAL</text>
+    </svg>`
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+  }
+
+  // Realistic School Leaving Certificate Generator
+  const generateRealisticSchoolLCDoc = (fullName, dobString, village) => {
+    const grNo = `GR-${Math.floor(1000 + Math.random() * 9000)}`
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="380" viewBox="0 0 600 380">
+      <rect width="600" height="380" fill="#F8FAFC" stroke="#64748B" stroke-width="2" rx="10" />
+      <rect x="10" y="10" width="580" height="360" fill="none" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,2" />
+      <text x="300" y="45" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E293B" text-anchor="middle">SHRI SARVODAYA VIDYALAYA HIGH SCHOOL</text>
+      <text x="300" y="65" font-family="Arial, sans-serif" font-size="12" fill="#475569" text-anchor="middle">${village || 'Ghatlodia'}, Ahmedabad, Gujarat (Reg. No. 12/G/1984)</text>
+      <text x="300" y="90" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#BE123C" text-anchor="middle">SCHOOL LEAVING CERTIFICATE (શાળા છોડ્યાનું પ્રમાણપત્ર)</text>
+      <line x1="30" y1="102" x2="570" y2="102" stroke="#CBD5E1" stroke-width="1.5" />
+      <text x="45" y="135" font-family="Arial, sans-serif" font-size="12" fill="#334155">General Register (G.R.) No.: <tspan font-weight="bold" font-family="Courier New">${grNo}</tspan></text>
+      <text x="350" y="135" font-family="Arial, sans-serif" font-size="12" fill="#334155">Student UID No.: <tspan font-weight="bold">24070500124</tspan></text>
+      <text x="45" y="170" font-family="Arial, sans-serif" font-size="12" fill="#334155">1. Full Name of Pupil: <tspan font-weight="bold" fill="#0F172A">${fullName}</tspan></text>
+      <text x="45" y="200" font-family="Arial, sans-serif" font-size="12" fill="#334155">2. Date of Birth: <tspan font-weight="bold" fill="#0F172A">${dobString}</tspan></text>
+      <text x="45" y="230" font-family="Arial, sans-serif" font-size="12" fill="#334155">3. Place of Birth: <tspan font-weight="bold" fill="#0F172A">${village || 'Ahmedabad'}, Gujarat</tspan></text>
+      <text x="45" y="260" font-family="Arial, sans-serif" font-size="12" fill="#334155">4. Progress in Studies: <tspan font-weight="bold" fill="#15803D">GOOD</tspan> | Conduct &amp; Character: <tspan font-weight="bold" fill="#15803D">VERY GOOD</tspan></text>
+      <text x="45" y="290" font-family="Arial, sans-serif" font-size="12" fill="#334155">5. Reason for Leaving School: <tspan font-weight="bold">Completed Higher Studies</tspan></text>
+      <circle cx="480" cy="335" r="26" fill="none" stroke="#DC2626" stroke-width="2" />
+      <text x="480" y="338" font-family="Arial, sans-serif" font-size="8" font-weight="bold" fill="#DC2626" text-anchor="middle">SCHOOL SEAL</text>
+      <text x="120" y="350" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#475569">Class Teacher Signature</text>
+      <text x="350" y="350" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#475569">Principal Signature</text>
+    </svg>`
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
+  }
+
   // Helper to fill form with random realistic data for fast testing
   const fillRandomRealisticData = () => {
     // Reset any previous submit status
@@ -1608,14 +1839,20 @@ export default function AdmissionFormPage() {
     const mothers = ['GITABEN', 'MINAXIBEN', 'BHAVANABEN', 'DAKSHABEN', 'REKHABEN', 'SAROJBEN']
     const occupations = ['Business', 'Private Job', 'Farmer', 'Shop Owner', 'Accountant', 'Supervisor']
 
-    const dummySvgPhoto = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360" viewBox="0 0 300 360"><rect width="300" height="360" fill="%23e0e7ff"/><circle cx="150" cy="125" r="55" fill="%23f97316"/><path d="M60,330 C60,210 240,210 240,330 Z" fill="%231e3a8a"/><text x="150" y="345" font-family="Arial" font-size="13" font-weight="bold" fill="%23ffffff" text-anchor="middle">PASSPORT PHOTO (SAMPLE)</text></svg>`
+    // Dynamic distinct realistic photo for every student
+    const realisticPhoto = generateRealisticStudentPhoto(fullName, isMale)
 
-    const dummyDoc = (name) => [
+    // Realistic SVG Documents
+    const aadhaarDocData = generateRealisticAadhaarDoc(fullName, randAadhaar, dobString, isMale)
+    const marksheetDocData = generateRealisticMarksheetDoc(fullName, String(birthYear + (eduLevelId === 4 ? 21 : 18)), eduLevelLabel)
+    const schoolLCDocData = generateRealisticSchoolLCDoc(fullName, dobString, chosenArea.village)
+
+    const createDocItem = (name, dataUrl) => [
       {
         name,
-        size: 154200,
-        type: 'application/pdf',
-        url: 'https://placehold.co/600x400/png?text=' + encodeURIComponent(name),
+        size: 184500,
+        type: 'image/svg+xml',
+        url: dataUrl,
       },
     ]
 
@@ -1653,14 +1890,14 @@ export default function AdmissionFormPage() {
       below_10th_standard: '',
       year_of_passing: String(birthYear + (eduLevelId === 4 ? 21 : 18)),
       education_history: eduHistory,
-      passport_photo_url: dummySvgPhoto,
-      aadhaar_photos: dummyDoc('Aadhaar_Card_Front_Back.pdf'),
+      passport_photo_url: realisticPhoto,
+      aadhaar_photos: createDocItem('Aadhaar_Card_Front_Back.svg', aadhaarDocData),
       marriage_certificates: [],
-      school_leaving_certificates: dummyDoc('School_Leaving_Certificate.pdf'),
-      marksheets_10th: dummyDoc('10th_SSC_Marksheet.pdf'),
-      marksheets_12th: eduLevelId >= 2 ? dummyDoc('12th_HSC_Marksheet.pdf') : [],
-      diploma_certificates: eduLevelId === 3 ? dummyDoc('Diploma_Certificate.pdf') : [],
-      ug_degree_certificates: eduLevelId === 4 ? dummyDoc('UG_Degree_Certificate.pdf') : [],
+      school_leaving_certificates: createDocItem('School_Leaving_Certificate.svg', schoolLCDocData),
+      marksheets_10th: createDocItem('10th_SSC_Marksheet.svg', marksheetDocData),
+      marksheets_12th: eduLevelId >= 2 ? createDocItem('12th_HSC_Marksheet.svg', marksheetDocData) : [],
+      diploma_certificates: eduLevelId === 3 ? createDocItem('Diploma_Certificate.svg', marksheetDocData) : [],
+      ug_degree_certificates: eduLevelId === 4 ? createDocItem('UG_Degree_Certificate.svg', marksheetDocData) : [],
       declaration_agreed: true,
       application_date: new Date().toLocaleDateString('en-GB'),
       application_place: 'Ahmedabad',
@@ -1700,17 +1937,6 @@ export default function AdmissionFormPage() {
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-          {/* ATOM: BUTTON_AUTOFILL_TEST_DATA (Top Banner) */}
-          <button
-            type="button"
-            onClick={fillRandomRealisticData}
-            className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer border border-amber-600 active:scale-95"
-            title="Click to fill form with random realistic test data"
-          >
-            <Sparkles className="w-3.5 h-3.5 fill-current" />
-            <span>⚡ Fill Test Data (ટેસ્ટ ડેટા ભરો)</span>
-          </button>
-
           <button
             type="button"
             onClick={() => {
@@ -3205,20 +3431,6 @@ export default function AdmissionFormPage() {
             </p>
 
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto justify-end">
-              {/* ATOM: BUTTON_AUTOFILL_TEST_DATA (Bottom Bar) */}
-              <button
-                id="atom-button-autofill-test-bottom"
-                data-atom-id="BUTTON_AUTOFILL_TEST"
-                type="button"
-                onClick={fillRandomRealisticData}
-                disabled={submitting || !!submitSuccess}
-                className="w-full sm:w-auto px-5 py-3.5 rounded-xl border-2 border-dashed border-amber-500 bg-amber-50 hover:bg-amber-100 text-amber-950 font-extrabold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-95"
-                title="Click to fill form with random realistic test data"
-              >
-                <Sparkles className="w-4 h-4 text-amber-600 fill-amber-400 shrink-0" />
-                <span>⚡ Auto-Fill Test Data</span>
-              </button>
-
               {/* ATOM: BUTTON_SUBMIT */}
               <button
                 id="atom-button-submit"
@@ -3248,6 +3460,18 @@ export default function AdmissionFormPage() {
           </div>
         </div>
       </form>
+
+      {/* Admin Discreet Test Data Filler Button (Tiny icon-only after form so users cannot find it) */}
+      <div className="max-w-4xl mx-auto mt-6 mb-2 flex justify-center print:hidden">
+        <button
+          type="button"
+          onClick={fillRandomRealisticData}
+          title="Admin"
+          className="p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all opacity-30 hover:opacity-100 cursor-pointer"
+        >
+          <Sparkles className="w-3.5 h-3.5" />
+        </button>
+      </div>
     </div>
   )
 }
