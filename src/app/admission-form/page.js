@@ -1528,6 +1528,147 @@ export default function AdmissionFormPage() {
     }
   }
 
+  // Helper to fill form with random realistic data for fast testing
+  const fillRandomRealisticData = () => {
+    // Reset any previous submit status
+    setSubmitSuccess(null)
+
+    // 1. Pick a random course
+    const randomCourseIndex = Math.floor(Math.random() * COURSES.length)
+    const selectedCourse = COURSES[randomCourseIndex]
+
+    // 2. Pick Gender and appropriate Gujarati first names
+    const isMale = Math.random() > 0.5
+    const maleFirstNames = ['AARAV', 'PRITESH', 'DHRUV', 'HIREN', 'BHAVIN', 'CHIRAG', 'JAYESH', 'MEHUL', 'HARSH']
+    const femaleFirstNames = ['PRIYA', 'ANANYA', 'KAJAL', 'POOJA', 'DIPTI', 'NEHAL', 'HETAL', 'PAYAL', 'KOMAL']
+    const middleNames = ['SURESHBHAI', 'MAHENDRABHAI', 'RAMESHBHAI', 'KIRITBHAI', 'PRAVINBHAI', 'BHARATBHAI', 'DINESHBHAI']
+    const lastNames = ['PATEL', 'SHAH', 'PANCHAL', 'JOSHI', 'DESAI', 'MEHTA', 'SOLANKI', 'RATHOD', 'CHAUHAN', 'SONI']
+
+    const firstName = isMale
+      ? maleFirstNames[Math.floor(Math.random() * maleFirstNames.length)]
+      : femaleFirstNames[Math.floor(Math.random() * femaleFirstNames.length)]
+    const middleName = middleNames[Math.floor(Math.random() * middleNames.length)]
+    const lastName = lastNames[Math.floor(Math.random() * lastNames.length)]
+    const fullName = `${lastName} ${firstName} ${middleName}`
+
+    // 3. Generate birth date strictly satisfying the course's minimum age
+    const applicantAge = selectedCourse.minAge + 2 + Math.floor(Math.random() * 3)
+    const birthYear = 2026 - applicantAge
+    const birthMonth = '01'
+    const birthDay = '15'
+    const dobString = `${birthDay}/${birthMonth}/${birthYear}`
+
+    // 4. Random Time Slot
+    const randomTimeSlot = TIME_SLOTS[Math.floor(Math.random() * TIME_SLOTS.length)]
+
+    // 5. Appropriate Education Level for this course
+    let eduLevelId = 2
+    let eduLevelLabel = '12th pass'
+    if (selectedCourse.id === 'boutique manager') {
+      eduLevelId = 4
+      eduLevelLabel = 'UG'
+    } else if (selectedCourse.id === 'fashion designer') {
+      eduLevelId = Math.random() > 0.5 ? 2 : 3
+      eduLevelLabel = eduLevelId === 2 ? '12th pass' : 'Diploma after 10th'
+    } else {
+      eduLevelId = Math.random() > 0.5 ? 1 : 2
+      eduLevelLabel = eduLevelId === 1 ? '10th pass' : '12th pass'
+    }
+
+    // 6. Education History
+    const baseHistory = getInitialEducationHistory(eduLevelId)
+    const eduHistory = baseHistory.map((row, idx) => {
+      let passYear = String(birthYear + 16 + idx * 2)
+      return {
+        ...row,
+        year: passYear,
+      }
+    })
+
+    // 7. Realistic Address in Ahmedabad / Gujarat
+    const areas = [
+      { village: 'Ghatlodia', pin: '380061', society: 'A-204, Shrinathji Complex', street: 'Near Rannapark, Ghatlodia Road', landmark: 'Opposite Bank of Baroda' },
+      { village: 'Chandlodiya', pin: '380061', society: 'B-12, Radhe Shyam Residency', street: 'Near Railway Crossing', landmark: 'Near Swaminarayan Temple' },
+      { village: 'Sola', pin: '380060', society: 'Flat 404, Shivam Apartment', street: 'Science City Road', landmark: 'Behind CIMS Hospital' },
+      { village: 'Bopal', pin: '380058', society: '15, Nilkanth Bunglows', street: 'Bopal-Ambli Road', landmark: 'Near BRTS Bus Stop' },
+      { village: 'Naranpura', pin: '380013', society: 'C-101, Tirupati Heights', street: 'Near Ankur Cross Road', landmark: 'Opposite Government School' },
+    ]
+    const chosenArea = areas[Math.floor(Math.random() * areas.length)]
+
+    // 8. Contact & IDs
+    const randPhone = `98${Math.floor(10000000 + Math.random() * 90000000)}`
+    const randFatherPhone = `97${Math.floor(10000000 + Math.random() * 90000000)}`
+    const randAadhaar = `${Math.floor(2000 + Math.random() * 7000)}${Math.floor(1000 + Math.random() * 9000)}${Math.floor(1000 + Math.random() * 9000)}`
+    const email = `${firstName.toLowerCase()}.${lastName.toLowerCase()}${Math.floor(10 + Math.random() * 90)}@gmail.com`
+
+    // Mothers & Fathers details
+    const mothers = ['GITABEN', 'MINAXIBEN', 'BHAVANABEN', 'DAKSHABEN', 'REKHABEN', 'SAROJBEN']
+    const occupations = ['Business', 'Private Job', 'Farmer', 'Shop Owner', 'Accountant', 'Supervisor']
+
+    const dummySvgPhoto = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="360" viewBox="0 0 300 360"><rect width="300" height="360" fill="%23e0e7ff"/><circle cx="150" cy="125" r="55" fill="%23f97316"/><path d="M60,330 C60,210 240,210 240,330 Z" fill="%231e3a8a"/><text x="150" y="345" font-family="Arial" font-size="13" font-weight="bold" fill="%23ffffff" text-anchor="middle">PASSPORT PHOTO (SAMPLE)</text></svg>`
+
+    const dummyDoc = (name) => [
+      {
+        name,
+        size: 154200,
+        type: 'application/pdf',
+        url: 'https://placehold.co/600x400/png?text=' + encodeURIComponent(name),
+      },
+    ]
+
+    const newFilledData = {
+      course_name: selectedCourse.id,
+      course_duration: selectedCourse.duration,
+      time_slot: randomTimeSlot,
+      form_no: `${selectedCourse.prefix}_001`,
+      registration_no: 'MKT_001',
+      full_name: fullName,
+      date_of_birth: dobString,
+      calculated_age: applicantAge,
+      gender: isMale ? 'Male' : 'Female',
+      fathers_name: `${middleName} ${lastName}`,
+      mothers_name: `${mothers[Math.floor(Math.random() * mothers.length)]} ${lastName}`,
+      fathers_occupation: occupations[Math.floor(Math.random() * occupations.length)],
+      marital_status: 'Unmarried',
+      category: ['GEN', 'OBC', 'SC', 'ST'][Math.floor(Math.random() * 4)],
+      aadhaar_no: randAadhaar,
+      contact_number: randPhone,
+      father_number: randFatherPhone,
+      email: email,
+      flat_society: chosenArea.society,
+      street_road: chosenArea.street,
+      landmark: chosenArea.landmark,
+      area_village: chosenArea.village,
+      city: 'Ahmedabad',
+      state: 'Gujarat',
+      pincode: chosenArea.pin,
+      same_as_postal: true,
+      permanent_address: `${chosenArea.society}, ${chosenArea.village}, Ahmedabad`,
+      permanent_pincode: chosenArea.pin,
+      education_level: `Level ${eduLevelId}) ${eduLevelLabel}`,
+      education_level_id: eduLevelId,
+      below_10th_standard: '',
+      year_of_passing: String(birthYear + (eduLevelId === 4 ? 21 : 18)),
+      education_history: eduHistory,
+      passport_photo_url: dummySvgPhoto,
+      aadhaar_photos: dummyDoc('Aadhaar_Card_Front_Back.pdf'),
+      marriage_certificates: [],
+      school_leaving_certificates: dummyDoc('School_Leaving_Certificate.pdf'),
+      marksheets_10th: dummyDoc('10th_SSC_Marksheet.pdf'),
+      marksheets_12th: eduLevelId >= 2 ? dummyDoc('12th_HSC_Marksheet.pdf') : [],
+      diploma_certificates: eduLevelId === 3 ? dummyDoc('Diploma_Certificate.pdf') : [],
+      ug_degree_certificates: eduLevelId === 4 ? dummyDoc('UG_Degree_Certificate.pdf') : [],
+      declaration_agreed: true,
+      application_date: new Date().toLocaleDateString('en-GB'),
+      application_place: 'Ahmedabad',
+    }
+
+    setFormData(newFilledData)
+    setErrors({})
+    setEduValidationMsg({ valid: true, text: `✓ Valid: ${selectedCourse.eduRequirementText}` })
+    setAgeValidationMsg({ valid: true, text: `✓ Valid: Age ${applicantAge} Years qualifies for ${selectedCourse.name} (${selectedCourse.minAge}+ required)` })
+  }
+
   // Print Form Action
   const handlePrint = () => {
     window.print()
@@ -1549,28 +1690,43 @@ export default function AdmissionFormPage() {
         >
           ← Back to Home
         </Link>
+
         <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500">
           <Clock className="w-4 h-4 text-emerald-600 animate-pulse" />
           <span>{lastSavedTime || 'Auto-save active'}</span>
         </div>
-        <button
-          type="button"
-          onClick={() => {
-            if (confirm('Are you sure you want to clear this draft and reset the form?')) {
-              localStorage.removeItem('mkt_admission_form_draft_v1')
-              setFormData(initialFormState)
-              setErrors({})
-              setPincodeStatusMsg({ text: '', isError: false })
-              setPermPincodeStatusMsg({ text: '', isError: false })
-              setPincodeVillages([])
-              setEduValidationMsg({ valid: true, text: '' })
-              setAgeValidationMsg({ valid: true, text: '' })
-            }
-          }}
-          className="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 cursor-pointer"
-        >
-          <RefreshCw className="w-3.5 h-3.5" /> Reset Form
-        </button>
+
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+          {/* ATOM: BUTTON_AUTOFILL_TEST_DATA (Top Banner) */}
+          <button
+            type="button"
+            onClick={fillRandomRealisticData}
+            className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-3.5 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-sm hover:shadow transition-all cursor-pointer border border-amber-600 active:scale-95"
+            title="Click to fill form with random realistic test data"
+          >
+            <Sparkles className="w-3.5 h-3.5 fill-current" />
+            <span>⚡ Fill Test Data (ટેસ્ટ ડેટા ભરો)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              if (confirm('Are you sure you want to clear this draft and reset the form?')) {
+                localStorage.removeItem('mkt_admission_form_draft_v1')
+                setFormData(initialFormState)
+                setErrors({})
+                setPincodeStatusMsg({ text: '', isError: false })
+                setPermPincodeStatusMsg({ text: '', isError: false })
+                setPincodeVillages([])
+                setEduValidationMsg({ valid: true, text: '' })
+                setAgeValidationMsg({ valid: true, text: '' })
+              }
+            }}
+            className="text-xs text-slate-500 hover:text-red-600 flex items-center gap-1 cursor-pointer"
+          >
+            <RefreshCw className="w-3.5 h-3.5" /> Reset Form
+          </button>
+        </div>
       </div>
 
       {/* ============================================================ */}
@@ -3047,32 +3203,48 @@ export default function AdmissionFormPage() {
               * On clicking Submit, your application will be saved to Supabase and a copy backed up locally.
             </p>
 
-            {/* ATOM: BUTTON_SUBMIT */}
-            <button
-              id="atom-button-submit"
-              data-atom-id="BUTTON_SUBMIT"
-              type="submit"
-              disabled={submitting || !formData.declaration_agreed || !!submitSuccess}
-              className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${
-                submitting || !formData.declaration_agreed || !!submitSuccess
-                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
-                  : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
-              }`}
-            >
-              {submitting ? (
-                <>
-                  <RefreshCw className="w-5 h-5 animate-spin" /> Submitting Application...
-                </>
-              ) : submitSuccess ? (
-                <>
-                  <CheckCircle className="w-5 h-5 text-emerald-600" /> Application Submitted
-                </>
-              ) : (
-                <>
-                  <FileCheck className="w-5 h-5" /> Submit Admission Form
-                </>
-              )}
-            </button>
+            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto justify-end">
+              {/* ATOM: BUTTON_AUTOFILL_TEST_DATA (Bottom Bar) */}
+              <button
+                id="atom-button-autofill-test-bottom"
+                data-atom-id="BUTTON_AUTOFILL_TEST"
+                type="button"
+                onClick={fillRandomRealisticData}
+                disabled={submitting || !!submitSuccess}
+                className="w-full sm:w-auto px-5 py-3.5 rounded-xl border-2 border-dashed border-amber-500 bg-amber-50 hover:bg-amber-100 text-amber-950 font-extrabold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-2xs active:scale-95"
+                title="Click to fill form with random realistic test data"
+              >
+                <Sparkles className="w-4 h-4 text-amber-600 fill-amber-400 shrink-0" />
+                <span>⚡ Auto-Fill Test Data</span>
+              </button>
+
+              {/* ATOM: BUTTON_SUBMIT */}
+              <button
+                id="atom-button-submit"
+                data-atom-id="BUTTON_SUBMIT"
+                type="submit"
+                disabled={submitting || !formData.declaration_agreed || !!submitSuccess}
+                className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${
+                  submitting || !formData.declaration_agreed || !!submitSuccess
+                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
+                    : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
+                }`}
+              >
+                {submitting ? (
+                  <>
+                    <RefreshCw className="w-5 h-5 animate-spin" /> Submitting Application...
+                  </>
+                ) : submitSuccess ? (
+                  <>
+                    <CheckCircle className="w-5 h-5 text-emerald-600" /> Application Submitted
+                  </>
+                ) : (
+                  <>
+                    <FileCheck className="w-5 h-5" /> Submit Admission Form
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </form>
