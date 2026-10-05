@@ -593,22 +593,22 @@ export default function AdmissionFormPage() {
   const initialFormState = {
     application_date: todayDateFormatted,
     application_place: 'Ahmedabad',
-    course_name: 'fashion designer',
-    course_duration: '6 Months (570 Hours)',
-    time_slot: '7:30 AM to 11:30 AM',
+    course_name: '',
+    course_duration: '',
+    time_slot: '',
     form_no: '',
     registration_no: '',
 
-    // Personal Details (Default Gender: Male)
+    // Personal Details (Nothing selected by default)
     full_name: '',
     date_of_birth: '', // Stored as DD/MM/YYYY
     calculated_age: '',
-    gender: 'Male',
+    gender: '',
     fathers_name: '',
     mothers_name: '',
     fathers_occupation: '',
-    marital_status: 'Unmarried',
-    category: 'GEN',
+    marital_status: '',
+    category: '',
     aadhaar_no: '',
 
     // Contact & Address
@@ -705,9 +705,10 @@ export default function AdmissionFormPage() {
     }
   }, [])
 
-  // Active course definition based on selected course_name
+  // Active course definition based on selected course_name (null if not yet selected)
   const activeCourse = useMemo(() => {
-    return COURSES.find((c) => c.id === formData.course_name) || COURSES[0]
+    if (!formData.course_name) return null
+    return COURSES.find((c) => c.id === formData.course_name) || null
   }, [formData.course_name])
 
   // Lookup PIN Code across India via Postal Registry API
@@ -956,7 +957,7 @@ export default function AdmissionFormPage() {
 
   // 2. Validate Age and Education when course, DOB, or education changes
   useEffect(() => {
-    const activeCourse = COURSES.find((c) => c.id === formData.course_name) || COURSES[0]
+    const course = COURSES.find((c) => c.id === formData.course_name)
 
     // Age validation
     if (formData.date_of_birth && formData.date_of_birth.length >= 10) {
@@ -964,16 +965,18 @@ export default function AdmissionFormPage() {
       setFormData((prev) => ({ ...prev, calculated_age: age !== null ? age : '' }))
 
       if (age !== null) {
-        if (age < activeCourse.minAge) {
+        if (course && age < course.minAge) {
           setAgeValidationMsg({
             valid: false,
-            text: `Age requirement not met! ${activeCourse.name} requires minimum ${activeCourse.minAge}+ years of age. (Current: ${age} years)`,
+            text: `Age requirement not met! ${course.name} requires minimum ${course.minAge}+ years of age. (Current: ${age} years)`,
           })
-        } else {
+        } else if (course) {
           setAgeValidationMsg({
             valid: true,
-            text: `Eligible: Age ${age} years meets the requirement (${activeCourse.minAge}+ years).`,
+            text: `Eligible: Age ${age} years meets the requirement (${course.minAge}+ years).`,
           })
+        } else {
+          setAgeValidationMsg({ valid: true, text: `Age: ${age} years` })
         }
       } else {
         setAgeValidationMsg({ valid: false, text: 'Please enter a valid date in DD/MM/YYYY format.' })
@@ -984,22 +987,26 @@ export default function AdmissionFormPage() {
 
     // Education validation
     if (formData.education_level_id !== undefined && formData.education_level_id !== null && formData.education_level_id !== '') {
-      const isEduAllowed =
-        activeCourse.allowedEduLevels.includes(formData.education_level_id) ||
-        (formData.education_level_id === 0 &&
-          formData.below_10th_standard === '10th Pass' &&
-          activeCourse.allowedEduLevels.includes(1))
+      if (course) {
+        const isEduAllowed =
+          course.allowedEduLevels.includes(formData.education_level_id) ||
+          (formData.education_level_id === 0 &&
+            formData.below_10th_standard === '10th Pass' &&
+            course.allowedEduLevels.includes(1))
 
-      if (!isEduAllowed) {
-        setEduValidationMsg({
-          valid: false,
-          text: `Selected education does not qualify for ${activeCourse.name}. ${activeCourse.eduRequirementText}.`,
-        })
+        if (!isEduAllowed) {
+          setEduValidationMsg({
+            valid: false,
+            text: `Selected education does not qualify for ${course.name}. ${course.eduRequirementText}.`,
+          })
+        } else {
+          setEduValidationMsg({
+            valid: true,
+            text: `Education qualification eligible for ${course.name}.`,
+          })
+        }
       } else {
-        setEduValidationMsg({
-          valid: true,
-          text: `Education qualification eligible for ${activeCourse.name}.`,
-        })
+        setEduValidationMsg({ valid: true, text: '' })
       }
     } else {
       setEduValidationMsg({ valid: true, text: '' })
@@ -1009,10 +1016,20 @@ export default function AdmissionFormPage() {
   // 3. Load from LocalStorage on mount
   useEffect(() => {
     try {
-      const savedDraft = localStorage.getItem('mkt_admission_form_draft_v1')
+      // Check v2 draft first, fallback to v1 migration
+      let savedDraft = localStorage.getItem('mkt_admission_form_draft_v2')
+      if (!savedDraft) {
+        savedDraft = localStorage.getItem('mkt_admission_form_draft_v1')
+      }
       if (savedDraft) {
         const parsed = JSON.parse(savedDraft)
-        if (!parsed.gender) parsed.gender = 'Male'
+        // Clean out any legacy auto-generated form_no or registration_no so it starts completely empty
+        if (typeof parsed.form_no === 'string' && /^(FD|BM|EPC)_001$/i.test(parsed.form_no)) {
+          parsed.form_no = ''
+        }
+        if (parsed.registration_no === 'MKT_001') {
+          parsed.registration_no = ''
+        }
         // Handle legacy single-string uploads to array transition
         if (parsed.marriage_certificate_url && (!parsed.marriage_certificates || !parsed.marriage_certificates.length)) {
           parsed.marriage_certificates = [{ name: 'Marriage Certificate', url: parsed.marriage_certificate_url, isImage: true }]
@@ -1067,7 +1084,7 @@ export default function AdmissionFormPage() {
           sanitized.passport_photo_url = ''
         }
 
-        localStorage.setItem('mkt_admission_form_draft_v1', JSON.stringify(sanitized))
+        localStorage.setItem('mkt_admission_form_draft_v2', JSON.stringify(sanitized))
         const time = new Date().toLocaleTimeString('en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -1125,7 +1142,21 @@ export default function AdmissionFormPage() {
 
   // Handle Course Change
   const handleCourseChange = (courseId) => {
-    const selected = COURSES.find((c) => c.id === courseId) || COURSES[0]
+    if (!courseId) {
+      setFormData((prev) => ({
+        ...prev,
+        course_name: '',
+        course_duration: '',
+        education_level_id: '',
+        education_level: '',
+        below_10th_standard: '',
+        education_history: [],
+      }))
+      return
+    }
+    const selected = COURSES.find((c) => c.id === courseId)
+    if (!selected) return
+
     setFormData((prev) => {
       let newEduLevelId = prev.education_level_id
       let newEduLevel = prev.education_level
@@ -1142,7 +1173,7 @@ export default function AdmissionFormPage() {
         ...prev,
         course_name: selected.id,
         course_duration: selected.duration,
-        form_no: prev.form_no || `${selected.prefix}_001`,
+        form_no: prev.form_no,
         education_level_id: newEduLevelId,
         education_level: newEduLevel,
         below_10th_standard: newEduLevelId === 0 ? prev.below_10th_standard : '',
@@ -1418,7 +1449,15 @@ export default function AdmissionFormPage() {
   // Validation before submit
   const validateForm = () => {
     const newErrors = {}
-    const activeCourse = COURSES.find((c) => c.id === formData.course_name) || COURSES[0]
+    const activeCourse = COURSES.find((c) => c.id === formData.course_name)
+
+    // Course & Scheduling Validation
+    if (!formData.course_name) {
+      newErrors.course_name = 'Please select a Course Name (કોર્સ પસંદ કરો)'
+    }
+    if (!formData.time_slot) {
+      newErrors.time_slot = 'Please select a Time Slot (સમય સ્લોટ પસંદ કરો)'
+    }
 
     if (!formData.form_no || !formData.form_no.trim()) newErrors.form_no = 'Form No. is required'
     if (!formData.registration_no || !formData.registration_no.trim()) newErrors.registration_no = 'Registration No. is required'
@@ -1429,12 +1468,18 @@ export default function AdmissionFormPage() {
 
     // Age validation
     const age = calculateAge(formData.date_of_birth)
-    if (age !== null && age < activeCourse.minAge) {
+    if (age !== null && activeCourse && age < activeCourse.minAge) {
       newErrors.date_of_birth = `${activeCourse.name} requires minimum ${activeCourse.minAge}+ years of age`
     }
 
     // Gender
-    if (!formData.gender) newErrors.gender = 'Gender selection is required'
+    if (!formData.gender) newErrors.gender = 'Please select Gender (જાતિ પસંદ કરો)'
+
+    // Marital Status
+    if (!formData.marital_status) newErrors.marital_status = 'Please select Marital Status (લગ્ન સ્થિતિ પસંદ કરો)'
+
+    // Category
+    if (!formData.category) newErrors.category = 'Please select Category (કેટેગરી પસંદ કરો)'
 
     // Aadhaar: 12 digits
     const cleanAadhaar = (formData.aadhaar_no || '').replace(/\D/g, '')
@@ -1464,7 +1509,7 @@ export default function AdmissionFormPage() {
     // Education Level vs Course
     if (formData.education_level_id === '' || formData.education_level_id === null || formData.education_level_id === undefined) {
       newErrors.education_level = 'Please select an Education Qualification'
-    } else {
+    } else if (activeCourse) {
       const isEduAllowed =
         activeCourse.allowedEduLevels.includes(formData.education_level_id) ||
         (formData.education_level_id === 0 &&
@@ -1517,6 +1562,7 @@ export default function AdmissionFormPage() {
       if (result.success) {
         setSubmitSuccess(result)
         // Clear local storage draft after successful submit
+        localStorage.removeItem('mkt_admission_form_draft_v2')
         localStorage.removeItem('mkt_admission_form_draft_v1')
         // Scroll to top immediately to display the success section
         window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1941,6 +1987,7 @@ export default function AdmissionFormPage() {
             type="button"
             onClick={() => {
               if (confirm('Are you sure you want to clear this draft and reset the form?')) {
+                localStorage.removeItem('mkt_admission_form_draft_v2')
                 localStorage.removeItem('mkt_admission_form_draft_v1')
                 setFormData(initialFormState)
                 setErrors({})
@@ -2081,6 +2128,8 @@ export default function AdmissionFormPage() {
                   alt="Gujarat Skill Development Mission Logo"
                   width={56}
                   height={56}
+                  priority
+                  loading="eager"
                   className="object-contain max-h-full max-w-full"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
@@ -2095,6 +2144,7 @@ export default function AdmissionFormPage() {
                   height={48}
                   className="object-contain max-h-full max-w-full"
                   priority
+                  loading="eager"
                 />
               </div>
             </div>
@@ -2111,6 +2161,8 @@ export default function AdmissionFormPage() {
                   alt="Gujarat Skill Development Mission Logo"
                   width={96}
                   height={96}
+                  priority
+                  loading="eager"
                   className="object-contain max-h-full max-w-full"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none'
@@ -2134,6 +2186,7 @@ export default function AdmissionFormPage() {
                   height={56}
                   className="object-contain max-h-full max-w-full"
                   priority
+                  loading="eager"
                 />
               </div>
 
@@ -2233,22 +2286,24 @@ export default function AdmissionFormPage() {
           >
             {/* ATOM: FIELD_FORM_NO */}
             <div id="atom-field-form-no" data-atom-id="FIELD_FORM_NO" className="flex items-center gap-2">
-              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Form No.:</span>
+              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Form No.: <span className="text-red-600">*</span></span>
               <input
                 type="text"
-                readOnly
+                placeholder="e.g. FD_001"
                 value={formData.form_no}
-                className="bg-amber-50 border border-amber-300 text-rose-800 font-bold px-3 py-1 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider shadow-inner"
+                onChange={(e) => setFormData({ ...formData, form_no: e.target.value })}
+                className={`bg-white border ${errors.form_no ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               />
             </div>
             {/* ATOM: FIELD_REGISTRATION_NO */}
             <div id="atom-field-registration-no" data-atom-id="FIELD_REGISTRATION_NO" className="flex items-center gap-2">
-              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Registration No.:</span>
+              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Registration No.: <span className="text-red-600">*</span></span>
               <input
                 type="text"
-                readOnly
+                placeholder="e.g. MKT_001"
                 value={formData.registration_no}
-                className="bg-indigo-50 border border-indigo-300 text-indigo-900 font-bold px-3 py-1 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider shadow-inner"
+                onChange={(e) => setFormData({ ...formData, registration_no: e.target.value })}
+                className={`bg-white border ${errors.registration_no ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider focus:ring-2 focus:ring-indigo-600 focus:outline-none shadow-xs`}
               />
             </div>
           </div>
@@ -2273,16 +2328,21 @@ export default function AdmissionFormPage() {
                 01) Course Name <span className="text-red-600">*</span>
               </label>
               <select
+                id="field-course-name"
                 value={formData.course_name}
                 onChange={(e) => handleCourseChange(e.target.value)}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                className={`w-full bg-white border ${errors.course_name ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
+                <option value="">-- Select Course Name (કોર્સ પસંદ કરો) --</option>
                 {COURSES.map((course) => (
                   <option key={course.id} value={course.id}>
                     {course.name}
                   </option>
                 ))}
               </select>
+              {errors.course_name && (
+                <p className="text-xs text-red-600 font-semibold mt-1">{errors.course_name}</p>
+              )}
               <p className="text-[11px] text-slate-500 mt-1">
                 Student can select only one course option.
               </p>
@@ -2294,10 +2354,12 @@ export default function AdmissionFormPage() {
                 02) Course Duration (Auto)
               </label>
               <div className="w-full bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-900 flex items-center justify-between shadow-xs">
-                <span>{formData.course_duration}</span>
-                <span className="text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
-                  Free of Cost
-                </span>
+                <span>{formData.course_duration || 'Auto-filled upon course selection'}</span>
+                {formData.course_duration && (
+                  <span className="text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
+                    Free of Cost
+                  </span>
+                )}
               </div>
               <p className="text-[11px] text-emerald-700 mt-1">
                 Duration automated based on selected course.
@@ -2310,16 +2372,21 @@ export default function AdmissionFormPage() {
                 03) Time Slot <span className="text-red-600">*</span>
               </label>
               <select
+                id="field-time-slot"
                 value={formData.time_slot}
                 onChange={(e) => setFormData({ ...formData, time_slot: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                className={`w-full bg-white border ${errors.time_slot ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
+                <option value="">-- Select Time Slot (સમય સ્લોટ પસંદ કરો) --</option>
                 {TIME_SLOTS.map((slot) => (
                   <option key={slot} value={slot}>
                     {slot}
                   </option>
                 ))}
               </select>
+              {errors.time_slot && (
+                <p className="text-xs text-red-600 font-semibold mt-1">{errors.time_slot}</p>
+              )}
               <p className="text-[11px] text-slate-500 mt-1">
                 Select your preferred daily batch timing.
               </p>
@@ -2409,20 +2476,25 @@ export default function AdmissionFormPage() {
               )}
             </div>
 
-            {/* ATOM: FIELD_GENDER (Default: Male) */}
+            {/* ATOM: FIELD_GENDER */}
             <div id="atom-field-gender" data-atom-id="FIELD_GENDER">
               <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
                 Gender <span className="text-red-600">*</span>
               </label>
               <select
+                id="field-gender"
                 value={formData.gender}
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                className={`w-full bg-white border ${errors.gender ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Transgender">Transgender</option>
+                <option value="">-- Select Gender (જાતિ પસંદ કરો) --</option>
+                <option value="Male">Male (પુરુષ)</option>
+                <option value="Female">Female (સ્ત્રી)</option>
+                <option value="Transgender">Transgender (અન્ય)</option>
               </select>
+              {errors.gender && (
+                <p className="text-xs text-red-600 font-semibold mt-1">{errors.gender}</p>
+              )}
             </div>
 
             {/* ATOM: FIELD_FATHERS_NAME */}
@@ -2470,13 +2542,18 @@ export default function AdmissionFormPage() {
                 Marital Status <span className="text-red-600">*</span>
               </label>
               <select
+                id="field-marital-status"
                 value={formData.marital_status}
                 onChange={(e) => setFormData({ ...formData, marital_status: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                className={`w-full bg-white border ${errors.marital_status ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
-                <option value="Unmarried">Unmarried</option>
-                <option value="Married">Married</option>
+                <option value="">-- Select Marital Status (લગ્ન સ્થિતિ પસંદ કરો) --</option>
+                <option value="Unmarried">Unmarried (અપરિણીત)</option>
+                <option value="Married">Married (પરિણીત)</option>
               </select>
+              {errors.marital_status && (
+                <p className="text-xs text-red-600 font-semibold mt-1">{errors.marital_status}</p>
+              )}
             </div>
 
             {/* ATOM: FIELD_MARRIAGE_CERTIFICATE_UPLOAD (CONDITIONAL - MULTIPLE FILES SUPPORT) */}
@@ -2498,14 +2575,19 @@ export default function AdmissionFormPage() {
                 Cast (Category) <span className="text-red-600">*</span>
               </label>
               <select
+                id="field-cast-category"
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                className={`w-full bg-white border ${errors.category ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
+                <option value="">-- Select Category (કેટેગરી પસંદ કરો) --</option>
                 <option value="GEN">GEN (General)</option>
                 <option value="OBC">OBC</option>
                 <option value="SC / ST">SC / ST</option>
               </select>
+              {errors.category && (
+                <p className="text-xs text-red-600 font-semibold mt-1">{errors.category}</p>
+              )}
             </div>
 
             {/* ATOM: FIELD_AADHAAR_NO (12 Digits) */}
@@ -2955,12 +3037,12 @@ export default function AdmissionFormPage() {
                   ),
                 }))
               }}
-              className={`w-full bg-white border ${errors.education_level ? 'border-red-500' : 'border-slate-300'
+              className={`w-full bg-white border ${errors.education_level ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'
                 } rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
             >
-              <option value="">-- Select Education Qualification --</option>
+              <option value="">-- Select Education Qualification (શૈક્ષણિક લાયકાત પસંદ કરો) --</option>
               {EDUCATION_LEVELS.filter((level) =>
-                activeCourse.allowedEduLevels.includes(level.id)
+                activeCourse ? activeCourse.allowedEduLevels.includes(level.id) : true
               ).map((level) => (
                 <option key={level.id} value={level.id}>
                   {level.label}
@@ -3206,7 +3288,7 @@ export default function AdmissionFormPage() {
                             placeholder="Select or type exam (e.g. 10th pass)"
                             rowIndex={index}
                             allRows={formData.education_history}
-                            allowedEduLevels={activeCourse.allowedEduLevels}
+                            allowedEduLevels={activeCourse ? activeCourse.allowedEduLevels : [0, 1, 2, 3, 4]}
                           />
                         </td>
                         <td className="p-1 border-r border-slate-900">
