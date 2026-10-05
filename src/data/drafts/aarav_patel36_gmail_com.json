@@ -1,0 +1,70 @@
+{
+  "course_name": "purchase coordinator electronics",
+  "course_duration": "6 Months (510 Hours)",
+  "time_slot": "7:30 AM to 11:30 AM",
+  "form_no": "EPC_89",
+  "registration_no": "MKT_818",
+  "full_name": "PATEL AARAV SURESHBHAI",
+  "date_of_birth": "15/01/2007",
+  "calculated_age": 19,
+  "gender": "Male",
+  "fathers_name": "SURESHBHAI PATEL",
+  "mothers_name": "REKHABEN PATEL",
+  "fathers_occupation": "Accountant",
+  "marital_status": "Unmarried",
+  "category": "SC",
+  "aadhaar_no": "693230348442",
+  "contact_number": "9865429713",
+  "father_number": "9711330381",
+  "email": "aarav.patel36@gmail.com",
+  "flat_society": "B-12, Radhe Shyam Residency",
+  "street_road": "Near Railway Crossing",
+  "landmark": "Near Swaminarayan Temple",
+  "area_village": "Chandlodiya",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "pincode": "380061",
+  "same_as_postal": true,
+  "permanent_address": "B-12, Radhe Shyam Residency, Chandlodiya, Ahmedabad",
+  "permanent_pincode": "380061",
+  "education_level": "Level 1) 10th pass",
+  "education_level_id": 1,
+  "below_10th_standard": "",
+  "year_of_passing": "2025",
+  "education_history": [
+    {
+      "exam": "10th pass",
+      "board": "GSEB",
+      "year": "2023"
+    }
+  ],
+  "passport_photo_url": "[attached]",
+  "aadhaar_photos": [
+    {
+      "name": "Aadhaar_Card_Front_Back.svg",
+      "size": 184500
+    }
+  ],
+  "marriage_certificates": [],
+  "school_leaving_certificates": [
+    {
+      "name": "School_Leaving_Certificate.svg",
+      "size": 184500
+    }
+  ],
+  "marksheets_10th": [
+    {
+      "name": "10th_SSC_Marksheet.svg",
+      "size": 184500
+    }
+  ],
+  "marksheets_12th": [],
+  "diploma_certificates": [],
+  "ug_degree_certificates": [],
+  "declaration_agreed": true,
+  "application_date": "05/10/2026",
+  "application_place": "Ahmedabad",
+  "closedAt": "2026-10-05T11:53:18.128Z",
+  "savedAt": "2026-10-05T11:53:22.278Z",
+  "type": "tab_close_draft"
+}

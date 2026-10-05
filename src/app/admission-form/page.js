@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import PrintableAdmissionForm from '@/components/forms/PrintableAdmissionForm'
 import {
   FileText,
   Upload,
@@ -2008,78 +2009,142 @@ export default function AdmissionFormPage() {
       {/* ============================================================ */}
       {/* ATOM: SUCCESS_MODAL_SCREEN */}
       {/* ============================================================ */}
+      {/* ATOM: SUCCESS_MODAL_SCREEN (Shown after submission) */}
+      {/* ============================================================ */}
       {submitSuccess && (
         <div
           id="atom-submission-success-modal"
           data-atom-id="SUCCESS_MODAL_SCREEN"
-          className="mx-auto mb-8 bg-emerald-50 border-2 border-emerald-500 rounded-2xl p-6 sm:p-8 shadow-lg text-slate-800 print:hidden"
+          className="max-w-4xl mx-auto my-6 bg-white border border-emerald-300 rounded-2xl shadow-xl overflow-hidden print:hidden"
         >
-          <div className="flex items-start gap-4">
-            <CheckCircle className="w-10 h-10 text-emerald-600 shrink-0 mt-1" />
-            <div className="space-y-3 w-full">
-              <h2 className="text-2xl font-bold text-emerald-900">
-                Admission Application Submitted Successfully!
-              </h2>
-              <p className="text-sm text-emerald-800">
-                Your admission application has been registered and securely saved in the system.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-emerald-200 text-sm">
-                <div>
-                  <span className="text-slate-500 block text-xs">Form Number:</span>
-                  <span className="font-bold text-base text-rose-700">
-                    {submitSuccess.form_no}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block text-xs">Registration Number:</span>
-                  <span className="font-bold text-base text-indigo-700">
-                    {submitSuccess.registration_no}
-                  </span>
-                </div>
-                <div>
-                  <span className="text-slate-500 block text-xs">Selected Course:</span>
-                  <span className="font-semibold text-slate-900">
-                    {submitSuccess.data?.course_name}
-                  </span>
-                </div>
+          {/* Header Banner */}
+          <div className="bg-gradient-to-r from-emerald-600 via-teal-700 to-emerald-800 p-6 sm:p-8 text-white">
+            <div className="flex items-start sm:items-center gap-4">
+              <div className="w-14 h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center shrink-0 border border-white/30">
+                <CheckCircle className="w-8 h-8 text-white" />
               </div>
+              <div>
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-white/20 text-emerald-100 text-xs font-bold tracking-wider uppercase mb-1">
+                  Registration Confirmed
+                </span>
+                <h2 className="text-xl sm:text-2xl font-black text-white">
+                  Admission Application Submitted Successfully!
+                </h2>
+                <p className="text-xs sm:text-sm text-emerald-100 mt-0.5">
+                  Your admission application has been registered and securely saved in the system.
+                </p>
+              </div>
+            </div>
+          </div>
 
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+          {/* Details Body */}
+          <div className="p-6 sm:p-8 space-y-6">
+            {/* Numbers Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Form Number</span>
+                <span className="font-mono font-black text-xl text-rose-700 mt-1 block">
+                  {submitSuccess.form_no}
+                </span>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Registration Number</span>
+                <span className="font-mono font-black text-xl text-indigo-700 mt-1 block">
+                  {submitSuccess.registration_no}
+                </span>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">Selected Course</span>
+                <span className="font-bold text-base text-slate-900 mt-1 block">
+                  {submitSuccess.data?.course_name || formData.course_name}
+                </span>
+              </div>
+            </div>
+
+            {/* Applicant Summary */}
+            <div className="bg-slate-50/70 border border-slate-200 rounded-xl p-4 sm:p-5 text-xs sm:text-sm text-slate-700 space-y-2">
+              <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+                <span className="text-slate-500">Applicant Full Name:</span>
+                <span className="font-bold text-slate-900 uppercase">
+                  {submitSuccess.data?.full_name || formData.full_name || '-'}
+                </span>
+              </div>
+              <div className="flex flex-wrap justify-between gap-2 border-b border-slate-200 pb-2">
+                <span className="text-slate-500">Contact Number:</span>
+                <span className="font-semibold text-slate-900">
+                  {submitSuccess.data?.mobile || formData.mobile || '-'}
+                </span>
+              </div>
+              <div className="flex flex-wrap justify-between gap-2">
+                <span className="text-slate-500">Batch / Preferred Slot:</span>
+                <span className="font-semibold text-slate-900">
+                  {submitSuccess.data?.preferred_time_slot || formData.preferred_time_slot || '-'}
+                </span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={handlePrint}
-                  className="px-6 py-2.5 bg-rose-700 hover:bg-rose-800 text-white font-semibold rounded-xl flex items-center gap-2 shadow-sm transition-colors cursor-pointer"
+                  className="px-6 py-3 bg-rose-700 hover:bg-rose-800 text-white font-bold rounded-xl flex items-center gap-2 shadow-sm transition-all cursor-pointer text-sm"
                 >
                   <Printer className="w-4 h-4" /> Print / Download Form (PDF)
                 </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitSuccess(null)
-                    setFormData(initialFormState)
-                    setErrors({})
-                    window.scrollTo({ top: 0, behavior: 'smooth' })
-                  }}
-                  className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-xl text-sm font-medium transition-colors cursor-pointer"
+                <Link
+                  href="/enrolled-students"
+                  className="px-5 py-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold rounded-xl flex items-center gap-2 border border-indigo-200 transition-all text-sm"
                 >
-                  Fill Another Form
-                </button>
+                  <Users className="w-4 h-4" /> View Enrolled Students
+                </Link>
               </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setSubmitSuccess(null)
+                  setFormData(initialFormState)
+                  setErrors({})
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl text-sm transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <Plus className="w-4 h-4" /> Fill Another Form
+              </button>
             </div>
           </div>
         </div>
       )}
 
       {/* ============================================================ */}
-      {/* ATOM: MAIN_FORM_CONTAINER */}
+      {/* PRINT-ONLY OFFICIAL ADMISSION FORM (VISIBLE IN PRINT AFTER SUBMIT) */}
       {/* ============================================================ */}
-      <form
-        id="atom-admission-main-form"
-        data-atom-id="MAIN_FORM_CONTAINER"
-        onSubmit={handleSubmit}
-        className="mx-auto bg-white border-2 border-slate-900 shadow-xl rounded-2xl overflow-hidden print:border print:border-slate-800 print:shadow-none print:m-0 print:p-0 print:rounded-none"
-      >
+      {submitSuccess && (
+        <div className="hidden print:block print:w-full print:m-0 print:p-0">
+          <PrintableAdmissionForm
+            student={
+              submitSuccess.data || {
+                ...formData,
+                form_no: submitSuccess.form_no,
+                registration_no: submitSuccess.registration_no,
+              }
+            }
+          />
+        </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* ATOM: MAIN_FORM_CONTAINER (Visible only when NOT submitted) */}
+      {/* ============================================================ */}
+      {!submitSuccess && (
+        <form
+          id="atom-admission-main-form"
+          data-atom-id="MAIN_FORM_CONTAINER"
+          onSubmit={handleSubmit}
+          className="mx-auto bg-white border-2 border-slate-900 shadow-xl rounded-2xl overflow-hidden print:border print:border-slate-800 print:shadow-none print:m-0 print:p-0 print:rounded-none"
+        >
         {/* ============================================================ */}
         {/* ATOM: HEADER_SECTION (Top Date & Place, Logos, Passport Slot) */}
         {/* ============================================================ */}
@@ -3544,18 +3609,21 @@ export default function AdmissionFormPage() {
           </div>
         </div>
       </form>
+      )}
 
       {/* Admin Discreet Test Data Filler Button (Tiny icon-only after form so users cannot find it) */}
-      <div className="max-w-4xl mx-auto mt-6 mb-2 flex justify-center print:hidden">
-        <button
-          type="button"
-          onClick={fillRandomRealisticData}
-          title="Admin"
-          className="p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all opacity-30 hover:opacity-100 cursor-pointer"
-        >
-          <Sparkles className="w-3.5 h-3.5" />
-        </button>
-      </div>
+      {!submitSuccess && (
+        <div className="max-w-4xl mx-auto mt-6 mb-2 flex justify-center print:hidden">
+          <button
+            type="button"
+            onClick={fillRandomRealisticData}
+            title="Admin"
+            className="p-1.5 text-slate-300 hover:text-slate-500 rounded-full transition-all opacity-30 hover:opacity-100 cursor-pointer"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   )
 }
