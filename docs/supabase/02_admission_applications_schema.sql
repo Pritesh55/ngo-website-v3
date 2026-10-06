@@ -89,6 +89,21 @@ CREATE POLICY "Allow public read own application"
     TO public
     USING (true);
 
+-- 5. Policy: Allow public delete for admission applications
+CREATE POLICY "Allow public delete for admission applications"
+    ON public.admission_applications
+    FOR DELETE
+    TO public
+    USING (true);
+
+-- 6. Policy: Allow public update for admission applications
+CREATE POLICY "Allow public update for admission applications"
+    ON public.admission_applications
+    FOR UPDATE
+    TO public
+    USING (true)
+    WITH CHECK (true);
+
 -- 5. Auto updated_at trigger
 CREATE OR REPLACE FUNCTION update_updated_at_column()
 RETURNS TRIGGER AS $$

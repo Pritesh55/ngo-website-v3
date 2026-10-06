@@ -1,24 +1,26 @@
 import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createAdminClient } from '@/lib/supabase/server'
 import fs from 'fs'
 import path from 'path'
 
 export const dynamic = 'force-dynamic'
 
-// GET: Fetch all enrolled students (merged from Supabase & local backup)
+// GET: Fetch all enrolled students (Supabase primary, local fallback only if Supabase unavailable)
 export async function GET(request) {
   try {
     const studentsMap = new Map()
+    let supabaseConnected = false
 
     // 1. Fetch from Supabase admission_applications table if available
     try {
-      const supabase = await createClient()
+      const supabase = createAdminClient()
       const { data: supabaseRows, error } = await supabase
         .from('admission_applications')
         .select('*')
         .order('created_at', { ascending: false })
 
       if (!error && Array.isArray(supabaseRows)) {
+        supabaseConnected = true
         supabaseRows.forEach((row) => {
           const key = row.form_no || row.id
           if (key) {
@@ -28,33 +30,37 @@ export async function GET(request) {
             })
           }
         })
+      } else if (error) {
+        console.warn('Supabase fetch error in /api/admission/students:', error.message)
       }
     } catch (sbErr) {
-      console.warn('Supabase fetch notice in /api/admission/students:', sbErr.message)
+      console.warn('Supabase fetch exception in /api/admission/students:', sbErr.message)
     }
 
-    // 2. Fetch from local backup JSON file (src/data/admission_submissions.json)
-    try {
-      const backupFile = path.join(process.cwd(), 'src', 'data', 'admission_submissions.json')
-      if (fs.existsSync(backupFile)) {
-        const localData = JSON.parse(fs.readFileSync(backupFile, 'utf8'))
-        if (Array.isArray(localData)) {
-          localData.forEach((row, index) => {
-            const key = row.form_no || `local_${index}`
-            // Only add if not already present from Supabase (or merge)
-            if (!studentsMap.has(key)) {
-              studentsMap.set(key, {
-                ...row,
-                id: row.id || `local_${index}`,
-                source: 'local_backup',
-                created_at: row.created_at || row.savedLocallyAt || new Date().toISOString(),
-              })
-            }
-          })
+    // 2. Fetch from local backup JSON file ONLY IF Supabase is NOT connected/offline
+    // This prevents static build files on Vercel from resurrecting deleted records.
+    if (!supabaseConnected) {
+      try {
+        const backupFile = path.join(process.cwd(), 'src', 'data', 'admission_submissions.json')
+        if (fs.existsSync(backupFile)) {
+          const localData = JSON.parse(fs.readFileSync(backupFile, 'utf8'))
+          if (Array.isArray(localData)) {
+            localData.forEach((row, index) => {
+              const key = row.form_no || `local_${index}`
+              if (!studentsMap.has(key)) {
+                studentsMap.set(key, {
+                  ...row,
+                  id: row.id || `local_${index}`,
+                  source: 'local_backup',
+                  created_at: row.created_at || row.savedLocallyAt || new Date().toISOString(),
+                })
+              }
+            })
+          }
         }
+      } catch (fsErr) {
+        console.warn('Local backup read notice in /api/admission/students:', fsErr.message)
       }
-    } catch (fsErr) {
-      console.warn('Local backup read notice in /api/admission/students:', fsErr.message)
     }
 
     // Convert map to array and sort by submission date descending
@@ -92,10 +98,11 @@ export async function DELETE(request) {
 
     let deletedFromSupabase = false
     let deletedFromLocal = false
+    let supabaseError = null
 
     // 1. Delete from Supabase
     try {
-      const supabase = await createClient()
+      const supabase = createAdminClient()
       let query = supabase.from('admission_applications').delete()
       if (id && !String(id).startsWith('local_')) {
         query = query.eq('id', id)
@@ -103,17 +110,24 @@ export async function DELETE(request) {
         query = query.eq('form_no', form_no)
       }
 
-      const { error: sbDeleteError } = await query
-      if (!sbDeleteError) {
+      // Verify that Postgres actually deleted the row
+      const { data: deletedRows, error: sbDeleteError } = await query.select()
+      if (sbDeleteError) {
+        supabaseError = sbDeleteError.message
+        console.error('Supabase delete error:', sbDeleteError.message)
+      } else if (Array.isArray(deletedRows) && deletedRows.length > 0) {
         deletedFromSupabase = true
       } else {
-        console.warn('Supabase delete notice:', sbDeleteError.message)
+        supabaseError =
+          'Record was not found or could not be deleted from Supabase. If Row Level Security (RLS) is enabled, ensure a DELETE policy exists in Supabase.'
+        console.warn('Supabase delete notice:', supabaseError)
       }
     } catch (sbErr) {
-      console.warn('Supabase delete exception:', sbErr.message)
+      supabaseError = sbErr.message
+      console.error('Supabase delete exception:', sbErr.message)
     }
 
-    // 2. Delete from local JSON backup
+    // 2. Delete from local JSON backup (if writable / local dev)
     try {
       const backupFile = path.join(process.cwd(), 'src', 'data', 'admission_submissions.json')
       if (fs.existsSync(backupFile)) {
@@ -133,7 +147,19 @@ export async function DELETE(request) {
         }
       }
     } catch (fsErr) {
-      console.warn('Local backup delete notice:', fsErr.message)
+      console.warn('Local backup delete notice (read-only file system on Vercel is expected):', fsErr.message)
+    }
+
+    if (!deletedFromSupabase && !deletedFromLocal) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: supabaseError || 'Failed to delete student record from database',
+          deletedFromSupabase,
+          deletedFromLocal,
+        },
+        { status: 400 }
+      )
     }
 
     return NextResponse.json({
@@ -206,10 +232,11 @@ export async function PUT(request) {
 
     let updatedInSupabase = false
     let updatedInLocal = false
+    let supabaseUpdateError = null
 
     // 1. Update in Supabase
     try {
-      const supabase = await createClient()
+      const supabase = createAdminClient()
       let query = supabase.from('admission_applications').update(updatePayload)
       if (id && !String(id).startsWith('local_')) {
         query = query.eq('id', id)
@@ -218,10 +245,16 @@ export async function PUT(request) {
       }
 
       const { data, error: sbUpdateError } = await query.select()
-      if (!sbUpdateError && data && data.length > 0) {
+      if (sbUpdateError) {
+        supabaseUpdateError = sbUpdateError.message
+        console.error('Supabase update error:', sbUpdateError.message)
+      } else if (data && data.length > 0) {
         updatedInSupabase = true
+      } else {
+        supabaseUpdateError = 'No rows updated in Supabase. Check RLS policies.'
       }
     } catch (sbErr) {
+      supabaseUpdateError = sbErr.message
       console.warn('Supabase update notice:', sbErr.message)
     }
 
