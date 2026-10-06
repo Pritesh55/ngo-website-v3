@@ -723,13 +723,15 @@ export default function AdmissionFormPage() {
       setLoadingNumbers(true)
       try {
         const courseParam = encodeURIComponent(formData.course_name || '')
-        const res = await fetch(`/api/admission/next-numbers?course=${courseParam}`)
+        const res = await fetch(`/api/admission/next-numbers?course=${courseParam}&_t=${Date.now()}`, {
+          cache: 'no-store',
+        })
         const data = await res.json()
         if (!isCancelled && data.success) {
           setFormData((prev) => ({
             ...prev,
-            form_no: data.form_no,
-            registration_no: data.registration_no,
+            form_no: data.form_no || '',
+            registration_no: data.registration_no || prev.registration_no,
           }))
         }
       } catch (err) {
@@ -1256,6 +1258,7 @@ export default function AdmissionFormPage() {
         ...prev,
         course_name: '',
         course_duration: '',
+        form_no: '',
         education_level_id: '',
         education_level: '',
         below_10th_standard: '',
@@ -1282,7 +1285,7 @@ export default function AdmissionFormPage() {
         ...prev,
         course_name: selected.id,
         course_duration: selected.duration,
-        form_no: prev.form_no,
+        form_no: '', // Clear previous form_no immediately so new course prefix is assigned
         education_level_id: newEduLevelId,
         education_level: newEduLevel,
         below_10th_standard: newEduLevelId === 0 ? prev.below_10th_standard : '',
@@ -2489,7 +2492,13 @@ export default function AdmissionFormPage() {
                   <input
                     type="text"
                     readOnly
-                    placeholder={loadingNumbers ? 'Auto-assigning...' : 'e.g. FD20261006008'}
+                    placeholder={
+                      loadingNumbers
+                        ? 'Auto-assigning...'
+                        : !formData.course_name
+                        ? 'Select course below'
+                        : 'e.g. FD20261006008'
+                    }
                     value={formData.form_no}
                     className="bg-slate-100 border border-slate-300 text-slate-900 font-bold px-3 pr-14 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider cursor-default shadow-xs select-all focus:outline-none"
                   />
