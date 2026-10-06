@@ -271,7 +271,7 @@ export default function NewCoursesAnnouncementModal() {
               <div className="flex items-center gap-2 text-xs text-slate-600 max-md:text-center">
                 <Phone className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>
-                  Helpline: <strong className="text-slate-900 font-bold">9974025126 / 079-27488056</strong> (Ghatlodia, Ahmedabad)
+                  Helpline: <strong className="text-slate-900 font-bold">9974025126</strong> (Ghatlodia, Ahmedabad)
                 </span>
               </div>
 
