@@ -274,6 +274,7 @@ export default function EnrolledStudentsPage() {
     addDocList(student.marksheets_12th, '12th_Marksheet')
     addDocList(student.diploma_certificates, 'Diploma_Certificate')
     addDocList(student.ug_degree_certificates, 'UG_Degree_Certificate')
+    addDocList(student.pg_degree_certificates, 'PG_Degree_Certificate')
     addDocList(student.marriage_certificates, 'Marriage_Certificate')
 
     if (filesToDownload.length === 0) {
@@ -303,6 +304,7 @@ export default function EnrolledStudentsPage() {
     if (Array.isArray(student.marksheets_12th)) count += student.marksheets_12th.length
     if (Array.isArray(student.diploma_certificates)) count += student.diploma_certificates.length
     if (Array.isArray(student.ug_degree_certificates)) count += student.ug_degree_certificates.length
+    if (Array.isArray(student.pg_degree_certificates)) count += student.pg_degree_certificates.length
     if (Array.isArray(student.marriage_certificates)) count += student.marriage_certificates.length
     return count
   }
@@ -1573,6 +1575,7 @@ export default function EnrolledStudentsPage() {
                       { title: '12th HSC Marksheet (૧૨મું ધોરણ)', docs: selectedStudent.marksheets_12th, icon: FileText, badgeColor: 'bg-purple-50 text-purple-800' },
                       { title: 'Diploma Certificate', docs: selectedStudent.diploma_certificates, icon: FileText, badgeColor: 'bg-indigo-50 text-indigo-800' },
                       { title: 'UG Degree Certificate', docs: selectedStudent.ug_degree_certificates, icon: GraduationCap, badgeColor: 'bg-teal-50 text-teal-800' },
+                      { title: 'PG Degree Certificate', docs: selectedStudent.pg_degree_certificates, icon: GraduationCap, badgeColor: 'bg-purple-50 text-purple-800' },
                       { title: 'Marriage Certificate', docs: selectedStudent.marriage_certificates, icon: FileText, badgeColor: 'bg-rose-50 text-rose-800' },
                     ].map((group, gIdx) => {
                       const hasFiles = Array.isArray(group.docs) && group.docs.length > 0
@@ -2119,11 +2122,22 @@ export default function EnrolledStudentsPage() {
                       <label className="block font-bold text-slate-700 mb-1">Education Level *</label>
                       <input
                         type="text"
+                        list="edu-level-options"
                         value={editFormData.education_level}
                         onChange={(e) => setEditFormData((prev) => ({ ...prev, education_level: e.target.value }))}
                         className="w-full bg-white border border-slate-300 rounded-lg p-2 font-medium"
+                        placeholder="Select or enter qualification"
                         required
                       />
+                      <datalist id="edu-level-options">
+                        <option value="Below 10th pass" />
+                        <option value="10th pass" />
+                        <option value="12th pass" />
+                        <option value="Diploma after 10th" />
+                        <option value="Diploma after 12th" />
+                        <option value="UG" />
+                        <option value="PG" />
+                      </datalist>
                     </div>
 
                     <div>

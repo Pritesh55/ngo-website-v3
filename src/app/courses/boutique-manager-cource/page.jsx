@@ -12,7 +12,7 @@ const courseData = {
   duration: '6 Months',
   durationHours: '600 Hours / ૬૦૦ કલાક',
   fee: 'Free (રૂ. 0/-)',
-  qualification: 'Completed 3-Year UG Degree',
+  qualification: 'Completed UG Degree, PG or Diploma after 12th',
   ageLimit: 'Minimum 23+ Years required (ન્યૂનતમ ૨૩ વર્ષ જરૂરી)',
   stipend: 'Stipend provided by Government after Certification',
   placement: '100% Job Placement Assistance',

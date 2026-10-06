@@ -12,7 +12,7 @@ const courseData = {
   duration: '6 Months',
   durationHours: '570 Hours / ૫૭૦ કલાક',
   fee: 'Free (રૂ. 0/-)',
-  qualification: '12th Pass or 3-Year Diploma after 10th',
+  qualification: '12th Pass, Diploma, UG or PG',
   ageLimit: '20+ Years required (૨૦+ ઉંમર જરૂરી)',
   stipend: 'Stipend provided by Government after Certification',
   placement: '100% Job Placement Assistance',

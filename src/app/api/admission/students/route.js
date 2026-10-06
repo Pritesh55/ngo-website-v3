@@ -227,6 +227,7 @@ export async function PUT(request) {
       marksheets_12th: student.marksheets_12th || [],
       diploma_certificates: student.diploma_certificates || [],
       ug_degree_certificates: student.ug_degree_certificates || [],
+      pg_degree_certificates: student.pg_degree_certificates || [],
       updated_at: new Date().toISOString(),
     }
 

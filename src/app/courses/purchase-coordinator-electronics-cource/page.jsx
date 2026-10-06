@@ -12,7 +12,7 @@ const courseData = {
   duration: '6 Months',
   durationHours: '510 Hours / ૫૧૦ કલાક',
   fee: 'Free (રૂ. 0/-)',
-  qualification: '10th Pass (SSC / ધોરણ ૧૦ પાસ)',
+  qualification: '10th Pass (SSC) or above (12th / Diploma / UG / PG)',
   ageLimit: 'Minimum 16+ Years required (ન્યૂનતમ ૧૬ વર્ષ જરૂરી)',
   stipend: 'Stipend provided by Government after Certification',
   placement: '100% Job Placement Assistance',

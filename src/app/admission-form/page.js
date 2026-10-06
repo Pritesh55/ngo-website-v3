@@ -40,9 +40,9 @@ const COURSES = [
     prefix: 'FD',
     duration: '6 Months (570 Hours)',
     minAge: 20,
-    minEduLevel: 2, // Min 12th pass or Diploma (level 2 or 3)
-    allowedEduLevels: [2, 3, 4],
-    eduRequirementText: 'Minimum 12th Pass or 3-Year Diploma after 10th required',
+    minEduLevel: 2, // Min 12th pass, Diploma, UG, PG
+    allowedEduLevels: [2, 3, 4, 5, 6],
+    eduRequirementText: 'Minimum 12th Pass, Diploma, UG or PG required',
   },
   {
     id: 'boutique manager',
@@ -50,9 +50,9 @@ const COURSES = [
     prefix: 'BM',
     duration: '6 Months (600 Hours)',
     minAge: 23,
-    minEduLevel: 4, // UnderGraduate Degree (UG)
-    allowedEduLevels: [4],
-    eduRequirementText: 'Minimum UnderGraduate Degree (UG - 3 or 4 years) required',
+    minEduLevel: 4, // Diploma after 12th, UG, PG
+    allowedEduLevels: [4, 5, 6],
+    eduRequirementText: 'Minimum Diploma after 12th, UnderGraduate (UG) or PG Degree required',
   },
   {
     id: 'purchase coordinator electronics',
@@ -61,7 +61,7 @@ const COURSES = [
     duration: '6 Months (510 Hours)',
     minAge: 16,
     minEduLevel: 1, // Minimum 10th pass
-    allowedEduLevels: [1, 2, 3, 4],
+    allowedEduLevels: [1, 2, 3, 4, 5, 6],
     eduRequirementText: 'Minimum 10th Pass required',
   },
 ]
@@ -83,7 +83,9 @@ const EDUCATION_LEVELS = [
   { id: 1, label: '10th pass' },
   { id: 2, label: '12th pass' },
   { id: 3, label: 'Diploma after 10th' },
-  { id: 4, label: 'UG' },
+  { id: 4, label: 'Diploma after 12th' },
+  { id: 5, label: 'UG' },
+  { id: 6, label: 'PG' },
 ]
 
 // ============================================================
@@ -109,7 +111,9 @@ const TABLE_EXAM_OPTIONS = [
   '10th pass',
   '12th pass',
   'Diploma after 10th',
+  'Diploma after 12th',
   'UG',
+  'PG',
   'Below 10th pass',
 ]
 
@@ -164,7 +168,25 @@ const getInitialEducationHistory = (eduLevelId, below10thStd = '') => {
           year: '',
         },
       ]
-    case 4: // UG
+    case 4: // Diploma after 12th
+      return [
+        {
+          exam: '10th pass',
+          board: 'GSEB',
+          year: '',
+        },
+        {
+          exam: '12th pass',
+          board: 'GSHSEB',
+          year: '',
+        },
+        {
+          exam: 'Diploma after 12th',
+          board: 'GTU',
+          year: '',
+        },
+      ]
+    case 5: // UG
       return [
         {
           exam: '10th pass',
@@ -178,7 +200,30 @@ const getInitialEducationHistory = (eduLevelId, below10thStd = '') => {
         },
         {
           exam: 'UG',
-          board: '',
+          board: 'Gujarat University',
+          year: '',
+        },
+      ]
+    case 6: // PG
+      return [
+        {
+          exam: '10th pass',
+          board: 'GSEB',
+          year: '',
+        },
+        {
+          exam: '12th pass',
+          board: 'GSHSEB',
+          year: '',
+        },
+        {
+          exam: 'UG',
+          board: 'Gujarat University',
+          year: '',
+        },
+        {
+          exam: 'PG',
+          board: 'Gujarat University',
           year: '',
         },
       ]
@@ -643,6 +688,7 @@ export default function AdmissionFormPage() {
     marksheets_12th: [],
     diploma_certificates: [],
     ug_degree_certificates: [],
+    pg_degree_certificates: [],
 
     // Declaration
     declaration_agreed: false,
@@ -657,6 +703,7 @@ export default function AdmissionFormPage() {
   const [submitting, setSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(null)
   const [errors, setErrors] = useState({})
+  const [loadingNumbers, setLoadingNumbers] = useState(false)
   const [pincodeLoading, setPincodeLoading] = useState(false)
   const [pincodeStatusMsg, setPincodeStatusMsg] = useState({ text: '', isError: false })
   const [pincodeVillages, setPincodeVillages] = useState([])
@@ -668,6 +715,35 @@ export default function AdmissionFormPage() {
   useEffect(() => {
     formDataRef.current = formData
   }, [formData])
+
+  // Auto-fetch next sequential Form No. and Registration No. based on course
+  useEffect(() => {
+    let isCancelled = false
+    const fetchNextNumbers = async () => {
+      setLoadingNumbers(true)
+      try {
+        const courseParam = encodeURIComponent(formData.course_name || '')
+        const res = await fetch(`/api/admission/next-numbers?course=${courseParam}`)
+        const data = await res.json()
+        if (!isCancelled && data.success) {
+          setFormData((prev) => ({
+            ...prev,
+            form_no: data.form_no,
+            registration_no: data.registration_no,
+          }))
+        }
+      } catch (err) {
+        console.warn('Could not auto-fetch numbers:', err)
+      } finally {
+        if (!isCancelled) setLoadingNumbers(false)
+      }
+    }
+
+    fetchNextNumbers()
+    return () => {
+      isCancelled = true
+    }
+  }, [formData.course_name])
 
   // Non-blocking background loader for full all-India cities & villages datasets (320KB+)
   useEffect(() => {
@@ -1024,13 +1100,9 @@ export default function AdmissionFormPage() {
       }
       if (savedDraft) {
         const parsed = JSON.parse(savedDraft)
-        // Clean out any legacy auto-generated form_no or registration_no so it starts completely empty
-        if (typeof parsed.form_no === 'string' && /^(FD|BM|EPC)_001$/i.test(parsed.form_no)) {
-          parsed.form_no = ''
-        }
-        if (parsed.registration_no === 'MKT_001') {
-          parsed.registration_no = ''
-        }
+        // Auto numbers are always dynamically managed to guarantee fresh sequence
+        parsed.form_no = ''
+        parsed.registration_no = ''
         // Handle legacy single-string uploads to array transition
         if (parsed.marriage_certificate_url && (!parsed.marriage_certificates || !parsed.marriage_certificates.length)) {
           parsed.marriage_certificates = [{ name: 'Marriage Certificate', url: parsed.marriage_certificate_url, isImage: true }]
@@ -1049,6 +1121,9 @@ export default function AdmissionFormPage() {
         }
         if (parsed.ug_degree_certificate_url && (!parsed.ug_degree_certificates || !parsed.ug_degree_certificates.length)) {
           parsed.ug_degree_certificates = [{ name: 'UG Degree Certificate', url: parsed.ug_degree_certificate_url, isImage: true }]
+        }
+        if (parsed.pg_degree_certificate_url && (!parsed.pg_degree_certificates || !parsed.pg_degree_certificates.length)) {
+          parsed.pg_degree_certificates = [{ name: 'PG Degree Certificate', url: parsed.pg_degree_certificate_url, isImage: true }]
         }
         setFormData((prev) => ({ ...prev, ...parsed }))
         setLastSavedTime('Restored from previous session')
@@ -1081,6 +1156,7 @@ export default function AdmissionFormPage() {
         sanitized.marksheets_12th = cleanFiles(sanitized.marksheets_12th)
         sanitized.diploma_certificates = cleanFiles(sanitized.diploma_certificates)
         sanitized.ug_degree_certificates = cleanFiles(sanitized.ug_degree_certificates)
+        sanitized.pg_degree_certificates = cleanFiles(sanitized.pg_degree_certificates)
         if (sanitized.passport_photo_url && sanitized.passport_photo_url.length > 500000) {
           sanitized.passport_photo_url = ''
         }
@@ -1114,6 +1190,7 @@ export default function AdmissionFormPage() {
           marksheets_12th: (currentData.marksheets_12th || []).map((f) => ({ name: f.name, size: f.size })),
           diploma_certificates: (currentData.diploma_certificates || []).map((f) => ({ name: f.name, size: f.size })),
           ug_degree_certificates: (currentData.ug_degree_certificates || []).map((f) => ({ name: f.name, size: f.size })),
+          pg_degree_certificates: (currentData.pg_degree_certificates || []).map((f) => ({ name: f.name, size: f.size })),
           closedAt: new Date().toISOString(),
         }
         const payload = JSON.stringify(payloadData)
@@ -1460,8 +1537,6 @@ export default function AdmissionFormPage() {
       newErrors.time_slot = 'Please select a Time Slot (સમય સ્લોટ પસંદ કરો)'
     }
 
-    if (!formData.form_no || !formData.form_no.trim()) newErrors.form_no = 'Form No. is required'
-    if (!formData.registration_no || !formData.registration_no.trim()) newErrors.registration_no = 'Registration No. is required'
     if (!formData.full_name.trim()) newErrors.full_name = 'Full name is required (Block Letters)'
     if (!formData.date_of_birth || formData.date_of_birth.length < 10) {
       newErrors.date_of_birth = 'Date of birth is required in DD/MM/YYYY format'
@@ -1475,9 +1550,6 @@ export default function AdmissionFormPage() {
 
     // Gender
     if (!formData.gender) newErrors.gender = 'Please select Gender (જાતિ પસંદ કરો)'
-
-    // Marital Status
-    if (!formData.marital_status) newErrors.marital_status = 'Please select Marital Status (લગ્ન સ્થિતિ પસંદ કરો)'
 
     // Category
     if (!formData.category) newErrors.category = 'Please select Category (કેટેગરી પસંદ કરો)'
@@ -1562,6 +1634,12 @@ export default function AdmissionFormPage() {
 
       if (result.success) {
         setSubmitSuccess(result)
+        // Ensure state contains official server-confirmed unique numbers
+        setFormData((prev) => ({
+          ...prev,
+          form_no: result.form_no || prev.form_no,
+          registration_no: result.registration_no || prev.registration_no,
+        }))
         // Clear local storage draft after successful submit
         localStorage.removeItem('mkt_admission_form_draft_v2')
         localStorage.removeItem('mkt_admission_form_draft_v1')
@@ -1846,14 +1924,20 @@ export default function AdmissionFormPage() {
     let eduLevelId = 2
     let eduLevelLabel = '12th pass'
     if (selectedCourse.id === 'boutique manager') {
-      eduLevelId = 4
-      eduLevelLabel = 'UG'
+      const bmLevels = [4, 5, 6] // Diploma after 12th, UG, PG
+      eduLevelId = bmLevels[Math.floor(Math.random() * bmLevels.length)]
+      const matchLevel = EDUCATION_LEVELS.find((l) => l.id === eduLevelId)
+      eduLevelLabel = matchLevel ? matchLevel.label : 'UG'
     } else if (selectedCourse.id === 'fashion designer') {
-      eduLevelId = Math.random() > 0.5 ? 2 : 3
-      eduLevelLabel = eduLevelId === 2 ? '12th pass' : 'Diploma after 10th'
+      const fdLevels = [2, 3, 4, 5, 6]
+      eduLevelId = fdLevels[Math.floor(Math.random() * fdLevels.length)]
+      const matchLevel = EDUCATION_LEVELS.find((l) => l.id === eduLevelId)
+      eduLevelLabel = matchLevel ? matchLevel.label : '12th pass'
     } else {
-      eduLevelId = Math.random() > 0.5 ? 1 : 2
-      eduLevelLabel = eduLevelId === 1 ? '10th pass' : '12th pass'
+      const epcLevels = [1, 2, 3, 4, 5, 6]
+      eduLevelId = epcLevels[Math.floor(Math.random() * epcLevels.length)]
+      const matchLevel = EDUCATION_LEVELS.find((l) => l.id === eduLevelId)
+      eduLevelLabel = matchLevel ? matchLevel.label : '10th pass'
     }
 
     // 6. Education History
@@ -1891,7 +1975,7 @@ export default function AdmissionFormPage() {
 
     // Realistic SVG Documents
     const aadhaarDocData = generateRealisticAadhaarDoc(fullName, randAadhaar, dobString, isMale)
-    const marksheetDocData = generateRealisticMarksheetDoc(fullName, String(birthYear + (eduLevelId === 4 ? 21 : 18)), eduLevelLabel)
+    const marksheetDocData = generateRealisticMarksheetDoc(fullName, String(birthYear + (eduLevelId === 6 ? 23 : eduLevelId === 5 ? 21 : 18)), eduLevelLabel)
     const schoolLCDocData = generateRealisticSchoolLCDoc(fullName, dobString, chosenArea.village)
 
     const createDocItem = (name, dataUrl) => [
@@ -1907,8 +1991,8 @@ export default function AdmissionFormPage() {
       course_name: selectedCourse.id,
       course_duration: selectedCourse.duration,
       time_slot: randomTimeSlot,
-      form_no: `${selectedCourse.prefix}_${Math.floor(100 + Math.random() * 900)}`,
-      registration_no: `MKT_${Math.floor(100 + Math.random() * 900)}`,
+      form_no: formData.form_no,
+      registration_no: formData.registration_no,
       full_name: fullName,
       date_of_birth: dobString,
       calculated_age: applicantAge,
@@ -1935,16 +2019,17 @@ export default function AdmissionFormPage() {
       education_level: `Level ${eduLevelId}) ${eduLevelLabel}`,
       education_level_id: eduLevelId,
       below_10th_standard: '',
-      year_of_passing: String(birthYear + (eduLevelId === 4 ? 21 : 18)),
+      year_of_passing: String(birthYear + (eduLevelId === 6 ? 23 : eduLevelId === 5 ? 21 : 18)),
       education_history: eduHistory,
       passport_photo_url: realisticPhoto,
       aadhaar_photos: createDocItem('Aadhaar_Card_Front_Back.svg', aadhaarDocData),
       marriage_certificates: [],
       school_leaving_certificates: createDocItem('School_Leaving_Certificate.svg', schoolLCDocData),
       marksheets_10th: createDocItem('10th_SSC_Marksheet.svg', marksheetDocData),
-      marksheets_12th: eduLevelId >= 2 ? createDocItem('12th_HSC_Marksheet.svg', marksheetDocData) : [],
-      diploma_certificates: eduLevelId === 3 ? createDocItem('Diploma_Certificate.svg', marksheetDocData) : [],
-      ug_degree_certificates: eduLevelId === 4 ? createDocItem('UG_Degree_Certificate.svg', marksheetDocData) : [],
+      marksheets_12th: [2, 4, 5, 6].includes(eduLevelId) ? createDocItem('12th_HSC_Marksheet.svg', marksheetDocData) : [],
+      diploma_certificates: [3, 4].includes(eduLevelId) ? createDocItem('Diploma_Certificate.svg', marksheetDocData) : [],
+      ug_degree_certificates: [5, 6].includes(eduLevelId) ? createDocItem('UG_Degree_Certificate.svg', marksheetDocData) : [],
+      pg_degree_certificates: eduLevelId === 6 ? createDocItem('PG_Degree_Certificate.svg', marksheetDocData) : [],
       declaration_agreed: true,
       application_date: new Date().toLocaleDateString('en-GB'),
       application_place: 'Ahmedabad',
@@ -2160,1470 +2245,1492 @@ export default function AdmissionFormPage() {
           onSubmit={handleSubmit}
           className="mx-auto bg-white border-2 border-slate-900 shadow-xl rounded-2xl overflow-hidden print:border print:border-slate-800 print:shadow-none print:m-0 print:p-0 print:rounded-none"
         >
-        {/* ============================================================ */}
-        {/* ATOM: HEADER_SECTION (Top Date & Place, Logos, Passport Slot) */}
-        {/* ============================================================ */}
-        <div
-          id="atom-form-header-section"
-          data-atom-id="HEADER_SECTION"
-          className="p-4 sm:p-6 md:p-8 border-b-2 border-slate-900 bg-white print:p-3 print:border-b-2"
-        >
           {/* ============================================================ */}
-          {/* ATOM: HEADER_LIVE_METADATA_DATE_PLACE */}
+          {/* ATOM: HEADER_SECTION (Top Date & Place, Logos, Passport Slot) */}
           {/* ============================================================ */}
           <div
-            id="atom-header-live-metadata"
-            data-atom-id="HEADER_LIVE_METADATA_DATE_PLACE"
-            className="flex justify-between items-center text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1.5 print:mb-2.5"
+            id="atom-form-header-section"
+            data-atom-id="HEADER_SECTION"
+            className="p-4 sm:p-6 md:p-8 border-b-2 border-slate-900 bg-white print:p-3 print:border-b-2"
           >
-            <div className="flex items-center gap-1.5">
-              <Calendar className="w-3.5 h-3.5 text-rose-700 print:text-black" />
-              <span>Date:</span>
-              <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
-                {formData.application_date}
-              </span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-rose-700 print:text-black" />
-              <span>Place:</span>
-              <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
-                {formData.application_place}
-              </span>
-            </div>
-          </div>
-
-          {/* ============================================================ */}
-          {/* ATOM: LOGOS_AND_PASSPORT_ROW */}
-          {/* ============================================================ */}
-          <div
-            id="atom-logos-and-passport-row"
-            data-atom-id="LOGOS_AND_PASSPORT_ROW"
-            className="flex flex-col sm:flex-row items-center justify-between gap-4 print:flex-row print:items-center print:gap-3"
-          >
-            {/* Top row on mobile: Both logos side by side for a neat header */}
-            <div className="w-full flex items-center justify-between sm:hidden px-2 pb-2 mb-1 border-b border-slate-200">
-              <div className="w-7/12 relative flex items-center justify-start shrink-0">
-                <Image
-                  src="/images/partners-logo/gsdm-official-header.png"
-                  alt="State Emblem of India & Gujarat Skill Development Mission"
-                  width={150}
-                  height={66}
-                  priority
-                  loading="eager"
-                  className="w-full h-auto object-contain max-h-14"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
-              </div>
-              <div className="w-4/12 relative flex items-center justify-end shrink-0">
-                <Image
-                  src="/Mkt-logo.svg"
-                  alt="Manav Kalyan Trust Logo"
-                  width={64}
-                  height={42}
-                  className="w-auto h-11 object-contain"
-                  priority
-                  loading="eager"
-                />
-              </div>
-            </div>
-
-            {/* ATOM: LOGO_GSDM_LEFT (Desktop & Print - Vertically Centered) */}
+            {/* ============================================================ */}
+            {/* ATOM: HEADER_LIVE_METADATA_DATE_PLACE */}
+            {/* ============================================================ */}
             <div
-              id="atom-logo-gsdm-left"
-              data-atom-id="LOGO_GSDM_LEFT"
-              className="hidden sm:flex print:flex items-center justify-start shrink-0 sm:w-[28%] print:w-[28%] self-center"
+              id="atom-header-live-metadata"
+              data-atom-id="HEADER_LIVE_METADATA_DATE_PLACE"
+              className="flex justify-between items-center text-xs font-bold text-slate-700 border-b border-slate-200 pb-2 mb-3 print:pb-1.5 print:mb-2.5"
             >
-              <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-20 relative flex items-center justify-start rounded-lg p-0.5">
-                <Image
-                  src="/images/partners-logo/gsdm-official-header.png"
-                  alt="State Emblem of India & Gujarat Skill Development Mission"
-                  width={200}
-                  height={88}
-                  priority
-                  loading="eager"
-                  className="w-full h-full object-contain object-left"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none'
-                  }}
-                />
+              <div className="flex items-center gap-1.5">
+                <Calendar className="w-3.5 h-3.5 text-rose-700 print:text-black" />
+                <span>Date:</span>
+                <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
+                  {formData.application_date}
+                </span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-rose-700 print:text-black" />
+                <span>Place:</span>
+                <span className="bg-slate-100 px-2.5 py-0.5 rounded border border-slate-300 font-mono text-slate-900 print:border-slate-400 print:bg-transparent">
+                  {formData.application_place}
+                </span>
               </div>
             </div>
 
-            {/* ATOM: LOGO_MKT_CENTER_AND_TITLES */}
+            {/* ============================================================ */}
+            {/* ATOM: LOGOS_AND_PASSPORT_ROW */}
+            {/* ============================================================ */}
             <div
-              id="atom-logo-mkt-center"
-              data-atom-id="LOGO_MKT_CENTER_AND_TITLES"
-              className="text-center flex-1 flex flex-col items-center justify-center px-1 sm:px-2 self-center"
+              id="atom-logos-and-passport-row"
+              data-atom-id="LOGOS_AND_PASSPORT_ROW"
+              className="flex flex-col sm:flex-row items-center justify-between gap-4 print:flex-row print:items-center print:gap-3"
             >
-              {/* Center MKT Sunburst Logo for Desktop & Print */}
-              <div className="hidden sm:flex print:flex w-18 h-12 sm:w-22 sm:h-13 print:w-16 print:h-10 relative items-center justify-center mb-1">
-                <Image
-                  src="/Mkt-logo.svg"
-                  alt="Manav Kalyan Trust Logo"
-                  width={70}
-                  height={46}
-                  className="w-full h-full object-contain"
-                  priority
-                  loading="eager"
-                />
+              {/* Top row on mobile: Both logos side by side for a neat header */}
+              <div className="w-full flex items-center justify-between sm:hidden px-2 pb-2 mb-1 border-b border-slate-200">
+                <div className="w-7/12 relative flex items-center justify-start shrink-0">
+                  <Image
+                    src="/images/partners-logo/gsdm-official-header.png"
+                    alt="State Emblem of India & Gujarat Skill Development Mission"
+                    width={150}
+                    height={66}
+                    priority
+                    loading="eager"
+                    className="w-full h-auto object-contain max-h-14"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                </div>
+                <div className="w-4/12 relative flex items-center justify-end shrink-0">
+                  <Image
+                    src="/Mkt-logo.svg"
+                    alt="Manav Kalyan Trust Logo"
+                    width={64}
+                    height={42}
+                    className="w-auto h-11 object-contain"
+                    priority
+                    loading="eager"
+                  />
+                </div>
               </div>
 
-              <h3 className="text-[11px] sm:text-xs md:text-sm font-extrabold uppercase tracking-wider text-slate-700 print:text-black leading-tight">
-                NGKRM SCHEME – GSDM
-              </h3>
-              <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl font-black text-rose-900 print:text-black tracking-tight leading-tight my-0.5 sm:my-1">
-                Manav Kalyan Trust
-              </h1>
-              <div className="inline-block mt-1 px-4 py-0.5 sm:px-6 sm:py-1 border-2 border-slate-900 rounded-md bg-slate-50 font-black text-xs sm:text-sm tracking-widest text-slate-900 uppercase shadow-2xs print:border-black print:bg-white print:shadow-none">
-                ADMISSION FORM
-              </div>
-            </div>
-
-            {/* ATOM: PASSPORT_PHOTO_BOX (Desktop Right, Mobile Center - Vertically Centered) */}
-            <div className="w-full sm:w-[24%] print:w-[24%] shrink-0 flex flex-col items-center sm:items-end print:items-end justify-center self-center">
+              {/* ATOM: LOGO_GSDM_LEFT (Desktop & Print - Vertically Centered) */}
               <div
-                id="atom-passport-photo-box"
-                data-atom-id="PASSPORT_PHOTO_BOX"
-                onDragOver={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setIsPassportDragging(true)
-                }}
-                onDragEnter={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  setIsPassportDragging(true)
-                }}
-                onDragLeave={(e) => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  if (e.currentTarget.contains(e.relatedTarget)) return
-                  setIsPassportDragging(false)
-                }}
-                onDrop={handlePassportPhotoDrop}
-                className={`w-28 h-36 sm:w-32 sm:h-40 print:w-26 print:h-34 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all shadow-2xs print:shadow-none ${isPassportDragging
+                id="atom-logo-gsdm-left"
+                data-atom-id="LOGO_GSDM_LEFT"
+                className="hidden sm:flex print:flex items-center justify-start shrink-0 sm:w-[28%] print:w-[28%] self-center"
+              >
+                <div className="w-full max-w-[210px] h-18 sm:h-22 print:h-20 relative flex items-center justify-start rounded-lg p-0.5">
+                  <Image
+                    src="/images/partners-logo/gsdm-official-header.png"
+                    alt="State Emblem of India & Gujarat Skill Development Mission"
+                    width={200}
+                    height={88}
+                    priority
+                    loading="eager"
+                    className="w-full h-full object-contain object-left"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* ATOM: LOGO_MKT_CENTER_AND_TITLES */}
+              <div
+                id="atom-logo-mkt-center"
+                data-atom-id="LOGO_MKT_CENTER_AND_TITLES"
+                className="text-center flex-1 flex flex-col items-center justify-center px-1 sm:px-2 self-center"
+              >
+                {/* Center MKT Sunburst Logo for Desktop & Print */}
+                <div className="hidden sm:flex print:flex w-18 h-12 sm:w-22 sm:h-13 print:w-16 print:h-10 relative items-center justify-center mb-1">
+                  <Image
+                    src="/Mkt-logo.svg"
+                    alt="Manav Kalyan Trust Logo"
+                    width={70}
+                    height={46}
+                    className="w-full h-full object-contain"
+                    priority
+                    loading="eager"
+                  />
+                </div>
+
+                <h3 className="text-[11px] sm:text-xs md:text-sm font-extrabold uppercase tracking-wider text-slate-700 print:text-black leading-tight">
+                  NGKRM SCHEME – GSDM
+                </h3>
+                <h1 className="font-serif text-xl sm:text-2xl lg:text-3xl font-black text-rose-900 print:text-black tracking-tight leading-tight my-0.5 sm:my-1">
+                  Manav Kalyan Trust
+                </h1>
+                <div className="inline-block mt-1 px-4 py-0.5 sm:px-6 sm:py-1 border-2 border-slate-900 rounded-md bg-slate-50 font-black text-xs sm:text-sm tracking-widest text-slate-900 uppercase shadow-2xs print:border-black print:bg-white print:shadow-none">
+                  ADMISSION FORM
+                </div>
+              </div>
+
+              {/* ATOM: PASSPORT_PHOTO_BOX (Desktop Right, Mobile Center - Vertically Centered) */}
+              <div className="w-full sm:w-[24%] print:w-[24%] shrink-0 flex flex-col items-center sm:items-end print:items-end justify-center self-center">
+                <div
+                  id="atom-passport-photo-box"
+                  data-atom-id="PASSPORT_PHOTO_BOX"
+                  onDragOver={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    setIsPassportDragging(true)
+                  }}
+                  onDragEnter={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    setIsPassportDragging(true)
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    if (e.currentTarget.contains(e.relatedTarget)) return
+                    setIsPassportDragging(false)
+                  }}
+                  onDrop={handlePassportPhotoDrop}
+                  className={`w-28 h-36 sm:w-32 sm:h-40 print:w-26 print:h-34 shrink-0 border-2 border-dashed rounded-lg flex flex-col items-center justify-center p-1.5 relative text-center group cursor-pointer transition-all shadow-2xs print:shadow-none ${isPassportDragging
                     ? 'border-rose-600 bg-rose-50 ring-4 ring-rose-200 scale-102'
                     : 'border-slate-800 bg-slate-50 hover:border-rose-600 print:bg-white'
-                  }`}
-              >
-                {formData.passport_photo_url ? (
-                  <div className="w-full h-full relative">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={formData.passport_photo_url}
-                      alt="Passport Preview"
-                      className="w-full h-full object-cover rounded"
-                    />
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setFormData((prev) => ({ ...prev, passport_photo_url: '' }))
-                      }}
-                      className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full text-xs shadow-md print:hidden cursor-pointer"
-                      title="Remove Photo"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                ) : (
-                  <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer p-1">
-                    <Camera
-                      className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
-                        }`}
-                    />
-                    <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">
-                      {isPassportDragging ? 'Drop Photo!' : 'Affix Passport Photograph'}
-                    </span>
-                    <span className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5 print:hidden">
-                      (Click or Drop)
-                    </span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handlePassportPhotoChange}
-                      className="hidden"
-                    />
-                  </label>
-                )}
-              </div>
-
-              {errors.passport_photo && (
-                <p className="text-xs text-red-600 text-center sm:text-right mt-1 font-semibold">
-                  {errors.passport_photo}
-                </p>
-              )}
-            </div>
-          </div>
-
-          {/* ============================================================ */}
-          {/* ATOM: FORM_NO_AND_REGISTRATION_NO_ROW */}
-          {/* ============================================================ */}
-          <div
-            id="atom-form-and-reg-numbers-row"
-            data-atom-id="FORM_NO_AND_REGISTRATION_NO_ROW"
-            className="flex flex-wrap gap-x-4 gap-y-4 sm:gap-x-6 sm:gap-y-2 mt-4 pt-3 border-t border-slate-300 print:mt-2 print:pt-2"
-          >
-            {/* ATOM: FIELD_FORM_NO */}
-            <div id="atom-field-form-no" data-atom-id="FIELD_FORM_NO" className="flex items-center gap-2">
-              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Form No.: <span className="text-red-600">*</span></span>
-              <input
-                type="text"
-                placeholder="e.g. FD_001"
-                value={formData.form_no}
-                onChange={(e) => setFormData({ ...formData, form_no: e.target.value })}
-                className={`bg-white border ${errors.form_no ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-            </div>
-            {/* ATOM: FIELD_REGISTRATION_NO */}
-            <div id="atom-field-registration-no" data-atom-id="FIELD_REGISTRATION_NO" className="flex items-center gap-2">
-              <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Registration No.: <span className="text-red-600">*</span></span>
-              <input
-                type="text"
-                placeholder="e.g. MKT_001"
-                value={formData.registration_no}
-                onChange={(e) => setFormData({ ...formData, registration_no: e.target.value })}
-                className={`bg-white border ${errors.registration_no ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} text-slate-900 font-bold px-3 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider focus:ring-2 focus:ring-indigo-600 focus:outline-none shadow-xs`}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: COURSE_SELECTION_SECTION */}
-        {/* ============================================================ */}
-        <div
-          id="atom-course-selection-section"
-          data-atom-id="COURSE_SELECTION_SECTION"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 bg-slate-50/50 space-y-5"
-        >
-          <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
-            <GraduationCap className="w-5 h-5 text-rose-700" /> Course Selection &amp; Scheduling
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {/* ATOM: FIELD_COURSE_NAME */}
-            <div id="atom-field-course-name" data-atom-id="FIELD_COURSE_NAME">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                01) Course Name <span className="text-red-600">*</span>
-              </label>
-              <select
-                id="field-course-name"
-                value={formData.course_name}
-                onChange={(e) => handleCourseChange(e.target.value)}
-                className={`w-full bg-white border ${errors.course_name ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              >
-                <option value="">-- Select Course Name (કોર્સ પસંદ કરો) --</option>
-                {COURSES.map((course) => (
-                  <option key={course.id} value={course.id}>
-                    {course.name}
-                  </option>
-                ))}
-              </select>
-              {errors.course_name && (
-                <p className="text-xs text-red-600 font-semibold mt-1">{errors.course_name}</p>
-              )}
-              <p className="text-[11px] text-slate-500 mt-1">
-                Student can select only one course option.
-              </p>
-            </div>
-
-            {/* ATOM: FIELD_COURSE_DURATION */}
-            <div id="atom-field-course-duration" data-atom-id="FIELD_COURSE_DURATION">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                02) Course Duration (Auto)
-              </label>
-              <div className="w-full bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-900 flex items-center justify-between shadow-xs">
-                <span>{formData.course_duration || 'Auto-filled upon course selection'}</span>
-                {formData.course_duration && (
-                  <span className="text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
-                    Free of Cost
-                  </span>
-                )}
-              </div>
-              <p className="text-[11px] text-emerald-700 mt-1">
-                Duration automated based on selected course.
-              </p>
-            </div>
-
-            {/* ATOM: FIELD_TIME_SLOT */}
-            <div id="atom-field-time-slot" data-atom-id="FIELD_TIME_SLOT">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                03) Time Slot <span className="text-red-600">*</span>
-              </label>
-              <select
-                id="field-time-slot"
-                value={formData.time_slot}
-                onChange={(e) => setFormData({ ...formData, time_slot: e.target.value })}
-                className={`w-full bg-white border ${errors.time_slot ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              >
-                <option value="">-- Select Time Slot (સમય સ્લોટ પસંદ કરો) --</option>
-                {TIME_SLOTS.map((slot) => (
-                  <option key={slot} value={slot}>
-                    {slot}
-                  </option>
-                ))}
-              </select>
-              {errors.time_slot && (
-                <p className="text-xs text-red-600 font-semibold mt-1">{errors.time_slot}</p>
-              )}
-              <p className="text-[11px] text-slate-500 mt-1">
-                Select your preferred daily batch timing.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: PERSONAL_DETAILS_SECTION */}
-        {/* ============================================================ */}
-        <div
-          id="atom-personal-details-section"
-          data-atom-id="PERSONAL_DETAILS_SECTION"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-6"
-        >
-          <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
-            <User className="w-5 h-5 text-rose-700" /> Personal Details
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* ATOM: FIELD_FULL_NAME */}
-            <div id="atom-field-full-name" data-atom-id="FIELD_FULL_NAME" className="md:col-span-2">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Full Name (In Block Letters) <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                id="field-full-name"
-                name="name"
-                autoComplete="name"
-                placeholder="FIRSTNAME MIDDLENAME SURNAME"
-                value={formData.full_name}
-                onChange={(e) =>
-                  setFormData({ ...formData, full_name: e.target.value.toUpperCase() })
-                }
-                style={{ textTransform: 'uppercase' }}
-                className={`w-full bg-white border ${errors.full_name ? 'border-red-500' : 'border-slate-300'
-                  } rounded-xl px-3.5 py-2.5 text-sm font-semibold tracking-wide text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-              {errors.full_name && (
-                <p className="text-xs text-red-600 mt-1">{errors.full_name}</p>
-              )}
-            </div>
-
-            {/* ATOM: FIELD_DATE_OF_BIRTH (DD/MM/YYYY Format) */}
-            <div id="atom-field-date-of-birth" data-atom-id="FIELD_DATE_OF_BIRTH">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Date of Birth (DD/MM/YYYY) <span className="text-red-600">*</span>
-              </label>
-              <div className="relative flex items-center">
-                <input
-                  type="text"
-                  maxLength={10}
-                  placeholder="DD/MM/YYYY (e.g. 15/08/2000)"
-                  value={formData.date_of_birth}
-                  onChange={handleDobChange}
-                  className={`w-full bg-white border ${errors.date_of_birth ? 'border-red-500' : 'border-slate-300'
-                    } rounded-xl px-3.5 py-2.5 pr-10 text-sm font-mono font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-                />
-                <input
-                  type="date"
-                  onChange={handleNativeDateChange}
-                  className="absolute right-2.5 opacity-0 w-6 h-6 cursor-pointer"
-                  title="Pick from calendar"
-                />
-                <Calendar className="absolute right-2.5 w-5 h-5 text-slate-400 pointer-events-none" />
-              </div>
-
-              {/* Dynamic Age Calculation Feedback */}
-              {formData.calculated_age !== '' && (
-                <div
-                  className={`mt-2 p-2.5 rounded-lg text-xs font-medium flex items-start gap-2 ${ageValidationMsg.valid
-                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                    : 'bg-red-50 text-red-800 border border-red-300'
                     }`}
                 >
-                  {ageValidationMsg.valid ? (
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                  {formData.passport_photo_url ? (
+                    <div className="w-full h-full relative">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={formData.passport_photo_url}
+                        alt="Passport Preview"
+                        className="w-full h-full object-cover rounded"
+                      />
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setFormData((prev) => ({ ...prev, passport_photo_url: '' }))
+                        }}
+                        className="absolute top-1 right-1 bg-red-600 text-white p-1 rounded-full text-xs shadow-md print:hidden cursor-pointer"
+                        title="Remove Photo"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
                   ) : (
-                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    <label className="w-full h-full flex flex-col items-center justify-center cursor-pointer p-1">
+                      <Camera
+                        className={`w-6 h-6 sm:w-7 sm:h-7 mb-1 transition-colors ${isPassportDragging ? 'text-rose-600 animate-bounce' : 'text-slate-400 group-hover:text-rose-600'
+                          }`}
+                      />
+                      <span className="text-[10px] sm:text-[11px] font-bold text-slate-700 leading-tight">
+                        {isPassportDragging ? 'Drop Photo!' : 'Affix Passport Photograph'}
+                      </span>
+                      <span className="text-[8px] sm:text-[9px] text-slate-400 mt-0.5 print:hidden">
+                        (Click or Drop)
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handlePassportPhotoChange}
+                        className="hidden"
+                      />
+                    </label>
                   )}
-                  <span>{ageValidationMsg.text}</span>
+                </div>
+
+                {errors.passport_photo && (
+                  <p className="text-xs text-red-600 text-center sm:text-right mt-1 font-semibold">
+                    {errors.passport_photo}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            {/* ============================================================ */}
+            {/* ATOM: FORM_NO_AND_REGISTRATION_NO_ROW */}
+            {/* ============================================================ */}
+            <div
+              id="atom-form-and-reg-numbers-row"
+              data-atom-id="FORM_NO_AND_REGISTRATION_NO_ROW"
+              className="flex flex-wrap gap-x-4 gap-y-4 sm:gap-x-6 sm:gap-y-2 mt-4 pt-3 border-t border-slate-300 print:mt-2 print:pt-2"
+            >
+              {/* ATOM: FIELD_FORM_NO */}
+              <div id="atom-field-form-no" data-atom-id="FIELD_FORM_NO" className="flex items-center gap-2">
+                <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Form No.:</span>
+                <div className="relative flex items-center flex-1 min-w-[170px]">
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={loadingNumbers ? 'Auto-assigning...' : 'e.g. FD20261006008'}
+                    value={formData.form_no}
+                    className="bg-slate-100 border border-slate-300 text-slate-900 font-bold px-3 pr-14 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider cursor-default shadow-xs select-all focus:outline-none"
+                  />
+                  <span className="absolute right-2 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-rose-100 text-rose-700 rounded border border-rose-200 pointer-events-none">
+                    Auto
+                  </span>
+                </div>
+              </div>
+              {/* ATOM: FIELD_REGISTRATION_NO */}
+              <div id="atom-field-registration-no" data-atom-id="FIELD_REGISTRATION_NO" className="flex items-center gap-2">
+                <span className="font-bold text-xs sm:text-sm text-slate-800 shrink-0">Registration No.:</span>
+                <div className="relative flex items-center flex-1 min-w-[200px]">
+                  <input
+                    type="text"
+                    readOnly
+                    placeholder={loadingNumbers ? 'Auto-assigning...' : 'e.g. MKT_2026-10-06-018'}
+                    value={formData.registration_no}
+                    className="bg-slate-100 border border-slate-300 text-slate-900 font-bold px-3 pr-14 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider cursor-default shadow-xs select-all focus:outline-none"
+                  />
+                  <span className="absolute right-2 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-indigo-100 text-indigo-700 rounded border border-indigo-200 pointer-events-none">
+                    Auto
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* ATOM: COURSE_SELECTION_SECTION */}
+          {/* ============================================================ */}
+          <div
+            id="atom-course-selection-section"
+            data-atom-id="COURSE_SELECTION_SECTION"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 bg-slate-50/50 space-y-5"
+          >
+            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
+              <GraduationCap className="w-5 h-5 text-rose-700" /> Course Selection &amp; Scheduling
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {/* ATOM: FIELD_COURSE_NAME */}
+              <div id="atom-field-course-name" data-atom-id="FIELD_COURSE_NAME">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  01) Course Name <span className="text-red-600">*</span>
+                </label>
+                <select
+                  id="field-course-name"
+                  value={formData.course_name}
+                  onChange={(e) => handleCourseChange(e.target.value)}
+                  className={`w-full bg-white border ${errors.course_name ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                >
+                  <option value="">-- Select Course Name (કોર્સ પસંદ કરો) --</option>
+                  {COURSES.map((course) => (
+                    <option key={course.id} value={course.id}>
+                      {course.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.course_name && (
+                  <p className="text-xs text-red-600 font-semibold mt-1">{errors.course_name}</p>
+                )}
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Student can select only one course option.
+                </p>
+              </div>
+
+              {/* ATOM: FIELD_COURSE_DURATION */}
+              <div id="atom-field-course-duration" data-atom-id="FIELD_COURSE_DURATION">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  02) Course Duration (Auto)
+                </label>
+                <div className="w-full bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2.5 text-sm font-bold text-emerald-900 flex items-center justify-between shadow-xs">
+                  <span>{formData.course_duration || 'Auto-filled upon course selection'}</span>
+                  {formData.course_duration && (
+                    <span className="text-[10px] bg-emerald-200 text-emerald-800 px-2 py-0.5 rounded-full font-semibold">
+                      Free of Cost
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-emerald-700 mt-1">
+                  Duration automated based on selected course.
+                </p>
+              </div>
+
+              {/* ATOM: FIELD_TIME_SLOT */}
+              <div id="atom-field-time-slot" data-atom-id="FIELD_TIME_SLOT">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  03) Time Slot <span className="text-red-600">*</span>
+                </label>
+                <select
+                  id="field-time-slot"
+                  value={formData.time_slot}
+                  onChange={(e) => setFormData({ ...formData, time_slot: e.target.value })}
+                  className={`w-full bg-white border ${errors.time_slot ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                >
+                  <option value="">-- Select Time Slot (સમય સ્લોટ પસંદ કરો) --</option>
+                  {TIME_SLOTS.map((slot) => (
+                    <option key={slot} value={slot}>
+                      {slot}
+                    </option>
+                  ))}
+                </select>
+                {errors.time_slot && (
+                  <p className="text-xs text-red-600 font-semibold mt-1">{errors.time_slot}</p>
+                )}
+                <p className="text-[11px] text-slate-500 mt-1">
+                  Select your preferred daily batch timing.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* ATOM: PERSONAL_DETAILS_SECTION */}
+          {/* ============================================================ */}
+          <div
+            id="atom-personal-details-section"
+            data-atom-id="PERSONAL_DETAILS_SECTION"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-6"
+          >
+            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
+              <User className="w-5 h-5 text-rose-700" /> Personal Details
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* ATOM: FIELD_FULL_NAME */}
+              <div id="atom-field-full-name" data-atom-id="FIELD_FULL_NAME" className="md:col-span-2">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Full Name (In Block Letters) <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-full-name"
+                  name="name"
+                  autoComplete="name"
+                  placeholder="FIRSTNAME MIDDLENAME SURNAME"
+                  value={formData.full_name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, full_name: e.target.value.toUpperCase() })
+                  }
+                  style={{ textTransform: 'uppercase' }}
+                  className={`w-full bg-white border ${errors.full_name ? 'border-red-500' : 'border-slate-300'
+                    } rounded-xl px-3.5 py-2.5 text-sm font-semibold tracking-wide text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                />
+                {errors.full_name && (
+                  <p className="text-xs text-red-600 mt-1">{errors.full_name}</p>
+                )}
+              </div>
+
+              {/* ATOM: FIELD_DATE_OF_BIRTH (DD/MM/YYYY Format) */}
+              <div id="atom-field-date-of-birth" data-atom-id="FIELD_DATE_OF_BIRTH">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Date of Birth (DD/MM/YYYY) <span className="text-red-600">*</span>
+                </label>
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    maxLength={10}
+                    placeholder="DD/MM/YYYY (e.g. 15/08/2000)"
+                    value={formData.date_of_birth}
+                    onChange={handleDobChange}
+                    className={`w-full bg-white border ${errors.date_of_birth ? 'border-red-500' : 'border-slate-300'
+                      } rounded-xl px-3.5 py-2.5 pr-10 text-sm font-mono font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                  />
+                  <input
+                    type="date"
+                    onChange={handleNativeDateChange}
+                    className="absolute right-2.5 opacity-0 w-6 h-6 cursor-pointer"
+                    title="Pick from calendar"
+                  />
+                  <Calendar className="absolute right-2.5 w-5 h-5 text-slate-400 pointer-events-none" />
+                </div>
+
+                {/* Dynamic Age Calculation Feedback */}
+                {formData.calculated_age !== '' && (
+                  <div
+                    className={`mt-2 p-2.5 rounded-lg text-xs font-medium flex items-start gap-2 ${ageValidationMsg.valid
+                      ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                      : 'bg-red-50 text-red-800 border border-red-300'
+                      }`}
+                  >
+                    {ageValidationMsg.valid ? (
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    ) : (
+                      <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                    )}
+                    <span>{ageValidationMsg.text}</span>
+                  </div>
+                )}
+                {errors.date_of_birth && (
+                  <p className="text-xs text-red-600 mt-1">{errors.date_of_birth}</p>
+                )}
+              </div>
+
+              {/* ATOM: FIELD_GENDER */}
+              <div id="atom-field-gender" data-atom-id="FIELD_GENDER">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Gender <span className="text-red-600">*</span>
+                </label>
+                <select
+                  id="field-gender"
+                  value={formData.gender}
+                  onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                  className={`w-full bg-white border ${errors.gender ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                >
+                  <option value="">-- Select Gender (જાતિ પસંદ કરો) --</option>
+                  <option value="Male">Male (પુરુષ)</option>
+                  <option value="Female">Female (સ્ત્રી)</option>
+                  <option value="Transgender">Transgender (અન્ય)</option>
+                </select>
+                {errors.gender && (
+                  <p className="text-xs text-red-600 font-semibold mt-1">{errors.gender}</p>
+                )}
+              </div>
+
+              {/* ATOM: FIELD_FATHERS_NAME */}
+              <div id="atom-field-fathers-name" data-atom-id="FIELD_FATHERS_NAME" className={!formData.fathers_name?.trim() ? 'print:hidden' : ''}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Father&apos;s Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.fathers_name}
+                  onChange={(e) => setFormData({ ...formData, fathers_name: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
+
+              {/* ATOM: FIELD_MOTHERS_NAME */}
+              <div id="atom-field-mothers-name" data-atom-id="FIELD_MOTHERS_NAME" className={!formData.mothers_name?.trim() ? 'print:hidden' : ''}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Mother&apos;s Name
+                </label>
+                <input
+                  type="text"
+                  value={formData.mothers_name}
+                  onChange={(e) => setFormData({ ...formData, mothers_name: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
+
+              {/* ATOM: FIELD_FATHERS_OCCUPATION */}
+              <div id="atom-field-fathers-occupation" data-atom-id="FIELD_FATHERS_OCCUPATION" className={!formData.fathers_occupation?.trim() ? 'print:hidden' : ''}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Father&apos;s Occupation
+                </label>
+                <input
+                  type="text"
+                  value={formData.fathers_occupation}
+                  onChange={(e) => setFormData({ ...formData, fathers_occupation: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
+
+              {/* ATOM: FIELD_MARITAL_STATUS */}
+              <div id="atom-field-marital-status" data-atom-id="FIELD_MARITAL_STATUS">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Marital Status <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <select
+                  id="field-marital-status"
+                  value={formData.marital_status}
+                  onChange={(e) => setFormData({ ...formData, marital_status: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                >
+                  <option value="">-- Select Marital Status (Optional / વૈકલ્પિક) --</option>
+                  <option value="Unmarried">Unmarried (અપરિણીત)</option>
+                  <option value="Married">Married (પરિણીત)</option>
+                </select>
+              </div>
+
+              {/* ATOM: FIELD_MARRIAGE_CERTIFICATE_UPLOAD (CONDITIONAL - MULTIPLE FILES SUPPORT) */}
+              {formData.marital_status === 'Married' && (
+                <div className={`md:col-span-2 ${(!formData.marriage_certificates || formData.marriage_certificates.length === 0) ? 'print:hidden' : ''}`}>
+                  {renderMultiUploadBox({
+                    field: 'marriage_certificates',
+                    label: 'Upload Marriage Certificate Documents (Photos / PDFs)',
+                    required: true,
+                    atomId: 'FIELD_MARRIAGE_CERTIFICATE_UPLOAD',
+                    description: 'You can upload multiple photos, PDFs, or scanned documents of the Marriage Certificate.',
+                  })}
                 </div>
               )}
-              {errors.date_of_birth && (
-                <p className="text-xs text-red-600 mt-1">{errors.date_of_birth}</p>
-              )}
-            </div>
 
-            {/* ATOM: FIELD_GENDER */}
-            <div id="atom-field-gender" data-atom-id="FIELD_GENDER">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Gender <span className="text-red-600">*</span>
-              </label>
-              <select
-                id="field-gender"
-                value={formData.gender}
-                onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                className={`w-full bg-white border ${errors.gender ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              >
-                <option value="">-- Select Gender (જાતિ પસંદ કરો) --</option>
-                <option value="Male">Male (પુરુષ)</option>
-                <option value="Female">Female (સ્ત્રી)</option>
-                <option value="Transgender">Transgender (અન્ય)</option>
-              </select>
-              {errors.gender && (
-                <p className="text-xs text-red-600 font-semibold mt-1">{errors.gender}</p>
-              )}
-            </div>
+              {/* ATOM: FIELD_CAST_CATEGORY */}
+              <div id="atom-field-cast-category" data-atom-id="FIELD_CAST_CATEGORY">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Cast (Category) <span className="text-red-600">*</span>
+                </label>
+                <select
+                  id="field-cast-category"
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  className={`w-full bg-white border ${errors.category ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                >
+                  <option value="">-- Select Category (કેટેગરી પસંદ કરો) --</option>
+                  <option value="GEN">GEN (General)</option>
+                  <option value="OBC">OBC</option>
+                  <option value="SC / ST">SC / ST</option>
+                </select>
+                {errors.category && (
+                  <p className="text-xs text-red-600 font-semibold mt-1">{errors.category}</p>
+                )}
+              </div>
 
-            {/* ATOM: FIELD_FATHERS_NAME */}
-            <div id="atom-field-fathers-name" data-atom-id="FIELD_FATHERS_NAME" className={!formData.fathers_name?.trim() ? 'print:hidden' : ''}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Father&apos;s Name
-              </label>
-              <input
-                type="text"
-                value={formData.fathers_name}
-                onChange={(e) => setFormData({ ...formData, fathers_name: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
+              {/* ATOM: FIELD_AADHAAR_NO (12 Digits) */}
+              <div id="atom-field-aadhaar-no" data-atom-id="FIELD_AADHAAR_NO">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Student Aadhaar Number (12 Digits) <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  maxLength={12}
+                  placeholder="123456789012"
+                  value={formData.aadhaar_no}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      aadhaar_no: e.target.value.replace(/\D/g, ''),
+                    })
+                  }
+                  className={`w-full bg-white border ${errors.aadhaar_no ? 'border-red-500' : 'border-slate-300'
+                    } rounded-xl px-3.5 py-2.5 text-sm font-mono tracking-widest text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                />
+                {errors.aadhaar_no && (
+                  <p className="text-xs text-red-600 mt-1">{errors.aadhaar_no}</p>
+                )}
+              </div>
 
-            {/* ATOM: FIELD_MOTHERS_NAME */}
-            <div id="atom-field-mothers-name" data-atom-id="FIELD_MOTHERS_NAME" className={!formData.mothers_name?.trim() ? 'print:hidden' : ''}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Mother&apos;s Name
-              </label>
-              <input
-                type="text"
-                value={formData.mothers_name}
-                onChange={(e) => setFormData({ ...formData, mothers_name: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
-
-            {/* ATOM: FIELD_FATHERS_OCCUPATION */}
-            <div id="atom-field-fathers-occupation" data-atom-id="FIELD_FATHERS_OCCUPATION" className={!formData.fathers_occupation?.trim() ? 'print:hidden' : ''}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Father&apos;s Occupation
-              </label>
-              <input
-                type="text"
-                value={formData.fathers_occupation}
-                onChange={(e) => setFormData({ ...formData, fathers_occupation: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
-
-            {/* ATOM: FIELD_MARITAL_STATUS */}
-            <div id="atom-field-marital-status" data-atom-id="FIELD_MARITAL_STATUS">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Marital Status <span className="text-red-600">*</span>
-              </label>
-              <select
-                id="field-marital-status"
-                value={formData.marital_status}
-                onChange={(e) => setFormData({ ...formData, marital_status: e.target.value })}
-                className={`w-full bg-white border ${errors.marital_status ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              >
-                <option value="">-- Select Marital Status (લગ્ન સ્થિતિ પસંદ કરો) --</option>
-                <option value="Unmarried">Unmarried (અપરિણીત)</option>
-                <option value="Married">Married (પરિણીત)</option>
-              </select>
-              {errors.marital_status && (
-                <p className="text-xs text-red-600 font-semibold mt-1">{errors.marital_status}</p>
-              )}
-            </div>
-
-            {/* ATOM: FIELD_MARRIAGE_CERTIFICATE_UPLOAD (CONDITIONAL - MULTIPLE FILES SUPPORT) */}
-            {formData.marital_status === 'Married' && (
-              <div className={`md:col-span-2 ${(!formData.marriage_certificates || formData.marriage_certificates.length === 0) ? 'print:hidden' : ''}`}>
+              {/* ATOM: FIELD_AADHAAR_PHOTOS_UPLOAD (Multiple files support) */}
+              <div className={`md:col-span-2 ${(!formData.aadhaar_photos || formData.aadhaar_photos.length === 0) ? 'print:hidden' : ''}`}>
                 {renderMultiUploadBox({
-                  field: 'marriage_certificates',
-                  label: 'Upload Marriage Certificate Documents (Photos / PDFs)',
-                  required: true,
-                  atomId: 'FIELD_MARRIAGE_CERTIFICATE_UPLOAD',
-                  description: 'You can upload multiple photos, PDFs, or scanned documents of the Marriage Certificate.',
+                  field: 'aadhaar_photos',
+                  label: 'Upload Aadhaar Card Documents (Front & Back Photos / PDFs)',
+                  required: false,
+                  atomId: 'FIELD_AADHAAR_PHOTOS_UPLOAD',
+                  description: 'You can upload multiple files (photos, PDF files) of your Aadhaar card.',
                 })}
               </div>
-            )}
-
-            {/* ATOM: FIELD_CAST_CATEGORY */}
-            <div id="atom-field-cast-category" data-atom-id="FIELD_CAST_CATEGORY">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Cast (Category) <span className="text-red-600">*</span>
-              </label>
-              <select
-                id="field-cast-category"
-                value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                className={`w-full bg-white border ${errors.category ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'} rounded-xl px-3.5 py-2.5 text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              >
-                <option value="">-- Select Category (કેટેગરી પસંદ કરો) --</option>
-                <option value="GEN">GEN (General)</option>
-                <option value="OBC">OBC</option>
-                <option value="SC / ST">SC / ST</option>
-              </select>
-              {errors.category && (
-                <p className="text-xs text-red-600 font-semibold mt-1">{errors.category}</p>
-              )}
-            </div>
-
-            {/* ATOM: FIELD_AADHAAR_NO (12 Digits) */}
-            <div id="atom-field-aadhaar-no" data-atom-id="FIELD_AADHAAR_NO">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Student Aadhaar Number (12 Digits) <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                maxLength={12}
-                placeholder="123456789012"
-                value={formData.aadhaar_no}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    aadhaar_no: e.target.value.replace(/\D/g, ''),
-                  })
-                }
-                className={`w-full bg-white border ${errors.aadhaar_no ? 'border-red-500' : 'border-slate-300'
-                  } rounded-xl px-3.5 py-2.5 text-sm font-mono tracking-widest text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-              {errors.aadhaar_no && (
-                <p className="text-xs text-red-600 mt-1">{errors.aadhaar_no}</p>
-              )}
-            </div>
-
-            {/* ATOM: FIELD_AADHAAR_PHOTOS_UPLOAD (Multiple files support) */}
-            <div className={`md:col-span-2 ${(!formData.aadhaar_photos || formData.aadhaar_photos.length === 0) ? 'print:hidden' : ''}`}>
-              {renderMultiUploadBox({
-                field: 'aadhaar_photos',
-                label: 'Upload Aadhaar Card Documents (Front & Back Photos / PDFs)',
-                required: false,
-                atomId: 'FIELD_AADHAAR_PHOTOS_UPLOAD',
-                description: 'You can upload multiple files (photos, PDF files) of your Aadhaar card.',
-              })}
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: CONTACT_AND_POSTAL_ADDRESS_SECTION */}
-        {/* ============================================================ */}
-        <div
-          id="atom-contact-and-postal-address-section"
-          data-atom-id="CONTACT_AND_POSTAL_ADDRESS_SECTION"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 bg-slate-50/50 space-y-6"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-rose-700" /> Contact &amp; Postal Address
-            </h2>
-            <div className="inline-flex items-center gap-1.5 text-xs bg-rose-50 text-rose-800 border border-rose-200 px-3 py-1 rounded-full font-medium">
-              <Sparkles className="w-3.5 h-3.5 text-rose-600" />
-              <span>Enter 6-digit Pincode to auto-select Village, City &amp; State</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {/* ATOM: FIELD_CONTACT_NUMBER (10 digit required) */}
-            <div id="atom-field-contact-number" data-atom-id="FIELD_CONTACT_NUMBER">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Contact Phone Number (10 Digits) <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="tel"
-                id="field-contact-number"
-                name="tel"
-                autoComplete="tel"
-                maxLength={10}
-                placeholder="9876543210"
-                value={formData.contact_number}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    contact_number: e.target.value.replace(/\D/g, ''),
-                  })
-                }
-                className={`w-full bg-white border ${errors.contact_number ? 'border-red-500' : 'border-slate-300'
-                  } rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-              {errors.contact_number && (
-                <p className="text-xs text-red-600 mt-1">{errors.contact_number}</p>
-              )}
+          {/* ============================================================ */}
+          {/* ATOM: CONTACT_AND_POSTAL_ADDRESS_SECTION */}
+          {/* ============================================================ */}
+          <div
+            id="atom-contact-and-postal-address-section"
+            data-atom-id="CONTACT_AND_POSTAL_ADDRESS_SECTION"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 bg-slate-50/50 space-y-6"
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
+                <MapPin className="w-5 h-5 text-rose-700" /> Contact &amp; Postal Address
+              </h2>
+              <div className="inline-flex items-center gap-1.5 text-xs bg-rose-50 text-rose-800 border border-rose-200 px-3 py-1 rounded-full font-medium">
+                <Sparkles className="w-3.5 h-3.5 text-rose-600" />
+                <span>Enter 6-digit Pincode to auto-select Village, City &amp; State</span>
+              </div>
             </div>
 
-            {/* ATOM: FIELD_FATHER_NUMBER */}
-            <div id="atom-field-father-number" data-atom-id="FIELD_FATHER_NUMBER" className={!formData.father_number?.trim() ? 'print:hidden' : ''}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Father&apos;s / Alternate Phone Number
-              </label>
-              <input
-                type="tel"
-                id="field-father-number"
-                name="tel-alternate"
-                autoComplete="tel"
-                maxLength={10}
-                placeholder="9876543210"
-                value={formData.father_number}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    father_number: e.target.value.replace(/\D/g, ''),
-                  })
-                }
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              {/* ATOM: FIELD_CONTACT_NUMBER (10 digit required) */}
+              <div id="atom-field-contact-number" data-atom-id="FIELD_CONTACT_NUMBER">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Contact Phone Number (10 Digits) <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="field-contact-number"
+                  name="tel"
+                  autoComplete="tel"
+                  maxLength={10}
+                  placeholder="9876543210"
+                  value={formData.contact_number}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      contact_number: e.target.value.replace(/\D/g, ''),
+                    })
+                  }
+                  className={`w-full bg-white border ${errors.contact_number ? 'border-red-500' : 'border-slate-300'
+                    } rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                />
+                {errors.contact_number && (
+                  <p className="text-xs text-red-600 mt-1">{errors.contact_number}</p>
+                )}
+              </div>
 
-            {/* ATOM: FIELD_EMAIL (@gmail.com required) */}
-            <div id="atom-field-email" data-atom-id="FIELD_EMAIL" className="md:col-span-2">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Email Address (@gmail.com required) <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="email"
-                id="field-email"
-                name="email"
-                autoComplete="email"
-                placeholder="studentname@gmail.com"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className={`w-full bg-white border ${errors.email ? 'border-red-500' : 'border-slate-300'
-                  } rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-              {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
-            </div>
+              {/* ATOM: FIELD_FATHER_NUMBER */}
+              <div id="atom-field-father-number" data-atom-id="FIELD_FATHER_NUMBER" className={!formData.father_number?.trim() ? 'print:hidden' : ''}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Father&apos;s / Alternate Phone Number
+                </label>
+                <input
+                  type="tel"
+                  id="field-father-number"
+                  name="tel-alternate"
+                  autoComplete="tel"
+                  maxLength={10}
+                  placeholder="9876543210"
+                  value={formData.father_number}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      father_number: e.target.value.replace(/\D/g, ''),
+                    })
+                  }
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
 
-            {/* ATOM: FIELD_ADDRESS_FLAT_SOCIETY (Chrome Autofill address-line1) */}
-            <div id="atom-field-flat-society" data-atom-id="FIELD_ADDRESS_FLAT_SOCIETY">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Flat No. &amp; Society Name <span className="text-red-600">*</span>
-              </label>
-              <input
-                type="text"
-                id="field-flat-society"
-                name="address-line1"
-                autoComplete="address-line1 street-address"
-                placeholder="e.g. A-204, Shrinath Residency"
-                value={formData.flat_society}
-                onChange={(e) => setFormData({ ...formData, flat_society: e.target.value })}
-                className={`w-full bg-white border ${errors.flat_society ? 'border-red-500' : 'border-slate-300'
-                  } rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-              />
-              {errors.flat_society && (
-                <p className="text-xs text-red-600 mt-1">{errors.flat_society}</p>
-              )}
-            </div>
+              {/* ATOM: FIELD_EMAIL (@gmail.com required) */}
+              <div id="atom-field-email" data-atom-id="FIELD_EMAIL" className="md:col-span-2">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Email Address (@gmail.com required) <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="field-email"
+                  name="email"
+                  autoComplete="email"
+                  placeholder="studentname@gmail.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className={`w-full bg-white border ${errors.email ? 'border-red-500' : 'border-slate-300'
+                    } rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                />
+                {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
+              </div>
 
-            {/* ATOM: FIELD_ADDRESS_STREET_ROAD (Chrome Autofill address-line2) */}
-            <div id="atom-field-street-road" data-atom-id="FIELD_ADDRESS_STREET_ROAD" className={!formData.street_road?.trim() ? 'print:hidden' : ''}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Street / Road Name <span className="text-slate-400 font-normal">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                id="field-street-road"
-                name="address-line2"
-                autoComplete="address-line2"
-                placeholder="e.g. Near Rannapark"
-                value={formData.street_road}
-                onChange={(e) => setFormData({ ...formData, street_road: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
+              {/* ATOM: FIELD_ADDRESS_FLAT_SOCIETY (Chrome Autofill address-line1) */}
+              <div id="atom-field-flat-society" data-atom-id="FIELD_ADDRESS_FLAT_SOCIETY">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Flat No. &amp; Society Name <span className="text-red-600">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-flat-society"
+                  name="address-line1"
+                  autoComplete="address-line1 street-address"
+                  placeholder="e.g. A-204, Shrinath Residency"
+                  value={formData.flat_society}
+                  onChange={(e) => setFormData({ ...formData, flat_society: e.target.value })}
+                  className={`w-full bg-white border ${errors.flat_society ? 'border-red-500' : 'border-slate-300'
+                    } rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                />
+                {errors.flat_society && (
+                  <p className="text-xs text-red-600 mt-1">{errors.flat_society}</p>
+                )}
+              </div>
 
-            {/* ATOM: FIELD_ADDRESS_LANDMARK */}
-            <div id="atom-field-landmark" data-atom-id="FIELD_ADDRESS_LANDMARK" className={`md:col-span-2 ${!formData.landmark?.trim() ? 'print:hidden' : ''}`}>
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-                Landmark <span className="text-slate-400 font-normal">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                id="field-landmark"
-                name="address-line3"
-                autoComplete="address-line3"
-                placeholder="e.g. Opposite Jain Temple"
-                value={formData.landmark}
-                onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
-                className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
-              />
-            </div>
+              {/* ATOM: FIELD_ADDRESS_STREET_ROAD (Chrome Autofill address-line2) */}
+              <div id="atom-field-street-road" data-atom-id="FIELD_ADDRESS_STREET_ROAD" className={!formData.street_road?.trim() ? 'print:hidden' : ''}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Street / Road Name <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-street-road"
+                  name="address-line2"
+                  autoComplete="address-line2"
+                  placeholder="e.g. Near Rannapark"
+                  value={formData.street_road}
+                  onChange={(e) => setFormData({ ...formData, street_road: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
 
-            {/* ATOM: FIELD_ADDRESS_STATE (Step 1: Searchable Autocomplete for all Indian States) */}
-            <div id="atom-field-state-wrapper" data-atom-id="FIELD_ADDRESS_STATE_WRAPPER">
+              {/* ATOM: FIELD_ADDRESS_LANDMARK */}
+              <div id="atom-field-landmark" data-atom-id="FIELD_ADDRESS_LANDMARK" className={`md:col-span-2 ${!formData.landmark?.trim() ? 'print:hidden' : ''}`}>
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                  Landmark <span className="text-slate-400 font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="text"
+                  id="field-landmark"
+                  name="address-line3"
+                  autoComplete="address-line3"
+                  placeholder="e.g. Opposite Jain Temple"
+                  value={formData.landmark}
+                  onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs"
+                />
+              </div>
+
+              {/* ATOM: FIELD_ADDRESS_STATE (Step 1: Searchable Autocomplete for all Indian States) */}
+              <div id="atom-field-state-wrapper" data-atom-id="FIELD_ADDRESS_STATE_WRAPPER">
+                <AutocompleteInput
+                  id="field-state"
+                  atomId="FIELD_ADDRESS_STATE"
+                  label="State"
+                  value={formData.state}
+                  onChange={(val) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      state: val,
+                      city: prev.state.toLowerCase() === val.toLowerCase() ? prev.city : '',
+                      area_village: prev.state.toLowerCase() === val.toLowerCase() ? prev.area_village : '',
+                    }))
+                  }}
+                  onSelectOption={(item) => {
+                    setFormData((prev) => ({
+                      ...prev,
+                      state: item.name,
+                      city: prev.state === item.name ? prev.city : '',
+                      area_village: prev.state === item.name ? prev.area_village : '',
+                    }))
+                    setPincodeVillages([])
+                  }}
+                  options={INDIAN_STATES}
+                  placeholder="e.g. Gujarat, Uttar Pradesh, Maharashtra..."
+                  required={true}
+                  error={errors.state}
+                />
+              </div>
+
+              {/* ATOM: FIELD_ADDRESS_CITY (Step 2: Suggests ONLY selected state's cities) */}
               <AutocompleteInput
-                id="field-state"
-                atomId="FIELD_ADDRESS_STATE"
-                label="State"
-                value={formData.state}
+                id="field-city"
+                atomId="FIELD_ADDRESS_CITY"
+                label="City / District"
+                value={formData.city}
+                disabled={!formData.state}
                 onChange={(val) => {
                   setFormData((prev) => ({
                     ...prev,
-                    state: val,
-                    city: prev.state.toLowerCase() === val.toLowerCase() ? prev.city : '',
-                    area_village: prev.state.toLowerCase() === val.toLowerCase() ? prev.area_village : '',
+                    city: val,
+                    area_village: prev.city.toLowerCase() === val.toLowerCase() ? prev.area_village : '',
                   }))
                 }}
                 onSelectOption={(item) => {
                   setFormData((prev) => ({
                     ...prev,
-                    state: item.name,
-                    city: prev.state === item.name ? prev.city : '',
-                    area_village: prev.state === item.name ? prev.area_village : '',
+                    city: item.name,
+                    state: item.state || prev.state,
+                    area_village: prev.city === item.name ? prev.area_village : '',
                   }))
-                  setPincodeVillages([])
                 }}
-                options={INDIAN_STATES}
-                placeholder="e.g. Gujarat, Uttar Pradesh, Maharashtra..."
+                options={contextualCityOptions}
+                placeholder={cityPlaceholder}
                 required={true}
-                error={errors.state}
+                error={errors.city}
+                helperText={
+                  formData.state
+                    ? `Select city/district in ${formData.state} or type manually`
+                    : 'Please select a State first'
+                }
               />
-            </div>
 
-            {/* ATOM: FIELD_ADDRESS_CITY (Step 2: Suggests ONLY selected state's cities) */}
-            <AutocompleteInput
-              id="field-city"
-              atomId="FIELD_ADDRESS_CITY"
-              label="City / District"
-              value={formData.city}
-              disabled={!formData.state}
-              onChange={(val) => {
-                setFormData((prev) => ({
-                  ...prev,
-                  city: val,
-                  area_village: prev.city.toLowerCase() === val.toLowerCase() ? prev.area_village : '',
-                }))
-              }}
-              onSelectOption={(item) => {
-                setFormData((prev) => ({
-                  ...prev,
-                  city: item.name,
-                  state: item.state || prev.state,
-                  area_village: prev.city === item.name ? prev.area_village : '',
-                }))
-              }}
-              options={contextualCityOptions}
-              placeholder={cityPlaceholder}
-              required={true}
-              error={errors.city}
-              helperText={
-                formData.state
-                  ? `Select city/district in ${formData.state} or type manually`
-                  : 'Please select a State first'
-              }
-            />
-
-            {/* ATOM: FIELD_ADDRESS_AREA_VILLAGE (Step 3: Suggests villages of the selected state/city) */}
-            <AutocompleteInput
-              id="field-area-village"
-              atomId="FIELD_ADDRESS_AREA_VILLAGE"
-              label="Area or Village Name"
-              value={formData.area_village}
-              disabled={!formData.state || !formData.city}
-              onChange={(val) => setFormData((prev) => ({ ...prev, area_village: val }))}
-              onSelectOption={(item) => {
-                setFormData((prev) => ({
-                  ...prev,
-                  area_village: item.name,
-                  city: item.district || prev.city,
-                  state: item.state || prev.state,
-                }))
-              }}
-              options={contextualVillageOptions}
-              placeholder={villagePlaceholder}
-              required={true}
-              error={errors.area_village}
-              helperText={
-                !formData.state
-                  ? 'Please select a State first'
-                  : !formData.city
-                    ? `Please select a City in ${formData.state} first`
-                    : 'Select from suggestions or type your village/area manually'
-              }
-            />
-
-            {/* ATOM: FIELD_ADDRESS_PINCODE (Instant Auto-fill Trigger for City, State, and Village) */}
-            <div id="atom-field-pincode" data-atom-id="FIELD_ADDRESS_PINCODE">
-              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5 flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  Pincode (6 Digits) <span className="text-red-600">*</span>
-                  <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] bg-rose-100 text-rose-800 font-semibold">
-                    <Sparkles className="w-2.5 h-2.5 text-rose-600 animate-pulse" /> Auto-detect
-                  </span>
-                </span>
-                {pincodeLoading && (
-                  <span className="text-[11px] text-rose-600 font-medium flex items-center gap-1">
-                    <Loader2 className="w-3 h-3 animate-spin" /> Detecting...
-                  </span>
-                )}
-              </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  id="field-pincode"
-                  name="postal-code"
-                  autoComplete="postal-code"
-                  maxLength={6}
-                  placeholder="e.g. 380061"
-                  value={formData.pincode}
-                  onChange={handlePincodeChange}
-                  className={`w-full bg-white border ${errors.pincode ? 'border-red-500' : 'border-slate-300'
-                    } rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs ${formData.pincode && formData.pincode.length === 6 ? 'pr-24' : ''
-                    }`}
-                />
-                {formData.pincode && formData.pincode.length === 6 && (
-                  <button
-                    type="button"
-                    onClick={() => lookupPincode(formData.pincode, false)}
-                    disabled={pincodeLoading}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 px-2.5 py-1 text-[11px] font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-lg border border-rose-200 transition-colors flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-2xs"
-                    title="Re-fetch Postal details"
-                  >
-                    <RefreshCw className={`w-3 h-3 ${pincodeLoading ? 'animate-spin' : ''}`} />
-                    Auto-fill
-                  </button>
-                )}
-              </div>
-
-              {/* Live status feedback badge */}
-              {pincodeStatusMsg.text && (
-                <div
-                  className={`mt-1.5 p-2 rounded-lg text-xs flex items-start gap-1.5 ${pincodeStatusMsg.isError
-                    ? 'bg-amber-50 text-amber-800 border border-amber-200'
-                    : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                    }`}
-                >
-                  {pincodeStatusMsg.isError ? (
-                    <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                  ) : (
-                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  )}
-                  <span className="leading-tight font-medium">{pincodeStatusMsg.text}</span>
-                </div>
-              )}
-
-              {errors.pincode && <p className="text-xs text-red-600 mt-1">{errors.pincode}</p>}
-            </div>
-
-            {/* ATOM: FIELD_ADDRESS_PERMANENT */}
-            <div id="atom-field-permanent-address" data-atom-id="FIELD_ADDRESS_PERMANENT" className="md:col-span-2 pt-2">
-              <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-slate-800">
-                <input
-                  type="checkbox"
-                  checked={formData.same_as_postal}
-                  onChange={(e) =>
-                    setFormData({ ...formData, same_as_postal: e.target.checked })
-                  }
-                  className="w-4 h-4 text-rose-600 rounded focus:ring-rose-500 border-slate-300"
-                />
-                <span>Permanent Address is same as Postal Address</span>
-              </label>
-
-              {!formData.same_as_postal && (
-                <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="md:col-span-2">
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
-                      Permanent Full Address (Flat, Street, Area)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Permanent Full Address"
-                      value={formData.permanent_address}
-                      onChange={(e) =>
-                        setFormData({ ...formData, permanent_address: e.target.value })
-                      }
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 shadow-xs"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center justify-between">
-                      <span>Permanent Pincode</span>
-                      {permPincodeStatusMsg.text && (
-                        <span className={`text-[10px] font-medium ${permPincodeStatusMsg.isError ? 'text-amber-600' : 'text-emerald-700'}`}>
-                          {permPincodeStatusMsg.text}
-                        </span>
-                      )}
-                    </label>
-                    <input
-                      type="text"
-                      maxLength={6}
-                      placeholder="e.g. 380061"
-                      value={formData.permanent_pincode}
-                      onChange={(e) => {
-                        const rawVal = e.target.value.replace(/\D/g, '').slice(0, 6)
-                        setFormData({ ...formData, permanent_pincode: rawVal })
-                        if (rawVal.length === 6) {
-                          lookupPincode(rawVal, true)
-                        } else {
-                          setPermPincodeStatusMsg({ text: '', isError: false })
-                        }
-                      }}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 shadow-xs"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: EDUCATION_QUALIFICATION_SECTION */}
-        {/* ============================================================ */}
-        <div
-          id="atom-education-qualification-section"
-          data-atom-id="EDUCATION_QUALIFICATION_SECTION"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-6"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-rose-700" /> Education Qualification &amp; Proofs
-            </h2>
-            <span className="text-xs bg-slate-100 text-slate-700 font-semibold px-2.5 py-1 rounded-md border border-slate-300">
-              Only 1 Qualification can be selected
-            </span>
-          </div>
-
-          {/* ATOM: FIELD_EDUCATION_LEVEL */}
-          <div id="atom-field-education-level" data-atom-id="FIELD_EDUCATION_LEVEL">
-            <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-              Education Qualification (Select One) <span className="text-red-600">*</span>
-            </label>
-            <select
-              value={formData.education_level_id !== undefined && formData.education_level_id !== null ? formData.education_level_id : ''}
-              onChange={(e) => {
-                const val = e.target.value
-                if (val === '') {
+              {/* ATOM: FIELD_ADDRESS_AREA_VILLAGE (Step 3: Suggests villages of the selected state/city) */}
+              <AutocompleteInput
+                id="field-area-village"
+                atomId="FIELD_ADDRESS_AREA_VILLAGE"
+                label="Area or Village Name"
+                value={formData.area_village}
+                disabled={!formData.state || !formData.city}
+                onChange={(val) => setFormData((prev) => ({ ...prev, area_village: val }))}
+                onSelectOption={(item) => {
                   setFormData((prev) => ({
                     ...prev,
-                    education_level_id: '',
-                    education_level: '',
-                    below_10th_standard: '',
-                    education_history: [],
+                    area_village: item.name,
+                    city: item.district || prev.city,
+                    state: item.state || prev.state,
                   }))
-                  return
+                }}
+                options={contextualVillageOptions}
+                placeholder={villagePlaceholder}
+                required={true}
+                error={errors.area_village}
+                helperText={
+                  !formData.state
+                    ? 'Please select a State first'
+                    : !formData.city
+                      ? `Please select a City in ${formData.state} first`
+                      : 'Select from suggestions or type your village/area manually'
                 }
-                const id = Number(val)
-                const opt = EDUCATION_LEVELS.find((l) => l.id === id)
-                setFormData((prev) => ({
-                  ...prev,
-                  education_level_id: id,
-                  education_level: opt ? opt.label : '',
-                  below_10th_standard: id === 0 ? prev.below_10th_standard : '',
-                  education_history: getInitialEducationHistory(
-                    id,
-                    id === 0 ? prev.below_10th_standard : ''
-                  ),
-                }))
-              }}
-              className={`w-full bg-white border ${errors.education_level ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'
-                } rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-            >
-              <option value="">-- Select Education Qualification (શૈક્ષણિક લાયકાત પસંદ કરો) --</option>
-              {EDUCATION_LEVELS.filter((level) =>
-                activeCourse ? activeCourse.allowedEduLevels.includes(level.id) : true
-              ).map((level) => (
-                <option key={level.id} value={level.id}>
-                  {level.label}
-                </option>
-              ))}
-            </select>
-            {errors.education_level && (
-              <p className="text-xs text-red-600 font-semibold mt-1">
-                {errors.education_level}
-              </p>
-            )}
+              />
 
-            {/* ATOM: FIELD_BELOW_10TH_STANDARD (Dropdown for 1st pass to 10th pass when Below 10th pass is selected) */}
-            {formData.education_level_id === 0 && (
-              <div
-                id="atom-field-below-10th-standard"
-                data-atom-id="FIELD_BELOW_10TH_STANDARD"
-                className="mt-3 p-3.5 bg-amber-50/80 border border-amber-300 rounded-xl space-y-1.5"
-              >
-                <label className="block text-xs font-bold text-slate-900 capitalize flex items-center justify-between">
-                  <span>
-                    Select Standard / Class Passed (Below 10th) <span className="text-red-600">*</span>
+              {/* ATOM: FIELD_ADDRESS_PINCODE (Instant Auto-fill Trigger for City, State, and Village) */}
+              <div id="atom-field-pincode" data-atom-id="FIELD_ADDRESS_PINCODE">
+                <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    Pincode (6 Digits) <span className="text-red-600">*</span>
+                    <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] bg-rose-100 text-rose-800 font-semibold">
+                      <Sparkles className="w-2.5 h-2.5 text-rose-600 animate-pulse" /> Auto-detect
+                    </span>
                   </span>
-                  <span className="text-[10px] text-amber-800 font-semibold bg-amber-100 px-2 py-0.5 rounded">
-                    Required for Below 10th
-                  </span>
+                  {pincodeLoading && (
+                    <span className="text-[11px] text-rose-600 font-medium flex items-center gap-1">
+                      <Loader2 className="w-3 h-3 animate-spin" /> Detecting...
+                    </span>
+                  )}
                 </label>
-                <select
-                  id="field-below-10th-standard"
-                  value={formData.below_10th_standard || ''}
-                  onChange={(e) => {
-                    const std = e.target.value
+                <div className="relative">
+                  <input
+                    type="text"
+                    id="field-pincode"
+                    name="postal-code"
+                    autoComplete="postal-code"
+                    maxLength={6}
+                    placeholder="e.g. 380061"
+                    value={formData.pincode}
+                    onChange={handlePincodeChange}
+                    className={`w-full bg-white border ${errors.pincode ? 'border-red-500' : 'border-slate-300'
+                      } rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs ${formData.pincode && formData.pincode.length === 6 ? 'pr-24' : ''
+                      }`}
+                  />
+                  {formData.pincode && formData.pincode.length === 6 && (
+                    <button
+                      type="button"
+                      onClick={() => lookupPincode(formData.pincode, false)}
+                      disabled={pincodeLoading}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 px-2.5 py-1 text-[11px] font-semibold bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-lg border border-rose-200 transition-colors flex items-center gap-1 cursor-pointer disabled:opacity-50 shadow-2xs"
+                      title="Re-fetch Postal details"
+                    >
+                      <RefreshCw className={`w-3 h-3 ${pincodeLoading ? 'animate-spin' : ''}`} />
+                      Auto-fill
+                    </button>
+                  )}
+                </div>
+
+                {/* Live status feedback badge */}
+                {pincodeStatusMsg.text && (
+                  <div
+                    className={`mt-1.5 p-2 rounded-lg text-xs flex items-start gap-1.5 ${pincodeStatusMsg.isError
+                      ? 'bg-amber-50 text-amber-800 border border-amber-200'
+                      : 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                      }`}
+                  >
+                    {pincodeStatusMsg.isError ? (
+                      <AlertCircle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                    ) : (
+                      <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    )}
+                    <span className="leading-tight font-medium">{pincodeStatusMsg.text}</span>
+                  </div>
+                )}
+
+                {errors.pincode && <p className="text-xs text-red-600 mt-1">{errors.pincode}</p>}
+              </div>
+
+              {/* ATOM: FIELD_ADDRESS_PERMANENT */}
+              <div id="atom-field-permanent-address" data-atom-id="FIELD_ADDRESS_PERMANENT" className="md:col-span-2 pt-2">
+                <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold text-slate-800">
+                  <input
+                    type="checkbox"
+                    checked={formData.same_as_postal}
+                    onChange={(e) =>
+                      setFormData({ ...formData, same_as_postal: e.target.checked })
+                    }
+                    className="w-4 h-4 text-rose-600 rounded focus:ring-rose-500 border-slate-300"
+                  />
+                  <span>Permanent Address is same as Postal Address</span>
+                </label>
+
+                {!formData.same_as_postal && (
+                  <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="md:col-span-2">
+                      <label className="block text-xs font-bold text-slate-700 mb-1">
+                        Permanent Full Address (Flat, Street, Area)
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Permanent Full Address"
+                        value={formData.permanent_address}
+                        onChange={(e) =>
+                          setFormData({ ...formData, permanent_address: e.target.value })
+                        }
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 shadow-xs"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1 flex items-center justify-between">
+                        <span>Permanent Pincode</span>
+                        {permPincodeStatusMsg.text && (
+                          <span className={`text-[10px] font-medium ${permPincodeStatusMsg.isError ? 'text-amber-600' : 'text-emerald-700'}`}>
+                            {permPincodeStatusMsg.text}
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        type="text"
+                        maxLength={6}
+                        placeholder="e.g. 380061"
+                        value={formData.permanent_pincode}
+                        onChange={(e) => {
+                          const rawVal = e.target.value.replace(/\D/g, '').slice(0, 6)
+                          setFormData({ ...formData, permanent_pincode: rawVal })
+                          if (rawVal.length === 6) {
+                            lookupPincode(rawVal, true)
+                          } else {
+                            setPermPincodeStatusMsg({ text: '', isError: false })
+                          }
+                        }}
+                        className="w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2.5 text-sm font-mono text-slate-900 shadow-xs"
+                      />
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* ATOM: EDUCATION_QUALIFICATION_SECTION */}
+          {/* ============================================================ */}
+          <div
+            id="atom-education-qualification-section"
+            data-atom-id="EDUCATION_QUALIFICATION_SECTION"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-6"
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
+                <BookOpen className="w-5 h-5 text-rose-700" /> Education Qualification &amp; Proofs
+              </h2>
+              <span className="text-xs bg-slate-100 text-slate-700 font-semibold px-2.5 py-1 rounded-md border border-slate-300">
+                Only 1 Qualification can be selected
+              </span>
+            </div>
+
+            {/* ATOM: FIELD_EDUCATION_LEVEL */}
+            <div id="atom-field-education-level" data-atom-id="FIELD_EDUCATION_LEVEL">
+              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                Education Qualification (Select One) <span className="text-red-600">*</span>
+              </label>
+              <select
+                value={formData.education_level_id !== undefined && formData.education_level_id !== null ? formData.education_level_id : ''}
+                onChange={(e) => {
+                  const val = e.target.value
+                  if (val === '') {
                     setFormData((prev) => ({
                       ...prev,
-                      below_10th_standard: std,
-                      education_history:
-                        prev.education_level_id === 0 && prev.education_history.length === 1
-                          ? [
-                            {
-                              ...prev.education_history[0],
-                              exam: std ? `Below 10th (${std})` : 'Below 10th pass',
-                            },
-                          ]
-                          : prev.education_history,
+                      education_level_id: '',
+                      education_level: '',
+                      below_10th_standard: '',
+                      education_history: [],
                     }))
-                  }}
-                  className={`w-full bg-white border ${errors.below_10th_standard ? 'border-red-500' : 'border-slate-300'
-                    } rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
-                >
-                  <option value="">-- Select Standard Passed (1st to 10th) --</option>
-                  {BELOW_10TH_STANDARDS.map((std) => (
-                    <option key={std} value={std}>
-                      {std}
-                    </option>
-                  ))}
-                </select>
-                {errors.below_10th_standard && (
-                  <p className="text-xs text-red-600 font-semibold mt-1">
-                    {errors.below_10th_standard}
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* Dynamic Education Qualification Eligibility Alert */}
-            {eduValidationMsg.text && (
-              <div
-                className={`mt-2.5 p-3 rounded-xl text-xs font-medium flex items-start gap-2.5 ${eduValidationMsg.valid
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                  : 'bg-red-50 text-red-800 border border-red-300'
-                  }`}
+                    return
+                  }
+                  const id = Number(val)
+                  const opt = EDUCATION_LEVELS.find((l) => l.id === id)
+                  setFormData((prev) => ({
+                    ...prev,
+                    education_level_id: id,
+                    education_level: opt ? opt.label : '',
+                    below_10th_standard: id === 0 ? prev.below_10th_standard : '',
+                    education_history: getInitialEducationHistory(
+                      id,
+                      id === 0 ? prev.below_10th_standard : ''
+                    ),
+                  }))
+                }}
+                className={`w-full bg-white border ${errors.education_level ? 'border-red-500 ring-1 ring-red-400' : 'border-slate-300'
+                  } rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
               >
-                {eduValidationMsg.valid ? (
-                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                ) : (
-                  <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
-                )}
-                <span>{eduValidationMsg.text}</span>
-              </div>
-            )}
-          </div>
-
-          {/* ATOM: FIELD_YEAR_OF_PASSING */}
-          <div id="atom-field-year-of-passing" data-atom-id="FIELD_YEAR_OF_PASSING">
-            <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
-              Year of Passing (Last Exam Passed) <span className="text-red-600">*</span>
-            </label>
-            <input
-              type="text"
-              placeholder="e.g. 2023"
-              maxLength={4}
-              value={formData.year_of_passing}
-              onChange={(e) =>
-                setFormData({
-                  ...formData,
-                  year_of_passing: e.target.value.replace(/\D/g, ''),
-                })
-              }
-              className="w-full sm:w-64 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-sm font-mono text-slate-900 shadow-xs"
-            />
-          </div>
-
-          {/* ============================================================ */}
-          {/* ATOM: CONDITIONAL_PROOFS_UPLOAD_CARDS (MULTIPLE FILES FOR EACH) */}
-          {/* ============================================================ */}
-          <div
-            id="atom-conditional-proofs-upload-cards"
-            data-atom-id="CONDITIONAL_PROOFS_UPLOAD_CARDS"
-            className="bg-slate-50 border border-slate-300 rounded-2xl p-5 space-y-4 print:bg-white print:border-slate-300 print:p-3 print:rounded-none"
-          >
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3 print:pb-1">
-              <div>
-                <h3 className="text-xs font-bold uppercase text-slate-800 tracking-wider">
-                  Required Proof Uploads {formData.education_level ? `for ${formData.education_level}` : ''}
-                </h3>
-                <p className="text-[11px] text-slate-500 print:hidden">
-                  You can upload multiple files (photos, PDFs, documents) for each required proof.
+                <option value="">-- Select Education Qualification (શૈક્ષણિક લાયકાત પસંદ કરો) --</option>
+                {EDUCATION_LEVELS.filter((level) =>
+                  activeCourse ? activeCourse.allowedEduLevels.includes(level.id) : true
+                ).map((level) => (
+                  <option key={level.id} value={level.id}>
+                    {level.label}
+                  </option>
+                ))}
+              </select>
+              {errors.education_level && (
+                <p className="text-xs text-red-600 font-semibold mt-1">
+                  {errors.education_level}
                 </p>
-              </div>
-            </div>
+              )}
 
-            {formData.education_level_id !== '' && formData.education_level_id !== null && formData.education_level_id !== undefined ? (
-              <div className="grid grid-cols-1 gap-4">
-                {/* ATOM: UPLOAD_SCHOOL_LEAVING_CERT (Multiple files allowed) */}
-                {renderMultiUploadBox({
-                  field: 'school_leaving_certificates',
-                  label:
-                    formData.education_level_id === 0
-                      ? '01) School Leaving Certificate / School Marksheet (Photos / PDFs)'
-                      : '01) School Leaving Certificate (Photos / PDFs)',
-                  required: true,
-                  atomId: 'UPLOAD_SCHOOL_LEAVING_CERT',
-                  description:
-                    formData.education_level_id === 0
-                      ? 'Upload School Leaving Certificate or marksheets of highest class passed.'
-                      : 'Upload multiple photos or PDFs of the School Leaving Certificate.',
-                })}
+              {/* ATOM: FIELD_BELOW_10TH_STANDARD (Dropdown for 1st pass to 10th pass when Below 10th pass is selected) */}
+              {formData.education_level_id === 0 && (
+                <div
+                  id="atom-field-below-10th-standard"
+                  data-atom-id="FIELD_BELOW_10TH_STANDARD"
+                  className="mt-3 p-3.5 bg-amber-50/80 border border-amber-300 rounded-xl space-y-1.5"
+                >
+                  <label className="block text-xs font-bold text-slate-900 capitalize flex items-center justify-between">
+                    <span>
+                      Select Standard / Class Passed (Below 10th) <span className="text-red-600">*</span>
+                    </span>
+                    <span className="text-[10px] text-amber-800 font-semibold bg-amber-100 px-2 py-0.5 rounded">
+                      Required for Below 10th
+                    </span>
+                  </label>
+                  <select
+                    id="field-below-10th-standard"
+                    value={formData.below_10th_standard || ''}
+                    onChange={(e) => {
+                      const std = e.target.value
+                      setFormData((prev) => ({
+                        ...prev,
+                        below_10th_standard: std,
+                        education_history:
+                          prev.education_level_id === 0 && prev.education_history.length === 1
+                            ? [
+                              {
+                                ...prev.education_history[0],
+                                exam: std ? `Below 10th (${std})` : 'Below 10th pass',
+                              },
+                            ]
+                            : prev.education_history,
+                      }))
+                    }}
+                    className={`w-full bg-white border ${errors.below_10th_standard ? 'border-red-500' : 'border-slate-300'
+                      } rounded-xl px-3.5 py-2.5 text-sm font-bold text-slate-900 focus:ring-2 focus:ring-rose-600 focus:outline-none shadow-xs`}
+                  >
+                    <option value="">-- Select Standard Passed (1st to 10th) --</option>
+                    {BELOW_10TH_STANDARDS.map((std) => (
+                      <option key={std} value={std}>
+                        {std}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.below_10th_standard && (
+                    <p className="text-xs text-red-600 font-semibold mt-1">
+                      {errors.below_10th_standard}
+                    </p>
+                  )}
+                </div>
+              )}
 
-                {/* ATOM: UPLOAD_MARKSHEET_10TH (Multiple files allowed - 10th pass and above) */}
-                {formData.education_level_id !== 0 &&
-                  renderMultiUploadBox({
-                    field: 'marksheets_10th',
-                    label: '02) 10th Marksheet (Photos / PDFs)',
-                    required: true,
-                    atomId: 'UPLOAD_MARKSHEET_10TH',
-                    description: 'Upload multiple photos or PDFs of the 10th Standard Marksheet / Certificate.',
-                  })}
-
-                {/* ATOM: UPLOAD_MARKSHEET_12TH (Levels 2, 3, 4 - Multiple files allowed) */}
-                {(formData.education_level_id === 2 ||
-                  formData.education_level_id === 3 ||
-                  formData.education_level_id === 4) &&
-                  renderMultiUploadBox({
-                    field: 'marksheets_12th',
-                    label: '03) 12th Marksheet (Photos / PDFs)',
-                    required: formData.education_level_id !== 3,
-                    atomId: 'UPLOAD_MARKSHEET_12TH',
-                    description: 'Upload multiple photos or PDFs of the 12th Standard Marksheet / Certificate.',
-                  })}
-
-                {/* ATOM: UPLOAD_DIPLOMA_CERT (Level 3 - Multiple files allowed) */}
-                {formData.education_level_id === 3 &&
-                  renderMultiUploadBox({
-                    field: 'diploma_certificates',
-                    label: '04) Diploma (03 years) Marksheets & Pass Certificate (Photos / PDFs)',
-                    required: true,
-                    atomId: 'UPLOAD_DIPLOMA_CERT',
-                    description: 'Upload multiple semester marksheets and diploma passing certificate files.',
-                  })}
-
-                {/* ATOM: UPLOAD_UG_DEGREE_CERT (Level 4 - Multiple files allowed) */}
-                {formData.education_level_id === 4 &&
-                  renderMultiUploadBox({
-                    field: 'ug_degree_certificates',
-                    label: '05) UnderGraduate (UG) Degree Certificate & Marksheets (Photos / PDFs)',
-                    required: true,
-                    atomId: 'UPLOAD_UG_DEGREE_CERT',
-                    description: 'Upload multiple semester / year marksheets and degree pass certificate files.',
-                  })}
-              </div>
-            ) : (
-              <p className="text-xs text-slate-500 italic py-2">
-                Please select an Education Qualification above to view required document upload fields.
-              </p>
-            )}
-          </div>
-
-          {/* ============================================================ */}
-          {/* ATOM: TABLE_EDUCATION_HISTORY (3 Columns: Exam, Board, Year) */}
-          {/* ============================================================ */}
-          <div
-            id="atom-table-education-history"
-            data-atom-id="TABLE_EDUCATION_HISTORY"
-            className="space-y-3"
-          >
-            <div className="flex items-center justify-between">
-              <label className="block text-xs font-bold text-slate-800 capitalize">
-                Education Table (Last Exam Passed)
-              </label>
-              <button
-                type="button"
-                onClick={addEducationRow}
-                className="text-xs font-semibold text-rose-700 hover:text-rose-900 cursor-pointer"
-              >
-                + Add Another Exam Row
-              </button>
-            </div>
-
-            <div className="overflow-x-auto md:overflow-visible border border-slate-900 ">
-              <table className="min-w-full divide-y divide-slate-900 text-sm ">
-                <thead className="bg-slate-100 font-bold text-slate-900">
-                  <tr>
-                    <th className="px-3 py-2 text-left border-r border-slate-900 text-xs">
-                      Exam Passed
-                    </th>
-                    <th className="px-3 py-2 text-left border-r border-slate-900 text-xs">
-                      Board / University
-                    </th>
-                    <th className="px-3 py-2 text-left border-r border-slate-900 text-xs w-36">
-                      Year of Passing
-                    </th>
-                    <th className="px-2 py-2 text-center text-xs w-16 print:hidden">
-                      Action
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-300 bg-white">
-                  {formData.education_history.length === 0 ? (
-                    <tr>
-                      <td colSpan={4} className="py-8 text-center text-xs text-slate-500 italic bg-slate-50">
-                        Please select Education Qualification above to automatically generate required exam rows.
-                      </td>
-                    </tr>
+              {/* Dynamic Education Qualification Eligibility Alert */}
+              {eduValidationMsg.text && (
+                <div
+                  className={`mt-2.5 p-3 rounded-xl text-xs font-medium flex items-start gap-2.5 ${eduValidationMsg.valid
+                    ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
+                    : 'bg-red-50 text-red-800 border border-red-300'
+                    }`}
+                >
+                  {eduValidationMsg.valid ? (
+                    <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   ) : (
-                    formData.education_history.map((row, index) => (
-                      <tr key={index} className="relative">
-                        <td className="p-1 border-r border-slate-900 relative">
-                          <TableExamAutocomplete
-                            value={row.exam}
-                            onChange={(val) =>
-                              updateEducationHistory(index, 'exam', val)
-                            }
-                            placeholder="Select or type exam (e.g. 10th pass)"
-                            rowIndex={index}
-                            allRows={formData.education_history}
-                            allowedEduLevels={activeCourse ? activeCourse.allowedEduLevels : [0, 1, 2, 3, 4]}
-                          />
-                        </td>
-                        <td className="p-1 border-r border-slate-900">
-                          <input
-                            type="text"
-                            value={row.board}
-                            onChange={(e) =>
-                              updateEducationHistory(index, 'board', e.target.value)
-                            }
-                            className="w-full px-2 py-1 text-xs border-0 focus:ring-0 text-slate-800"
-                            placeholder="e.g. GSEB"
-                          />
-                        </td>
-                        <td className="p-1 border-r border-slate-900">
-                          <input
-                            type="text"
-                            maxLength={4}
-                            value={row.year}
-                            onChange={(e) =>
-                              updateEducationHistory(index, 'year', e.target.value)
-                            }
-                            className="w-full px-2 py-1 text-xs border-0 focus:ring-0 text-slate-800 font-mono"
-                            placeholder="2022"
-                          />
-                        </td>
-                        <td className="p-1 text-center print:hidden">
-                          <button
-                            type="button"
-                            onClick={() => removeEducationRow(index)}
-                            className="p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer inline-flex items-center justify-center"
-                            title="Remove this exam row"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
+                    <AlertCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                  )}
+                  <span>{eduValidationMsg.text}</span>
+                </div>
+              )}
+            </div>
+
+            {/* ATOM: FIELD_YEAR_OF_PASSING */}
+            <div id="atom-field-year-of-passing" data-atom-id="FIELD_YEAR_OF_PASSING">
+              <label className="block text-xs font-bold text-slate-800 capitalize mb-1.5">
+                Year of Passing (Last Exam Passed) <span className="text-red-600">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="e.g. 2023"
+                maxLength={4}
+                value={formData.year_of_passing}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    year_of_passing: e.target.value.replace(/\D/g, ''),
+                  })
+                }
+                className="w-full sm:w-64 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-sm font-mono text-slate-900 shadow-xs"
+              />
+            </div>
+
+            {/* ============================================================ */}
+            {/* ATOM: CONDITIONAL_PROOFS_UPLOAD_CARDS (MULTIPLE FILES FOR EACH) */}
+            {/* ============================================================ */}
+            <div
+              id="atom-conditional-proofs-upload-cards"
+              data-atom-id="CONDITIONAL_PROOFS_UPLOAD_CARDS"
+              className="bg-slate-50 border border-slate-300 rounded-2xl p-5 space-y-4 print:bg-white print:border-slate-300 print:p-3 print:rounded-none"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-200 pb-3 print:pb-1">
+                <div>
+                  <h3 className="text-xs font-bold uppercase text-slate-800 tracking-wider">
+                    Required Proof Uploads {formData.education_level ? `for ${formData.education_level}` : ''}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 print:hidden">
+                    You can upload multiple files (photos, PDFs, documents) for each required proof.
+                  </p>
+                </div>
+              </div>
+
+              {formData.education_level_id !== '' && formData.education_level_id !== null && formData.education_level_id !== undefined ? (
+                <div className="grid grid-cols-1 gap-4">
+                  {/* ATOM: UPLOAD_SCHOOL_LEAVING_CERT (Multiple files allowed) */}
+                  {renderMultiUploadBox({
+                    field: 'school_leaving_certificates',
+                    label:
+                      formData.education_level_id === 0
+                        ? '01) School Leaving Certificate / School Marksheet (Photos / PDFs)'
+                        : '01) School Leaving Certificate (Photos / PDFs)',
+                    required: true,
+                    atomId: 'UPLOAD_SCHOOL_LEAVING_CERT',
+                    description:
+                      formData.education_level_id === 0
+                        ? 'Upload School Leaving Certificate or marksheets of highest class passed.'
+                        : 'Upload multiple photos or PDFs of the School Leaving Certificate.',
+                  })}
+
+                  {/* ATOM: UPLOAD_MARKSHEET_10TH (Multiple files allowed - 10th pass and above) */}
+                  {formData.education_level_id !== 0 &&
+                    renderMultiUploadBox({
+                      field: 'marksheets_10th',
+                      label: '02) 10th Marksheet (Photos / PDFs)',
+                      required: true,
+                      atomId: 'UPLOAD_MARKSHEET_10TH',
+                      description: 'Upload multiple photos or PDFs of the 10th Standard Marksheet / Certificate.',
+                    })}
+
+                  {/* ATOM: UPLOAD_MARKSHEET_12TH (Levels 2, 3, 4, 5, 6 - Multiple files allowed) */}
+                  {(formData.education_level_id === 2 ||
+                    formData.education_level_id === 3 ||
+                    formData.education_level_id === 4 ||
+                    formData.education_level_id === 5 ||
+                    formData.education_level_id === 6) &&
+                    renderMultiUploadBox({
+                      field: 'marksheets_12th',
+                      label: '03) 12th Marksheet (Photos / PDFs)',
+                      required: formData.education_level_id !== 3,
+                      atomId: 'UPLOAD_MARKSHEET_12TH',
+                      description: 'Upload multiple photos or PDFs of the 12th Standard Marksheet / Certificate.',
+                    })}
+
+                  {/* ATOM: UPLOAD_DIPLOMA_CERT (Levels 3 & 4 - Diploma after 10th / 12th) */}
+                  {(formData.education_level_id === 3 || formData.education_level_id === 4) &&
+                    renderMultiUploadBox({
+                      field: 'diploma_certificates',
+                      label:
+                        formData.education_level_id === 4
+                          ? '04) Diploma (after 12th) Marksheets & Certificate (Photos / PDFs)'
+                          : '04) Diploma (03 years after 10th) Marksheets & Pass Certificate (Photos / PDFs)',
+                      required: true,
+                      atomId: 'UPLOAD_DIPLOMA_CERT',
+                      description: 'Upload multiple semester marksheets and diploma passing certificate files.',
+                    })}
+
+                  {/* ATOM: UPLOAD_UG_DEGREE_CERT (Levels 5 & 6 - UG & PG candidates) */}
+                  {(formData.education_level_id === 5 || formData.education_level_id === 6) &&
+                    renderMultiUploadBox({
+                      field: 'ug_degree_certificates',
+                      label: '05) UnderGraduate (UG) Degree Certificate & Marksheets (Photos / PDFs)',
+                      required: true,
+                      atomId: 'UPLOAD_UG_DEGREE_CERT',
+                      description: 'Upload multiple semester / year marksheets and degree pass certificate files.',
+                    })}
+
+                  {/* ATOM: UPLOAD_PG_DEGREE_CERT (Level 6 - PG candidates) */}
+                  {formData.education_level_id === 6 &&
+                    renderMultiUploadBox({
+                      field: 'pg_degree_certificates',
+                      label: '06) PostGraduate (PG) Degree Certificate & Marksheets (Photos / PDFs)',
+                      required: true,
+                      atomId: 'UPLOAD_PG_DEGREE_CERT',
+                      description: 'Upload multiple semester / year marksheets and PG degree pass certificate files.',
+                    })}
+                </div>
+              ) : (
+                <p className="text-xs text-slate-500 italic py-2">
+                  Please select an Education Qualification above to view required document upload fields.
+                </p>
+              )}
+            </div>
+
+            {/* ============================================================ */}
+            {/* ATOM: TABLE_EDUCATION_HISTORY (3 Columns: Exam, Board, Year) */}
+            {/* ============================================================ */}
+            <div
+              id="atom-table-education-history"
+              data-atom-id="TABLE_EDUCATION_HISTORY"
+              className="space-y-3"
+            >
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold text-slate-800 capitalize">
+                  Education Table (Last Exam Passed)
+                </label>
+                <button
+                  type="button"
+                  onClick={addEducationRow}
+                  className="text-xs font-semibold text-rose-700 hover:text-rose-900 cursor-pointer"
+                >
+                  + Add Another Exam Row
+                </button>
+              </div>
+
+              <div className="overflow-x-auto md:overflow-visible border border-slate-900 ">
+                <table className="min-w-full divide-y divide-slate-900 text-sm ">
+                  <thead className="bg-slate-100 font-bold text-slate-900">
+                    <tr>
+                      <th className="px-3 py-2 text-left border-r border-slate-900 text-xs">
+                        Exam Passed
+                      </th>
+                      <th className="px-3 py-2 text-left border-r border-slate-900 text-xs">
+                        Board / University
+                      </th>
+                      <th className="px-3 py-2 text-left border-r border-slate-900 text-xs w-36">
+                        Year of Passing
+                      </th>
+                      <th className="px-2 py-2 text-center text-xs w-16 print:hidden">
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-300 bg-white">
+                    {formData.education_history.length === 0 ? (
+                      <tr>
+                        <td colSpan={4} className="py-8 text-center text-xs text-slate-500 italic bg-slate-50">
+                          Please select Education Qualification above to automatically generate required exam rows.
                         </td>
                       </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                    ) : (
+                      formData.education_history.map((row, index) => (
+                        <tr key={index} className="relative">
+                          <td className="p-1 border-r border-slate-900 relative">
+                            <TableExamAutocomplete
+                              value={row.exam}
+                              onChange={(val) =>
+                                updateEducationHistory(index, 'exam', val)
+                              }
+                              placeholder="Select or type exam (e.g. 10th pass)"
+                              rowIndex={index}
+                              allRows={formData.education_history}
+                              allowedEduLevels={activeCourse ? activeCourse.allowedEduLevels : [0, 1, 2, 3, 4]}
+                            />
+                          </td>
+                          <td className="p-1 border-r border-slate-900">
+                            <input
+                              type="text"
+                              value={row.board}
+                              onChange={(e) =>
+                                updateEducationHistory(index, 'board', e.target.value)
+                              }
+                              className="w-full px-2 py-1 text-xs border-0 focus:ring-0 text-slate-800"
+                              placeholder="e.g. GSEB"
+                            />
+                          </td>
+                          <td className="p-1 border-r border-slate-900">
+                            <input
+                              type="text"
+                              maxLength={4}
+                              value={row.year}
+                              onChange={(e) =>
+                                updateEducationHistory(index, 'year', e.target.value)
+                              }
+                              className="w-full px-2 py-1 text-xs border-0 focus:ring-0 text-slate-800 font-mono"
+                              placeholder="2022"
+                            />
+                          </td>
+                          <td className="p-1 text-center print:hidden">
+                            <button
+                              type="button"
+                              onClick={() => removeEducationRow(index)}
+                              className="p-1 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer inline-flex items-center justify-center"
+                              title="Remove this exam row"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* ============================================================ */}
-        {/* ATOM: BOX_PHYSICAL_DOCUMENTS_CHECKLIST */}
-        {/* ============================================================ */}
-        <div
-          id="atom-box-physical-documents-checklist"
-          data-atom-id="BOX_PHYSICAL_DOCUMENTS_CHECKLIST"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 bg-amber-50/50"
-        >
-          <div className="flex items-start gap-3">
-            <Info className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
-            <div className="space-y-2">
-              <h3 className="text-sm font-bold capitalize text-amber-950 tracking-wider">
-                Physical Required Documents (To bring at Training Center)
-              </h3>
-              <p className="text-xs text-amber-900">
-                Candidates must carry the original and photocopies of the following 7 documents
-                during admission verification:
+          {/* ============================================================ */}
+          {/* ATOM: BOX_PHYSICAL_DOCUMENTS_CHECKLIST */}
+          {/* ============================================================ */}
+          <div
+            id="atom-box-physical-documents-checklist"
+            data-atom-id="BOX_PHYSICAL_DOCUMENTS_CHECKLIST"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 bg-amber-50/50"
+          >
+            <div className="flex items-start gap-3">
+              <Info className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
+              <div className="space-y-2">
+                <h3 className="text-sm font-bold capitalize text-amber-950 tracking-wider">
+                  Physical Required Documents (To bring at Training Center)
+                </h3>
+                <p className="text-xs text-amber-900">
+                  Candidates must carry the original and photocopies of the following 7 documents
+                  during admission verification:
+                </p>
+                <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-800 pt-2 list-decimal list-inside">
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    4 Passport Size Photos
+                  </li>
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    Aadhar Card Color Xerox
+                  </li>
+                  <li className="bg-white p-2 rounded border border-amber-200">Voter ID Card</li>
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    Marksheet (10th / 12th / Diploma / Degree)
+                  </li>
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    School Leaving Certificate
+                  </li>
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    Bank Passbook Front Page Xerox
+                  </li>
+                  <li className="bg-white p-2 rounded border border-amber-200">
+                    Marriage Certificate (if married)
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* ATOM: SECTION_TERMS_AND_CONDITIONS */}
+          {/* ============================================================ */}
+          <div
+            id="atom-section-terms-and-conditions"
+            data-atom-id="SECTION_TERMS_AND_CONDITIONS"
+            className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-4"
+          >
+            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
+              <ShieldCheck className="w-5 h-5 text-rose-700" /> Terms and Conditions
+            </h2>
+
+            <div className="bg-slate-50 p-5 rounded-2xl border border-slate-300 text-xs text-slate-700 space-y-2.5 leading-relaxed">
+              <p>1. The candidate must be a resident of Gujarat.</p>
+              <p>2. A minimum of 90% attendance is mandatory throughout the training program.</p>
+              <p>
+                3. The candidate must attend all practical sessions, assessments, and examinations as
+                Scheduled.
               </p>
-              <ol className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-800 pt-2 list-decimal list-inside">
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  4 Passport Size Photos
-                </li>
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  Aadhar Card Color Xerox
-                </li>
-                <li className="bg-white p-2 rounded border border-amber-200">Voter ID Card</li>
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  Marksheet (10th / 12th / Diploma / Degree)
-                </li>
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  School Leaving Certificate
-                </li>
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  Bank Passbook Front Page Xerox
-                </li>
-                <li className="bg-white p-2 rounded border border-amber-200">
-                  Marriage Certificate (if married)
-                </li>
-              </ol>
+              <p>
+                4. The course is completely free of cost. No fees or charges are payable by the
+                Candidate.
+              </p>
+              <p>
+                5. Candidates must inform the training center in case of prolonged absence due to
+                Genuine reasons.
+              </p>
+              <p>6. The candidate must submit all required documents before admission.</p>
+              <p>
+                7. Candidates must maintain discipline and follow all rules and regulations of the
+                Training center.
+              </p>
+              <p>
+                8. Any misconduct, use of unfair means, or submission of false information may lead to
+                Cancellation of admission.
+              </p>
             </div>
           </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: SECTION_TERMS_AND_CONDITIONS */}
-        {/* ============================================================ */}
-        <div
-          id="atom-section-terms-and-conditions"
-          data-atom-id="SECTION_TERMS_AND_CONDITIONS"
-          className="p-6 sm:p-8 border-b-2 border-slate-900 space-y-4"
-        >
-          <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide flex items-center gap-2">
-            <ShieldCheck className="w-5 h-5 text-rose-700" /> Terms and Conditions
-          </h2>
-
-          <div className="bg-slate-50 p-5 rounded-2xl border border-slate-300 text-xs text-slate-700 space-y-2.5 leading-relaxed">
-            <p>1. The candidate must be a resident of Gujarat.</p>
-            <p>2. A minimum of 90% attendance is mandatory throughout the training program.</p>
-            <p>
-              3. The candidate must attend all practical sessions, assessments, and examinations as
-              Scheduled.
-            </p>
-            <p>
-              4. The course is completely free of cost. No fees or charges are payable by the
-              Candidate.
-            </p>
-            <p>
-              5. Candidates must inform the training center in case of prolonged absence due to
-              Genuine reasons.
-            </p>
-            <p>6. The candidate must submit all required documents before admission.</p>
-            <p>
-              7. Candidates must maintain discipline and follow all rules and regulations of the
-              Training center.
-            </p>
-            <p>
-              8. Any misconduct, use of unfair means, or submission of false information may lead to
-              Cancellation of admission.
-            </p>
-          </div>
-        </div>
-
-        {/* ============================================================ */}
-        {/* ATOM: SECTION_DECLARATION_AND_SIGNATURES */}
-        {/* ============================================================ */}
-        <div
-          id="atom-section-declaration-and-signatures"
-          data-atom-id="SECTION_DECLARATION_AND_SIGNATURES"
-          className="p-6 sm:p-8 space-y-6 bg-white"
-        >
-          <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide">
-            Declaration
-          </h2>
-
-          {/* ATOM: CHECKBOX_DECLARATION */}
-          <div
-            id="atom-checkbox-declaration"
-            data-atom-id="CHECKBOX_DECLARATION"
-            className="bg-rose-50/70 border border-rose-200 p-4 rounded-xl"
-          >
-            <label className="flex items-start gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={formData.declaration_agreed}
-                onChange={(e) =>
-                  setFormData({ ...formData, declaration_agreed: e.target.checked })
-                }
-                className="w-5 h-5 text-rose-700 rounded focus:ring-rose-500 border-slate-400 shrink-0 mt-0.5 cursor-pointer"
-              />
-              <span className="text-xs sm:text-sm font-semibold text-slate-800 leading-normal">
-                I hereby declare that the information given in this application form is true to the
-                best of my knowledge and belief. And I have read all the rules and regulation and
-                promise to abide by it. <span className="text-red-600">*</span>
-              </span>
-            </label>
-            {errors.declaration && (
-              <p className="text-xs text-red-600 mt-2 font-bold">{errors.declaration}</p>
-            )}
-          </div>
 
           {/* ============================================================ */}
-          {/* ATOM: SIGNATURES_ROW (Both Sign Physically Upon Verification) */}
+          {/* ATOM: SECTION_DECLARATION_AND_SIGNATURES */}
           {/* ============================================================ */}
           <div
-            id="atom-signatures-row"
-            data-atom-id="SIGNATURES_ROW"
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4"
+            id="atom-section-declaration-and-signatures"
+            data-atom-id="SECTION_DECLARATION_AND_SIGNATURES"
+            className="p-6 sm:p-8 space-y-6 bg-white"
           >
-            {/* ATOM: SIGNATURE_PARENTS */}
+            <h2 className="text-base font-bold text-slate-900 capitalize tracking-wide">
+              Declaration
+            </h2>
+
+            {/* ATOM: CHECKBOX_DECLARATION */}
             <div
-              id="atom-signature-parents"
-              data-atom-id="SIGNATURE_PARENTS"
-              className="border border-slate-300 rounded-xl p-4 text-center bg-slate-50 space-y-3"
+              id="atom-checkbox-declaration"
+              data-atom-id="CHECKBOX_DECLARATION"
+              className="bg-rose-50/70 border border-rose-200 p-4 rounded-xl"
             >
-              <span className="text-xs font-bold text-slate-600 uppercase block">
-                Signature of Parents / Guardians
-              </span>
-              <div className="h-16 border-b border-dashed border-slate-400 flex items-end justify-center text-xs text-slate-400  pb-2">
-                (Sign physically upon verification)
-              </div>
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={formData.declaration_agreed}
+                  onChange={(e) =>
+                    setFormData({ ...formData, declaration_agreed: e.target.checked })
+                  }
+                  className="w-5 h-5 text-rose-700 rounded focus:ring-rose-500 border-slate-400 shrink-0 mt-0.5 cursor-pointer"
+                />
+                <span className="text-xs sm:text-sm font-semibold text-slate-800 leading-normal">
+                  I hereby declare that the information given in this application form is true to the
+                  best of my knowledge and belief. And I have read all the rules and regulation and
+                  promise to abide by it. <span className="text-red-600">*</span>
+                </span>
+              </label>
+              {errors.declaration && (
+                <p className="text-xs text-red-600 mt-2 font-bold">{errors.declaration}</p>
+              )}
             </div>
 
-            {/* ATOM: SIGNATURE_APPLICANT */}
+            {/* ============================================================ */}
+            {/* ATOM: SIGNATURES_ROW (Hidden on screen, visible only when printing) */}
+            {/* ============================================================ */}
             <div
-              id="atom-signature-applicant"
-              data-atom-id="SIGNATURE_APPLICANT"
-              className="border border-slate-300 rounded-xl p-4 text-center bg-slate-50 space-y-3"
+              id="atom-signatures-row"
+              data-atom-id="SIGNATURES_ROW"
+              className="hidden print:grid print:grid-cols-2 gap-6 pt-4 print:pt-3"
             >
-              <span className="text-xs font-bold text-slate-600 uppercase block">
-                Signature of Applicant
-              </span>
-              <div className="h-16 border-b border-dashed border-slate-400 flex items-end justify-center text-xs text-slate-400 pb-2">
-                (Sign physically upon verification)
-              </div>
-            </div>
-          </div>
-
-          {/* ATOM: FOOTER_DATE_PLACE */}
-          <div
-            id="atom-footer-date-place"
-            data-atom-id="FOOTER_DATE_PLACE"
-            className="flex justify-between items-center text-xs text-slate-600 pt-2 border-t border-slate-200"
-          >
-            <span>Date: <strong>{formData.application_date}</strong></span>
-            <span>Place: <strong>{formData.application_place}</strong></span>
-          </div>
-
-          {/* ============================================================ */}
-          {/* ATOM: SUBMIT_BUTTON_BAR */}
-          {/* ============================================================ */}
-          <div
-            id="atom-submit-button-bar"
-            data-atom-id="SUBMIT_BUTTON_BAR"
-            className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t-2 border-slate-900 print:hidden"
-          >
-            <p className="text-xs text-slate-500">
-              * On clicking Submit, your application will be saved to Supabase and a copy backed up locally.
-            </p>
-
-            <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto justify-end">
-              {/* ATOM: BUTTON_SUBMIT */}
-              <button
-                id="atom-button-submit"
-                data-atom-id="BUTTON_SUBMIT"
-                type="submit"
-                disabled={submitting || !formData.declaration_agreed || !!submitSuccess}
-                className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${submitting || !formData.declaration_agreed || !!submitSuccess
-                  ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
-                  : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
-                  }`}
+              {/* ATOM: SIGNATURE_PARENTS */}
+              <div
+                id="atom-signature-parents"
+                data-atom-id="SIGNATURE_PARENTS"
+                className="border border-slate-300 rounded-xl p-4 text-center bg-slate-50 space-y-3"
               >
-                {submitting ? (
-                  <>
-                    <RefreshCw className="w-5 h-5 animate-spin" /> Submitting Application...
-                  </>
-                ) : submitSuccess ? (
-                  <>
-                    <CheckCircle className="w-5 h-5 text-emerald-600" /> Application Submitted
-                  </>
-                ) : (
-                  <>
-                    <FileCheck className="w-5 h-5" /> Submit Admission Form
-                  </>
-                )}
-              </button>
+                <span className="text-xs font-bold text-slate-600 uppercase block">
+                  Signature of Parents / Guardians
+                </span>
+                <div className="h-16 border-b border-dashed border-slate-400 flex items-end justify-center text-xs text-slate-400  pb-2">
+                  (Sign physically upon verification)
+                </div>
+              </div>
+
+              {/* ATOM: SIGNATURE_APPLICANT */}
+              <div
+                id="atom-signature-applicant"
+                data-atom-id="SIGNATURE_APPLICANT"
+                className="border border-slate-300 rounded-xl p-4 text-center bg-slate-50 space-y-3"
+              >
+                <span className="text-xs font-bold text-slate-600 uppercase block">
+                  Signature of Applicant
+                </span>
+                <div className="h-16 border-b border-dashed border-slate-400 flex items-end justify-center text-xs text-slate-400 pb-2">
+                  (Sign physically upon verification)
+                </div>
+              </div>
+            </div>
+
+            {/* ATOM: FOOTER_DATE_PLACE */}
+            <div
+              id="atom-footer-date-place"
+              data-atom-id="FOOTER_DATE_PLACE"
+              className="flex justify-between items-center text-xs text-slate-600 pt-2 border-t border-slate-200"
+            >
+              <span>Date: <strong>{formData.application_date}</strong></span>
+              <span>Place: <strong>{formData.application_place}</strong></span>
+            </div>
+
+            {/* ============================================================ */}
+            {/* ATOM: SUBMIT_BUTTON_BAR */}
+            {/* ============================================================ */}
+            <div
+              id="atom-submit-button-bar"
+              data-atom-id="SUBMIT_BUTTON_BAR"
+              className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t-2 border-slate-900 print:hidden"
+            >
+              <p className="text-xs text-slate-500">
+                * On clicking Submit, your application will be saved to Supabase and a copy backed up locally.
+              </p>
+
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 w-full sm:w-auto justify-end">
+                {/* ATOM: BUTTON_SUBMIT */}
+                <button
+                  id="atom-button-submit"
+                  data-atom-id="BUTTON_SUBMIT"
+                  type="submit"
+                  disabled={submitting || !formData.declaration_agreed || !!submitSuccess}
+                  className={`w-full sm:w-auto px-10 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all flex items-center justify-center gap-2 select-none ${submitting || !formData.declaration_agreed || !!submitSuccess
+                    ? 'bg-slate-300 text-slate-500 cursor-not-allowed pointer-events-none opacity-60 shadow-none'
+                    : 'bg-rose-700 hover:bg-rose-800 text-white hover:shadow-rose-700/25 cursor-pointer'
+                    }`}
+                >
+                  {submitting ? (
+                    <>
+                      <RefreshCw className="w-5 h-5 animate-spin" /> Submitting Application...
+                    </>
+                  ) : submitSuccess ? (
+                    <>
+                      <CheckCircle className="w-5 h-5 text-emerald-600" /> Application Submitted
+                    </>
+                  ) : (
+                    <>
+                      <FileCheck className="w-5 h-5" /> Submit Admission Form
+                    </>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
       )}
 
       {/* Admin Discreet Test Data Filler Button (Tiny icon-only after form so users cannot find it) */}
