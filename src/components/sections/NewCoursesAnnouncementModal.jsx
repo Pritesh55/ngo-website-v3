@@ -30,7 +30,7 @@ const NEW_COURSES = [
     age: '20+ Years',
     fee: '100% FREE (રૂ. 0/-)',
     image: '/images/courses/fashion_designer_cources/Fashion_designer_Course.png',
-    link: '/courses/fashion-designer-cource',
+    link: '/courses/fashion-designer-course',
     tagColor: 'from-rose-500 to-orange-500',
     borderColor: 'border-rose-200 hover:border-rose-500 hover:ring-2 hover:ring-rose-400/40 hover:shadow-lg hover:shadow-rose-500/10',
     hoverTitleColor: 'group-hover:text-rose-600',
@@ -45,7 +45,7 @@ const NEW_COURSES = [
     age: '23+ Years',
     fee: '100% FREE (રૂ. 0/-)',
     image: '/images/courses/Boutique_Manager_Course/Boutique_Manager_Course.png',
-    link: '/courses/boutique-manager-cource',
+    link: '/courses/boutique-manager-course',
     tagColor: 'from-amber-500 to-orange-600',
     borderColor: 'border-amber-200 hover:border-amber-500 hover:ring-2 hover:ring-amber-400/40 hover:shadow-lg hover:shadow-amber-500/10',
     hoverTitleColor: 'group-hover:text-amber-700',
@@ -60,7 +60,7 @@ const NEW_COURSES = [
     age: '16+ Years',
     fee: '100% FREE (રૂ. 0/-)',
     image: '/images/courses/Purchase_Coordinator_Electronics/Purchase_Coordinator_Electronics.png',
-    link: '/courses/purchase-coordinator-electronics-cource',
+    link: '/courses/purchase-coordinator-electronics-course',
     tagColor: 'from-blue-600 to-cyan-600',
     borderColor: 'border-blue-200 hover:border-blue-500 hover:ring-2 hover:ring-blue-400/40 hover:shadow-lg hover:shadow-blue-500/10',
     hoverTitleColor: 'group-hover:text-blue-600',
@@ -139,7 +139,7 @@ export default function NewCoursesAnnouncementModal() {
 
                 {/* Main Heading */}
                 <h2 className="text-base sm:text-2xl md:text-3xl font-extrabold text-white leading-snug sm:leading-tight drop-shadow-xs">
-                  3 New Skill Development Courses Added — <span className="text-yellow-300">100% FREE!</span>
+                  New Skill Development Courses — <span className="text-yellow-300">100% FREE!</span>
                 </h2>
                 {/* Gujarati Subtitle */}
                 <p className="text-rose-100 text-[11px] sm:text-sm font-semibold mt-1 sm:mt-1.5 leading-normal">
@@ -158,11 +158,11 @@ export default function NewCoursesAnnouncementModal() {
                   </span>
                   <span className="bg-white/20 backdrop-blur-xs px-2 py-1 sm:px-2.5 rounded-md flex items-center gap-1 border border-white/20 truncate">
                     <ShieldCheck className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-300 shrink-0" />
-                    <span className="truncate">Govt. Stipend</span>
+                    <span className="truncate">Govt. Stipend after Certification</span>
                   </span>
                   <span className="bg-white/20 backdrop-blur-xs px-2 py-1 sm:px-2.5 rounded-md flex items-center gap-1 border border-white/20 truncate">
                     <GraduationCap className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-300 shrink-0" />
-                    <span className="truncate">100% Placement</span>
+                    <span className="truncate">100% Placement assistance</span>
                   </span>
                 </div>
               </div>
@@ -244,7 +244,7 @@ export default function NewCoursesAnnouncementModal() {
                         Course Details <ExternalLink className="w-3 h-3" />
                       </span>
                       <Link
-                        href="/admission-form"
+                        href={`/admission-form?course=${encodeURIComponent(course.id === 'fashion-designer' ? 'fashion designer' : course.id === 'boutique-manager' ? 'boutique manager' : 'purchase coordinator electronics')}`}
                         onClick={(e) => e.stopPropagation()}
                         className="text-xs font-extrabold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-md transition-colors shadow-2xs"
                       >

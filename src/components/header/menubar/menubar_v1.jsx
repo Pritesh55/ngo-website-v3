@@ -23,9 +23,9 @@ const menuItems = [
     {
         menuId: 3, label: 'Courses', href: '#', icon: GraduationCap,
         dropdown: [
-            { menuId: 3.1, label: 'Fashion Designer Course', href: '/courses/fashion-designer-cource', icon: Sparkles },
-            { menuId: 3.2, label: 'Boutique Manager Course', href: '/courses/boutique-manager-cource', icon: Store },
-            { menuId: 3.3, label: 'Purchase Coordinator - Electronics', href: '/courses/purchase-coordinator-electronics-cource', icon: Laptop },
+            { menuId: 3.1, label: 'Fashion Designer Course', href: '/courses/fashion-designer-course', icon: Sparkles },
+            { menuId: 3.2, label: 'Boutique Manager Course', href: '/courses/boutique-manager-course', icon: Store },
+            { menuId: 3.3, label: 'Purchase Coordinator - Electronics', href: '/courses/purchase-coordinator-electronics-course', icon: Laptop },
             { menuId: 3.4, label: 'Admission Form (Apply Online)', href: '/admission-form', icon: FileCheck },
             { menuId: 3.5, label: 'Enrolled Students (વિદ્યાર્થી યાદી)', href: '/enrolled-students', icon: Users },
         ]

@@ -745,6 +745,37 @@ export default function AdmissionFormPage() {
     }
   }, [formData.course_name])
 
+  // Pre-select course if specified in URL query parameter (e.g. ?course=fashion+designer)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const params = new URLSearchParams(window.location.search)
+        const courseParam = (params.get('course') || '').toLowerCase().trim()
+        if (courseParam) {
+          const matched = COURSES.find(
+            (c) =>
+              c.id === courseParam ||
+              c.name.toLowerCase() === courseParam ||
+              c.prefix.toLowerCase() === courseParam ||
+              (courseParam.includes('fashion') && c.id.includes('fashion')) ||
+              (courseParam.includes('boutique') && c.id.includes('boutique')) ||
+              (courseParam.includes('purchase') && c.id.includes('purchase')) ||
+              (courseParam.includes('electronic') && c.id.includes('purchase'))
+          )
+          if (matched) {
+            setFormData((prev) => ({
+              ...prev,
+              course_name: matched.id,
+              course_duration: matched.duration,
+            }))
+          }
+        }
+      } catch (e) {
+        console.warn('URL param parse error:', e)
+      }
+    }
+  }, [])
+
   // Non-blocking background loader for full all-India cities & villages datasets (320KB+)
   useEffect(() => {
     if (cachedCities && cachedVillages) return

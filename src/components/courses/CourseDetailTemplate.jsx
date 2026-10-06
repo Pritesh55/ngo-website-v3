@@ -18,7 +18,9 @@ import {
   Briefcase,
   Layers,
   Coins,
-  Check
+  Check,
+  FileCheck,
+  ArrowRight
 } from 'lucide-react'
 
 export default function CourseDetailTemplate({ course }) {
@@ -68,6 +70,8 @@ export default function CourseDetailTemplate({ course }) {
   } = course
 
   const encodedMessage = encodeURIComponent(`Hello Manav Kalyan Trust, I would like to inquire about admission for "${title}".`)
+  const courseParam = encodeURIComponent(course.courseId || course.slug || title || '')
+  const admissionUrl = `/admission-form?course=${courseParam}`
 
   return (
     <div className="w-full text-slate-800 antialiased font-sans">
@@ -173,27 +177,36 @@ export default function CourseDetailTemplate({ course }) {
               </div>
 
               {/* Action Buttons in Logo / Header Theme */}
-              <div className="flex flex-wrap gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
+                <Link
+                  href={admissionUrl}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-700 hover:to-teal-800 text-white font-extrabold text-sm rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+                >
+                  <FileCheck className="w-4 h-4" />
+                  <span>Apply Online (ઓનલાઇન પ્રવેશ અરજી)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
                 <Link
                   href={`https://wa.me/919974025126?text=${encodedMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold text-sm rounded-xl shadow-xs transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold text-sm rounded-xl shadow-xs transition-colors"
                 >
                   <img
                     src="/icons/whatsapp-color-svgrepo-com.svg"
                     alt="WhatsApp"
                     className="w-4 h-4 object-contain brightness-0 invert"
                   />
-                  WhatsApp Inquiry
+                  WhatsApp
                 </Link>
 
                 <a
                   href="tel:9974025126"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-linear-to-r from-orange-500 to-darkred hover:from-orange-600 hover:to-red-900 text-white font-semibold text-sm rounded-xl shadow-xs transition-colors"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-linear-to-r from-orange-500 to-darkred hover:from-orange-600 hover:to-red-900 text-white font-semibold text-sm rounded-xl shadow-xs transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  Call: 9974025126
+                  9974025126
                 </a>
 
                 <a
@@ -247,6 +260,15 @@ export default function CourseDetailTemplate({ course }) {
                   </span>
                 </div>
 
+                <Link
+                  href={admissionUrl}
+                  className="mt-3.5 w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer"
+                >
+                  <FileCheck className="w-4 h-4" />
+                  <span>Apply Online Now (અહીંથી અરજી કરો)</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+
               </div>
             </div>
 
@@ -292,9 +314,17 @@ export default function CourseDetailTemplate({ course }) {
                     {batch.desc}
                   </p> */}
                 </div>
-                <div className="mt-4 pt-3 border-t border-amber-100 text-[11px] font-semibold text-emerald-700 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  Open for Admission
+                <div className="mt-4 pt-3 border-t border-amber-100 text-[11px] font-semibold text-emerald-700 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Open for Admission
+                  </span>
+                  <Link
+                    href={admissionUrl}
+                    className="text-emerald-700 hover:text-emerald-900 font-bold hover:underline"
+                  >
+                    Apply Online →
+                  </Link>
                 </div>
               </div>
             ))}
@@ -478,6 +508,14 @@ export default function CourseDetailTemplate({ course }) {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href={admissionUrl}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer"
+            >
+              <FileCheck className="w-4 h-4" />
+              Apply Online (ઓનલાઇન અરજી કરો)
+              <ArrowRight className="w-4 h-4" />
+            </Link>
             <Link
               href={`https://wa.me/919974025126?text=${encodedMessage}`}
               target="_blank"
