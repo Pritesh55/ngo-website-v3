@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import PrintableAdmissionForm from '@/components/forms/PrintableAdmissionForm'
 import {
   Users,
@@ -39,7 +40,18 @@ import {
   AlertTriangle,
   Save,
   Check,
-  FileDown
+  FileDown,
+  Lock,
+  Unlock,
+  KeyRound,
+  LogIn,
+  LogOut,
+  ArrowLeft,
+  ArrowRight,
+  Shield,
+  Award,
+  BookOpen,
+  EyeOff
 } from 'lucide-react'
 
 // Course definitions with visual styles
@@ -89,8 +101,9 @@ const TIME_SLOTS = [
 ]
 
 export default function EnrolledStudentsPage() {
+  const router = useRouter()
   const [students, setStudents] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [selectedCourseTab, setSelectedCourseTab] = useState('all')
   const [searchTerm, setSearchTerm] = useState('')
@@ -98,6 +111,15 @@ export default function EnrolledStudentsPage() {
   const [genderFilter, setGenderFilter] = useState('all')
   const [categoryFilter, setCategoryFilter] = useState('all')
   const [viewMode, setViewMode] = useState('grid') // 'grid' | 'table'
+
+  // Admin Authentication State
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false)
+  const [authChecking, setAuthChecking] = useState(true)
+  const [showLoginModal, setShowLoginModal] = useState(false)
+  const [loginPassword, setLoginPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [loginError, setLoginError] = useState('')
+  const [rememberMe, setRememberMe] = useState(true)
 
   // Modals state
   const [selectedStudent, setSelectedStudent] = useState(null)
@@ -329,9 +351,69 @@ export default function EnrolledStudentsPage() {
     }
   }
 
+  // Check saved admin session on mount
   useEffect(() => {
-    fetchStudents()
+    try {
+      const savedAuth = sessionStorage.getItem('mkt_admin_logged_in') || localStorage.getItem('mkt_admin_logged_in')
+      if (savedAuth === 'true') {
+        setIsAdminAuthenticated(true)
+      }
+    } catch (e) {
+      // ignore
+    } finally {
+      setAuthChecking(false)
+    }
   }, [])
+
+  // Fetch only when authenticated as admin
+  useEffect(() => {
+    if (isAdminAuthenticated) {
+      fetchStudents()
+    }
+  }, [isAdminAuthenticated])
+
+  // Admin login handler
+  const handleAdminLogin = (e) => {
+    if (e) e.preventDefault()
+    setLoginError('')
+    const pwd = (loginPassword || '').trim().toLowerCase()
+    // Supported admin passcodes
+    const validPasswords = ['mkt@2026', 'admin123', 'admin', 'mktngo', 'mktadmin2026', 'mkt@ngo', 'admin@mktngo']
+    if (validPasswords.includes(pwd)) {
+      setIsAdminAuthenticated(true)
+      setShowLoginModal(false)
+      setLoginPassword('')
+      try {
+        if (rememberMe) {
+          localStorage.setItem('mkt_admin_logged_in', 'true')
+        }
+        sessionStorage.setItem('mkt_admin_logged_in', 'true')
+      } catch (err) {}
+      setStatusNotification({ type: 'success', text: 'Admin login successful! Student directory unlocked.' })
+    } else {
+      setLoginError('Invalid password. Default admin passcode: mkt@2026')
+    }
+  }
+
+  // Admin logout handler
+  const handleAdminLogout = () => {
+    try {
+      sessionStorage.removeItem('mkt_admin_logged_in')
+      localStorage.removeItem('mkt_admin_logged_in')
+    } catch (err) {}
+    setIsAdminAuthenticated(false)
+    setStudents([])
+    setStatusNotification({ type: 'success', text: 'Admin logged out successfully.' })
+  }
+
+  // Back button handler
+  const handleGoBack = () => {
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back()
+    } else {
+      router.push('/')
+    }
+  }
 
   // Calculate Course Counts
   const courseCounts = useMemo(() => {
@@ -511,64 +593,423 @@ export default function EnrolledStudentsPage() {
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-3 sm:px-6 lg:px-8 print:bg-white print:p-0 print:m-0">
-      <div className="max-w-7xl mx-auto space-y-6 print:hidden">
+      {/* ============================================================ */}
+      {/* TOAST / NOTIFICATION */}
+      {/* ============================================================ */}
+      {statusNotification && (
+        <div className="fixed top-5 right-5 z-[99999] bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-semibold border border-slate-700 animate-in fade-in slide-in-from-top-3">
+          <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+          <span>{statusNotification.text}</span>
+          <button
+            onClick={() => setStatusNotification(null)}
+            className="ml-2 text-slate-400 hover:text-white"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
 
-        {/* ============================================================ */}
-        {/* TOAST / NOTIFICATION */}
-        {/* ============================================================ */}
-        {statusNotification && (
-          <div className="fixed top-5 right-5 z-[9999] bg-slate-900 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-xs sm:text-sm font-semibold border border-slate-700 animate-in fade-in slide-in-from-top-3">
-            <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-            <span>{statusNotification.text}</span>
-            <button
-              onClick={() => setStatusNotification(null)}
-              className="ml-2 text-slate-400 hover:text-white"
-            >
-              <X className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        )}
+      {/* ============================================================ */}
+      {/* ADMIN LOGIN MODAL */}
+      {/* ============================================================ */}
+      {showLoginModal && (
+        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-darkred via-rose-700 to-orange-600 p-6 text-white text-center relative">
+              <button
+                type="button"
+                onClick={() => { setShowLoginModal(false); setLoginError(''); }}
+                className="absolute top-4 right-4 text-white/80 hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="w-14 h-14 mx-auto mb-3 rounded-2xl bg-white/15 backdrop-blur-md flex items-center justify-center border border-white/20 shadow-inner">
+                <KeyRound className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-xl font-black tracking-tight">Admin Authorization</h3>
+              <p className="text-xs text-rose-100 mt-1">
+                એડમિન લૉગિન • માનવ કલ્યાણ ટ્રસ્ટ
+              </p>
+            </div>
 
-        {/* ============================================================ */}
-        {/* TOP BAR & NAVIGATION */}
-        {/* ============================================================ */}
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-2xs border border-slate-200 print:hidden">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="text-xs font-semibold text-rose-700 hover:text-rose-900 flex items-center gap-1"
-            >
-              ← Home
-            </Link>
-            <span className="text-slate-300">|</span>
-            <Link
-              href="/admission-form"
-              className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 flex items-center gap-1"
-            >
-              <PlusCircle className="w-3.5 h-3.5" /> New Admission Form
-            </Link>
-          </div>
+            {/* Modal Body */}
+            <form onSubmit={handleAdminLogin} className="p-6 space-y-4">
+              <p className="text-xs text-slate-600 leading-relaxed text-center">
+                Please enter the administrative password to access the enrolled students directory and student records.
+              </p>
 
-          <div className="flex items-center gap-2">
-            <button
-              onClick={fetchStudents}
-              disabled={loading}
-              className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
-              title="Refresh enrolled students list"
-            >
-              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-rose-600' : ''}`} />
-              <span>Refresh</span>
-            </button>
+              {loginError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-semibold flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 shrink-0 text-red-600" />
+                  <span>{loginError}</span>
+                </div>
+              )}
 
-            <button
-              onClick={() => window.print()}
-              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>Print Directory</span>
-            </button>
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+                  Admin Passcode / પાસવર્ડ
+                </label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    value={loginPassword}
+                    onChange={(e) => { setLoginPassword(e.target.value); setLoginError(''); }}
+                    placeholder="Enter admin password (e.g. mkt@2026)"
+                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:border-rose-500 focus:ring-2 focus:ring-rose-200 text-sm font-medium pr-10 outline-hidden transition-all"
+                    autoFocus
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1 cursor-pointer"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+                <p className="text-[11px] text-slate-400 mt-1.5">
+                  Default passcode: <code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700 font-mono font-bold">mkt@2026</code>
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between text-xs text-slate-600 pt-1">
+                <label className="flex items-center gap-2 cursor-pointer select-none">
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.checked)}
+                    className="rounded text-rose-600 focus:ring-rose-500"
+                  />
+                  <span>Remember on this browser</span>
+                </label>
+              </div>
+
+              <div className="pt-2 flex items-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => { setShowLoginModal(false); setLoginError(''); }}
+                  className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-bold text-xs hover:bg-slate-50 transition-colors cursor-pointer"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-darkred to-rose-600 hover:from-rose-700 hover:to-rose-800 text-white font-bold text-xs shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>Login / પ્રવેશો</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
+      )}
+
+      {/* ============================================================ */}
+      {/* 1. NON-ADMIN GATEWAY & STUDENT ENROLLMENT CTA (RESTRICTED VIEW) */}
+      {/* ============================================================ */}
+      {!isAdminAuthenticated ? (
+        <div className="max-w-5xl mx-auto space-y-6 print:hidden">
+          {/* Top Bar Navigation for Non-Admin */}
+          <div className="flex items-center justify-between gap-4 bg-white p-4 rounded-2xl shadow-xs border border-slate-200">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleGoBack}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer"
+                title="Go back to previous page"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 text-rose-600" />
+                <span>← Back (પાછા જાઓ)</span>
+              </button>
+              <span className="text-slate-300">|</span>
+              <Link
+                href="/"
+                className="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1"
+              >
+                Home
+              </Link>
+              <span className="text-slate-300">|</span>
+              <Link
+                href="/courses"
+                className="text-xs font-semibold text-slate-600 hover:text-slate-900 flex items-center gap-1"
+              >
+                Courses
+              </Link>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => { setShowLoginModal(true); setLoginError(''); }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-slate-900 to-slate-800 hover:from-black hover:to-slate-900 text-white font-bold text-xs shadow-sm hover:shadow transition-all cursor-pointer border border-slate-700"
+            >
+              <Lock className="w-3.5 h-3.5 text-amber-400" />
+              <span>Admin Login (એડમિન લૉગિન)</span>
+            </button>
+          </div>
+
+          {/* Access Restricted Notice Header Card */}
+          <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xs border border-slate-200 text-center relative overflow-hidden">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-bold mb-4">
+              <Shield className="w-3.5 h-3.5 text-rose-600" />
+              <span>Restricted Access • માત્ર અધિકૃત એડમિન માટે</span>
+            </div>
+            <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-rose-500 to-darkred text-white flex items-center justify-center shadow-md">
+              <Lock className="w-8 h-8" />
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Enrolled Students Directory (વિદ્યાર્થીઓની યાદી)
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto mt-2 leading-relaxed">
+              આ પેજ પર માનવ કલ્યાણ ટ્રસ્ટના નોંધાયેલા વિદ્યાર્થીઓની ગોપનીય માહિતી, ફોટા અને સરકારી દસ્તાવેજો છે. માત્ર અધિકૃત સંચાલક (Admin) જ આ પેજ જોઈ શકે છે.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={() => { setShowLoginModal(true); setLoginError(''); }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-darkred to-rose-700 hover:from-rose-700 hover:to-rose-800 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-lg transition-all cursor-pointer"
+              >
+                <KeyRound className="w-4 h-4" />
+                <span>Admin Login (એડમિન લૉગિન કરો)</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleGoBack}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition-all cursor-pointer"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                <span>Go Back (પાછા જાઓ)</span>
+              </button>
+            </div>
+          </div>
+
+          {/* ============================================================ */}
+          {/* CALL TO ACTION SECTION FOR PROSPECTIVE STUDENTS */}
+          {/* ============================================================ */}
+          <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-rose-50/40 to-amber-50/50 border-2 border-rose-200/90 shadow-xl p-6 sm:p-10 text-center">
+            {/* Decorative background glow */}
+            <div className="absolute -top-24 -right-24 w-72 h-72 bg-rose-400/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-orange-400/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 space-y-6">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-500/10 to-orange-500/10 border border-rose-300 text-rose-800 text-xs sm:text-sm font-bold tracking-wide">
+                <Sparkles className="w-4 h-4 text-rose-600 animate-spin" style={{ animationDuration: '6s' }} />
+                <span>નવી બેચમાં પ્રવેશ શરૂ છે • GSDM માન્યતા પ્રાપ્ત 100% મફત સરકારી યોજના</span>
+              </div>
+
+              {/* Title & Introduction */}
+              <div className="space-y-2 max-w-3xl mx-auto">
+                <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                  વિનામૂલ્યે સરકારી કૌશલ્ય તાલીમ મેળવો અને ઉજ્જવળ કારકિર્દી બનાવો
+                </h2>
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+                  જો તમે વિદ્યાર્થી છો અને માનવ કલ્યાણ ટ્રસ્ટ (MKT) દ્વારા સંચાલિત ગુજરાત કૌશલ્ય વિકાસ મિશન (GSDM) હેઠળ 100% મફત કોર્સમાં પ્રવેશ મેળવવા માંગો છો, તો અત્યારે જ ઓનલાઇન એડમિશન ફોર્મ ભરો.
+                </p>
+              </div>
+
+              {/* Key Highlights Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto pt-2 text-left">
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-rose-100 shadow-xs flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center shrink-0 text-base font-bold">
+                    🎓
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">100% મફત તાલીમ</h4>
+                    <p className="text-[11px] text-slate-500 leading-tight">કોઈ પણ ફી વિના સંપૂર્ણ અભ્યાસક્રમ</p>
+                  </div>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-amber-100 shadow-xs flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 text-base font-bold">
+                    📜
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">સરકારી પ્રમાણપત્ર</h4>
+                    <p className="text-[11px] text-slate-500 leading-tight">GSDM માન્યતા પ્રાપ્ત સર્ટિફિકેટ</p>
+                  </div>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-emerald-100 shadow-xs flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 text-base font-bold">
+                    💰
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">રોજિંદુ સ્ટાઇપેન્ડ</h4>
+                    <p className="text-[11px] text-slate-500 leading-tight">સરકારી નિયમ મુજબ દૈનિક ભથ્થું</p>
+                  </div>
+                </div>
+
+                <div className="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-blue-100 shadow-xs flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 text-base font-bold">
+                    💼
+                  </div>
+                  <div>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">100% પ્લેસમેન્ટ</h4>
+                    <p className="text-[11px] text-slate-500 leading-tight">નોકરી અને સ્વરોજગાર સહાય</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Course Visual Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto pt-2 text-left">
+                {/* Fashion Designer */}
+                <div className="bg-white rounded-2xl p-5 border border-rose-200 shadow-xs flex flex-col justify-between hover:border-rose-400 hover:shadow-md transition-all">
+                  <div>
+                    <span className="inline-block px-2.5 py-0.5 rounded-md bg-rose-100 text-rose-800 text-[11px] font-bold mb-2">
+                      Code: FD • 6 Months
+                    </span>
+                    <h3 className="font-extrabold text-base text-slate-900">Fashion Designer (ફેશન ડિઝાઇનર)</h3>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 10th પાસ • ડ્રેસ ડિઝાઇનિંગ, પેટર્ન મેકિંગ અને સિલાઈ તાલીમ સાથે મફત કિટ</p>
+                  </div>
+                  <Link
+                    href="/admission-form?course=fashion+designer"
+                    className="mt-4 inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors"
+                  >
+                    <span>Apply For FD</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                {/* Boutique Manager */}
+                <div className="bg-white rounded-2xl p-5 border border-amber-200 shadow-xs flex flex-col justify-between hover:border-amber-400 hover:shadow-md transition-all">
+                  <div>
+                    <span className="inline-block px-2.5 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[11px] font-bold mb-2">
+                      Code: BM • 6 Months
+                    </span>
+                    <h3 className="font-extrabold text-base text-slate-900">Boutique Manager (બુટિક મેનેજર)</h3>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 12th પાસ • બુટિક સંચાલન, ફેશન બિઝનેસ પ્લાનિંગ અને ક્લાયન્ટ મેનેજમેન્ટ</p>
+                  </div>
+                  <Link
+                    href="/admission-form?course=boutique+manager"
+                    className="mt-4 inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 text-xs font-bold transition-colors"
+                  >
+                    <span>Apply For BM</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                {/* Purchase Coordinator - Electronics */}
+                <div className="bg-white rounded-2xl p-5 border border-blue-200 shadow-xs flex flex-col justify-between hover:border-blue-400 hover:shadow-md transition-all">
+                  <div>
+                    <span className="inline-block px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold mb-2">
+                      Code: EPC • 6 Months
+                    </span>
+                    <h3 className="font-extrabold text-base text-slate-900">Purchase Coordinator (પરચેઝ કો-ઓર્ડિનેટર)</h3>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 10th/12th પાસ • ઇલેક્ટ્રોનિક્સ સપ્લાય ચેઇન, સ્ટોર મેનેજમેન્ટ અને કમ્પ્યુટર</p>
+                  </div>
+                  <Link
+                    href="/admission-form?course=purchase+coordinator+electronics"
+                    className="mt-4 inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold transition-colors"
+                  >
+                    <span>Apply For EPC</span>
+                    <ChevronRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* MAIN PRIMARY CTA BUTTONS */}
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  href="/admission-form"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-darkred via-rose-600 to-orange-500 hover:from-rose-700 hover:to-orange-600 text-white font-black text-base sm:text-lg shadow-xl hover:shadow-2xl hover:scale-[1.02] active:scale-[0.98] transition-all group"
+                >
+                  <FileText className="w-5 h-5 text-amber-200" />
+                  <span>Apply Online Free (ઓનલાઇન મફત પ્રવેશ ફોર્મ ભરો)</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                </Link>
+
+                <button
+                  type="button"
+                  onClick={handleGoBack}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 font-bold text-sm sm:text-base shadow-xs hover:shadow transition-all cursor-pointer"
+                >
+                  <ArrowLeft className="w-4 h-4 text-slate-500" />
+                  <span>Go Back (અગાઉના પેજ પર પાછા જાઓ)</span>
+                </button>
+              </div>
+
+              {/* Support Hotline Info */}
+              <div className="pt-4 border-t border-rose-200/60 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-600">
+                <div className="flex items-center gap-1.5">
+                  <Phone className="w-4 h-4 text-rose-600" />
+                  <span>હેલ્પલાઇન: <strong className="text-slate-800">+91 99099 66050 / +91 98252 23377</strong></span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <MapPin className="w-4 h-4 text-rose-600" />
+                  <span>માનવ કલ્યાણ ટ્રસ્ટ • અમદાવાદ / ગાંધીનગર, ગુજરાત</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* ============================================================ */
+        /* 2. ADMIN ENROLLED STUDENTS DIRECTORY (AUTHENTICATED VIEW) */
+        /* ============================================================ */
+        <div className="max-w-7xl mx-auto space-y-6 print:hidden">
+          {/* TOP BAR & NAVIGATION FOR ADMIN */}
+          <div className="flex flex-wrap items-center justify-between gap-4 bg-white p-4 rounded-xl shadow-2xs border border-slate-200 print:hidden">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleGoBack}
+                className="text-xs font-semibold text-slate-700 hover:text-rose-700 flex items-center gap-1 cursor-pointer"
+                title="Go back to previous page"
+              >
+                <ArrowLeft className="w-3.5 h-3.5 text-rose-600" /> Back
+              </button>
+              <span className="text-slate-300">|</span>
+              <Link
+                href="/"
+                className="text-xs font-semibold text-rose-700 hover:text-rose-900 flex items-center gap-1"
+              >
+                ← Home
+              </Link>
+              <span className="text-slate-300">|</span>
+              <Link
+                href="/admission-form"
+                className="text-xs font-semibold text-indigo-700 hover:text-indigo-900 flex items-center gap-1"
+              >
+                <PlusCircle className="w-3.5 h-3.5" /> New Admission Form
+              </Link>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                <span>Admin Mode</span>
+              </span>
+
+              <button
+                type="button"
+                onClick={handleAdminLogout}
+                className="px-3 py-1.5 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                title="Logout from Admin Mode"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span>Logout</span>
+              </button>
+
+              <button
+                onClick={fetchStudents}
+                disabled={loading}
+                className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer"
+                title="Refresh enrolled students list"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-rose-600' : ''}`} />
+                <span>Refresh</span>
+              </button>
+
+              <button
+                onClick={() => window.print()}
+                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
+              >
+                <Printer className="w-3.5 h-3.5" />
+                <span>Print Directory</span>
+              </button>
+            </div>
+          </div>
 
         {/* ============================================================ */}
         {/* PAGE HEADER */}
@@ -2244,6 +2685,7 @@ export default function EnrolledStudentsPage() {
         )}
 
       </div>
+      )}
 
       {/* ============================================================ */}
       {/* OFFICIAL PRINTABLE ADMISSION FORM (VISIBLE ONLY IN PRINT) */}
