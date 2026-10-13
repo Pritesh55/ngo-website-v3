@@ -102,6 +102,8 @@ const TIME_SLOTS = [
 
 // Admin session timeout duration: 30 minutes in milliseconds
 const ADMIN_SESSION_TIMEOUT_MS = 30 * 60 * 1000
+// Extension duration: 15 minutes in milliseconds
+const ADMIN_SESSION_EXTENSION_MS = 15 * 60 * 1000
 
 export default function EnrolledStudentsPage() {
   const router = useRouter()
@@ -123,6 +125,7 @@ export default function EnrolledStudentsPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loginError, setLoginError] = useState('')
   const [rememberMe, setRememberMe] = useState(true)
+  const [sessionRemainingSeconds, setSessionRemainingSeconds] = useState(30 * 60)
 
   // Modals state
   const [selectedStudent, setSelectedStudent] = useState(null)
@@ -358,44 +361,92 @@ export default function EnrolledStudentsPage() {
   const clearAdminSession = useCallback(() => {
     try {
       sessionStorage.removeItem('mkt_admin_logged_in')
+      sessionStorage.removeItem('mkt_admin_expires_at')
       sessionStorage.removeItem('mkt_admin_login_time')
       localStorage.removeItem('mkt_admin_logged_in')
+      localStorage.removeItem('mkt_admin_expires_at')
       localStorage.removeItem('mkt_admin_login_time')
     } catch (err) {}
     setIsAdminAuthenticated(false)
+    setSessionRemainingSeconds(0)
     setStudents([])
     setSelectedStudent(null)
     setEditingStudent(null)
     setDeletingStudent(null)
   }, [])
 
-  // Auto-logout callback when 30 minutes expire
+  // Auto-logout callback when time expires
   const handleAutoLogout = useCallback(() => {
     clearAdminSession()
     setStatusNotification({
       type: 'error',
-      text: 'Admin session expired after 30 minutes. Please login again. (સુરક્ષા ખાતર 30 મિનિટ પૂર્ણ થતાં એડમિન લૉગઆઉટ થયું છે)'
+      text: 'Admin session expired. Please login again. (સુરક્ષા ખાતર એડમિન સેશન સમાપ્ત થયું છે)'
     })
   }, [clearAdminSession])
 
-  // Check saved admin session on mount with 30-minute expiration check
+  // Get current session expiration timestamp
+  const getSessionExpiresAt = useCallback(() => {
+    try {
+      const savedExp = sessionStorage.getItem('mkt_admin_expires_at') || localStorage.getItem('mkt_admin_expires_at')
+      if (savedExp) return Number(savedExp)
+      const savedTime = sessionStorage.getItem('mkt_admin_login_time') || localStorage.getItem('mkt_admin_login_time')
+      if (savedTime) return Number(savedTime) + ADMIN_SESSION_TIMEOUT_MS
+      return 0
+    } catch {
+      return 0
+    }
+  }, [])
+
+  // Extend session by 15 minutes handler
+  const handleExtendSession = () => {
+    try {
+      const currentExp = getSessionExpiresAt()
+      const baseTime = currentExp > Date.now() ? currentExp : Date.now()
+      const newExp = baseTime + ADMIN_SESSION_EXTENSION_MS
+
+      sessionStorage.setItem('mkt_admin_expires_at', String(newExp))
+      sessionStorage.setItem('mkt_admin_logged_in', 'true')
+      if (localStorage.getItem('mkt_admin_logged_in') === 'true') {
+        localStorage.setItem('mkt_admin_expires_at', String(newExp))
+      }
+
+      const newRemaining = Math.max(0, Math.floor((newExp - Date.now()) / 1000))
+      setSessionRemainingSeconds(newRemaining)
+
+      setStatusNotification({
+        type: 'success',
+        text: `+15 min extended! Admin session now has ${Math.ceil(newRemaining / 60)} minutes remaining.`
+      })
+    } catch (err) {
+      console.error('Failed to extend session:', err)
+    }
+  }
+
+  // Format seconds into MM:SS display
+  const formatSessionTime = (totalSeconds) => {
+    const mins = Math.floor(totalSeconds / 60)
+    const secs = totalSeconds % 60
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`
+  }
+
+  // Check saved admin session on mount with expiration check
   useEffect(() => {
     try {
       const savedAuth = sessionStorage.getItem('mkt_admin_logged_in') || localStorage.getItem('mkt_admin_logged_in')
-      const savedTime = sessionStorage.getItem('mkt_admin_login_time') || localStorage.getItem('mkt_admin_login_time')
 
       if (savedAuth === 'true') {
-        const loginTime = savedTime ? Number(savedTime) : 0
-        const elapsed = Date.now() - loginTime
+        const expiresAt = getSessionExpiresAt()
+        const now = Date.now()
 
-        if (loginTime > 0 && elapsed < ADMIN_SESSION_TIMEOUT_MS) {
+        if (expiresAt > now) {
           setIsAdminAuthenticated(true)
+          setSessionRemainingSeconds(Math.max(0, Math.floor((expiresAt - now) / 1000)))
         } else {
-          // More than 30 minutes elapsed - auto logout immediately
+          // More than session time elapsed - auto logout immediately
           clearAdminSession()
           setStatusNotification({
             type: 'error',
-            text: 'Admin session expired after 30 minutes. Please login again. (સુરક્ષા ખાતર 30 મિનિટ પૂર્ણ થતાં એડમિન લૉગઆઉટ થયું છે)'
+            text: 'Admin session expired. Please login again. (સુરક્ષા ખાતર એડમિન સેશન સમાપ્ત થયું છે)'
           })
         }
       }
@@ -404,46 +455,31 @@ export default function EnrolledStudentsPage() {
     } finally {
       setAuthChecking(false)
     }
-  }, [clearAdminSession])
+  }, [clearAdminSession, getSessionExpiresAt])
 
-  // Active auto-logout timer: triggers logout automatically 30 minutes after login
+  // Live 1-second countdown timer for active admin session
   useEffect(() => {
     if (!isAdminAuthenticated) return
 
-    const getRemainingTime = () => {
-      try {
-        const savedTime = sessionStorage.getItem('mkt_admin_login_time') || localStorage.getItem('mkt_admin_login_time')
-        const loginTime = savedTime ? Number(savedTime) : Date.now()
-        const elapsed = Date.now() - loginTime
-        return Math.max(0, ADMIN_SESSION_TIMEOUT_MS - elapsed)
-      } catch {
-        return ADMIN_SESSION_TIMEOUT_MS
-      }
-    }
+    const updateTimer = () => {
+      const expiresAt = getSessionExpiresAt()
+      const now = Date.now()
+      const remaining = Math.max(0, Math.floor((expiresAt - now) / 1000))
+      setSessionRemainingSeconds(remaining)
 
-    const remaining = getRemainingTime()
-    if (remaining <= 0) {
-      handleAutoLogout()
-      return
-    }
-
-    // Set timeout for exact remaining duration
-    const timerId = setTimeout(() => {
-      handleAutoLogout()
-    }, remaining)
-
-    // Periodic check every 15 seconds (covers tab backgrounding, system sleep, or clock changes)
-    const intervalId = setInterval(() => {
-      if (getRemainingTime() <= 0) {
+      if (remaining <= 0) {
         handleAutoLogout()
       }
-    }, 15000)
-
-    return () => {
-      clearTimeout(timerId)
-      clearInterval(intervalId)
     }
-  }, [isAdminAuthenticated, handleAutoLogout])
+
+    // Run immediately once
+    updateTimer()
+
+    // 1-second interval
+    const intervalId = setInterval(updateTimer, 1000)
+
+    return () => clearInterval(intervalId)
+  }, [isAdminAuthenticated, getSessionExpiresAt, handleAutoLogout])
 
   // Fetch only when authenticated as admin
   useEffect(() => {
@@ -461,15 +497,19 @@ export default function EnrolledStudentsPage() {
     const validPasswords = ['mkt@2026', 'admin123', 'admin', 'mktngo', 'mktadmin2026', 'mkt@ngo', 'admin@mktngo']
     if (validPasswords.includes(pwd)) {
       const now = Date.now()
+      const expiresAt = now + ADMIN_SESSION_TIMEOUT_MS
       setIsAdminAuthenticated(true)
       setShowLoginModal(false)
       setLoginPassword('')
+      setSessionRemainingSeconds(30 * 60)
       try {
         if (rememberMe) {
           localStorage.setItem('mkt_admin_logged_in', 'true')
+          localStorage.setItem('mkt_admin_expires_at', String(expiresAt))
           localStorage.setItem('mkt_admin_login_time', String(now))
         }
         sessionStorage.setItem('mkt_admin_logged_in', 'true')
+        sessionStorage.setItem('mkt_admin_expires_at', String(expiresAt))
         sessionStorage.setItem('mkt_admin_login_time', String(now))
       } catch (err) {}
       setStatusNotification({ type: 'success', text: 'Admin login successful! Session active for 30 minutes.' })
@@ -1050,14 +1090,38 @@ export default function EnrolledStudentsPage() {
               </Link>
             </div>
 
-            <div className="flex items-center gap-2">
-              <span 
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300"
-                title="Admin session will automatically logout after 30 minutes"
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Dynamic Live Countdown Timer Badge */}
+              <div 
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-colors shadow-2xs ${
+                  sessionRemainingSeconds <= 120
+                    ? 'bg-red-50 text-red-800 border-red-300 animate-pulse'
+                    : sessionRemainingSeconds <= 300
+                      ? 'bg-amber-50 text-amber-800 border-amber-300'
+                      : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                }`}
+                title="Admin session live countdown (ઑટોમેટિક લૉગઆઉટ કાઉન્ટડાઉન)"
               >
-                <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                <span>Admin Mode (30m Auto-Logout)</span>
-              </span>
+                <Clock className={`w-3.5 h-3.5 shrink-0 ${
+                  sessionRemainingSeconds <= 120
+                    ? 'text-red-600'
+                    : sessionRemainingSeconds <= 300
+                      ? 'text-amber-600'
+                      : 'text-emerald-600'
+                }`} />
+                <span className="font-mono tracking-wider font-extrabold">{formatSessionTime(sessionRemainingSeconds)}</span>
+              </div>
+
+              {/* Extend +15 Minutes Button */}
+              <button
+                type="button"
+                onClick={handleExtendSession}
+                className="px-2.5 py-1 rounded-lg border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 hover:text-indigo-900 font-bold text-xs flex items-center gap-1 transition-all cursor-pointer shadow-2xs hover:scale-105 active:scale-95"
+                title="Extend session by 15 minutes / સેશન 15 મિનિટ લંબાવો"
+              >
+                <PlusCircle className="w-3.5 h-3.5 text-indigo-600" />
+                <span>+15 Min</span>
+              </button>
 
               <button
                 type="button"
@@ -1088,6 +1152,26 @@ export default function EnrolledStudentsPage() {
               </button>
             </div>
           </div>
+
+          {/* Low Session Warning Alert (Shown when less than 3 minutes remaining) */}
+          {sessionRemainingSeconds <= 180 && sessionRemainingSeconds > 0 && (
+            <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 text-white px-4 py-2.5 rounded-xl shadow-lg flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-semibold animate-in fade-in slide-in-from-top-2 border border-amber-300">
+              <div className="flex items-center gap-2">
+                <AlertTriangle className="w-4 h-4 text-white animate-bounce shrink-0" />
+                <span>
+                  સુરક્ષા ચેતવણી: એડમિન સેશન <strong className="font-mono text-white underline">{formatSessionTime(sessionRemainingSeconds)}</strong> માં ઑટોમેટિક લૉગઆઉટ થશે! (Session expiring soon)
+                </span>
+              </div>
+              <button
+                type="button"
+                onClick={handleExtendSession}
+                className="px-3 py-1 bg-white hover:bg-amber-50 text-amber-900 rounded-lg font-bold text-xs shadow-md transition-all shrink-0 cursor-pointer flex items-center gap-1.5 hover:scale-105 active:scale-95"
+              >
+                <PlusCircle className="w-3.5 h-3.5 text-amber-700" />
+                <span>+15 Min લંબાવો (Extend Now)</span>
+              </button>
+            </div>
+          )}
 
           {/* ============================================================ */}
           {/* PAGE HEADER */}
