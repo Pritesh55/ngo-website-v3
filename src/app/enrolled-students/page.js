@@ -366,7 +366,7 @@ export default function EnrolledStudentsPage() {
       localStorage.removeItem('mkt_admin_logged_in')
       localStorage.removeItem('mkt_admin_expires_at')
       localStorage.removeItem('mkt_admin_login_time')
-    } catch (err) {}
+    } catch (err) { }
     setIsAdminAuthenticated(false)
     setSessionRemainingSeconds(0)
     setStudents([])
@@ -511,7 +511,7 @@ export default function EnrolledStudentsPage() {
         sessionStorage.setItem('mkt_admin_logged_in', 'true')
         sessionStorage.setItem('mkt_admin_expires_at', String(expiresAt))
         sessionStorage.setItem('mkt_admin_login_time', String(now))
-      } catch (err) {}
+      } catch (err) { }
       setStatusNotification({ type: 'success', text: 'Admin login successful! Session active for 30 minutes.' })
     } else {
       setLoginError('ખોટો પાસવર્ડ દાખલ કર્યો છે. કૃપા કરીને સાચો એડમિન પાસવર્ડ દાખલ કરો. (Incorrect admin passcode)')
@@ -960,7 +960,7 @@ export default function EnrolledStudentsPage() {
                     💼
                   </div>
                   <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">100% પ્લેસમેન્ટ</h4>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900">100% પ્લેસમેન્ટ માર્ગદર્શન </h4>
                     <p className="text-[11px] text-slate-500 leading-tight">નોકરી અને સ્વરોજગાર સહાય</p>
                   </div>
                 </div>
@@ -975,7 +975,7 @@ export default function EnrolledStudentsPage() {
                       Code: FD • 6 Months
                     </span>
                     <h3 className="font-extrabold text-base text-slate-900">Fashion Designer (ફેશન ડિઝાઇનર)</h3>
-                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 10th પાસ • ડ્રેસ ડિઝાઇનિંગ, પેટર્ન મેકિંગ અને સિલાઈ તાલીમ સાથે મફત કિટ</p>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 12th Pass, Diploma, UG or PG </p>
                   </div>
                   <Link
                     href="/admission-form?course=fashion+designer"
@@ -993,7 +993,7 @@ export default function EnrolledStudentsPage() {
                       Code: BM • 6 Months
                     </span>
                     <h3 className="font-extrabold text-base text-slate-900">Boutique Manager (બુટિક મેનેજર)</h3>
-                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 12th પાસ • બુટિક સંચાલન, ફેશન બિઝનેસ પ્લાનિંગ અને ક્લાયન્ટ મેનેજમેન્ટ</p>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: Completed UG Degree, PG or Diploma after 12th </p>
                   </div>
                   <Link
                     href="/admission-form?course=boutique+manager"
@@ -1011,7 +1011,7 @@ export default function EnrolledStudentsPage() {
                       Code: EPC • 6 Months
                     </span>
                     <h3 className="font-extrabold text-base text-slate-900">Purchase Coordinator (પરચેઝ કો-ઓર્ડિનેટર)</h3>
-                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 10th/12th પાસ • ઇલેક્ટ્રોનિક્સ સપ્લાય ચેઇન, સ્ટોર મેનેજમેન્ટ અને કમ્પ્યુટર</p>
+                    <p className="text-xs text-slate-500 mt-1">લાયકાત: 10th Pass (SSC) or above </p>
                   </div>
                   <Link
                     href="/admission-form?course=purchase+coordinator+electronics"
@@ -1052,7 +1052,7 @@ export default function EnrolledStudentsPage() {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <MapPin className="w-4 h-4 text-rose-600" />
-                  <span>માનવ કલ્યાણ ટ્રસ્ટ • અમદાવાદ / ગાંધીનગર, ગુજરાત</span>
+                  <span>માનવ કલ્યાણ ટ્રસ્ટ • અમદાવાદ , ગુજરાત</span>
                 </div>
               </div>
             </div>
@@ -1092,23 +1092,21 @@ export default function EnrolledStudentsPage() {
 
             <div className="flex flex-wrap items-center gap-2">
               {/* Dynamic Live Countdown Timer Badge */}
-              <div 
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-colors shadow-2xs ${
-                  sessionRemainingSeconds <= 120
-                    ? 'bg-red-50 text-red-800 border-red-300 animate-pulse'
-                    : sessionRemainingSeconds <= 300
-                      ? 'bg-amber-50 text-amber-800 border-amber-300'
-                      : 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                }`}
+              <div
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border transition-colors shadow-2xs ${sessionRemainingSeconds <= 120
+                  ? 'bg-red-50 text-red-800 border-red-300 animate-pulse'
+                  : sessionRemainingSeconds <= 300
+                    ? 'bg-amber-50 text-amber-800 border-amber-300'
+                    : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                  }`}
                 title="Admin session live countdown (ઑટોમેટિક લૉગઆઉટ કાઉન્ટડાઉન)"
               >
-                <Clock className={`w-3.5 h-3.5 shrink-0 ${
-                  sessionRemainingSeconds <= 120
-                    ? 'text-red-600'
-                    : sessionRemainingSeconds <= 300
-                      ? 'text-amber-600'
-                      : 'text-emerald-600'
-                }`} />
+                <Clock className={`w-3.5 h-3.5 shrink-0 ${sessionRemainingSeconds <= 120
+                  ? 'text-red-600'
+                  : sessionRemainingSeconds <= 300
+                    ? 'text-amber-600'
+                    : 'text-emerald-600'
+                  }`} />
                 <span className="font-mono tracking-wider font-extrabold">{formatSessionTime(sessionRemainingSeconds)}</span>
               </div>
 
