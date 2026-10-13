@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -99,6 +99,9 @@ const TIME_SLOTS = [
   '11:30 AM to 3:30 PM',
   '3:30 PM to 7:30 PM',
 ]
+
+// Admin session timeout duration: 30 minutes in milliseconds
+const ADMIN_SESSION_TIMEOUT_MS = 30 * 60 * 1000
 
 export default function EnrolledStudentsPage() {
   const router = useRouter()
@@ -351,19 +354,96 @@ export default function EnrolledStudentsPage() {
     }
   }
 
-  // Check saved admin session on mount
+  // Clear admin session from storage and reset state
+  const clearAdminSession = useCallback(() => {
+    try {
+      sessionStorage.removeItem('mkt_admin_logged_in')
+      sessionStorage.removeItem('mkt_admin_login_time')
+      localStorage.removeItem('mkt_admin_logged_in')
+      localStorage.removeItem('mkt_admin_login_time')
+    } catch (err) {}
+    setIsAdminAuthenticated(false)
+    setStudents([])
+    setSelectedStudent(null)
+    setEditingStudent(null)
+    setDeletingStudent(null)
+  }, [])
+
+  // Auto-logout callback when 30 minutes expire
+  const handleAutoLogout = useCallback(() => {
+    clearAdminSession()
+    setStatusNotification({
+      type: 'error',
+      text: 'Admin session expired after 30 minutes. Please login again. (સુરક્ષા ખાતર 30 મિનિટ પૂર્ણ થતાં એડમિન લૉગઆઉટ થયું છે)'
+    })
+  }, [clearAdminSession])
+
+  // Check saved admin session on mount with 30-minute expiration check
   useEffect(() => {
     try {
       const savedAuth = sessionStorage.getItem('mkt_admin_logged_in') || localStorage.getItem('mkt_admin_logged_in')
+      const savedTime = sessionStorage.getItem('mkt_admin_login_time') || localStorage.getItem('mkt_admin_login_time')
+
       if (savedAuth === 'true') {
-        setIsAdminAuthenticated(true)
+        const loginTime = savedTime ? Number(savedTime) : 0
+        const elapsed = Date.now() - loginTime
+
+        if (loginTime > 0 && elapsed < ADMIN_SESSION_TIMEOUT_MS) {
+          setIsAdminAuthenticated(true)
+        } else {
+          // More than 30 minutes elapsed - auto logout immediately
+          clearAdminSession()
+          setStatusNotification({
+            type: 'error',
+            text: 'Admin session expired after 30 minutes. Please login again. (સુરક્ષા ખાતર 30 મિનિટ પૂર્ણ થતાં એડમિન લૉગઆઉટ થયું છે)'
+          })
+        }
       }
     } catch (e) {
       // ignore
     } finally {
       setAuthChecking(false)
     }
-  }, [])
+  }, [clearAdminSession])
+
+  // Active auto-logout timer: triggers logout automatically 30 minutes after login
+  useEffect(() => {
+    if (!isAdminAuthenticated) return
+
+    const getRemainingTime = () => {
+      try {
+        const savedTime = sessionStorage.getItem('mkt_admin_login_time') || localStorage.getItem('mkt_admin_login_time')
+        const loginTime = savedTime ? Number(savedTime) : Date.now()
+        const elapsed = Date.now() - loginTime
+        return Math.max(0, ADMIN_SESSION_TIMEOUT_MS - elapsed)
+      } catch {
+        return ADMIN_SESSION_TIMEOUT_MS
+      }
+    }
+
+    const remaining = getRemainingTime()
+    if (remaining <= 0) {
+      handleAutoLogout()
+      return
+    }
+
+    // Set timeout for exact remaining duration
+    const timerId = setTimeout(() => {
+      handleAutoLogout()
+    }, remaining)
+
+    // Periodic check every 15 seconds (covers tab backgrounding, system sleep, or clock changes)
+    const intervalId = setInterval(() => {
+      if (getRemainingTime() <= 0) {
+        handleAutoLogout()
+      }
+    }, 15000)
+
+    return () => {
+      clearTimeout(timerId)
+      clearInterval(intervalId)
+    }
+  }, [isAdminAuthenticated, handleAutoLogout])
 
   // Fetch only when authenticated as admin
   useEffect(() => {
@@ -380,16 +460,19 @@ export default function EnrolledStudentsPage() {
     // Supported admin passcodes
     const validPasswords = ['mkt@2026', 'admin123', 'admin', 'mktngo', 'mktadmin2026', 'mkt@ngo', 'admin@mktngo']
     if (validPasswords.includes(pwd)) {
+      const now = Date.now()
       setIsAdminAuthenticated(true)
       setShowLoginModal(false)
       setLoginPassword('')
       try {
         if (rememberMe) {
           localStorage.setItem('mkt_admin_logged_in', 'true')
+          localStorage.setItem('mkt_admin_login_time', String(now))
         }
         sessionStorage.setItem('mkt_admin_logged_in', 'true')
-      } catch (err) { }
-      setStatusNotification({ type: 'success', text: 'Admin login successful! Student directory unlocked.' })
+        sessionStorage.setItem('mkt_admin_login_time', String(now))
+      } catch (err) {}
+      setStatusNotification({ type: 'success', text: 'Admin login successful! Session active for 30 minutes.' })
     } else {
       setLoginError('ખોટો પાસવર્ડ દાખલ કર્યો છે. કૃપા કરીને સાચો એડમિન પાસવર્ડ દાખલ કરો. (Incorrect admin passcode)')
     }
@@ -397,12 +480,7 @@ export default function EnrolledStudentsPage() {
 
   // Admin logout handler
   const handleAdminLogout = () => {
-    try {
-      sessionStorage.removeItem('mkt_admin_logged_in')
-      localStorage.removeItem('mkt_admin_logged_in')
-    } catch (err) { }
-    setIsAdminAuthenticated(false)
-    setStudents([])
+    clearAdminSession()
     setStatusNotification({ type: 'success', text: 'Admin logged out successfully.' })
   }
 
@@ -677,7 +755,7 @@ export default function EnrolledStudentsPage() {
                     onChange={(e) => setRememberMe(e.target.checked)}
                     className="rounded text-rose-600 focus:ring-rose-500"
                   />
-                  <span>Remember on this browser</span>
+                  <span>Remember on this browser (Auto logout in 30 mins)</span>
                 </label>
               </div>
 
@@ -973,9 +1051,12 @@ export default function EnrolledStudentsPage() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+              <span 
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300"
+                title="Admin session will automatically logout after 30 minutes"
+              >
                 <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                <span>Admin Mode</span>
+                <span>Admin Mode (30m Auto-Logout)</span>
               </span>
 
               <button

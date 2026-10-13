@@ -2496,8 +2496,8 @@ export default function AdmissionFormPage() {
                       loadingNumbers
                         ? 'Auto-assigning...'
                         : !formData.course_name
-                        ? 'Select course below'
-                        : 'e.g. FD20261006008'
+                          ? 'Select course below'
+                          : 'e.g. FD20261006008'
                     }
                     value={formData.form_no}
                     className="bg-slate-100 border border-slate-300 text-slate-900 font-bold px-3 pr-14 py-1.5 rounded-lg text-xs sm:text-sm flex-1 font-mono tracking-wider cursor-default shadow-xs select-all focus:outline-none"
@@ -2768,17 +2768,25 @@ export default function AdmissionFormPage() {
                   <option value="Unmarried">Unmarried (અપરિણીત)</option>
                   <option value="Married">Married (પરિણીત)</option>
                 </select>
+                <p className="text-xs text-emerald-700 font-medium mt-1.5 flex items-start gap-y-1 gap-x-1 print:hidden flex-wrap ml-4">
+                  <Info className="w-3.5 h-3.5 text-emerald-600 shrink-0 mb-0.5" />
+                  <span>મેરેજ સર્ટિફિકેટ Upload કરવું ફરજિયાત નથી..જો મેરેજ સર્ટિફિકેટ available હોય તો જ upload કરો</span>
+                </p>
               </div>
 
               {/* ATOM: FIELD_MARRIAGE_CERTIFICATE_UPLOAD (CONDITIONAL - MULTIPLE FILES SUPPORT) */}
               {formData.marital_status === 'Married' && (
                 <div className={`md:col-span-2 ${(!formData.marriage_certificates || formData.marriage_certificates.length === 0) ? 'print:hidden' : ''}`}>
+                  <div className="p-2.5 mb-2 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center justify-center gap-1.5 font-medium print:hidden">
+                    <Info className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>મેરેજ સર્ટિફિકેટ Upload કરવું ફરજિયાત નથી..જો મેરેજ સર્ટિફિકેટ available હોય તો જ upload કરો</span>
+                  </div>
                   {renderMultiUploadBox({
                     field: 'marriage_certificates',
                     label: 'Upload Marriage Certificate Documents (Photos / PDFs)',
-                    required: true,
+                    required: false,
                     atomId: 'FIELD_MARRIAGE_CERTIFICATE_UPLOAD',
-                    description: 'You can upload multiple photos, PDFs, or scanned documents of the Marriage Certificate.',
+                    description: '(If Marriage Certificate is available, then upload it. Otherwise it is not compulsory.)',
                   })}
                 </div>
               )}

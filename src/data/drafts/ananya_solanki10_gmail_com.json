@@ -1,0 +1,81 @@
+{
+  "course_name": "fashion designer",
+  "course_duration": "6 Months (570 Hours)",
+  "time_slot": "3:30 PM to 7:30 PM",
+  "form_no": "FD20261013009",
+  "registration_no": "MKT_2026-10-13-023",
+  "full_name": "SOLANKI ANANYA SURESHBHAI",
+  "date_of_birth": "15/01/2002",
+  "calculated_age": 24,
+  "gender": "Female",
+  "fathers_name": "SURESHBHAI SOLANKI",
+  "mothers_name": "MINAXIBEN SOLANKI",
+  "fathers_occupation": "Business",
+  "marital_status": "Married",
+  "category": "ST",
+  "aadhaar_no": "271340273604",
+  "contact_number": "9815848946",
+  "father_number": "9779878101",
+  "email": "ananya.solanki10@gmail.com",
+  "flat_society": "C-101, Tirupati Heights",
+  "street_road": "Near Ankur Cross Road",
+  "landmark": "Opposite Government School",
+  "area_village": "Naranpura",
+  "city": "Ahmedabad",
+  "state": "Gujarat",
+  "pincode": "380013",
+  "same_as_postal": true,
+  "permanent_address": "C-101, Tirupati Heights, Naranpura, Ahmedabad",
+  "permanent_pincode": "380013",
+  "education_level": "Level 3) Diploma after 10th",
+  "education_level_id": 3,
+  "below_10th_standard": "",
+  "year_of_passing": "2020",
+  "education_history": [
+    {
+      "exam": "10th pass",
+      "board": "GSEB",
+      "year": "2018"
+    },
+    {
+      "exam": "Diploma after 10th",
+      "board": "GTU",
+      "year": "2020"
+    }
+  ],
+  "passport_photo_url": "[attached]",
+  "aadhaar_photos": [
+    {
+      "name": "Aadhaar_Card_Front_Back.svg",
+      "size": 184500
+    }
+  ],
+  "marriage_certificates": [],
+  "school_leaving_certificates": [
+    {
+      "name": "School_Leaving_Certificate.svg",
+      "size": 184500
+    }
+  ],
+  "marksheets_10th": [
+    {
+      "name": "10th_SSC_Marksheet.svg",
+      "size": 184500
+    }
+  ],
+  "marksheets_12th": [],
+  "diploma_certificates": [
+    {
+      "name": "Diploma_Certificate.svg",
+      "size": 184500
+    }
+  ],
+  "ug_degree_certificates": [],
+  "pg_degree_certificates": [],
+  "declaration_agreed": true,
+  "application_date": "13/10/2026",
+  "application_place": "Ahmedabad",
+  "closedAt": "2026-10-13T08:49:20.526Z",
+  "savedAt": "2026-10-13T08:49:21.783Z",
+  "type": "tab_close_draft"
+}
