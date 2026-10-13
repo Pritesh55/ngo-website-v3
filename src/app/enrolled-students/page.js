@@ -1140,14 +1140,6 @@ export default function EnrolledStudentsPage() {
                 <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-rose-600' : ''}`} />
                 <span>Refresh</span>
               </button>
-
-              <button
-                onClick={() => window.print()}
-                className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-900 text-white font-semibold text-xs flex items-center gap-1.5 transition-colors cursor-pointer shadow-2xs"
-              >
-                <Printer className="w-3.5 h-3.5" />
-                <span>Print Directory</span>
-              </button>
             </div>
           </div>
 
