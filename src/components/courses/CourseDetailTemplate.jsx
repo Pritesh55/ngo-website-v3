@@ -109,7 +109,7 @@ export default function CourseDetailTemplate({ course }) {
                 </span>
                 <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-100/60 text-amber-900 border border-amber-200">
                   <Coins className="w-3.5 h-3.5 text-amber-700" />
-                  Government Stipend
+                  Government Stipend after certification
                 </span>
               </div>
 

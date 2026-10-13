@@ -35,7 +35,7 @@ const courses = [
     category: 'Free + Stipend',
     duration: '6 Months (510 Hours)',
     fee: '100% Free (રૂ. 0/-)',
-    description: 'Electronics component procurement and inventory training for 10th pass candidates with free admission, government stipend, and 100% job placement assistance.',
+    description: 'Electronics component procurement and inventory training for 10th pass candidates with free admission, government stipend after certification, and 100% job placement assistance.',
     image: '/images/courses/Purchase_Coordinator_Electronics/Purchase_Coordinator_Electronics.png',
     link: '/courses/purchase-coordinator-electronics-course',
     theme: 'from-blue-50/80 to-cyan-50/40',
